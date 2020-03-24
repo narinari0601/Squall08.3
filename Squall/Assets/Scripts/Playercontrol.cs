@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Playercontrol : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Startis called before the first frame update
+    public AudioClip _se;
+    private AudioSource _audio;
     void Start()
     {
-        
+        _audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,10 +30,14 @@ public class Playercontrol : MonoBehaviour
             transform.position += new Vector3(-0.3f, 0, 0);
 
         }
-        if (Input.GetKey(KeyCode.RightArrow)) 
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += new Vector3(0.3f, 0, 0);
 
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            _audio.PlayOneShot(_se);
         }
 
     }
