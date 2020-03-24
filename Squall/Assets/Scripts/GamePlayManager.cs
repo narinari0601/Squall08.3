@@ -40,8 +40,10 @@ public class GamePlayManager : MonoBehaviour
 
     private float currentWeatherTimer;
 
-
+    //風関連
     private SquallDirections squallDirection;
+
+    
 
 
     public WeatherStates Weather { get => weather; set => weather = value; }
