@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField,Header("カメラのターゲット")]
-    private GameObject target;
+    [SerializeField, Header("カメラのターゲット")]
+    private GameObject target = null;
 
     private Vector3 offset;
+    
 
     void Start()
     {
