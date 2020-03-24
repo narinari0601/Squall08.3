@@ -72,10 +72,10 @@ public class GamePlayManager : MonoBehaviour
         
         squallDirection = SquallDirections.Up;
 
-        Debug.Log("1周 : " + weatherRotateTime + "秒");
-        Debug.Log("晴れ : " + sunRatio / toatalWeatherRatio * weatherRotateTime + "秒");
-        Debug.Log("予兆 : " + signRatio / toatalWeatherRatio * weatherRotateTime + "秒");
-        Debug.Log("スコール : " + squallRatio / toatalWeatherRatio * weatherRotateTime + "秒");
+        //Debug.Log("1周 : " + weatherRotateTime + "秒");
+        //Debug.Log("晴れ : " + sunRatio / toatalWeatherRatio * weatherRotateTime + "秒");
+        //Debug.Log("予兆 : " + signRatio / toatalWeatherRatio * weatherRotateTime + "秒");
+        //Debug.Log("スコール : " + squallRatio / toatalWeatherRatio * weatherRotateTime + "秒");
     }
 
     private void FixedUpdate()
@@ -91,19 +91,19 @@ public class GamePlayManager : MonoBehaviour
         if (currentWeatherTimer < sunRatio / toatalWeatherRatio * weatherRotateTime)
         {
             weather = WeatherStates.Sun;
-            Debug.Log("晴れ");
+            //Debug.Log("晴れ");
         }
 
         else if (currentWeatherTimer >= (toatalWeatherRatio - squallRatio) / toatalWeatherRatio * weatherRotateTime)
         {
             weather = WeatherStates.Squall;
-            Debug.Log("スコール");
+            //Debug.Log("スコール");
         }
 
         else
         {
             weather = WeatherStates.Sign;
-            Debug.Log("予兆");
+            //Debug.Log("予兆");
         }
 
         if (currentWeatherTimer >= weatherRotateTime)
