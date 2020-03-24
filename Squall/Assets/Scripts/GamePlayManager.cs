@@ -43,7 +43,10 @@ public class GamePlayManager : MonoBehaviour
     //風関連
     private SquallDirections squallDirection;
 
-    
+    [SerializeField, Header("風の方向を順番に")]
+    private SquallDirections[] squallDirArray = new SquallDirections[0];
+
+    private int squallCount;  //何回目のスコールか
 
 
     public WeatherStates Weather { get => weather; set => weather = value; }
@@ -71,8 +74,10 @@ public class GamePlayManager : MonoBehaviour
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
 
         currentWeatherTimer = 0;
-        
-        squallDirection = SquallDirections.Up;
+
+        squallDirection = squallDirArray[0];
+
+        squallCount = 0;
 
         //Debug.Log("1周 : " + weatherRotateTime + "秒");
         //Debug.Log("晴れ : " + sunRatio / toatalWeatherRatio * weatherRotateTime + "秒");
@@ -111,6 +116,15 @@ public class GamePlayManager : MonoBehaviour
         if (currentWeatherTimer >= weatherRotateTime)
         {
             currentWeatherTimer = 0;
+
+            squallCount++;
+
+            if (squallCount == squallDirArray.Length)
+            {
+                squallCount = 0;
+            }
+
+            squallDirection = squallDirArray[squallCount];
         }
     }
 }
