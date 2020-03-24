@@ -7,22 +7,24 @@ public class Playercontrol : MonoBehaviour
     // Startis called before the first frame update
     public AudioClip _se;
     private AudioSource _audio;
+    private Vector3 wind;
     void Start()
     {
+        wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        wind = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position += new Vector3(0, 0.3f, 0);
-
+            transform.position += new Vector3(0, 0, 0.3f);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += new Vector3(0, -0.3f, 0);
+            transform.position += new Vector3(0, 0, -0.3f);
 
         }
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -39,6 +41,26 @@ public class Playercontrol : MonoBehaviour
         {
             _audio.PlayOneShot(_se);
         }
-
+        if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Up
+            && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+        {
+            wind = new Vector3(0, 0, 0.1f);
+        }
+        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Down
+           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+        {
+            wind = new Vector3(0, 0, -0.1f);
+        }
+        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Left
+           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall) 
+        {
+            wind = new Vector3(-0.1f, 0, 0);
+        }
+        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Right
+           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall) 
+        {
+            wind = new Vector3(0.1f, 0, 0);
+        }
+        transform.position += wind;
     }
 }
