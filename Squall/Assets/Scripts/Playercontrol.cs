@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Playercontrol : MonoBehaviour
 {
-    // Startis called before the first frame update
+    // Startis called before the first frame updat
     public AudioClip _se;
     private AudioSource _audio;
     private Vector3 wind;
