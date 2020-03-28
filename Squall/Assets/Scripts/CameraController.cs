@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField, Header("カメラのターゲット")]
-    private GameObject target = null;
+    //[SerializeField, Header("カメラのターゲット")]
+    private GameObject target;
 
-    private Vector3 offset;
+    [SerializeField, Header("playerとの距離")]
+    private Vector3 offset = Vector3.zero;
     
 
     void Start()
     {
-        offset = target.transform.position - transform.position;
+        
+    }
+
+    public void Initialize()
+    {
+        target = GamePlayManager.instance.Player;
+        //offset = target.transform.position - transform.position;
     }
 
     // Update is called once per frame

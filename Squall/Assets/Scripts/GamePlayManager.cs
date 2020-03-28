@@ -5,6 +5,8 @@ using UnityEngine;
 public class GamePlayManager : MonoBehaviour
 {
     public static GamePlayManager instance = null;
+    
+
 
     public enum WeatherStates
     {
@@ -21,11 +23,20 @@ public class GamePlayManager : MonoBehaviour
         Right,
     }
 
+
+    //ゲームオブジェクト関連
+    private GameObject player;
+
+    private GameObject[] members;
+
+    [SerializeField, Header("メインカメラ")]
+    private GameObject mainCamera = null;
+
     //天気関連
     private WeatherStates weather;
-    
-    [SerializeField,Header("天気が1周する時間")]
-    private float weatherRotateTime = 0;
+
+    //[SerializeField,Header("天気が1周する時間")]
+    private float weatherRotateTime;
 
     [SerializeField, Header("通常時の比率")]
     private float sunRatio = 0;
@@ -43,21 +54,35 @@ public class GamePlayManager : MonoBehaviour
     //風関連
     private SquallDirections squallDirection;
 
-    [SerializeField, Header("風の方向を順番に")]
-    private SquallDirections[] squallDirArray = new SquallDirections[0];
+    private float windPower;
+
+    //[SerializeField, Header("風の方向を順番に")]
+    private SquallDirections[] squallDirArray;
 
     private int squallCount;  //何回目のスコールか
 
 
+    //ステージ関連
+    [SerializeField,Header("ステージ")]
+    private GameObject[] stagePrefabs = new GameObject[0];
+
+    //private List<GameObject> stageList;
+
+    private Stage currentStage;
+
+    private int stageNum;
+
+
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
+    public GameObject Player { get => player; set => player = value; }
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);  //シーンを切り替えても消えない
+            //DontDestroyOnLoad(this.gameObject);  //シーンを切り替えても消えない
         }
         else
         {
@@ -69,25 +94,67 @@ public class GamePlayManager : MonoBehaviour
 
     private void Initialize()
     {
-        weather = WeatherStates.Sun;
-
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
+        
+        stageNum = 0;
+
+
+        //stageList = new List<GameObject>();
+
+        //プレハブを生成し初期化してリストに格納
+        //for (int i = 0; i < stagePrefabs.Length; i++)
+        //{
+        //    var stage = Instantiate(stagePrefabs[i]);
+        //    stage.GetComponent<Stage>().Initialize();
+        //    stageList.Add(stage);
+        //}
+
+        StageInitialize();
+    }
+
+    private void StageInitialize()
+    {
+        var stage = Instantiate(stagePrefabs[stageNum]);
+
+        //currentStage = stageList[stageNum].GetComponent<Stage>();
+
+        currentStage = stage.GetComponent<Stage>();
+        currentStage.Initialize();
+
+        weather = WeatherStates.Sun;
 
         currentWeatherTimer = 0;
 
-        squallDirection = squallDirArray[0];
-
         squallCount = 0;
 
-        //Debug.Log("1周 : " + weatherRotateTime + "秒");
-        //Debug.Log("晴れ : " + sunRatio / toatalWeatherRatio * weatherRotateTime + "秒");
-        //Debug.Log("予兆 : " + signRatio / toatalWeatherRatio * weatherRotateTime + "秒");
-        //Debug.Log("スコール : " + squallRatio / toatalWeatherRatio * weatherRotateTime + "秒");
+        weatherRotateTime = currentStage.WeatherRotateTime;
+
+        windPower = currentStage.WindPower;
+
+        squallDirArray = currentStage.SquallDirArray;
+
+        squallDirection = squallDirArray[0];
+
+        ///
+        player = currentStage.PlayerObj;
+
+        //Debug.Log(player.name);
+
+        members = currentStage.Members;
+
+        //for (int i = 0; i < members.Length; i++)
+        //{
+        //    Debug.Log(members[i].name);
+        //}
+
+        mainCamera.GetComponent<CameraController>().Initialize();
     }
 
     private void FixedUpdate()
     {
         ChangeWeather();
+
+        NextStage();
     }
 
     private void ChangeWeather()
@@ -125,6 +192,28 @@ public class GamePlayManager : MonoBehaviour
             }
 
             squallDirection = squallDirArray[squallCount];
+        }
+    }
+
+    public void NextStage()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            //var stage = Instantiate(stagePrefabs[stageNum]);
+            //stage.GetComponent<Stage>().Initialize();
+            //stageList[stageNum] = stage;
+
+            Destroy(currentStage.gameObject);
+
+            stageNum++;
+            
+
+            if (stageNum > stagePrefabs.Length - 1)
+            {
+                stageNum = 0;
+            }
+
+            StageInitialize();
         }
     }
 }
