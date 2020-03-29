@@ -26,7 +26,7 @@ public class MemberControl : MonoBehaviour
         Initialize();
     }
 
-    void Initialize()
+    public void Initialize()
     {
         memberStates = MemberStates.isAlive;
         member = gameObject.GetComponent<NavMeshAgent>();
