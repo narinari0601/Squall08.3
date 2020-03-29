@@ -76,6 +76,7 @@ public class GamePlayManager : MonoBehaviour
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
     public GameObject Player { get => player; set => player = value; }
+    public Stage CurrentStage { get => currentStage; set => currentStage = value; }
 
     private void Awake()
     {

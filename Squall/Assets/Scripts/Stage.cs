@@ -46,7 +46,7 @@ public class Stage : MonoBehaviour
 
         for (int i = 0; i < members.Length; i++)
         {
-            Debug.Log(members[i].name);
+            //Debug.Log(members[i].name);
         }
     }
 }
