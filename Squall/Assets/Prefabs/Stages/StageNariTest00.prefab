@@ -243,9 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObj: {fileID: 4816494704454814767}
-  members:
-  - {fileID: 4816494704727400282}
-  - {fileID: 4816494705284986541}
+  members: []
   weatherRotateTime: 10
   windPower: 0.3
   squallDirArray: 00000000010000000200000003000000
