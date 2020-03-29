@@ -14,6 +14,12 @@ public class Stage : MonoBehaviour
     [SerializeField,Header("仲間たち")]
     private GameObject[] members = new GameObject[0];
 
+    private MemberControl[] memberControllers;
+
+    private int memberMaxValue;
+
+    private int stageClearMember;
+
     [SerializeField, Header("天気が1周する時間")]
     private float weatherRotateTime = 0;
 
@@ -44,9 +50,49 @@ public class Stage : MonoBehaviour
     {
         playerInitPos = playerObj.transform.position;
 
+        memberControllers = new MemberControl[members.Length];
+
         for (int i = 0; i < members.Length; i++)
         {
-            Debug.Log(members[i].name);
+            //Debug.Log(members[i].name);
+            var member = members[i];
+            if (!member.GetComponentInChildren<MemberControl>())
+                return;
+            
+
+            var m_controler = member.GetComponentInChildren<MemberControl>();
+
+            m_controler.Initialize();
+
+            memberControllers[i] = m_controler;
         }
+
+        memberMaxValue = members.Length;
+
+        stageClearMember = 0;
+    }
+
+    public void StageClear()
+    {
+        foreach (var member in memberControllers)
+        {
+            //if (member.GetMemberCheck == MemberControl.MemberCheck.isCapture)
+            //{
+            //    stageClearMember++;
+            //}
+
+            if (member.GetMemberState == MemberControl.MemberStates.isDaed ||
+                member.GetMemberState == MemberControl.MemberStates.isHub)
+            {
+                stageClearMember++;
+            }
+        }
+
+        if (stageClearMember == memberMaxValue)
+        {
+            Debug.Log("クリア");
+        }
+
+        stageClearMember = 0;
     }
 }

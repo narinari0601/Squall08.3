@@ -76,6 +76,7 @@ public class GamePlayManager : MonoBehaviour
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
     public GameObject Player { get => player; set => player = value; }
+    public Stage CurrentStage { get => currentStage; set => currentStage = value; }
 
     private void Awake()
     {
@@ -138,7 +139,7 @@ public class GamePlayManager : MonoBehaviour
         ///
         player = currentStage.PlayerObj;
 
-        //Debug.Log(player.name);
+        player.GetComponent<Playercontrol>().Initialize();
 
         members = currentStage.Members;
 
@@ -155,6 +156,8 @@ public class GamePlayManager : MonoBehaviour
         ChangeWeather();
 
         NextStage();
+
+        StageClear();
     }
 
     private void ChangeWeather()
@@ -215,5 +218,10 @@ public class GamePlayManager : MonoBehaviour
 
             StageInitialize();
         }
+    }
+
+    public void StageClear()
+    {
+        currentStage.StageClear();
     }
 }
