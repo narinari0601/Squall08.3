@@ -9,6 +9,8 @@ public class MemberControl : MonoBehaviour
     public Transform[] points;
     private int destPoint = 0;
     private float temperature = 100;
+    //プレイヤーを追うための
+    private Vector3 def;
 
     public enum MemberStates//メンバーの状態
     {
@@ -39,22 +41,23 @@ public class MemberControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        temperature = 100;
-
-        if (GetMemberCheck == MemberCheck.isLoitering)
+        //Memberの処理分岐
+        if (GetMemberCheck == MemberCheck.isLoitering)//徘徊しているときの処理書くところ
         {
             WeratherCheck();
-            if (!member.pathPending && member.remainingDistance < 0.5f)
+            if (!member.pathPending && member.remainingDistance < 0.5f)//ぐるぐる回るやつ
             {
                 GotoNextPoint();
             }
         }
-        else
+        else if(GetMemberCheck == MemberCheck.isCapture)//プレイヤーに捕まったらの処理書くところ
         {
             MoveToPlayer();
         }
+        else//死んだときの処理を書くところ
+        {
 
-        
+        }     
     }
 
     public void Initialize()
@@ -63,9 +66,11 @@ public class MemberControl : MonoBehaviour
         member = gameObject.GetComponent<NavMeshAgent>();
         member.autoBraking = false;
         GotoNextPoint();
+        //プレイヤーを追うためのやつ
+        def = transform.localRotation.eulerAngles;
     }
 
-    public void MoveToPlayer()
+    public void MoveToPlayer()//今のところプレイヤーを追いかける
     {
         //目的地と自分の距離
         Vector3 dir = GamePlayManager.instance.Player.transform.position - this.transform.position;
@@ -76,13 +81,20 @@ public class MemberControl : MonoBehaviour
         //目的地を指定する
         member.destination = pos;
         //目的地からどれくらい離れて停止するか
-        member.stoppingDistance = 3.0f;
+        member.stoppingDistance = 2.0f;
+
+
+        //スプライトの回転をなくす
+        Vector3 parent = this.transform.parent.transform.localRotation.eulerAngles;
+        this.transform.localRotation = Quaternion.Euler(def - parent);
+
     }
 
     public void GotoNextPoint()
     {
         if (points.Length == 0)
             return;
+        //ぐるぐる回るやつ
         member.destination = points[destPoint].transform.position;
         destPoint = (destPoint + 1) % points.Length;
     }
