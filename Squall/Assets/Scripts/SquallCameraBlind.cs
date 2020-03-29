@@ -62,6 +62,14 @@ public class SquallCameraBlind : MonoBehaviour
                     count++;
                 }
             }
+            if (direction == 4)
+            {
+                if (count < 21)
+                {
+                    transform.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
+                    count++;
+                }
+            }
         }
         else
         {
@@ -98,6 +106,14 @@ public class SquallCameraBlind : MonoBehaviour
                 if (count < 21)
                 {
                     transform.Translate(Vector3.left * 0.25f);
+                    count++;
+                }
+            }
+            if (direction == 4)
+            {
+                if (count < 21)
+                {
+                    transform.localScale += new Vector3(0.02f,0.02f,0.02f);
                     count++;
                 }
             }
