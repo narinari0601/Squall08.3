@@ -11,8 +11,14 @@ public class Playercontrol : MonoBehaviour
     private float windpower;
     int mashcount;
     GameObject throwmash;
+    enum Direc
+    {
+        UP,DOWN,RIGHT,LEFT
+    }
+    Direc _direc;
     void Start()
     {
+        _direc = Direc.UP;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
         throwmash = (GameObject)Resources.Load("throwmash");
@@ -21,7 +27,7 @@ public class Playercontrol : MonoBehaviour
     {
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
-
+        _direc = Direc.UP;
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
 
         throwmash = (GameObject)Resources.Load("throwmash");
@@ -39,30 +45,31 @@ public class Playercontrol : MonoBehaviour
         wind = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.UpArrow))
         {
-
+            _direc = Direc.UP;
             transform.position += new Vector3(0, 0, 0.3f);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
             transform.position += new Vector3(0, 0, -0.3f);
-
+            _direc = Direc.DOWN;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position += new Vector3(-0.3f, 0, 0);
-
+            _direc = Direc.LEFT;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += new Vector3(0.3f, 0, 0);
-
+            _direc = Direc.RIGHT;
         }
         if (Input.GetKey(KeyCode.C))
         {
             if (mashcount > 0)
             {
                 mashcount--;
-                Instantiate(throwmash, new Vector3(-1.0f, 0.0f, 0.0f),
+              
+                Instantiate((GameObject)throwmash, transform.position+GetDirec()*3,
                     Quaternion.LookRotation(new Vector3(0, 90, 0), new Vector3(0, 0, 0)));
             }
             else
@@ -71,6 +78,29 @@ public class Playercontrol : MonoBehaviour
             }
         }
 
+    }
+   public Vector3 GetDirec()
+    {
+        if (_direc == Direc.DOWN)
+        {
+           return new Vector3(0, 0, -0.5f);
+        }
+        if (_direc == Direc.UP)
+        {
+            return new Vector3(0, 0, 0.5f);
+        }
+        if (_direc == Direc.RIGHT)
+        {
+            return new Vector3(0.5f, 0, 0);
+        }
+        if (_direc == Direc.LEFT)
+        {
+            return new Vector3(-0.5f, 0, 0);
+        }
+        else
+        {
+            return Vector3.zero;
+        }
     }
     void WindMove()
     {
@@ -111,6 +141,10 @@ public class Playercontrol : MonoBehaviour
         Debug.Log("Hit"); // ログを表示する
 
         if (collision.gameObject.tag == "Mash")
+        {
+            mashcount++;
+        }
+        else if(collision.gameObject.tag == "TMash")
         {
             mashcount++;
         }

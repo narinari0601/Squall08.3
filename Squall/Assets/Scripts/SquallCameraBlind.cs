@@ -8,7 +8,7 @@ public class SquallCameraBlind : MonoBehaviour
     GamePlayManager.WeatherStates currentstates;//現在の天気
     GamePlayManager.WeatherStates paststate;//１フレーム前の天気
     //Vector3 position;//視界阻害サイズ変更用
-    public int direction;//ブロックごとの方向指定数字 0=した,1=うえ,2=みぎ,3=ひだり,
+    public int direction;//ブロックごとの方向指定数字 0=した,1=うえ,2=みぎ,3=ひだり,4=,スプライトマスク
     int count;
 
     // Start is called before the first frame update
