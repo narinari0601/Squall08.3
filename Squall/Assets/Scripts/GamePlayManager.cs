@@ -5,7 +5,6 @@ using UnityEngine;
 public class GamePlayManager : MonoBehaviour
 {
     public static GamePlayManager instance = null;
-    
 
 
     public enum WeatherStates
@@ -21,6 +20,13 @@ public class GamePlayManager : MonoBehaviour
         Down,
         Left,
         Right,
+    }
+
+    public enum GamePlayStates
+    {
+        Play,
+        Map,
+        Pause
     }
 
 
@@ -72,11 +78,14 @@ public class GamePlayManager : MonoBehaviour
 
     private int stageNum;
 
+    private GamePlayStates gameState;
+
 
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
     public GameObject Player { get => player; set => player = value; }
     public Stage CurrentStage { get => currentStage; set => currentStage = value; }
+    public GamePlayStates GameState { get => gameState; set => gameState = value; }
 
     private void Awake()
     {
