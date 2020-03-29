@@ -8,18 +8,23 @@ public class Playercontrol : MonoBehaviour
     public AudioClip _se;
     private AudioSource _audio;
     private Vector3 wind;
+    private float windpower;
+    int mashcount;
+    GameObject throwmash;
     void Start()
     {
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
+        throwmash = (GameObject)Resources.Load("throwmash");
     }
     public void Initialize()
     {
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
 
-        //wind = GamePlayManager.instance.CurrentStage.WindPower;
+        windpower = GamePlayManager.instance.CurrentStage.WindPower;
 
+        throwmash = (GameObject)Resources.Load("throwmash");
     }
     // Update is called once per frame
     void Update()
@@ -52,36 +57,62 @@ public class Playercontrol : MonoBehaviour
             transform.position += new Vector3(0.3f, 0, 0);
 
         }
+        if (Input.GetKey(KeyCode.C))
+        {
+            if (mashcount > 0)
+            {
+                mashcount--;
+                Instantiate(throwmash, new Vector3(-1.0f, 0.0f, 0.0f),
+                    Quaternion.LookRotation(new Vector3(0, 90, 0), new Vector3(0, 0, 0)));
+            }
+            else
+            {
+
+            }
+        }
+
     }
     void WindMove()
     {
+        if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Up
+            && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+        {
+            wind = new Vector3(0, 0, windpower);
+        }
+        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Down
+           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+        {
+            wind = new Vector3(0, 0, -windpower);
+        }
+        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Left
+           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+        {
+            wind = new Vector3(-windpower, 0, 0);
+        }
+        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Right
+           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+        {
+            wind = new Vector3(windpower, 0, 0);
+        }
+        transform.position += wind;
+    }
+    void Shout()
+    {
+       
         if (Input.GetKeyDown(KeyCode.B))
         {
             _audio.PlayOneShot(_se);
         }
     }
-    void Shout()
+    void OnCollisionEnter(Collision collision)
     {
-        if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Up
-           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+
+
+        Debug.Log("Hit"); // ログを表示する
+
+        if (collision.gameObject.tag == "Mash")
         {
-            wind = new Vector3(0, 0, 0.1f);
+            mashcount++;
         }
-        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Down
-           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
-        {
-            wind = new Vector3(0, 0, -0.1f);
-        }
-        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Left
-           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
-        {
-            wind = new Vector3(-0.1f, 0, 0);
-        }
-        else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Right
-           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
-        {
-            wind = new Vector3(0.1f, 0, 0);
-        }
-        transform.position += wind;
     }
 }
