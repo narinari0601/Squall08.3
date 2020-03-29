@@ -156,6 +156,8 @@ public class GamePlayManager : MonoBehaviour
         ChangeWeather();
 
         NextStage();
+
+        StageClear();
     }
 
     private void ChangeWeather()
@@ -216,5 +218,10 @@ public class GamePlayManager : MonoBehaviour
 
             StageInitialize();
         }
+    }
+
+    public void StageClear()
+    {
+        currentStage.StageClear();
     }
 }
