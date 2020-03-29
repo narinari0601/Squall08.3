@@ -18,10 +18,8 @@ public class LightMash : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-       
-        
-            Debug.Log("Hit"); // ログを表示する
-        
+        Debug.Log("Hit"); // ログを表示する
+
         if (collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);

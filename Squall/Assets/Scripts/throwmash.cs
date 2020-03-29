@@ -11,6 +11,10 @@ public class throwmash : MonoBehaviour
     void Start()
     {
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
+
+        SetMove(GamePlayManager.instance.Player.GetComponent<Playercontrol>().GetDirec());
+       
+
     }
     void Initialize()
     {
@@ -20,10 +24,15 @@ public class throwmash : MonoBehaviour
     void Update()
     {
         Wind();
+        Move();
     }
     public void SetMove(Vector3 velocity)
     {
         move = velocity;
+    }
+    void Move()
+    {
+        transform.position += move;
     }
     void Wind()
     {
@@ -50,5 +59,13 @@ public class throwmash : MonoBehaviour
         }
         transform.position += wind;
     }
-  
+    void OnCollisionEnter(Collision collision)
+    {
+    
+
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
