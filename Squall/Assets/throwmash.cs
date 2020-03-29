@@ -6,6 +6,7 @@ public class throwmash : MonoBehaviour
 {
     Vector3 wind;
     float windpower;
+    Vector3 move;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,10 @@ public class throwmash : MonoBehaviour
     void Update()
     {
         Wind();
+    }
+    public void SetMove(Vector3 velocity)
+    {
+        move = velocity;
     }
     void Wind()
     {
