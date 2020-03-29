@@ -245,7 +245,7 @@ MonoBehaviour:
   playerObj: {fileID: 4816494704454814767}
   members: []
   weatherRotateTime: 10
-  windPower: 0.3
+  windPower: 0.1
   squallDirArray: 00000000010000000200000003000000
 --- !u!1 &4816494705284986541
 GameObject:
