@@ -57,7 +57,7 @@ public class Stage : MonoBehaviour
             //Debug.Log(members[i].name);
             var member = members[i];
             if (!member.GetComponentInChildren<MemberControl>())
-                return;
+                continue;
             
 
             var m_controler = member.GetComponentInChildren<MemberControl>();
@@ -74,12 +74,18 @@ public class Stage : MonoBehaviour
 
     public void StageClear()
     {
+
+        if (memberControllers.Length == 0)
+            return;
+
         foreach (var member in memberControllers)
         {
+
             //if (member.GetMemberCheck == MemberControl.MemberCheck.isCapture)
             //{
             //    stageClearMember++;
             //}
+            
 
             if (member.GetMemberState == MemberControl.MemberStates.isDaed ||
                 member.GetMemberState == MemberControl.MemberStates.isHub)
