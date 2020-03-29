@@ -13,10 +13,12 @@ public class Playercontrol : MonoBehaviour
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
     }
-    void Initialize()
+    public void Initialize()
     {
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
+
+        //wind = GamePlayManager.instance.CurrentStage.WindPower;
 
     }
     // Update is called once per frame

@@ -139,7 +139,7 @@ public class GamePlayManager : MonoBehaviour
         ///
         player = currentStage.PlayerObj;
 
-        //Debug.Log(player.name);
+        player.GetComponent<Playercontrol>().Initialize();
 
         members = currentStage.Members;
 
