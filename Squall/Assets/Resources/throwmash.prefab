@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1627968233278496275}
   m_Layer: 0
   m_Name: throwmash
-  m_TagString: Mash
+  m_TagString: TMash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

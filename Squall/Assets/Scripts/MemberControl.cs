@@ -90,6 +90,11 @@ public class MemberControl : MonoBehaviour
 
     }
 
+    public void MemberToPlayer()
+    {
+        member.areaMask |= 1 << NavMesh.GetAreaFromName("River");
+    }
+
     public void GotoNextPoint()
     {
         if (points.Length == 0)
@@ -117,7 +122,9 @@ public class MemberControl : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            member.isStopped = false;
             memberCheck = MemberCheck.isCapture;
+            MemberToPlayer();
         }
         
     }
