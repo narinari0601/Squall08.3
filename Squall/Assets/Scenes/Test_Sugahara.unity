@@ -234,7 +234,7 @@ MonoBehaviour:
   signRatio: 2
   squallRatio: 5
   stagePrefabs:
-  - {fileID: 5928195420443602274, guid: 29f3fbaa94ffd4949b7073c025914df4, type: 3}
+  - {fileID: 7209679810623542945, guid: 29f3fbaa94ffd4949b7073c025914df4, type: 3}
 --- !u!4 &588807859
 Transform:
   m_ObjectHideFlags: 0
