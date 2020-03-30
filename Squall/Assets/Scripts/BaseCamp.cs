@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class BaseCamp : MonoBehaviour
 {
-    private GameObject map;
 
     void Start()
     {
-        
+        Initialize();
     }
 
     // Update is called once per frame
@@ -17,21 +16,20 @@ public class BaseCamp : MonoBehaviour
         
     }
 
+    public void Initialize()
+    {
+       
+    }
+
     public void MapDisplay()
     {
-
+        GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(true);
 
-        var obj = collision.gameObject;
-
-        if (obj.tag == "Player")
-        {
-            Debug.Log(true);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,9 +38,7 @@ public class BaseCamp : MonoBehaviour
 
         if (obj.tag == "Player")
         {
-            Debug.Log(true);
+            MapDisplay();
         }
-
-        Debug.Log(true);
     }
 }
