@@ -68,8 +68,8 @@ public class Playercontrol : MonoBehaviour
             if (mashcount > 0)
             {
                 mashcount--;
-              
-                Instantiate((GameObject)throwmash, transform.position+GetDirec()*9,
+
+                Instantiate((GameObject)throwmash, transform.position + GetDirec() * 9 + new Vector3(0, 1f, 0),
                     Quaternion.LookRotation(new Vector3(0, 90, 0), new Vector3(0, 0, 0)));
             }
             else
@@ -83,7 +83,7 @@ public class Playercontrol : MonoBehaviour
     {
         if (_direc == Direc.DOWN)
         {
-           return new Vector3(0, 0, -0.2f);
+           return new Vector3(0, 0f, -0.2f);
         }
         if (_direc == Direc.UP)
         {
