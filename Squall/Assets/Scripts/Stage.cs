@@ -92,7 +92,6 @@ public class Stage : MonoBehaviour
             //{
             //    stageClearMember++;
             //}
-            
 
             if (member.GetMemberState == MemberControl.MemberStates.isDaed ||
                 member.GetMemberState == MemberControl.MemberStates.isHub)

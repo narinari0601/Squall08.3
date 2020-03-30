@@ -166,7 +166,7 @@ public class GamePlayManager : MonoBehaviour
         mainCamera.GetComponent<CameraController>().Initialize();
 
         cameraList.Clear();
-        cameraList.Add(mainCamera);
+        cameraList.Add(mainCamera.GetComponent<CameraController>().Camera);
         var mapCamera = currentStage.MapCamera;
         cameraList.Add(mapCamera);
         currentCamera = cameraList[0];
@@ -183,7 +183,7 @@ public class GamePlayManager : MonoBehaviour
 
         MapEnd();
 
-        NextStage();
+        //NextStage();
 
         StageClear();
     }
