@@ -21,4 +21,28 @@ public class BaseCamp : MonoBehaviour
     {
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(true);
+
+        var obj = collision.gameObject;
+
+        if (obj.tag == "Player")
+        {
+            Debug.Log(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var obj = other.gameObject;
+
+        if (obj.tag == "Player")
+        {
+            Debug.Log(true);
+        }
+
+        Debug.Log(true);
+    }
 }
