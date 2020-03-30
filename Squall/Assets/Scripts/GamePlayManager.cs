@@ -186,6 +186,12 @@ public class GamePlayManager : MonoBehaviour
         //NextStage();
 
         StageClear();
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameEnd();
+        }
     }
 
     private void ChangeWeather()
@@ -287,5 +293,14 @@ public class GamePlayManager : MonoBehaviour
                 gameState = GamePlayStates.Play;
             }
         }
+    }
+
+    public void GameEnd()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 }
