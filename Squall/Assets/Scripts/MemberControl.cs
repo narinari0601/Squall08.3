@@ -64,7 +64,7 @@ public class MemberControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(memberNumber);
+        //Debug.Log(memberNumber);
         //Memberの処理分岐
         if (GetMemberCheck == MemberCheck.isLoitering)//徘徊しているときの処理書くところ
         {
