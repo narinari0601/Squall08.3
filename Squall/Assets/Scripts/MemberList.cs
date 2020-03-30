@@ -6,10 +6,6 @@ public class MemberList : MonoBehaviour
 {
     public List<GameObject> memberList = new List<GameObject>();
 
-    //public GameObject[] gameObjects;
-
-   // public GameObject player;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +19,7 @@ public class MemberList : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //Debug.Log(memberList.Count);
+    {        
         
     }
 }

@@ -35,6 +35,7 @@ public class MemberControl : MonoBehaviour
         isLoitering,//徘徊してる
         isCapture,//捕まえた
         isDead,//死んだ
+        isHub,//拠点
     }
     private MemberCheck memberCheck;
     public MemberCheck GetMemberCheck { get => memberCheck; set => memberCheck = value; }
@@ -77,6 +78,10 @@ public class MemberControl : MonoBehaviour
         {
             PlayerFollows();
             
+        }
+        else if (GetMemberCheck == MemberCheck.isHub)
+        {
+            //今のところ何もしない
         }
         else//死んだときの処理を書くところ
         {
@@ -146,6 +151,17 @@ public class MemberControl : MonoBehaviour
         {
             member.isStopped = false;
             temperature += 0.5f;
+        }
+    }
+
+    public void MemberHubCheck()
+    {
+        if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
+        {
+            if (GetMemberCheck == MemberCheck.isCapture)
+            {
+                memberCheck = MemberCheck.isHub;
+            }
         }
     }
 
