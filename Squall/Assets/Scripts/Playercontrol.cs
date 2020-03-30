@@ -46,21 +46,21 @@ public class Playercontrol : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             _direc = Direc.UP;
-            transform.position += new Vector3(0, 0, 0.3f);
+            transform.position += new Vector3(0, 0, 0.1f);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += new Vector3(0, 0, -0.3f);
+            transform.position += new Vector3(0, 0, -0.1f);
             _direc = Direc.DOWN;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += new Vector3(-0.3f, 0, 0);
+            transform.position += new Vector3(-0.1f, 0, 0);
             _direc = Direc.LEFT;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += new Vector3(0.3f, 0, 0);
+            transform.position += new Vector3(0.1f, 0, 0);
             _direc = Direc.RIGHT;
         }
         if (Input.GetKey(KeyCode.C))
@@ -83,19 +83,19 @@ public class Playercontrol : MonoBehaviour
     {
         if (_direc == Direc.DOWN)
         {
-           return new Vector3(0, 0, -0.4f);
+           return new Vector3(0, 0, -0.2f);
         }
         if (_direc == Direc.UP)
         {
-            return new Vector3(0, 0, 0.4f);
+            return new Vector3(0, 0, 0.2f);
         }
         if (_direc == Direc.RIGHT)
         {
-            return new Vector3(0.4f, 0, 0);
+            return new Vector3(0.2f, 0, 0);
         }
         if (_direc == Direc.LEFT)
         {
-            return new Vector3(-0.4f, 0, 0);
+            return new Vector3(-0.2f, 0, 0);
         }
         else
         {
