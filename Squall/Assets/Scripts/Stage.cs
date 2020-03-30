@@ -20,6 +20,9 @@ public class Stage : MonoBehaviour
 
     private int stageClearMember;
 
+    [SerializeField, Header("全体マップのカメラ")]
+    private GameObject mapCamera = null;
+
     [SerializeField, Header("天気が1周する時間")]
     private float weatherRotateTime = 0;
 
@@ -29,11 +32,13 @@ public class Stage : MonoBehaviour
     [SerializeField, Header("風の方向を順番に")]
     private SquallDirections[] squallDirArray = new SquallDirections[0];
 
+
     public GameObject PlayerObj { get => playerObj; set => playerObj = value; }
     public GameObject[] Members { get => members; set => members = value; }
     public float WeatherRotateTime { get => weatherRotateTime; set => weatherRotateTime = value; }
     public SquallDirections[] SquallDirArray { get => squallDirArray; set => squallDirArray = value; }
     public float WindPower { get => windPower; set => windPower = value; }
+    public GameObject MapCamera { get => mapCamera; set => mapCamera = value; }
 
     void Start()
     {
@@ -70,6 +75,8 @@ public class Stage : MonoBehaviour
         memberMaxValue = members.Length;
 
         stageClearMember = 0;
+        
+        
     }
 
     public void StageClear()

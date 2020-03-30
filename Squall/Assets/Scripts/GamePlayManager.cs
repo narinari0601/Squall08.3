@@ -38,6 +38,10 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField, Header("メインカメラ")]
     private GameObject mainCamera = null;
 
+    private GameObject currentCamera;
+
+    private List<GameObject> cameraList;
+
     //天気関連
     private WeatherStates weather;
 
@@ -119,6 +123,8 @@ public class GamePlayManager : MonoBehaviour
         //    stageList.Add(stage);
         //}
 
+        cameraList = new List<GameObject>();
+
         StageInitialize();
     }
 
@@ -158,11 +164,24 @@ public class GamePlayManager : MonoBehaviour
         //}
 
         mainCamera.GetComponent<CameraController>().Initialize();
+
+        cameraList.Clear();
+        cameraList.Add(mainCamera);
+        var mapCamera = currentStage.MapCamera;
+        cameraList.Add(mapCamera);
+        currentCamera = cameraList[0];
+        cameraList[1].SetActive(false);
+
+
     }
 
     private void FixedUpdate()
     {
         ChangeWeather();
+
+        ChangeCamera();
+
+        MapEnd();
 
         NextStage();
 
@@ -232,5 +251,41 @@ public class GamePlayManager : MonoBehaviour
     public void StageClear()
     {
         currentStage.StageClear();
+    }
+
+    public void ChangeCamera()
+    {
+        var state = gameState;
+
+        if (state == GamePlayStates.Play)
+        {
+            if (currentCamera == cameraList[0])
+                return;
+
+            currentCamera = cameraList[0];
+            cameraList[1].SetActive(false);
+            cameraList[0].SetActive(true);
+        }
+
+        else if (state == GamePlayStates.Map)
+        {
+            if (currentCamera == cameraList[1])
+                return;
+
+            currentCamera = cameraList[1];
+            cameraList[0].SetActive(false);
+            cameraList[1].SetActive(true);
+        }
+    }
+
+    public void MapEnd()
+    {
+        if (gameState == GamePlayStates.Map)
+        {
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                gameState = GamePlayStates.Play;
+            }
+        }
     }
 }
