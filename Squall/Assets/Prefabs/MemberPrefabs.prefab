@@ -400,6 +400,9 @@ MonoBehaviour:
   - {fileID: 8879815386146325386}
   - {fileID: 8879815386075611262}
   - {fileID: 8879815386103051576}
+  player: {fileID: 0}
+  navSpeed: 1
+  navStop: 1.5
 --- !u!54 &3751308973813074872
 Rigidbody:
   m_ObjectHideFlags: 0
