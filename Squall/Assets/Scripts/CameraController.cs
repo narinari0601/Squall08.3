@@ -9,7 +9,11 @@ public class CameraController : MonoBehaviour
 
     [SerializeField, Header("playerとの距離")]
     private Vector3 offset = Vector3.zero;
-    
+
+    [SerializeField,Header("メインカメラ")]
+    private GameObject m_Camera;
+
+    public GameObject Camera { get => m_Camera; set => m_Camera = value; }
 
     void Start()
     {
