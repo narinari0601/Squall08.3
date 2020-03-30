@@ -15,7 +15,7 @@ public class MemberControl : MonoBehaviour
     public GameObject player;
     MemberList script;
 
-    public int navSpeed;
+    public float navSpeed;
     public float navStop;
     private int memberNumber;
 
