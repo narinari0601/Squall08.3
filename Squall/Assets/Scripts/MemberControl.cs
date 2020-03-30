@@ -90,9 +90,10 @@ public class MemberControl : MonoBehaviour
 
     }
 
-    public void MemberToPlayer()
+    public void MemberToPlayer()//仲間がPlayerにつかまってから川を避けなくする
     {
         member.areaMask |= 1 << NavMesh.GetAreaFromName("River");
+        member.SetAreaCost(NavMesh.GetAreaFromName("River"), 1.0f);
     }
 
     public void GotoNextPoint()
@@ -104,7 +105,7 @@ public class MemberControl : MonoBehaviour
         destPoint = (destPoint + 1) % points.Length;
     }
 
-    public void WeratherCheck()
+    public void WeratherCheck()//天気を確認()
     {
         if(GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
         {
