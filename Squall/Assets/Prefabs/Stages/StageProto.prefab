@@ -675,7 +675,7 @@ MonoBehaviour:
   - {fileID: 6565529268075259416}
   mapCamera: {fileID: 645481849841585672}
   weatherRotateTime: 10
-  windPower: 0
+  windPower: 0.05
   squallDirArray: 00000000010000000200000003000000
 --- !u!1 &1922224454229120724
 GameObject:
