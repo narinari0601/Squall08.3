@@ -11,15 +11,16 @@ public class BasedirectionUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (baseCamp == null)
-        {
-            baseCamp = GameObject.FindWithTag("BaseCamp");
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (baseCamp == null)
+        {
+            baseCamp = GameObject.FindWithTag("BaseCamp");
+        }
         baseUI.transform.position = camera.WorldToScreenPoint(baseCamp.transform.position);
         if(baseUI.transform.position.x < 60)
         {
@@ -36,6 +37,15 @@ public class BasedirectionUI : MonoBehaviour
         if (baseUI.transform.position.y > 670)
         {
             baseUI.transform.position = new Vector3(baseUI.transform.position.x,670, baseUI.transform.position.z);
+        }
+
+        if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
+        {
+            baseUI.SetActive(false);
+        }
+        else
+        {
+            baseUI.SetActive(true);
         }
     }
 }

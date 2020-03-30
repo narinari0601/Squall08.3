@@ -83,19 +83,19 @@ public class Playercontrol : MonoBehaviour
     {
         if (_direc == Direc.DOWN)
         {
-           return new Vector3(0, 0, -0.5f);
+           return new Vector3(0, 0, -0.4f);
         }
         if (_direc == Direc.UP)
         {
-            return new Vector3(0, 0, 0.5f);
+            return new Vector3(0, 0, 0.4f);
         }
         if (_direc == Direc.RIGHT)
         {
-            return new Vector3(0.5f, 0, 0);
+            return new Vector3(0.4f, 0, 0);
         }
         if (_direc == Direc.LEFT)
         {
-            return new Vector3(-0.5f, 0, 0);
+            return new Vector3(-0.4f, 0, 0);
         }
         else
         {
@@ -136,8 +136,6 @@ public class Playercontrol : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-
-
         Debug.Log("Hit"); // ログを表示する
 
         if (collision.gameObject.tag == "Mash")
