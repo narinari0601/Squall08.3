@@ -183,7 +183,7 @@ public class GamePlayManager : MonoBehaviour
 
         MapEnd();
 
-        NextStage();
+        //NextStage();
 
         StageClear();
     }
