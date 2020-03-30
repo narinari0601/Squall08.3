@@ -398,7 +398,7 @@ MonoBehaviour:
   signRatio: 2
   squallRatio: 5
   stagePrefabs:
-  - {fileID: 544178128254636735}
+  - {fileID: 1922224454029648810, guid: 520214d59ebbd1845a8b2a1ed857006b, type: 3}
 --- !u!4 &889892659
 Transform:
   m_ObjectHideFlags: 0
@@ -413,12 +413,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &544178128254636735 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1922224454029648810, guid: 520214d59ebbd1845a8b2a1ed857006b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2098769696146206997}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2098769696146206997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -430,6 +424,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StageProto
+      objectReference: {fileID: 0}
+    - target: {fileID: 1922224454029648810, guid: 520214d59ebbd1845a8b2a1ed857006b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1922224454029648808, guid: 520214d59ebbd1845a8b2a1ed857006b,
         type: 3}
