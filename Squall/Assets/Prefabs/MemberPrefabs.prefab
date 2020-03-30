@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 8879815386179262174}
   m_Layer: 0
   m_Name: MemberPrefabs
-  m_TagString: Untagged
+  m_TagString: Member
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
