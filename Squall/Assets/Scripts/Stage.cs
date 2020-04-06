@@ -48,7 +48,7 @@ public class Stage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Ripple();
     }
 
     public void Initialize()
@@ -106,5 +106,22 @@ public class Stage : MonoBehaviour
         }
 
         stageClearMember = 0;
+    }
+
+
+    public void Ripple()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //foreach (var member in memberControllers)
+            //{
+            //    member.GetComponent<RippleUI>().Ripple();
+            //}
+
+            foreach (var member in members)
+            {
+                member.GetComponentInChildren<RippleUI>().Ripple();
+            }
+        }
     }
 }
