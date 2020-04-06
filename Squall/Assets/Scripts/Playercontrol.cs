@@ -69,7 +69,7 @@ public class Playercontrol : MonoBehaviour
             {
                 mashcount--;
 
-                Instantiate((GameObject)throwmash, transform.position + GetDirec() * 9 + new Vector3(0, 1f, 0),
+                Instantiate((GameObject)throwmash, transform.position + GetDirec() *11+new Vector3(0,1,0) ,
                     Quaternion.LookRotation(new Vector3(0, 90, 0), new Vector3(0, 0, 0)));
             }
             else
