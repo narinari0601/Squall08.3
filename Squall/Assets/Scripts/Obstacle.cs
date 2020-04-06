@@ -39,10 +39,16 @@ public class Obstacle : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "TMash")
+        if (collision.gameObject.tag == "TMash")
         {
             damagetime = 600;
             GetComponent<Renderer>().material = damagematerial;
+        }
+        if (collision.gameObject.tag == "Player" &&
+            GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall &&
+            damagetime == 0)  
+        {
+            collision.gameObject.GetComponent<Playercontrol>().Damage();
         }
     }
     public void Initialize()
