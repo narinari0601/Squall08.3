@@ -9,6 +9,9 @@ public class Playercontrol : MonoBehaviour
     private AudioSource _audio;
     private Vector3 wind;
     private float windpower;
+
+    public int HP;
+    private int mutekitime;
     int mashcount;
     GameObject throwmash;
     enum Direc
@@ -18,6 +21,7 @@ public class Playercontrol : MonoBehaviour
     Direc _direc;
     void Start()
     {
+        mutekitime = 0;
         _direc = Direc.UP;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
@@ -25,6 +29,7 @@ public class Playercontrol : MonoBehaviour
     }
     public void Initialize()
     {
+        mutekitime = 0;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
         _direc = Direc.UP;
@@ -35,10 +40,18 @@ public class Playercontrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TimerManager();
         WindMove();
         Move();
         Shout();
        
+    }
+    void TimerManager()
+    {
+        if (mutekitime > 0)
+        {
+            mutekitime--;
+        }
     }
     void Move()
     {
@@ -69,7 +82,7 @@ public class Playercontrol : MonoBehaviour
             {
                 mashcount--;
 
-                Instantiate((GameObject)throwmash, transform.position + GetDirec() * 9 + new Vector3(0, 1f, 0),
+                Instantiate((GameObject)throwmash, transform.position + GetDirec() *9,
                     Quaternion.LookRotation(new Vector3(0, 90, 0), new Vector3(0, 0, 0)));
             }
             else
@@ -134,6 +147,15 @@ public class Playercontrol : MonoBehaviour
             _audio.PlayOneShot(_se);
         }
     }
+    public void Damage()
+    {
+        if (mutekitime == 0)
+        {
+            mutekitime = 300;
+            HP--;
+            _audio.PlayOneShot(_se);
+        }
+    }
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Hit"); // ログを表示する
@@ -146,5 +168,14 @@ public class Playercontrol : MonoBehaviour
         {
             mashcount++;
         }
+        //if (collision.gameObject.tag == "Enemy")
+        //{
+        //    if (mutekitime == 0)
+        //    {
+        //        mutekitime = 300;
+        //        HP--;
+        //        _audio.PlayOneShot(_se);
+        //    }
+        //}
     }
 }
