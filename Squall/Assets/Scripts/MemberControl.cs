@@ -11,13 +11,15 @@ public class MemberControl : MonoBehaviour
     private float temperature = 100;
     //プレイヤーを追うための
     private Vector3 def;
-
-    public GameObject player;
+    private GameObject player;
     MemberList script;
+
 
     public float navSpeed;
     public float navStop;
     private int memberNumber;
+    private Transform memberLingt;
+    public Vector3 lightScale;
 
 
     public enum MemberStates//メンバーの状態
@@ -49,6 +51,8 @@ public class MemberControl : MonoBehaviour
 
     public void Initialize()
     {
+        player = GameObject.Find("Player");
+        memberLingt = this.gameObject.transform.Find("MemberLight");
         memberStates = MemberStates.isAlive;
         member = gameObject.GetComponent<NavMeshAgent>();
         member.autoBraking = false;
@@ -69,7 +73,7 @@ public class MemberControl : MonoBehaviour
         if (GetMemberCheck == MemberCheck.isLoitering)//徘徊しているときの処理書くところ
         {
             WeratherCheck();
-            if (!member.pathPending && member.remainingDistance < 0.5f)//ぐるぐる回るやつ
+            if (!member.pathPending && member.remainingDistance < 0.5f)//ぐるぐる回るやつ(徘徊)
             {
                 GotoNextPoint();
             }
@@ -77,9 +81,10 @@ public class MemberControl : MonoBehaviour
         else if(GetMemberCheck == MemberCheck.isCapture)//プレイヤーに捕まったらの処理書くところ
         {
             PlayerFollows();
-            
+            MemberHubCheck();
+
         }
-        else if (GetMemberCheck == MemberCheck.isHub)
+        else if (GetMemberCheck == MemberCheck.isHub)//拠点いるとき
         {
             //今のところ何もしない
         }
@@ -91,12 +96,21 @@ public class MemberControl : MonoBehaviour
 
     public void PlayerFollows()//仲間がドラクエの隊列みたいにPlayerを追いかける
     {
-        for (int i = 1; i <= script.memberList.Count; i++)//捕まえたメンバーの数だけ回す
+        //for (int i = 1; i <= script.memberList.Count; i++)
+        //{
+        //    if (memberNumber == i)
+        //    {
+        //        member.destination = script.memberList[i - 1].transform.position;
+        //        member.stoppingDistance = navStop;//Playerが止まってからどれくらいで止まるか、
+        //    }
+        //}
+
+        for (int i = 1; i < script.memberList.Count; i++)//捕まえたメンバーの数だけ回す
         {
-            if (memberNumber == i)
+            if (script.memberList[i] == this.gameObject)
             {
                 member.destination = script.memberList[i - 1].transform.position;
-                member.stoppingDistance = navStop;//Playerが止まってからどれくらいで止まるか、
+                member.stoppingDistance = navStop;
             }
         }
 
@@ -161,6 +175,7 @@ public class MemberControl : MonoBehaviour
             if (GetMemberCheck == MemberCheck.isCapture)
             {
                 memberCheck = MemberCheck.isHub;
+                script.memberList.Remove(this.gameObject);//
             }
         }
     }
@@ -173,10 +188,8 @@ public class MemberControl : MonoBehaviour
             memberCheck = MemberCheck.isCapture;
             MemberToPlayer();
             script.memberList.Add(this.gameObject);
-            memberNumber = script.memberList.Count - 1;
-            Debug.Log("当たった");
-            
-
+            memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);
+           // memberNumber = script.memberList.Count - 1;
         }
         
     }
