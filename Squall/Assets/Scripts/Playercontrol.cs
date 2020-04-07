@@ -199,7 +199,7 @@ public class Playercontrol : MonoBehaviour
             HP--;
             _audio.PlayOneShot(_se);
             damagevelocity = Nock/10;
-            savevelocity = Nock/10;
+            savevelocity = Nock / 10;
         }
     }
     void Damagemove()
