@@ -6,12 +6,12 @@ using static GamePlayManager;
 public class Stage : MonoBehaviour
 {
 
-    [SerializeField,Header("プレイヤー")]
+    [SerializeField, Header("プレイヤー")]
     private GameObject playerObj = null;
 
     private Vector3 playerInitPos;
 
-    [SerializeField,Header("仲間たち")]
+    [SerializeField, Header("仲間たち")]
     private GameObject[] members = new GameObject[0];
 
     private MemberControl[] memberControllers;
@@ -19,6 +19,9 @@ public class Stage : MonoBehaviour
     private int memberMaxValue;
 
     private int stageClearMember;
+
+    [SerializeField, Header("敵たち")]
+    private GameObject[] enemies = new GameObject[0];
 
     [SerializeField, Header("全体マップのカメラ")]
     private GameObject mapCamera = null;
@@ -48,7 +51,7 @@ public class Stage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ripple();
+
     }
 
     public void Initialize()
@@ -63,7 +66,7 @@ public class Stage : MonoBehaviour
             var member = members[i];
             if (!member.GetComponentInChildren<MemberControl>())
                 continue;
-            
+
 
             var m_controler = member.GetComponentInChildren<MemberControl>();
 
@@ -75,8 +78,13 @@ public class Stage : MonoBehaviour
         memberMaxValue = members.Length;
 
         stageClearMember = 0;
-        
-        
+
+
+        foreach (var enemy in enemies)
+        {
+            enemy.GetComponent<Obstacle>().Initialize();
+        }
+
     }
 
     public void StageClear()
@@ -111,17 +119,14 @@ public class Stage : MonoBehaviour
 
     public void Ripple()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        foreach (var member in memberControllers)
         {
-            //foreach (var member in memberControllers)
-            //{
-            //    member.GetComponent<RippleUI>().Ripple();
-            //}
+            member.Ripple();
+        }
 
-            foreach (var member in members)
-            {
-                member.GetComponentInChildren<RippleUI>().Ripple();
-            }
+        foreach (var enemy in enemies)
+        {
+            enemy.GetComponent<Obstacle>().Ripple();
         }
     }
 }

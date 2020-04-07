@@ -25,6 +25,9 @@ public class MemberControl : MonoBehaviour
     public Vector3 lightScale;
     public Slider slider;
 
+    //
+    RippleUI rippleUI;
+    //
 
     public enum MemberStates//メンバーの状態
     {
@@ -67,7 +70,9 @@ public class MemberControl : MonoBehaviour
         script = player.GetComponent<MemberList>();
         member.speed += navSpeed;
 
-        
+        //
+        rippleUI = GetComponentInChildren<RippleUI>();
+        //
     }
 
     // Update is called once per frame
@@ -194,5 +199,13 @@ public class MemberControl : MonoBehaviour
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);
             memberHp = 100;//HPを回復
         }      
-    }    
+    }
+
+
+    //
+    public void Ripple()
+    {
+        rippleUI.Ripple();
+    }
+    //
 }

@@ -145,6 +145,7 @@ public class Playercontrol : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             _audio.PlayOneShot(_se);
+            GamePlayManager.instance.CurrentStage.Ripple();
         }
     }
     public void Damage()

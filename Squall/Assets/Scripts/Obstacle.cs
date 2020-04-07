@@ -8,6 +8,11 @@ public class Obstacle : MonoBehaviour
     Material rainmaterial;
     Material damagematerial;
     int damagetime;
+
+    //
+    RippleUI rippleUI;
+    //
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,5 +62,16 @@ public class Obstacle : MonoBehaviour
         damagematerial = (Material)Resources.Load("Materials/damage");
         rainmaterial = (Material)Resources.Load("Materials/red");
         damagetime = 0;
+
+        //
+        rippleUI = GetComponentInChildren<RippleUI>();
+        //
     }
+
+    //
+    public void Ripple()
+    {
+        rippleUI.Ripple();
+    }
+    //
 }
