@@ -9,7 +9,8 @@ public class Playercontrol : MonoBehaviour
     private AudioSource _audio;
     private Vector3 wind;
     private float windpower;
-
+    private int shouttime;
+    private Vector3 velocity;
     public int HP;
     private int mutekitime;
     int mashcount;
@@ -22,6 +23,7 @@ public class Playercontrol : MonoBehaviour
     void Start()
     {
         mutekitime = 0;
+        shouttime = 0;
         _direc = Direc.UP;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
@@ -30,6 +32,7 @@ public class Playercontrol : MonoBehaviour
     public void Initialize()
     {
         mutekitime = 0;
+        shouttime = 0;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
         _direc = Direc.UP;
@@ -59,23 +62,44 @@ public class Playercontrol : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             _direc = Direc.UP;
-            transform.position += new Vector3(0, 0, 0.1f);
+            velocity += new Vector3(0, 0, 0.1f);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += new Vector3(0, 0, -0.1f);
+            velocity += new Vector3(0, 0, -0.1f);
             _direc = Direc.DOWN;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += new Vector3(-0.1f, 0, 0);
+            velocity += new Vector3(-0.1f, 0, 0);
             _direc = Direc.LEFT;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += new Vector3(0.1f, 0, 0);
+            velocity += new Vector3(0.1f, 0, 0);
             _direc = Direc.RIGHT;
         }
+        if (velocity.x * velocity.x + velocity.z * velocity.z > 0.01)
+        {
+            if (velocity.x < 0)
+            {
+                velocity.x = 0.1f / -1.4f;
+            }
+            else if (velocity.x > 0) 
+            {
+                velocity.x = 0.1f / 1.4f;
+            }
+            if (velocity.z < 0)
+            {
+                velocity.z = 0.1f / -1.4f;
+            }
+            else if (velocity.z > 0) 
+            {
+                velocity.z = 0.1f / 1.4f;
+            }
+        }
+        transform.position += velocity;
+        velocity = Vector3.zero;
         if (Input.GetKey(KeyCode.C))
         {
             if (mashcount > 0)
@@ -141,11 +165,17 @@ public class Playercontrol : MonoBehaviour
     }
     void Shout()
     {
-       
-        if (Input.GetKeyDown(KeyCode.B))
+
+        if (Input.GetKeyDown(KeyCode.B) && shouttime == 0)
         {
             _audio.PlayOneShot(_se);
             GamePlayManager.instance.CurrentStage.Ripple();
+            shouttime = 180;
+        }
+        else if (shouttime != 0) 
+        {
+            Debug.Log(shouttime);
+            shouttime--;
         }
     }
     public void Damage()

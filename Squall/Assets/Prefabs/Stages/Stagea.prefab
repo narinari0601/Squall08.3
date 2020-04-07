@@ -287,6 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObj: {fileID: 2110929356148343081}
   members: []
+  enemies:
+  - {fileID: 8337657645823487901}
   mapCamera: {fileID: 2201627012310721700}
   weatherRotateTime: 5
   windPower: 0.05
@@ -741,15 +743,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c73dca0f2b78488033f2a56c2df14, type: 3}
---- !u!4 &2201627012310721701 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2495196560097039541, guid: 668c73dca0f2b78488033f2a56c2df14,
-    type: 3}
-  m_PrefabInstance: {fileID: 4336254058520326160}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2201627012310721700 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2495196560097039540, guid: 668c73dca0f2b78488033f2a56c2df14,
+    type: 3}
+  m_PrefabInstance: {fileID: 4336254058520326160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2201627012310721701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2495196560097039541, guid: 668c73dca0f2b78488033f2a56c2df14,
     type: 3}
   m_PrefabInstance: {fileID: 4336254058520326160}
   m_PrefabAsset: {fileID: 0}
@@ -901,8 +903,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9215520543995247213, guid: 635e1eadd598e0942b85eaaa49426f7e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635e1eadd598e0942b85eaaa49426f7e, type: 3}
+--- !u!1 &8337657645823487901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 908166810369699611, guid: 635e1eadd598e0942b85eaaa49426f7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9164609270321397894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8337657645823487889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 908166810369699607, guid: 635e1eadd598e0942b85eaaa49426f7e,
