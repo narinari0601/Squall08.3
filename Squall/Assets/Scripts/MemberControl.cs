@@ -9,10 +9,10 @@ public class MemberControl : MonoBehaviour
     public NavMeshAgent member;
     public Transform[] points;
     private int destPoint = 0;
-    public float memberHp = 100;
+    public float memberHp = 100;//仲間のhp
     const float MIN = 0;
     const float MAX =100;
-    private float memberHpMax;
+    private float memberHpMax;//最大hp
     //プレイヤーを追うための
     private Vector3 def;
     private GameObject player;
@@ -21,11 +21,11 @@ public class MemberControl : MonoBehaviour
 
     public float navSpeed;
     public float navStop;
-    private int memberNumber;
+    //private int memberNumber;
     private Transform memberLingt;
     public Vector3 lightScale;
     public Slider slider;
-
+    private float invincibleTime = 0;
     //仲間の速さ
     private Vector3 wind;
     private float windpower;
@@ -117,6 +117,11 @@ public class MemberControl : MonoBehaviour
             WeratherCheck();
             PlayerFollows();
             MemberHubCheck();
+            
+            if(invincibleTime>0)
+            {
+                invincibleTime -= Time.deltaTime;
+            }
           
         }
         else if (GetMemberCheck == MemberCheck.isHub)//拠点いるときの処理書くところ
@@ -173,7 +178,7 @@ public class MemberControl : MonoBehaviour
         {
             memberHp -= Time.deltaTime * 5;
             memberHp = System.Math.Max(memberHp, MIN);//最小値を超えたら戻す
-            member.speed = 8;
+            member.speed = 6;
         }
         else 
         {
@@ -221,14 +226,18 @@ public class MemberControl : MonoBehaviour
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
             memberHp = 100;//HPを回復
-        }      
+        }     
+        if(other.gameObject.tag =="Enemy" && GetMemberCheck == MemberCheck.isCapture && invincibleTime <=0 
+            && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall )
+        {
+            memberHp -= 20;
+            invincibleTime = 5;
+        }
     }
-
-    
 
     public void Ripple()
     {
-        if(GetMemberCheck == MemberCheck.isLoitering)
+        if (GetMemberCheck == MemberCheck.isLoitering )
         {
             rippleUI.Ripple();
         }
