@@ -8,7 +8,7 @@ public class RippleUI : MonoBehaviour
     [SerializeField, Header("Imageオブジェクト")]
     private GameObject sprite = null;
 
-    private RectTransform imagePos;
+    private RectTransform imageRect;
 
     [SerializeField, Header("発信者")]
     private GameObject senderObj;
@@ -24,7 +24,11 @@ public class RippleUI : MonoBehaviour
 
     private float currentRippleTimer;
 
-    private GameObject player;
+    private Vector2 rippleScale;
+    private float rippleAlfa;
+    private float red, green, blue;
+
+    private Image spriteImage;
 
 
     // Start is called before the first frame update
@@ -37,9 +41,13 @@ public class RippleUI : MonoBehaviour
     {
         isActive = false;
         currentRippleTimer = 0;
-        imagePos = sprite.GetComponent<RectTransform>();
-        player = GamePlayManager.instance.Player;
-        
+        imageRect = sprite.GetComponent<RectTransform>();
+        rippleScale = Vector2.zero;
+        spriteImage = sprite.GetComponent<Image>();
+        rippleAlfa = 1.5f;
+        red = spriteImage.color.r;
+        green = spriteImage.color.g;
+        blue = spriteImage.color.b;
     }
 
     // Update is called once per frame
@@ -51,18 +59,29 @@ public class RippleUI : MonoBehaviour
         if (isActive)
         {
             currentRippleTimer += Time.deltaTime;
+            rippleScale += new Vector2(2, 2);
+            imageRect.sizeDelta = rippleScale;
+            rippleAlfa -= 0.01f;
+            spriteImage.color = new Color(red, green, blue, rippleAlfa);
 
             if (currentRippleTimer >= RIPPLE_TIME)
             {
                 isActive = false;
                 sprite.SetActive(false);
                 currentRippleTimer = 0;
+                rippleScale = Vector2.zero;
+                rippleAlfa = 1.5f;
             }
         }
     }
 
     public void Ripple()
     {
+        var weather = GamePlayManager.instance.Weather;
+
+        if (weather == GamePlayManager.WeatherStates.Squall)
+            return;
+
         sprite.SetActive(true);
         isActive = true;
     }
@@ -94,7 +113,7 @@ public class RippleUI : MonoBehaviour
             pos.y = DOWN_MAX;
         }
 
-        imagePos.transform.position = pos;
+        imageRect.transform.position = pos;
         
     }
 }

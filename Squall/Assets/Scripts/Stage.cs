@@ -56,13 +56,14 @@ public class Stage : MonoBehaviour
 
     public void Initialize()
     {
+        playerObj.GetComponent<Playercontrol>().Initialize();
+
         playerInitPos = playerObj.transform.position;
 
         memberControllers = new MemberControl[members.Length];
 
         for (int i = 0; i < members.Length; i++)
         {
-            //Debug.Log(members[i].name);
             var member = members[i];
             if (!member.GetComponentInChildren<MemberControl>())
                 continue;
