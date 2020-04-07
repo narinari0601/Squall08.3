@@ -11,7 +11,7 @@ public class RippleUI : MonoBehaviour
     private RectTransform imageRect;
 
     [SerializeField, Header("発信者")]
-    private GameObject senderObj;
+    private GameObject senderObj = null;
 
     private bool isActive;
 
