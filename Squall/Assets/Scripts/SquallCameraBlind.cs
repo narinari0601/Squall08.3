@@ -12,6 +12,7 @@ public class SquallCameraBlind : MonoBehaviour
     //Vector3 position;//視界阻害サイズ変更用
     public int direction;//ブロックごとの方向指定数字 0=した,1=うえ,2=みぎ,3=ひだり,4=,スプライトマスク
     int count;
+    int cntfull;//スコール時に見える部分が小さくなる量（大きいと小さくなる）
     Transform transforms;
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class SquallCameraBlind : MonoBehaviour
         currentstates = GamePlayManager.instance.Weather;
         transforms = GameObject.Find("View").transform;
         //gamePlayManager = GameObject.Find("GamePlayManager");
+        cntfull = 21;
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class SquallCameraBlind : MonoBehaviour
         {
             if(currentstate2 == GamePlayManager.GamePlayStates.Play && paststate2 == GamePlayManager.GamePlayStates.Map)
             {
-                count = 21;
+                count = cntfull;
                 transforms.localScale -= new Vector3(0.42f,0.42f,0.42f);
             }
 
@@ -43,7 +45,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 0)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transform.Translate(Vector3.forward * 0.1f);
                     count++;
@@ -51,7 +53,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 1)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transform.Translate(Vector3.back * 0.1f);
                     count++;
@@ -59,7 +61,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 2)
             {
-                if  (count < 21)
+                if  (count < cntfull)
                 {
                     transform.Translate(Vector3.left*0.25f);
                     count++;
@@ -67,7 +69,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 3)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transform.Translate(Vector3.right * 0.25f);
                     count++;
@@ -75,7 +77,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 4)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transforms.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
                     count++;
@@ -86,7 +88,7 @@ public class SquallCameraBlind : MonoBehaviour
         {
             if (currentstate2 == GamePlayManager.GamePlayStates.Play && paststate2 == GamePlayManager.GamePlayStates.Map)
             {
-                count = 21;
+                count = cntfull;
                 transforms.localScale += new Vector3(0.42f, 0.42f, 0.42f);
             }
             if (paststate == GamePlayManager.WeatherStates.Squall)
@@ -95,7 +97,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 0)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transform.Translate(Vector3.back*0.1f);
                     count++;
@@ -103,7 +105,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 1)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transform.Translate(Vector3.forward * 0.1f);
                     count++;
@@ -111,7 +113,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 2)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transform.Translate(Vector3.right * 0.25f);
                     count++;
@@ -119,7 +121,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 3)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transform.Translate(Vector3.left * 0.25f);
                     count++;
@@ -127,7 +129,7 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 4)
             {
-                if (count < 21)
+                if (count < cntfull)
                 {
                     transforms.localScale += new Vector3(0.02f,0.02f,0.02f);
                     count++;

@@ -154,7 +154,7 @@ public class GamePlayManager : MonoBehaviour
         ///
         player = currentStage.PlayerObj;
 
-        player.GetComponent<Playercontrol>().Initialize();
+        //player.GetComponent<Playercontrol>().Initialize();
 
         members = currentStage.Members;
 
