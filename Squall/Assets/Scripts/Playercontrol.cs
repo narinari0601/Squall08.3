@@ -10,6 +10,8 @@ public class Playercontrol : MonoBehaviour
     private Vector3 wind;
     private float windpower;
     private int shouttime;
+    private Vector3 damagevelocity;
+    private Vector3 savevelocity;
     private Vector3 velocity;
     public int HP;
     private int mutekitime;
@@ -45,7 +47,10 @@ public class Playercontrol : MonoBehaviour
     {
         TimerManager();
         WindMove();
-        Move();
+        Damagemove();
+       
+            Move();
+        
         Shout();
        
     }
@@ -97,8 +102,12 @@ public class Playercontrol : MonoBehaviour
             {
                 velocity.z = 0.1f / 1.4f;
             }
+
         }
-        transform.position += velocity;
+        if (mutekitime == 0)
+        {
+            transform.position += velocity;
+        }
         velocity = Vector3.zero;
         if (Input.GetKey(KeyCode.C))
         {
@@ -161,7 +170,11 @@ public class Playercontrol : MonoBehaviour
         {
             wind = new Vector3(windpower, 0, 0);
         }
-        transform.position += wind;
+        if (mutekitime == 0)
+        {
+            transform.position += wind;
+        }
+     //   transform.position *= Time.deltaTime;
     }
     void Shout()
     {
@@ -178,14 +191,26 @@ public class Playercontrol : MonoBehaviour
             shouttime--;
         }
     }
-    public void Damage()
+    public void Damage(Vector3 Nock)
     {
         if (mutekitime == 0)
         {
-            mutekitime = 300;
+            mutekitime = 180;
             HP--;
             _audio.PlayOneShot(_se);
+            damagevelocity = Nock/10;
+            savevelocity = Nock / 10;
         }
+    }
+    void Damagemove()
+    {
+        if (mutekitime > 170)
+        {
+            transform.position = transform.position + damagevelocity;
+            damagevelocity -= savevelocity / 5;
+            Debug.Log(damagevelocity);
+        }
+       // transform.position *= Time.deltaTime;
     }
     void OnCollisionEnter(Collision collision)
     {

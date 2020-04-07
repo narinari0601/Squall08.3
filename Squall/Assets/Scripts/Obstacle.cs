@@ -53,7 +53,8 @@ public class Obstacle : MonoBehaviour
             GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall &&
             damagetime == 0)  
         {
-            collision.gameObject.GetComponent<Playercontrol>().Damage();
+            collision.gameObject.GetComponent<Playercontrol>().Damage(
+                (collision.transform.position - transform.position).normalized);
         }
     }
     public void Initialize()
