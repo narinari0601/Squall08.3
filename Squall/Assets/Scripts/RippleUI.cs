@@ -53,7 +53,6 @@ public class RippleUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveUI();
 
         //出ているとき
         if (isActive)
@@ -67,11 +66,18 @@ public class RippleUI : MonoBehaviour
             if (currentRippleTimer >= RIPPLE_TIME)
             {
                 isActive = false;
-                sprite.SetActive(false);
+                //sprite.SetActive(false);
                 currentRippleTimer = 0;
                 rippleScale = Vector2.zero;
+                imageRect.sizeDelta = rippleScale;
                 rippleAlfa = 1.5f;
+                spriteImage.color = new Color(red, green, blue, rippleAlfa);
             }
+        }
+
+        else
+        {
+            MoveUI();
         }
     }
 
@@ -82,8 +88,10 @@ public class RippleUI : MonoBehaviour
         if (weather == GamePlayManager.WeatherStates.Squall)
             return;
 
-        sprite.SetActive(true);
+        MoveUI();
+        //sprite.SetActive(true);
         isActive = true;
+        
     }
 
     private void MoveUI()
