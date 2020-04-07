@@ -13,7 +13,9 @@ public class SquallCameraBlind : MonoBehaviour
     public int direction;//ブロックごとの方向指定数字 0=した,1=うえ,2=みぎ,3=ひだり,4=,スプライトマスク
     int count;
     int cntfull;//スコール時に見える部分が小さくなる量（大きいと小さくなる）
+    //int membercnt;//連れてる仲間の人数
     Transform transforms;
+    GameObject player;//プレイヤー
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,12 @@ public class SquallCameraBlind : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*if(player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            membercnt = player.GetComponent<MemberList>().memberList.Count;
+        }*/
+
         paststate = currentstates;
         currentstates = GamePlayManager.instance.Weather;
 
