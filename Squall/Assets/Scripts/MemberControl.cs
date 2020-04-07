@@ -9,23 +9,23 @@ public class MemberControl : MonoBehaviour
     public NavMeshAgent member;
     public Transform[] points;
     private int destPoint = 0;
-    public float memberHp = 100;
+    public float memberHp = 100;//仲間のhp
     const float MIN = 0;
     const float MAX =100;
-    private float memberHpMax;
+    private float memberHpMax;//最大hp
     //プレイヤーを追うための
     private Vector3 def;
     private GameObject player;
     MemberList script;
-
+    Playercontrol playerScript;
 
     public float navSpeed;
     public float navStop;
-    private int memberNumber;
+    //private int memberNumber;
     private Transform memberLingt;
     public Vector3 lightScale;
     public Slider slider;
-
+    private float invincibleTime = 0;
     //仲間の速さ
     private Vector3 wind;
     private float windpower;
@@ -76,6 +76,8 @@ public class MemberControl : MonoBehaviour
         script = player.GetComponent<MemberList>();
         member.speed += navSpeed;
 
+        playerScript = GetComponent<Playercontrol>();
+
         //波紋のやつ
         rippleUI = GetComponentInChildren<RippleUI>();
     }
@@ -83,6 +85,7 @@ public class MemberControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //Debug.Log(memberHp);
         slider.value = memberHp;
         //Memberの処理分岐
@@ -94,9 +97,7 @@ public class MemberControl : MonoBehaviour
                 memberStates = MemberStates.isDaed;
             }
 
-            //スプライトの回転をなくす(Hpバーの回転もなくす）
-            Vector3 parent = this.transform.parent.transform.localRotation.eulerAngles;
-            this.transform.localRotation = Quaternion.Euler(def - parent);
+            MemberDontRotaion();
             WeratherCheck();
             SquallCheck();
             if (!member.pathPending && member.remainingDistance < 0.5f)
@@ -107,21 +108,39 @@ public class MemberControl : MonoBehaviour
         else if(GetMemberCheck == MemberCheck.isCapture)//プレイヤーに捕まったらの処理書くところ
         {
             if (memberHp <= 0)
+            {
                 memberCheck = MemberCheck.isDead;
-            //WindMemberMove();
+                memberStates = MemberStates.isDaed;
+                script.memberList.Remove(this.gameObject);
+            }
+                      
             WeratherCheck();
             PlayerFollows();
             MemberHubCheck();
-
+            
+            if(invincibleTime>0)
+            {
+                invincibleTime -= Time.deltaTime;
+            }
+          
         }
         else if (GetMemberCheck == MemberCheck.isHub)//拠点いるときの処理書くところ
         {
+            MemberDontRotaion();
             //今のところ何もしない
         }
         else//死んだときの処理を書くところ
         {
-
+            MemberDontRotaion();
+           
         }     
+    }
+
+    public void MemberDontRotaion()
+    {
+        //スプライトの回転をなくす
+        Vector3 parent = this.transform.parent.transform.localRotation.eulerAngles;
+        this.transform.localRotation = Quaternion.Euler(def - parent);
     }
 
     public void PlayerFollows()//仲間がドラクエの隊列みたいにPlayerを追いかける
@@ -134,9 +153,7 @@ public class MemberControl : MonoBehaviour
                 member.stoppingDistance = navStop;
             }
         }
-        //スプライトの回転をなくす
-        Vector3 parent = this.transform.parent.transform.localRotation.eulerAngles;
-        this.transform.localRotation = Quaternion.Euler(def - parent);
+        MemberDontRotaion();
     }
 
     public void MemberToPlayer()//仲間がPlayerにつかまってから川を避けなくする
@@ -161,11 +178,13 @@ public class MemberControl : MonoBehaviour
         {
             memberHp -= Time.deltaTime * 5;
             memberHp = System.Math.Max(memberHp, MIN);//最小値を超えたら戻す
+            member.speed = 6;
         }
         else 
         {
             memberHp += Time.deltaTime * 2;
             memberHp = System.Math.Min(memberHp, memberHpMax);//最大値を超えたら戻す
+            member.speed = 5;
         }           
     }
 
@@ -207,36 +226,21 @@ public class MemberControl : MonoBehaviour
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
             memberHp = 100;//HPを回復
-        }      
+        }     
+        if(other.gameObject.tag =="Enemy" && GetMemberCheck == MemberCheck.isCapture && invincibleTime <=0 
+            && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall )
+        {
+            memberHp -= 20;
+            invincibleTime = 5;
+        }
     }
-
-    //void WindMemberMove()
-    //{
-    //    if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Up
-    //       && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
-    //    {
-    //        wind = new Vector3(0, 0, windpower);
-    //    }
-    //    else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Down
-    //       && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
-    //    {
-    //        wind = new Vector3(0, 0, -windpower);
-    //    }
-    //    else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Left
-    //       && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
-    //    {
-    //        wind = new Vector3(-windpower, 0, 0);
-    //    }
-    //    else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Right
-    //       && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
-    //    {
-    //        wind = new Vector3(windpower, 0, 0);
-    //    }
-    //    transform.position += wind;
-    //}
 
     public void Ripple()
     {
-        rippleUI.Ripple();
+        if (GetMemberCheck == MemberCheck.isLoitering )
+        {
+            rippleUI.Ripple();
+        }
+       
     }
 }
