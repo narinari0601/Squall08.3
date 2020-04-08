@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RiverCol : MonoBehaviour
 {
-    public enum Direction
+    public enum Directions
     {
         Left,
         Up,
@@ -16,59 +16,55 @@ public class RiverCol : MonoBehaviour
 
     [SerializeField]
     private BoxCollider col;
-    [SerializeField]
-    private BoxCollider leftTrigger;
-    [SerializeField]
-    private BoxCollider rightTrigger;
 
     private Transform riverTransform;
 
     private float objAngle;
 
-    private Direction direction;
+    private Directions direction;
 
+    private bool isJump;
 
+    public Directions Direction { get => direction; set => direction = value; }
+    public bool IsJump { get => isJump; set => isJump = value; }
 
     void Start()
     {
         riverTransform = GetComponent<Transform>();
         objAngle = riverTransform.localEulerAngles.y;
 
-        direction = Direction.Other; //警告出るからとりあえずこれで初期化
+        direction = Directions.Other; //警告出るからとりあえずこれで初期化
 
         if (objAngle == 0)
-            direction = Direction.Left;
+            direction = Directions.Left;
 
         else if (objAngle == 90)
-            direction = Direction.Up;
+            direction = Directions.Up;
 
         else if (objAngle == 180)
-            direction = Direction.Right;
+            direction = Directions.Right;
 
         else if (objAngle == 270)
-            direction = Direction.Down;
+            direction = Directions.Down;
 
         else
-            direction = Direction.Other;
+            direction = Directions.Other;
 
 
+        if (col.bounds.size.x < 2)
+        {
+            isJump = true;
+        }
+
+        else
+        {
+            isJump = false;
+        }
     }
     // Update is called once per frame
     void Update()
     {
         
     }
-
-    private void Jump(GameObject player)
-    {
-        var weather = GamePlayManager.instance.Weather;
-
-        if (weather != GamePlayManager.WeatherStates.Squall)
-            return;
-
-
-        var squallDirect = GamePlayManager.instance.SquallDirection;
-        
-
-    }
+    
 }
