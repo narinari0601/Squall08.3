@@ -37,6 +37,11 @@ public class RiverRight : MonoBehaviour
 
     private void Jump(GameObject obj)
     {
+        
+
+        //Debug.Log("風の方向 : " + GamePlayManager.instance.SquallDirection);
+        //Debug.Log("川の向き : " + riverCol.Direction);
+
         var weather = GamePlayManager.instance.Weather;
         if (weather != GamePlayManager.WeatherStates.Squall ||
             !riverCol.IsJump)
@@ -46,27 +51,27 @@ public class RiverRight : MonoBehaviour
         var riverDir = riverCol.Direction;
 
         if (squallDir == GamePlayManager.SquallDirections.Left &&
-           riverDir == RiverCol.Directions.Left)
+           riverDir == RiverCol.Directions.Vertical)
         {
-            obj.transform.position += new Vector3(-2, 0, 0);
+            obj.transform.position += new Vector3(-riverCol.ColSizeX * 2, 0, 0);
         }
 
         if (squallDir == GamePlayManager.SquallDirections.Up &&
-           riverDir == RiverCol.Directions.Up)
+           riverDir == RiverCol.Directions.Horizontal)
         {
-            obj.transform.position += new Vector3(0, 0, 2);
+            obj.transform.position += new Vector3(0, 0, riverCol.ColSizeX * 2);
         }
 
         if (squallDir == GamePlayManager.SquallDirections.Right &&
-           riverDir == RiverCol.Directions.Right)
+           riverDir == RiverCol.Directions.Vertical)
         {
-            obj.transform.position += new Vector3(2, 0, 0);
+            obj.transform.position += new Vector3(riverCol.ColSizeX * 2, 0, 0);
         }
 
         if (squallDir == GamePlayManager.SquallDirections.Down &&
-           riverDir == RiverCol.Directions.Down)
+           riverDir == RiverCol.Directions.Horizontal)
         {
-            obj.transform.position += new Vector3(0, 0, -2);
+            obj.transform.position += new Vector3(0, 0, -riverCol.ColSizeX * 2);
         }
     }
 }

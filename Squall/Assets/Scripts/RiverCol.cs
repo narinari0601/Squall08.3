@@ -6,10 +6,8 @@ public class RiverCol : MonoBehaviour
 {
     public enum Directions
     {
-        Left,
-        Up,
-        Right,
-        Down,
+        Vertical,
+        Horizontal,
         Other,
     }
 
@@ -25,8 +23,11 @@ public class RiverCol : MonoBehaviour
 
     private bool isJump;
 
+    private float colSize;
+
     public Directions Direction { get => direction; set => direction = value; }
     public bool IsJump { get => isJump; set => isJump = value; }
+    public float ColSizeX { get => colSize; set => colSize = value; }
 
     void Start()
     {
@@ -36,22 +37,31 @@ public class RiverCol : MonoBehaviour
         direction = Directions.Other; //警告出るからとりあえずこれで初期化
 
         if (objAngle == 0)
-            direction = Directions.Left;
+        {
+            direction = Directions.Vertical;
+            colSize = col.bounds.size.x;
+        }
 
         else if (objAngle == 90)
-            direction = Directions.Up;
+        {
+            direction = Directions.Horizontal;
+            colSize = col.bounds.size.z;
+        }
 
-        else if (objAngle == 180)
-            direction = Directions.Right;
+        //else if (objAngle == 180)
+        //    direction = Directions.Right;
 
-        else if (objAngle == 270)
-            direction = Directions.Down;
+        //else if (objAngle == 270)
+        //    direction = Directions.Down;
 
         else
+        {
             direction = Directions.Other;
+            colSize = 2;
+        }
+        
 
-
-        if (col.bounds.size.x < 2)
+        if (colSize < 2)
         {
             isJump = true;
         }

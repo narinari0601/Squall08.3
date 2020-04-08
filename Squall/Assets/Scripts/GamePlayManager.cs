@@ -92,8 +92,6 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField]
     private Text directTextUI = null;
 
-    private int squallDirectNum;
-
 
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
@@ -139,8 +137,6 @@ public class GamePlayManager : MonoBehaviour
         StageInitialize();
 
         directStrings = new string[4] { "うえ", "した", "ひだり", "みぎ" };
-
-        squallDirectNum = 0;
 
         directTextUI.text = "";
     }
