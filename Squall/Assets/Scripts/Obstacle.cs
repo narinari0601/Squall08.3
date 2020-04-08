@@ -7,8 +7,11 @@ public class Obstacle : MonoBehaviour
     Material sunmaterial;
     Material rainmaterial;
     Material damagematerial;
+    public Sprite damage;
+    public Sprite sun;
+    public Sprite rain;
     int damagetime;
-
+ 
     //
     RippleUI rippleUI;
     //
@@ -19,7 +22,7 @@ public class Obstacle : MonoBehaviour
         sunmaterial = (Material)Resources.Load("Materials/blue");
         rainmaterial = (Material)Resources.Load("Materials/red");
         damagematerial = (Material)Resources.Load("Materials/damage");
-
+     
         damagetime = 0;
     }
 
@@ -34,11 +37,23 @@ public class Obstacle : MonoBehaviour
         {
             if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
             {
-                gameObject.GetComponent<Renderer>().material = rainmaterial;
+                if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != rain)
+                {
+                    transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = rain;
+                    Debug.Log(1);
+                }
+             //   gameObject.GetComponent<Renderer>().material = rainmaterial;
+                
+                
             }
             else
             {
-                gameObject.GetComponent<Renderer>().material = sunmaterial;
+                if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != sun)
+                {
+                    transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = sun;
+                }
+               // gameObject.GetComponent<Renderer>().material = sunmaterial;
+             
             }
         }
     }
@@ -47,7 +62,13 @@ public class Obstacle : MonoBehaviour
         if (collision.gameObject.tag == "TMash")
         {
             damagetime = 600;
-            GetComponent<Renderer>().material = damagematerial;
+            if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != damage)
+            {
+                
+                transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = damage;
+            }
+            // GetComponent<Renderer>().material = damagematerial;
+            // sprite = damage;
         }
         if (collision.gameObject.tag == "Player" &&
             GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall &&
@@ -63,7 +84,7 @@ public class Obstacle : MonoBehaviour
         damagematerial = (Material)Resources.Load("Materials/damage");
         rainmaterial = (Material)Resources.Load("Materials/red");
         damagetime = 0;
-
+    
         //
         rippleUI = GetComponentInChildren<RippleUI>();
         //
