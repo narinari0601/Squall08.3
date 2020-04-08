@@ -50,25 +50,25 @@ public class RiverLeft : MonoBehaviour
         if (squallDir == GamePlayManager.SquallDirections.Left &&
            riverDir == RiverCol.Directions.Vertical)
         {
-            obj.transform.position += new Vector3(-riverCol.ColSizeX * 2, 0, 0);
+            obj.transform.position += new Vector3(-riverCol.ColSizeX - 0.5f, 0, 0);
         }
 
         if (squallDir == GamePlayManager.SquallDirections.Down &&
            riverDir == RiverCol.Directions.Horizontal)
         {
-            obj.transform.position += new Vector3(0, 0, -riverCol.ColSizeX * 2);
+            obj.transform.position += new Vector3(0, 0, -riverCol.ColSizeX - 0.5f);
         }
 
         if (squallDir == GamePlayManager.SquallDirections.Right &&
            riverDir == RiverCol.Directions.Vertical)
         {
-            obj.transform.position += new Vector3(riverCol.ColSizeX * 2, 0, 0);
+            obj.transform.position += new Vector3(riverCol.ColSizeX + 0.5f, 0, 0);
         }
 
         if (squallDir == GamePlayManager.SquallDirections.Up &&
            riverDir == RiverCol.Directions.Horizontal)
         {
-            obj.transform.position += new Vector3(0, 0, riverCol.ColSizeX * 2);
+            obj.transform.position += new Vector3(0, 0, riverCol.ColSizeX + 0.5f);
         }
     }
 }
