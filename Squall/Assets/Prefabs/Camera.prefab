@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171453722}
   m_LocalRotation: {x: 0.00000009362675, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.47}
+  m_LocalPosition: {x: 0, y: 0, z: 9.3}
   m_LocalScale: {x: 1.5351, y: 1.5351, z: 1.5351}
   m_Children:
   - {fileID: 181371080}
@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887918849}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 15.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 171453723}
@@ -217,7 +217,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCamp: {fileID: 0}
   baseUI: {fileID: 0}
+  DistanceUI: {fileID: 0}
   camera: {fileID: 1887918852}
 --- !u!1 &1643177782200063119
 GameObject:
@@ -316,5 +317,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5c99ea621433f4bb53429ebab6c307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePlayManager: {fileID: 0}
   direction: 4
