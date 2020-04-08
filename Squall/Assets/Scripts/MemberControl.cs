@@ -9,7 +9,7 @@ public class MemberControl : MonoBehaviour
     public NavMeshAgent member;
     public Transform[] points;
     private int destPoint = 0;
-    public float memberHp = 200;//仲間のhp
+    public float memberHp;//仲間のhp
     const float MIN = 0;
     const float MAX =200;
     private float memberHpMax;//最大hp
@@ -75,8 +75,8 @@ public class MemberControl : MonoBehaviour
         new Vector3(0, 0, 0);
         //
         script = player.GetComponent<MemberList>();
-       // member.speed += navSpeed;
-
+        // member.speed += navSpeed;
+        slider.maxValue = memberHpMax;
         playerScript = GetComponent<Playercontrol>();
 
         //波紋のやつ

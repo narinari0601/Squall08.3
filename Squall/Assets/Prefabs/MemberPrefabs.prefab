@@ -1230,8 +1230,7 @@ MonoBehaviour:
   - {fileID: 8879815386146325386}
   - {fileID: 8879815386075611262}
   - {fileID: 8879815386103051576}
-  memberHp: 100
-  navSpeed: 0.75
+  memberHp: 200
   navStop: 1.75
   lightScale: {x: 3, y: 3, z: 3}
   slider: {fileID: 5104173190644349010}
