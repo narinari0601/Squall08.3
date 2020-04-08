@@ -9,9 +9,9 @@ public class MemberControl : MonoBehaviour
     public NavMeshAgent member;
     public Transform[] points;
     private int destPoint = 0;
-    public float memberHp = 100;//仲間のhp
+    public float memberHp = 200;//仲間のhp
     const float MIN = 0;
-    const float MAX =100;
+    const float MAX =200;
     private float memberHpMax;//最大hp
     //プレイヤーを追うための
     private Vector3 def;
@@ -19,8 +19,8 @@ public class MemberControl : MonoBehaviour
     MemberList script;
     Playercontrol playerScript;
 
-    public float navSpeed;
-    public float navStop;
+    public float navSpeed;//navの動くスピード
+    public float navStop;//どれだけ離れて止まるか
     //private int memberNumber;
     private Transform memberLingt;
     public Vector3 lightScale;
@@ -85,8 +85,7 @@ public class MemberControl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {    
         //Debug.Log(memberHp);
         slider.value = memberHp;
         //Memberの処理分岐
@@ -98,9 +97,9 @@ public class MemberControl : MonoBehaviour
                 memberStates = MemberStates.isDaed;
             }
 
-            MemberDontRotaion();
-            WeratherCheck();
-            SquallCheck();
+            MemberDontRotaion();//HPバーが回転しないように
+            WeratherCheck();//天気の確認
+            SquallCheck();//スコールの時止まるやつ
             if (!member.pathPending && member.remainingDistance < 0.5f)
             {
                 GotoNextPoint();//ぐるぐる回るやつ(徘徊)
@@ -115,11 +114,11 @@ public class MemberControl : MonoBehaviour
                 script.memberList.Remove(this.gameObject);
             }
                       
-            WeratherCheck();
-            PlayerFollows();
-            MemberHubCheck();
+            WeratherCheck();//天気の確認
+            PlayerFollows();//隊列になるやつ
+            MemberHubCheck();//拠点についたら
             
-            if(invincibleTime>0)
+            if(invincibleTime>0)//敵と当たった時の無敵時間
             {
                 invincibleTime -= Time.deltaTime;
             }
@@ -127,13 +126,13 @@ public class MemberControl : MonoBehaviour
         }
         else if (GetMemberCheck == MemberCheck.isHub)//拠点いるときの処理書くところ
         {
-            MemberDontRotaion();
+            MemberDontRotaion();//HPバーが回転しないように
             //今のところ何もしない
         }
         else//死んだときの処理を書くところ
         {
-            MemberDontRotaion();
-           
+            MemberDontRotaion();//HPバーが回転しないように
+
         }     
     }
 
@@ -177,9 +176,9 @@ public class MemberControl : MonoBehaviour
     {
         if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
         {
-            memberHp -= Time.deltaTime * 5;
+            memberHp -= Time.deltaTime * 4;
             memberHp = System.Math.Max(memberHp, MIN);//最小値を超えたら戻す
-            member.speed = 6;
+            member.speed = 6;//Playerを追いかけるスピードを変更
         }
         else 
         {
@@ -189,7 +188,7 @@ public class MemberControl : MonoBehaviour
         }           
     }
 
-    public void SquallCheck()
+    public void SquallCheck()//スコールの時止まるやつ
     {
         if (GetMemberCheck == MemberCheck.isLoitering)
         {
@@ -204,15 +203,15 @@ public class MemberControl : MonoBehaviour
         }
     }
 
-    public void MemberHubCheck()
-    {
-        if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)//今のところは拠点についたら
+    public void MemberHubCheck()//拠点についたか
+    {//今のところはPlayerがマップを見たら、変更するかも...
+        if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
             if (GetMemberCheck == MemberCheck.isCapture)
             {
                 memberCheck = MemberCheck.isHub;
                 memberStates = MemberStates.isHub;
-                script.memberList.Remove(this.gameObject);//
+                script.memberList.Remove(this.gameObject);
             }
         }
     }
@@ -221,18 +220,18 @@ public class MemberControl : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && GetMemberCheck == MemberCheck.isLoitering)
         {
-            member.isStopped = false;
+            member.isStopped = false;//徘徊していたnavmechを止める
             memberCheck = MemberCheck.isCapture;           
             MemberToPlayer();
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
-            memberHp = 100;//HPを回復
+            memberHp = memberHpMax;//HPを全回復
         }     
         if(other.gameObject.tag =="Enemy" && GetMemberCheck == MemberCheck.isCapture && invincibleTime <=0 
             && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall )
         {
-            memberHp -= 20;
-            invincibleTime = 5;
+            memberHp -= 20;//ダメージ量
+            invincibleTime = 5;//無敵時間(単位-秒)
         }
     }
 
