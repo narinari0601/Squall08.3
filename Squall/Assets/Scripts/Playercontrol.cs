@@ -109,7 +109,7 @@ public class Playercontrol : MonoBehaviour
             transform.position += velocity;
         }
         velocity = Vector3.zero;
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             if (mashcount > 0)
             {
