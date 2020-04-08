@@ -51,7 +51,7 @@ public class Playercontrol : MonoBehaviour
        
             Move();
         
-        Shout();
+        //Shout();
        
     }
     void TimerManager()
