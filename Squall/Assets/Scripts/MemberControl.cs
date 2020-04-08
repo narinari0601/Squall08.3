@@ -19,7 +19,7 @@ public class MemberControl : MonoBehaviour
     MemberList script;
     Playercontrol playerScript;
 
-    public float navSpeed;//navの動くスピード
+    //public float navSpeed;//navの動くスピード
     public float navStop;//どれだけ離れて止まるか
     //private int memberNumber;
     private Transform memberLingt;
@@ -75,7 +75,7 @@ public class MemberControl : MonoBehaviour
         new Vector3(0, 0, 0);
         //
         script = player.GetComponent<MemberList>();
-        member.speed += navSpeed;
+       // member.speed += navSpeed;
 
         playerScript = GetComponent<Playercontrol>();
 
@@ -96,7 +96,6 @@ public class MemberControl : MonoBehaviour
                 memberCheck = MemberCheck.isDead;
                 memberStates = MemberStates.isDaed;
             }
-
             MemberDontRotaion();//HPバーが回転しないように
             WeratherCheck();//天気の確認
             SquallCheck();//スコールの時止まるやつ
@@ -184,7 +183,7 @@ public class MemberControl : MonoBehaviour
         {
             memberHp += Time.deltaTime * 2;
             memberHp = System.Math.Min(memberHp, memberHpMax);//最大値を超えたら戻す
-            member.speed = 5;
+            member.speed = 4;
         }           
     }
 

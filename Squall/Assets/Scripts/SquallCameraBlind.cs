@@ -17,6 +17,13 @@ public class SquallCameraBlind : MonoBehaviour
     Transform transforms;
     GameObject player;//プレイヤー
 
+
+    //菅原追加
+    MemberList script;//メンバーリストを見るためのやつ
+    private int memberCount = 0;//メンバーの人数をカウントするためのやつ
+    private bool memberCheckFlag = false;//一回しか呼ばないためのフラグ
+    private int memberCount2 = 0;//1f前の仲間の人数
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,17 +31,20 @@ public class SquallCameraBlind : MonoBehaviour
         currentstates = GamePlayManager.instance.Weather;
         transforms = GameObject.Find("View").transform;
         //gamePlayManager = GameObject.Find("GamePlayManager");
-        cntfull = 21;
+        cntfull = 21;     
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if(player == null)
+        
+        if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            membercnt = player.GetComponent<MemberList>().memberList.Count;
-        }*/
+            script = player.GetComponent<MemberList>();
+        }   
+        memberCount = script.memberList.Count - 1;//メンバーの数を確認(-1されてるのはリストにPlayerを含んでるから)
+        cntfull = 21 - memberCount;//仲間の数を常に代入、
 
         paststate = currentstates;
         currentstates = GamePlayManager.instance.Weather;
@@ -88,8 +98,31 @@ public class SquallCameraBlind : MonoBehaviour
                 if (count < cntfull)
                 {
                     transforms.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
+                    Debug.Log(this.transform.localScale);
                     count++;
+                    memberCount2 = memberCount;
                 }
+
+                if (memberCheckFlag == false)
+                {
+                    for (int i = 0; i < memberCount; i++)//スコール開始時に仲間の数だけ視界を広げる
+                    {
+                        transform.localScale += new Vector3(0.08f, 0.08f, 0.08f);
+                    }
+                    memberCheckFlag = true;//一回だけ呼びたいからboolで切り替え
+                }
+               
+                if (memberCount > memberCount2) //スコール中に仲間が増えたら視界を広げ、減ったら視界を狭くする、
+                {
+                    transform.localScale += new Vector3(0.08f, 0.08f, 0.08f);
+                    memberCount2 = memberCount;
+                }
+                else if (memberCount < memberCount2)
+                {
+                    transform.localScale -= new Vector3(0.08f, 0.08f, 0.08f);
+                    memberCount2 = memberCount;
+                }
+
             }
         }
         else
@@ -142,6 +175,12 @@ public class SquallCameraBlind : MonoBehaviour
                     transforms.localScale += new Vector3(0.02f,0.02f,0.02f);
                     count++;
                 }
+
+                if (transform.localScale.x >= 1.0f)//もとに戻すときに最初の大きさより大きくならないようにするため
+                {
+                    transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                }
+                memberCheckFlag = false;//フラグを戻してあげる
             }
         }
     }
