@@ -36,6 +36,11 @@ public class Stage : MonoBehaviour
     private SquallDirections[] squallDirArray = new SquallDirections[0];
 
 
+    private const float RIPPLE_TIME = 3.0f;
+
+    private float currentTimer;
+
+
     public GameObject PlayerObj { get => playerObj; set => playerObj = value; }
     public GameObject[] Members { get => members; set => members = value; }
     public float WeatherRotateTime { get => weatherRotateTime; set => weatherRotateTime = value; }
@@ -51,7 +56,7 @@ public class Stage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Ripple();
     }
 
     public void Initialize()
@@ -87,6 +92,8 @@ public class Stage : MonoBehaviour
             enemy.GetComponent<Obstacle>().Initialize();
         }
 
+        currentTimer = 0.0f;
+
     }
 
     public void StageClear()
@@ -121,14 +128,32 @@ public class Stage : MonoBehaviour
 
     public void Ripple()
     {
-        foreach (var member in memberControllers)
+        var weather = GamePlayManager.instance.Weather;
+
+        if (weather == WeatherStates.Squall)
         {
-            member.Ripple();
+            currentTimer = 0;
         }
 
-        foreach (var enemy in enemies)
+        else
         {
-            enemy.GetComponent<Obstacle>().Ripple();
+
+            currentTimer += Time.deltaTime;
+
+            if (currentTimer >= RIPPLE_TIME)
+            {
+                foreach (var member in memberControllers)
+                {
+                    member.Ripple();
+                }
+
+                foreach (var enemy in enemies)
+                {
+                    enemy.GetComponent<Obstacle>().Ripple();
+                }
+
+                currentTimer = 0;
+            }
         }
     }
 }
