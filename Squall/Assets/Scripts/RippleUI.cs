@@ -17,7 +17,7 @@ public class RippleUI : MonoBehaviour
 
     private const float RIPPLE_TIME = 2;
 
-    private const float RIRGT_MAX = 1125;
+    private const float RIRGT_MAX = 1280;
     private const float LEFT_MAX = 0;
     private const float UP_MAX = 720;
     private const float DOWN_MAX = 0;
