@@ -57,6 +57,7 @@ public class Stage : MonoBehaviour
     public void Initialize()
     {
         playerObj.GetComponent<Playercontrol>().Initialize();
+        GamePlayManager.instance.Player = playerObj;
 
         playerInitPos = playerObj.transform.position;
 
