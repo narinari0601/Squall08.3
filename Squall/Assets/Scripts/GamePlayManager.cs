@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GamePlayManager : MonoBehaviour
 {
@@ -17,10 +18,10 @@ public class GamePlayManager : MonoBehaviour
 
     public enum SquallDirections
     {
-        Up,
-        Down,
-        Left,
-        Right,
+        Up=0,
+        Down=1,
+        Left=2,
+        Right=3,
     }
 
     public enum GamePlayStates
@@ -86,6 +87,14 @@ public class GamePlayManager : MonoBehaviour
     private GamePlayStates gameState;
 
 
+    private string[] directStrings;
+
+    [SerializeField]
+    private Text directTextUI = null;
+
+    private int squallDirectNum;
+
+
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
     public GameObject Player { get => player; set => player = value; }
@@ -128,6 +137,12 @@ public class GamePlayManager : MonoBehaviour
         cameraList = new List<GameObject>();
 
         StageInitialize();
+
+        directStrings = new string[4] { "うえ", "した", "ひだり", "みぎ" };
+
+        squallDirectNum = 0;
+
+        directTextUI.text = "";
     }
 
     private void StageInitialize()
@@ -211,12 +226,14 @@ public class GamePlayManager : MonoBehaviour
         else if (currentWeatherTimer >= (toatalWeatherRatio - squallRatio) / toatalWeatherRatio * weatherRotateTime)
         {
             weather = WeatherStates.Squall;
+            directTextUI.text = "";
             //Debug.Log("スコール");
         }
 
         else
         {
             weather = WeatherStates.Sign;
+            directTextUI.text = directStrings[(int)squallDirection];
             //Debug.Log("予兆");
         }
 
