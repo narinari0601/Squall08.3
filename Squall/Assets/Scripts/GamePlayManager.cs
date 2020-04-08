@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GamePlayManager : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class GamePlayManager : MonoBehaviour
     //ゲームオブジェクト関連
     private GameObject player;
 
-    private GameObject[] members;
+    //private GameObject[] members;
 
     [SerializeField, Header("メインカメラ")]
     private GameObject mainCamera = null;
@@ -90,6 +91,7 @@ public class GamePlayManager : MonoBehaviour
     public GameObject Player { get => player; set => player = value; }
     public Stage CurrentStage { get => currentStage; set => currentStage = value; }
     public GamePlayStates GameState { get => gameState; set => gameState = value; }
+    
 
     private void Awake()
     {
@@ -152,11 +154,11 @@ public class GamePlayManager : MonoBehaviour
         squallDirection = squallDirArray[0];
 
         ///
-        player = currentStage.PlayerObj;
+        //player = currentStage.PlayerObj;
 
         //player.GetComponent<Playercontrol>().Initialize();
 
-        members = currentStage.Members;
+        //members = currentStage.Members;
 
         //for (int i = 0; i < members.Length; i++)
         //{
@@ -187,6 +189,7 @@ public class GamePlayManager : MonoBehaviour
 
         StageClear();
 
+        RetryScene();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -234,7 +237,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void NextStage()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             //var stage = Instantiate(stagePrefabs[stageNum]);
             //stage.GetComponent<Stage>().Initialize();
@@ -292,6 +295,14 @@ public class GamePlayManager : MonoBehaviour
             {
                 gameState = GamePlayStates.Play;
             }
+        }
+    }
+
+    public void RetryScene()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

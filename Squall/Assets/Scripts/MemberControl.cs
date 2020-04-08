@@ -61,7 +61,8 @@ public class MemberControl : MonoBehaviour
     public void Initialize()
     {
         memberHpMax = memberHp;//最大値の固定
-        player = GameObject.Find("Player");
+        //player = GameObject.Find("Player");
+        player = GamePlayManager.instance.CurrentStage.PlayerObj;
         memberLingt = this.gameObject.transform.Find("MemberLight");
         memberStates = MemberStates.isAlive;
         memberCheck = MemberCheck.isLoitering;
