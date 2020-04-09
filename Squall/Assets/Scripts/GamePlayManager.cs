@@ -240,8 +240,12 @@ public class GamePlayManager : MonoBehaviour
         {
             weather = WeatherStates.Sign;
             currentDirect.text = directStrings[(int)squallDirection];
-            secondDirect.text = directStrings[((int)squallDirection + 1) % squallDirArray.Length];
-            thirdDirect.text = directStrings[((int)squallDirection + 2) % squallDirArray.Length];
+
+            var secondDir = squallDirArray[(squallCount + 1) % squallDirArray.Length];
+            var thirdDir= squallDirArray[(squallCount + 2) % squallDirArray.Length];
+            secondDirect.text = directStrings[(int)secondDir];
+            thirdDirect.text = directStrings[(int)thirdDir];
+            
             //Debug.Log("予兆");
         }
 
