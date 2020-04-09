@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963802364}
-  sunRatio: 3
-  signRatio: 2
+  sunRatio: 1
+  signRatio: 4
   squallRatio: 5
   stagePrefabs:
   - {fileID: 2475283516566480147, guid: c56ff2a03e8970e4da93404e6309d141, type: 3}
