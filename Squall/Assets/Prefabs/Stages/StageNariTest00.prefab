@@ -1446,7 +1446,7 @@ MonoBehaviour:
   mapCamera: {fileID: 934557806}
   weatherRotateTime: 10
   windPower: 0.05
-  squallDirArray: 00000000010000000200000003000000
+  squallDirArray: 02000000000000000300000001000000
 --- !u!1 &4816494705284986541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,6 +2073,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4816494704771551259}
     m_Modifications:
+    - target: {fileID: 8879815386179262175, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: m_Name
+      value: MemberPrefabs
+      objectReference: {fileID: 0}
     - target: {fileID: 8879815386179262174, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2128,10 +2133,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8879815386179262175, guid: f4746aa2685c0514c86a7419e8de5ea9,
+    - target: {fileID: 6336476712505399978, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
-      propertyPath: m_Name
-      value: MemberPrefabs
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
@@ -2141,11 +2146,6 @@ PrefabInstance:
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336476712505399978, guid: f4746aa2685c0514c86a7419e8de5ea9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

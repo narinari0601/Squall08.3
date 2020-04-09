@@ -90,7 +90,13 @@ public class GamePlayManager : MonoBehaviour
     private string[] directStrings;
 
     [SerializeField]
-    private Text directTextUI = null;
+    private Text currentDirect = null;
+
+    [SerializeField]
+    private Text secondDirect = null;
+
+    [SerializeField]
+    private Text thirdDirect = null;
 
 
     public WeatherStates Weather { get => weather; set => weather = value; }
@@ -136,9 +142,11 @@ public class GamePlayManager : MonoBehaviour
 
         StageInitialize();
 
-        directStrings = new string[4] { "うえ", "した", "ひだり", "みぎ" };
+        directStrings = new string[4] { "↑", "↓", "←", "→" };
 
-        directTextUI.text = "";
+        currentDirect.text = "";
+        secondDirect.text = "";
+        thirdDirect.text = "";
     }
 
     private void StageInitialize()
@@ -222,14 +230,18 @@ public class GamePlayManager : MonoBehaviour
         else if (currentWeatherTimer >= (toatalWeatherRatio - squallRatio) / toatalWeatherRatio * weatherRotateTime)
         {
             weather = WeatherStates.Squall;
-            directTextUI.text = "";
+            currentDirect.text = "";
+            secondDirect.text = "";
+            thirdDirect.text = "";
             //Debug.Log("スコール");
         }
 
         else
         {
             weather = WeatherStates.Sign;
-            directTextUI.text = directStrings[(int)squallDirection];
+            currentDirect.text = directStrings[(int)squallDirection];
+            secondDirect.text = directStrings[((int)squallDirection + 1) % squallDirArray.Length];
+            thirdDirect.text = directStrings[((int)squallDirection + 2) % squallDirArray.Length];
             //Debug.Log("予兆");
         }
 
