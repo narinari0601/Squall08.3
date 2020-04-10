@@ -1446,7 +1446,7 @@ MonoBehaviour:
   mapCamera: {fileID: 934557806}
   weatherRotateTime: 10
   windPower: 0.05
-  squallDirArray: 02000000020000000100000001000000000000000000000002000000000000000300000001000000
+  squallDirArray: 00000000030000000100000002000000
 --- !u!1 &4816494705284986541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,11 +2133,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6336476712505399978, guid: f4746aa2685c0514c86a7419e8de5ea9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2146,6 +2141,11 @@ PrefabInstance:
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336476712505399978, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
