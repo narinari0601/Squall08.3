@@ -156,4 +156,19 @@ public class Stage : MonoBehaviour
             }
         }
     }
+
+    public int GetMemberAliveValue()
+    {
+        int memberVal = 0;
+
+        foreach (var member in memberControllers)
+        {
+            if (member.GetMemberState == MemberControl.MemberStates.isAlive)
+            {
+                memberVal++;
+            }
+        }
+
+        return memberVal;
+    }
 }

@@ -183,7 +183,15 @@ public class MemberControl : MonoBehaviour
         {
             memberHp += Time.deltaTime * 2;
             memberHp = System.Math.Min(memberHp, memberHpMax);//最大値を超えたら戻す
-            member.speed = 4;
+            if(GetMemberCheck == MemberCheck.isLoitering)
+            {
+                member.speed = 3;
+            }
+            else if(GetMemberCheck == MemberCheck.isCapture)
+            {
+                member.speed = 7;
+            }
+            
         }           
     }
 
