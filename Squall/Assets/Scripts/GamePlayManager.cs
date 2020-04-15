@@ -98,6 +98,9 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField]
     private Text thirdDirect = null;
 
+    [SerializeField]
+    private Text memberAliveUI = null;
+
 
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
@@ -147,6 +150,7 @@ public class GamePlayManager : MonoBehaviour
         currentDirect.text = "";
         secondDirect.text = "";
         thirdDirect.text = "";
+        
     }
 
     private void StageInitialize()
@@ -193,22 +197,32 @@ public class GamePlayManager : MonoBehaviour
         currentCamera = cameraList[0];
         cameraList[1].SetActive(false);
 
-
+        memberAliveUI.text = "あと" + currentStage.GetMemberAliveValue() + "人";
     }
 
     private void FixedUpdate()
     {
-        ChangeWeather();
+        if (gameState == GamePlayStates.Play)
+        {
+            ChangeWeather();
 
-        ChangeCamera();
+            ChangeCamera();
 
-        MapEnd();
+            MapEnd();
+            
 
-        //NextStage();
+            StageClear();
+            
+            memberAliveUI.text = "あと" + currentStage.GetMemberAliveValue() + "人";
+        }
 
-        StageClear();
+        else if (gameState == GamePlayStates.Map)
+        {
+
+        }
 
         RetryScene();
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -334,6 +348,12 @@ public class GamePlayManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
+    private void  SwicthUI()
+    {
+        
+    }
+    
 
     public void GameEnd()
     {
