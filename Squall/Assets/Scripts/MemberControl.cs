@@ -64,8 +64,8 @@ public class MemberControl : MonoBehaviour
         //player = GameObject.Find("Player");
         player = GamePlayManager.instance.CurrentStage.PlayerObj;
         memberLingt = this.gameObject.transform.Find("MemberLight");
-        memberStates = MemberStates.isAlive;
-        memberCheck = MemberCheck.isLoitering;
+        memberStates = MemberStates.isAlive;//生きてる
+        memberCheck = MemberCheck.isLoitering;//徘徊
         member = gameObject.GetComponent<NavMeshAgent>();
         member.autoBraking = false;
         GotoNextPoint();
@@ -73,7 +73,7 @@ public class MemberControl : MonoBehaviour
         def = transform.localRotation.eulerAngles;
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
         new Vector3(0, 0, 0);
-        //
+        //メンバーリストを取得
         script = player.GetComponent<MemberList>();
         // member.speed += navSpeed;
         slider.maxValue = memberHpMax;
@@ -246,7 +246,7 @@ public class MemberControl : MonoBehaviour
     {
         if (GetMemberCheck == MemberCheck.isLoitering )
         {
-            rippleUI.Ripple();
+            rippleUI.Ripple();//徘徊しているときに呼ばれるUI
         }
        
     }
