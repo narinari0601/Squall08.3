@@ -35,6 +35,11 @@ public class MemberControl : MonoBehaviour
     private GameObject memberSprite;
     //仲間の画像(マップ版)
     private GameObject memberMapSprite;
+    //仲間のコライダー
+    private BoxCollider boxCollider;
+    private GameObject memberHpUI;
+    //非表示を一回しか呼ばないためのフラグ
+    private bool oneTrigger = false;
 
     public enum MemberStates//メンバーの状態
     {
@@ -87,6 +92,9 @@ public class MemberControl : MonoBehaviour
         //仲間の画像
         memberSprite = this.gameObject.transform.Find("MemberSprite").gameObject;
         memberMapSprite = this.gameObject.transform.Find("MemberMapSprite").gameObject;
+        memberHpUI = this.gameObject.transform.Find("MemberHpUI").gameObject;
+        boxCollider = GetComponent<BoxCollider>();
+        oneTrigger = false;
     }
 
     // Update is called once per frame
@@ -132,10 +140,15 @@ public class MemberControl : MonoBehaviour
         else if (GetMemberCheck == MemberCheck.isHub)//拠点いるときの処理書くところ
         {
             MemberDontRotaion();//HPバーが回転しないように
-            memberSprite.SetActive(false);//仲間の画像を非表示
-            memberMapSprite.SetActive(false);//仲間のマップ画像を非表示
-            memberLingt.SetActive(false);
-            
+            if(!oneTrigger)
+            {
+                memberSprite.SetActive(false);//仲間の画像を非表示
+                memberMapSprite.SetActive(false);//仲間のマップ画像を非表示
+                memberLingt.SetActive(false);//仲間のライトを非表示
+                memberHpUI.SetActive(false);//仲間のHpUIを非表示
+                boxCollider.enabled = false;//仲間同時の当たり判定を消す
+                oneTrigger = true;
+            }            
         }
         else//死んだときの処理を書くところ
         {
