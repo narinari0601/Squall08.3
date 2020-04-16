@@ -21,8 +21,8 @@ public class MemberControl : MonoBehaviour
 
     //public float navSpeed;//navの動くスピード
     public float navStop;//どれだけ離れて止まるか
-    //private int memberNumber;
-    private Transform memberLingt;
+    //仲間の光
+    private GameObject memberLingt;
     public Vector3 lightScale;
     public Slider slider;
     private float invincibleTime = 0;
@@ -31,7 +31,10 @@ public class MemberControl : MonoBehaviour
     private float windpower;
     //波紋
     RippleUI rippleUI;
-
+    //仲間の画像
+    private GameObject memberSprite;
+    //仲間の画像(マップ版)
+    private GameObject memberMapSprite;
 
     public enum MemberStates//メンバーの状態
     {
@@ -63,7 +66,8 @@ public class MemberControl : MonoBehaviour
         memberHpMax = memberHp;//最大値の固定
         //player = GameObject.Find("Player");
         player = GamePlayManager.instance.CurrentStage.PlayerObj;
-        memberLingt = this.gameObject.transform.Find("MemberLight");
+        //memberLingt = this.gameObject.transform.Find("MemberLight");
+        memberLingt = this.gameObject.transform.Find("MemberLight").gameObject;
         memberStates = MemberStates.isAlive;//生きてる
         memberCheck = MemberCheck.isLoitering;//徘徊
         member = gameObject.GetComponent<NavMeshAgent>();
@@ -78,9 +82,11 @@ public class MemberControl : MonoBehaviour
         // member.speed += navSpeed;
         slider.maxValue = memberHpMax;
         playerScript = GetComponent<Playercontrol>();
-
         //波紋のやつ
         rippleUI = GetComponentInChildren<RippleUI>();
+        //仲間の画像
+        memberSprite = this.gameObject.transform.Find("MemberSprite").gameObject;
+        memberMapSprite = this.gameObject.transform.Find("MemberMapSprite").gameObject;
     }
 
     // Update is called once per frame
@@ -106,7 +112,7 @@ public class MemberControl : MonoBehaviour
         }
         else if(GetMemberCheck == MemberCheck.isCapture)//プレイヤーに捕まったらの処理書くところ
         {
-            if (memberHp <= 0)
+            if (memberHp <= 0)//死んだら
             {
                 memberCheck = MemberCheck.isDead;
                 memberStates = MemberStates.isDaed;
@@ -126,18 +132,19 @@ public class MemberControl : MonoBehaviour
         else if (GetMemberCheck == MemberCheck.isHub)//拠点いるときの処理書くところ
         {
             MemberDontRotaion();//HPバーが回転しないように
-            //今のところ何もしない
+            memberSprite.SetActive(false);//仲間の画像を非表示
+            memberMapSprite.SetActive(false);//仲間のマップ画像を非表示
+            memberLingt.SetActive(false);
+            
         }
         else//死んだときの処理を書くところ
         {
             MemberDontRotaion();//HPバーが回転しないように
-
         }     
     }
 
-    public void MemberDontRotaion()
+    public void MemberDontRotaion()//スプライトの回転をなくす
     {
-        //スプライトの回転をなくす
         Vector3 parent = this.transform.parent.transform.localRotation.eulerAngles;
         this.transform.localRotation = Quaternion.Euler(def - parent);
     }
@@ -148,11 +155,11 @@ public class MemberControl : MonoBehaviour
         {
             if (script.memberList[i] == this.gameObject)
             {
-                member.destination = script.memberList[i - 1].transform.position;
+                member.destination = script.memberList[i -1].transform.position;
                 member.stoppingDistance = navStop;
             }
         }
-        MemberDontRotaion();
+        MemberDontRotaion();//スプライトの回転をなくす
     }
 
     public void MemberToPlayer()//仲間がPlayerにつかまってから川を避けなくする
@@ -165,7 +172,7 @@ public class MemberControl : MonoBehaviour
     {
         if (points.Length == 0)
             return;
-        //ぐるぐる回るやつ
+        //ぐるぐる回るやつ(徘徊)
         member.destination = points[destPoint].transform.position;
         destPoint = (destPoint + 1) % points.Length;
 
@@ -241,7 +248,6 @@ public class MemberControl : MonoBehaviour
             invincibleTime = 5;//無敵時間(単位-秒)
         }
     }
-
     public void Ripple()
     {
         if (GetMemberCheck == MemberCheck.isLoitering )
