@@ -202,14 +202,11 @@ public class GamePlayManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ChangeCamera();
+
         if (gameState == GamePlayStates.Play)
         {
             ChangeWeather();
-
-            ChangeCamera();
-
-            MapEnd();
-            
 
             StageClear();
             
@@ -218,7 +215,7 @@ public class GamePlayManager : MonoBehaviour
 
         else if (gameState == GamePlayStates.Map)
         {
-
+            MapEnd();
         }
 
         RetryScene();
