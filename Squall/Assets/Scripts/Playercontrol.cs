@@ -45,12 +45,14 @@ public class Playercontrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimerManager();
-        WindMove();
-        Damagemove();
-       
+        if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
+        {
+            TimerManager();
+            WindMove();
+            Damagemove();
+
             Move();
-        
+        }
         //Shout();
        
     }
