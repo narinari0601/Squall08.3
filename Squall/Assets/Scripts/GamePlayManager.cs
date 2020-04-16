@@ -203,11 +203,10 @@ public class GamePlayManager : MonoBehaviour
     private void FixedUpdate()
     {
         ChangeCamera();
+        ChangeWeather();
 
         if (gameState == GamePlayStates.Play)
         {
-            ChangeWeather();
-
             StageClear();
             
             memberAliveUI.text = "あと" + currentStage.GetMemberAliveValue() + "人";
