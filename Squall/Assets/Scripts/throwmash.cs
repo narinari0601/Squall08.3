@@ -12,7 +12,7 @@ public class throwmash : MonoBehaviour
     void Start()
     {
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
-
+        wind = Vector3.zero;
         SetMove(GamePlayManager.instance.Player.GetComponent<Playercontrol>().GetDirec());
         time = 1;
 
@@ -20,6 +20,8 @@ public class throwmash : MonoBehaviour
     void Initialize()
     {
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
+        wind = Vector3.zero;
+        time = 1;
     }
     // Update is called once per frame
     void Update()
@@ -34,16 +36,16 @@ public class throwmash : MonoBehaviour
     void Move()
     {
         transform.position += move;
-        
+
     }
     void Wind()
     {
         time+= 0.1f;
-        wind = new Vector3(0, 0, 0);
+        
         if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Up
           && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
         {
-            wind = new Vector3(0, 0, windpower*time);
+            wind = new Vector3(0, 0, windpower * time);
         }
         else if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Down
            && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
