@@ -230,6 +230,20 @@ public class GamePlayManager : MonoBehaviour
     {
         currentWeatherTimer += Time.deltaTime;
 
+        if (currentWeatherTimer >= weatherRotateTime)
+        {
+            currentWeatherTimer = 0;
+
+            squallCount++;
+
+            if (squallCount == squallDirArray.Length)
+            {
+                squallCount = 0;
+            }
+
+            squallDirection = squallDirArray[squallCount];
+        }
+
 
         if (currentWeatherTimer < sunRatio / toatalWeatherRatio * weatherRotateTime)
         {
@@ -259,19 +273,7 @@ public class GamePlayManager : MonoBehaviour
             //Debug.Log("予兆");
         }
 
-        if (currentWeatherTimer >= weatherRotateTime)
-        {
-            currentWeatherTimer = 0;
-
-            squallCount++;
-
-            if (squallCount == squallDirArray.Length)
-            {
-                squallCount = 0;
-            }
-
-            squallDirection = squallDirArray[squallCount];
-        }
+        
     }
 
     public void NextStage()
