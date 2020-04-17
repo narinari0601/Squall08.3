@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712751ce7d95eab41938831a7c6673f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _se: {fileID: 8300000, guid: 3b50645c8dbdb284b97d5daf2a880d90, type: 3}
   HP: 0
 --- !u!82 &387896445533993959
 AudioSource:

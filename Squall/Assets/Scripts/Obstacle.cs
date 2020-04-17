@@ -11,7 +11,8 @@ public class Obstacle : MonoBehaviour
     public Sprite sun;
     public Sprite rain;
     int damagetime;
- 
+    AudioSource _audio;
+    AudioClip hitse;
     //
     RippleUI rippleUI;
     //
@@ -22,7 +23,8 @@ public class Obstacle : MonoBehaviour
         sunmaterial = (Material)Resources.Load("Materials/blue");
         rainmaterial = (Material)Resources.Load("Materials/red");
         damagematerial = (Material)Resources.Load("Materials/damage");
-     
+        _audio = GetComponent<AudioSource>();
+        hitse = (AudioClip)Resources.Load("Sounds/HitSE");
         damagetime = 0;
     }
 
@@ -40,7 +42,7 @@ public class Obstacle : MonoBehaviour
                 if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != rain)
                 {
                     transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = rain;
-                    Debug.Log(1);
+                   
                 }
              //   gameObject.GetComponent<Renderer>().material = rainmaterial;
                 
@@ -59,12 +61,14 @@ public class Obstacle : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "TMash")
+        if (collision.gameObject.tag == "TMash" && damagetime == 0) 
         {
             damagetime = 600;
-            if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != damage)
+            Debug.Log(damagetime);
+            if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != damage )
             {
-                
+                _audio.PlayOneShot(hitse);
+                Debug.Log(hitse.name);
                 transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = damage;
             }
             // GetComponent<Renderer>().material = damagematerial;
@@ -84,7 +88,8 @@ public class Obstacle : MonoBehaviour
         damagematerial = (Material)Resources.Load("Materials/damage");
         rainmaterial = (Material)Resources.Load("Materials/red");
         damagetime = 0;
-    
+        hitse = (AudioClip)Resources.Load("Sounds/hitSE");
+        _audio = GetComponent<AudioSource>();
         //
         rippleUI = GetComponentInChildren<RippleUI>();
         //

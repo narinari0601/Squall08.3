@@ -23,8 +23,17 @@ public class BaseCamp : MonoBehaviour
 
     public void MapDisplay()
     {
-        GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
-        
+        foreach (var member in GamePlayManager.instance.CurrentStage.MemberControllers)
+        {
+            member.MemberHubCheck();
+        }
+
+        GamePlayManager.instance.StageEndCheack();
+
+        if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
+        {
+            GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

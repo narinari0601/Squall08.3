@@ -54,6 +54,13 @@ public class RippleUI : MonoBehaviour
     void Update()
     {
 
+        if (GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)
+        {
+            sprite.SetActive(false);
+            return;
+        }
+
+
         //出ているとき
         if (isActive)
         {
@@ -89,8 +96,9 @@ public class RippleUI : MonoBehaviour
             return;
 
         MoveUI();
-        //sprite.SetActive(true);
         isActive = true;
+
+        sprite.SetActive(true);
         
     }
 

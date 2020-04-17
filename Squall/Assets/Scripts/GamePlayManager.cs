@@ -28,7 +28,9 @@ public class GamePlayManager : MonoBehaviour
     {
         Play,
         Map,
-        Pause
+        Pause,
+        Clear,
+        GameOver,
     }
 
 
@@ -84,22 +86,15 @@ public class GamePlayManager : MonoBehaviour
 
     private int stageNum;
 
+
+    //ゲームの状態関連
     private GamePlayStates gameState;
 
 
-    private string[] directStrings;
-
-    [SerializeField]
-    private Text currentDirect = null;
-
-    [SerializeField]
-    private Text secondDirect = null;
-
-    [SerializeField]
-    private Text thirdDirect = null;
-
-    [SerializeField]
-    private Text memberAliveUI = null;
+    //UI関連
+    [SerializeField, Header("UIマネージャーオブジェ")]
+    private GameObject uIObj = null;
+    private UIManager uiManager;
 
 
     public WeatherStates Weather { get => weather; set => weather = value; }
@@ -107,7 +102,6 @@ public class GamePlayManager : MonoBehaviour
     public GameObject Player { get => player; set => player = value; }
     public Stage CurrentStage { get => currentStage; set => currentStage = value; }
     public GamePlayStates GameState { get => gameState; set => gameState = value; }
-    
 
     private void Awake()
     {
@@ -130,27 +124,13 @@ public class GamePlayManager : MonoBehaviour
         
         stageNum = 0;
 
-
-        //stageList = new List<GameObject>();
-
-        //プレハブを生成し初期化してリストに格納
-        //for (int i = 0; i < stagePrefabs.Length; i++)
-        //{
-        //    var stage = Instantiate(stagePrefabs[i]);
-        //    stage.GetComponent<Stage>().Initialize();
-        //    stageList.Add(stage);
-        //}
-
         cameraList = new List<GameObject>();
 
         StageInitialize();
 
-        directStrings = new string[4] { "↑", "↓", "←", "→" };
+        uiManager = uIObj.GetComponent<UIManager>();
+        uiManager.Initialize();
 
-        currentDirect.text = "";
-        secondDirect.text = "";
-        thirdDirect.text = "";
-        
     }
 
     private void StageInitialize()
@@ -196,8 +176,7 @@ public class GamePlayManager : MonoBehaviour
         cameraList.Add(mapCamera);
         currentCamera = cameraList[0];
         cameraList[1].SetActive(false);
-
-        memberAliveUI.text = "あと" + currentStage.GetMemberAliveValue() + "人";
+        
     }
 
     private void FixedUpdate()
@@ -207,14 +186,25 @@ public class GamePlayManager : MonoBehaviour
 
         if (gameState == GamePlayStates.Play)
         {
-            StageClear();
-            
-            memberAliveUI.text = "あと" + currentStage.GetMemberAliveValue() + "人";
+            StageEndCheack();
+            currentStage.Ripple();
         }
 
         else if (gameState == GamePlayStates.Map)
         {
+            uiManager.HiddenPlayUI();
+
             MapEnd();
+        }
+
+        else if (gameState == GamePlayStates.Clear)
+        {
+            GameClear();
+        }
+
+        else if (gameState == GamePlayStates.GameOver)
+        {
+            GameOver();
         }
 
         RetryScene();
@@ -244,36 +234,43 @@ public class GamePlayManager : MonoBehaviour
             squallDirection = squallDirArray[squallCount];
         }
 
-
+        //晴れ
         if (currentWeatherTimer < sunRatio / toatalWeatherRatio * weatherRotateTime)
         {
             weather = WeatherStates.Sun;
             //Debug.Log("晴れ");
         }
 
+        //スコール
         else if (currentWeatherTimer >= (toatalWeatherRatio - squallRatio) / toatalWeatherRatio * weatherRotateTime)
         {
             weather = WeatherStates.Squall;
-            currentDirect.text = "";
-            secondDirect.text = "";
-            thirdDirect.text = "";
+            uiManager.WindDirectUI.SetActive(false);
             //Debug.Log("スコール");
         }
 
+        //予兆
         else
         {
             weather = WeatherStates.Sign;
-            currentDirect.text = directStrings[(int)squallDirection];
-
-            var secondDir = squallDirArray[(squallCount + 1) % squallDirArray.Length];
-            var thirdDir= squallDirArray[(squallCount + 2) % squallDirArray.Length];
-            secondDirect.text = directStrings[(int)secondDir];
-            thirdDirect.text = directStrings[(int)thirdDir];
             
+            var currentDir= (int)squallDirArray[(squallCount + 0) % squallDirArray.Length];
+            var secondDir = (int)squallDirArray[(squallCount + 1) % squallDirArray.Length];
+            var thirdDir= (int)squallDirArray[(squallCount + 2) % squallDirArray.Length];
+            uiManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
+
+            if (gameState == GamePlayStates.Play)
+            {
+                uiManager.WindDirectUI.SetActive(true);
+            }
+
+            //currentDirect.text = directStrings[(int)squallDirArray[squallCount]];
+            //secondDirect.text = directStrings[(int)secondDir];
+            //thirdDirect.text = directStrings[(int)thirdDir];
             //Debug.Log("予兆");
         }
 
-        
+
     }
 
     public void NextStage()
@@ -298,9 +295,9 @@ public class GamePlayManager : MonoBehaviour
         }
     }
 
-    public void StageClear()
+    public void StageEndCheack()
     {
-        currentStage.StageClear();
+        currentStage.StageEnd();
     }
 
     public void ChangeCamera()
@@ -334,6 +331,7 @@ public class GamePlayManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                uiManager.MemberAliveUI.SetActive(true);
                 gameState = GamePlayStates.Play;
             }
         }
@@ -347,9 +345,14 @@ public class GamePlayManager : MonoBehaviour
         }
     }
 
-    private void  SwicthUI()
+    public void GameClear()
     {
-        
+        Debug.Log("クリア");
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("ゲームオーバー");
     }
     
 

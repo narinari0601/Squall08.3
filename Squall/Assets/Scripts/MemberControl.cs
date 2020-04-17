@@ -129,7 +129,7 @@ public class MemberControl : MonoBehaviour
                       
             WeratherCheck();//天気の確認
             PlayerFollows();//隊列になるやつ
-            MemberHubCheck();//拠点についたら
+            //MemberHubCheck();//拠点についたら
             
             if(invincibleTime>0)//敵と当たった時の無敵時間
             {
@@ -232,7 +232,7 @@ public class MemberControl : MonoBehaviour
 
     public void MemberHubCheck()//拠点についたか
     {//今のところはPlayerがマップを見たら、変更するかも...
-        if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
+        //if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
             if (GetMemberCheck == MemberCheck.isCapture)
             {
