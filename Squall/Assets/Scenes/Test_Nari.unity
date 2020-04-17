@@ -193,11 +193,11 @@ PrefabInstance:
     - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: baseUI
       value: 
-      objectReference: {fileID: 745401784}
+      objectReference: {fileID: 1025968566}
     - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: DistanceUI
       value: 
-      objectReference: {fileID: 1544482222}
+      objectReference: {fileID: 1871342057}
     - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
         type: 3}
       propertyPath: offset.y
@@ -214,12 +214,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1643177782200063119, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
     type: 3}
   m_PrefabInstance: {fileID: 435691278}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &745401784 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3831173329985013811, guid: 339d1e83957387f4895b879e67928441,
-    type: 3}
-  m_PrefabInstance: {fileID: 3831173330322908555}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1008723833
 GameObject:
@@ -290,6 +284,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1025968566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 67211873171338492, guid: 339d1e83957387f4895b879e67928441,
+    type: 3}
+  m_PrefabInstance: {fileID: 3831173330322908555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1236060445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,12 +419,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1544482222 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3831173329181870117, guid: 339d1e83957387f4895b879e67928441,
-    type: 3}
-  m_PrefabInstance: {fileID: 3831173330322908555}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1619464422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,6 +518,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4746aa2685c0514c86a7419e8de5ea9, type: 3}
+--- !u!1 &1871342057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 468608185582529998, guid: 339d1e83957387f4895b879e67928441,
+    type: 3}
+  m_PrefabInstance: {fileID: 3831173330322908555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1886117946
 GameObject:
   m_ObjectHideFlags: 0
