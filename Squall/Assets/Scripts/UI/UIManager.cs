@@ -8,9 +8,11 @@ public class UIManager : MonoBehaviour
 
     private MemberAliveUI memberAliveUI;
 
+    private GameOverUI gameOverUI;
+
     public WindDirectUI WindDirectUI { get => windDirectUI;}
     public MemberAliveUI MemberAliveUI { get => memberAliveUI; set => memberAliveUI = value; }
-
+    public GameOverUI GameOverUI { get => gameOverUI; }
     void Start()
     {
         
