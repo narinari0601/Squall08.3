@@ -14,6 +14,7 @@ public class Playercontrol : MonoBehaviour
     private Vector3 damagevelocity;
     private Vector3 savevelocity;
     private Vector3 velocity;
+    private GameObject bursteffect;
     public int HP;
     private int mutekitime;
     int mashcount;
@@ -28,11 +29,12 @@ public class Playercontrol : MonoBehaviour
         mutekitime = 0;
         shouttime = 0;
         getse = (AudioClip)Resources.Load("Sounds/GetSE");
-        throwse = (AudioClip)Resources.Load("Sounds/HitSE");
+        throwse = (AudioClip)Resources.Load("Sounds/ThrowSE");
         _direc = Direc.UP;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
         throwmash = (GameObject)Resources.Load("throwmash");
+        bursteffect = (GameObject)Resources.Load("Effects/Burst");
     }
     public void Initialize()
     {
@@ -210,6 +212,7 @@ public class Playercontrol : MonoBehaviour
 
             savevelocity = Nock / 10;
             savevelocity.y = 0;
+            Instantiate((GameObject)bursteffect, transform);
         }
     }
     void Damagemove()
@@ -219,6 +222,7 @@ public class Playercontrol : MonoBehaviour
             transform.position = transform.position + damagevelocity;
             damagevelocity -= savevelocity / 5;
             Debug.Log(damagevelocity);
+            
         }
        // transform.position *= Time.deltaTime;
     }
