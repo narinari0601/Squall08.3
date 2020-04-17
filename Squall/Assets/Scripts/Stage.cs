@@ -18,7 +18,9 @@ public class Stage : MonoBehaviour
 
     private int memberMaxValue;
 
-    private int stageClearMember;
+    private int hubMember;
+
+    private int deadMember;
 
     [SerializeField, Header("敵たち")]
     private GameObject[] enemies = new GameObject[0];
@@ -47,6 +49,7 @@ public class Stage : MonoBehaviour
     public SquallDirections[] SquallDirArray { get => squallDirArray; set => squallDirArray = value; }
     public float WindPower { get => windPower; set => windPower = value; }
     public GameObject MapCamera { get => mapCamera; set => mapCamera = value; }
+    public MemberControl[] MemberControllers { get => memberControllers; set => memberControllers = value; }
 
     void Start()
     {
@@ -56,7 +59,7 @@ public class Stage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ripple();
+        //Ripple();
     }
 
     public void Initialize()
@@ -84,7 +87,9 @@ public class Stage : MonoBehaviour
 
         memberMaxValue = members.Length;
 
-        stageClearMember = 0;
+        hubMember = 0;
+
+        deadMember = 0;
 
 
         foreach (var enemy in enemies)
@@ -96,7 +101,7 @@ public class Stage : MonoBehaviour
 
     }
 
-    public void StageClear()
+    public void StageEnd()
     {
 
         if (memberControllers.Length == 0)
@@ -104,25 +109,29 @@ public class Stage : MonoBehaviour
 
         foreach (var member in memberControllers)
         {
-
-            //if (member.GetMemberCheck == MemberControl.MemberCheck.isCapture)
-            //{
-            //    stageClearMember++;
-            //}
-
-            if (member.GetMemberState == MemberControl.MemberStates.isDaed ||
-                member.GetMemberState == MemberControl.MemberStates.isHub)
+            if (member.GetMemberState == MemberControl.MemberStates.isHub)
             {
-                stageClearMember++;
+                hubMember++;
+            }
+
+            if (member.GetMemberState == MemberControl.MemberStates.isDaed)
+            {
+                deadMember++;
             }
         }
 
-        if (stageClearMember == memberMaxValue)
+        if (deadMember == memberMaxValue)
         {
-            Debug.Log("クリア");
+            GamePlayManager.instance.GameState = GamePlayStates.GameOver;
         }
 
-        stageClearMember = 0;
+        else if (deadMember + hubMember == memberMaxValue)
+        {
+            GamePlayManager.instance.GameState = GamePlayStates.Clear;
+        }
+
+        hubMember = 0;
+        deadMember = 0;
     }
 
 

@@ -13,7 +13,7 @@ public class RiverCol : MonoBehaviour
 
 
     [SerializeField]
-    private BoxCollider col;
+    private BoxCollider col = null;
 
     private Transform riverTransform;
 

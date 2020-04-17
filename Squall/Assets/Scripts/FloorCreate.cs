@@ -14,7 +14,7 @@ public class FloorCreate : MonoBehaviour
     private float zInterval = 1.0f;
 
     [SerializeField, Header("作る対象")]
-    private GameObject target;
+    private GameObject target = null;
     GameObject obj;
 
 
