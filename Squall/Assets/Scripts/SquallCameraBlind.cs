@@ -17,11 +17,12 @@ public class SquallCameraBlind : MonoBehaviour
     Transform transforms;
     GameObject player;//プレイヤー
 
-
+    const float BlackMIN = 0.2114235f;//スコールの時の黒いやつの最小値
+    const float BlackMAX = 0.6514235f;//スコールの時の黒いやつの最大値
     //菅原追加
     MemberList script;//メンバーリストを見るためのやつ
     private int memberCount = 0;//メンバーの人数をカウントするためのやつ
-    //private bool memberCheckFlag = false;//一回しか呼ばないためのフラグ
+    private bool memberCheckFlag = false;//一回しか呼ばないためのフラグ
     private int memberCount2 = 0;//1f前の仲間の人数
 
     // Start is called before the first frame update
@@ -38,6 +39,12 @@ public class SquallCameraBlind : MonoBehaviour
     void Update()
     {
         
+        if(cntfull>21)
+        {
+            cntfull = 21;
+        }
+
+        Debug.Log(count);
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
@@ -103,26 +110,24 @@ public class SquallCameraBlind : MonoBehaviour
                     memberCount2 = memberCount;
                 }
 
-                /*if (memberCheckFlag == false)
+                if (transforms.localScale.x <= BlackMIN)//もとに戻すときに最初の大きさより小さくならないようにするため
                 {
-                    for (int i = 0; i < memberCount; i++)//スコール開始時に仲間の数だけ視界を広げる
-                    {
-                        transform.localScale += new Vector3(0.08f, 0.08f, 0.08f);
-                    }
-                    memberCheckFlag = true;//一回だけ呼びたいからboolで切り替え
-                }*/
-               
+                    transforms.localScale = new Vector3(BlackMIN, BlackMIN, BlackMIN);
+                }
+
                 if (memberCount > memberCount2) //スコール中に仲間が増えたら視界を広げ、減ったら視界を狭くする、
                 {
                     transforms.localScale += new Vector3(0.08f, 0.08f, 0);
                     memberCount2 = memberCount;
                     cntfull -= 4;
+                    count = 0;
                 }
                 else if (memberCount < memberCount2)
                 {
                     transforms.localScale -= new Vector3(0.08f, 0.08f, 0);
                     memberCount2 = memberCount;
                     cntfull += 4;
+                    count = 0;
                 }
 
             }
@@ -131,7 +136,7 @@ public class SquallCameraBlind : MonoBehaviour
         {
             if (currentstate2 == GamePlayManager.GamePlayStates.Play && paststate2 == GamePlayManager.GamePlayStates.Map)
             {
-                count = cntfull+1;
+                count = cntfull;//+1消した
                 transforms.localScale += new Vector3(0.4f, 0.4f, 0.4f);
             }
             if (paststate == GamePlayManager.WeatherStates.Squall)
@@ -142,7 +147,7 @@ public class SquallCameraBlind : MonoBehaviour
             {
                 if (count < cntfull)
                 {
-                    transform.Translate(Vector3.back*0.1f);
+                    transform.Translate(Vector3.back * 0.1f);
                     count++;
                 }
             }
@@ -178,9 +183,9 @@ public class SquallCameraBlind : MonoBehaviour
                     count++;
                 }
 
-                if (transforms.localScale.x >= 0.6514235f)//もとに戻すときに最初の大きさより大きくならないようにするため
+                if (transforms.localScale.x >= BlackMAX)//もとに戻すときに最初の大きさより大きくならないようにするため
                 {
-                    transforms.localScale = new Vector3(0.6514235f, 0.6514235f, 0.6514235f);
+                    transforms.localScale = new Vector3(BlackMAX, BlackMAX, BlackMAX);
                 }
                 //memberCheckFlag = false;//フラグを戻してあげる
                 if (memberCount > memberCount2) //スコール中に仲間が増えたら視界を広げ、減ったら視界を狭くする、

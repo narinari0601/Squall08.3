@@ -5,7 +5,8 @@ using UnityEngine;
 public class Playercontrol : MonoBehaviour
 {
     // Startis called before the first frame updat
-    public AudioClip _se;
+    AudioClip throwse;
+    AudioClip getse;
     private AudioSource _audio;
     private Vector3 wind;
     private float windpower;
@@ -13,6 +14,7 @@ public class Playercontrol : MonoBehaviour
     private Vector3 damagevelocity;
     private Vector3 savevelocity;
     private Vector3 velocity;
+    private GameObject bursteffect;
     public int HP;
     private int mutekitime;
     int mashcount;
@@ -26,15 +28,20 @@ public class Playercontrol : MonoBehaviour
     {
         mutekitime = 0;
         shouttime = 0;
+        getse = (AudioClip)Resources.Load("Sounds/GetSE");
+        throwse = (AudioClip)Resources.Load("Sounds/ThrowSE");
         _direc = Direc.UP;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
         throwmash = (GameObject)Resources.Load("throwmash");
+        bursteffect = (GameObject)Resources.Load("Effects/Burst");
     }
     public void Initialize()
     {
         mutekitime = 0;
         shouttime = 0;
+        getse = (AudioClip)Resources.Load("Sounds/GetSE");
+        throwse = (AudioClip)Resources.Load("Sounds/HitSE");
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
         _direc = Direc.UP;
@@ -116,7 +123,7 @@ public class Playercontrol : MonoBehaviour
             if (mashcount > 0)
             {
                 mashcount--;
-
+                _audio.PlayOneShot(throwse);
                 Instantiate((GameObject)throwmash, transform.position + GetDirec() * 9 ,
                     Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)));
             }
@@ -178,33 +185,34 @@ public class Playercontrol : MonoBehaviour
         }
      //   transform.position *= Time.deltaTime;
     }
-    void Shout()
-    {
+    //void Shout()
+    //{
 
-        if (Input.GetKeyDown(KeyCode.B) && shouttime == 0)
-        {
-            _audio.PlayOneShot(_se);
-            GamePlayManager.instance.CurrentStage.Ripple();
-            shouttime = 180;
-        }
-        else if (shouttime != 0) 
-        {
-            Debug.Log(shouttime);
-            shouttime--;
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.B) && shouttime == 0)
+    //    {
+    //        _audio.PlayOneShot(_se);
+    //        GamePlayManager.instance.CurrentStage.Ripple();
+    //        shouttime = 180;
+    //    }
+    //    else if (shouttime != 0) 
+    //    {
+    //        Debug.Log(shouttime);
+    //        shouttime--;
+    //    }
+    //}
     public void Damage(Vector3 Nock)
     {
         if (mutekitime == 0)
         {
             mutekitime = 180;
             HP--;
-            _audio.PlayOneShot(_se);
+          
             damagevelocity = Nock/10;
             damagevelocity.y = 0;
 
             savevelocity = Nock / 10;
             savevelocity.y = 0;
+            Instantiate((GameObject)bursteffect, transform);
         }
     }
     void Damagemove()
@@ -214,6 +222,7 @@ public class Playercontrol : MonoBehaviour
             transform.position = transform.position + damagevelocity;
             damagevelocity -= savevelocity / 5;
             Debug.Log(damagevelocity);
+            
         }
        // transform.position *= Time.deltaTime;
     }
@@ -223,10 +232,13 @@ public class Playercontrol : MonoBehaviour
 
         if (collision.gameObject.tag == "Mash")
         {
+            _audio.PlayOneShot(getse);
+            Debug.Log(getse.name);
             mashcount++;
         }
         else if(collision.gameObject.tag == "TMash")
         {
+            _audio.PlayOneShot(getse);
             mashcount++;
         }
         //if (collision.gameObject.tag == "Enemy")
