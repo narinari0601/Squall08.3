@@ -577,6 +577,16 @@ PrefabInstance:
       propertyPath: thirdDirect
       value: 
       objectReference: {fileID: 752414741}
+    - target: {fileID: 6784857425675962091, guid: 339d1e83957387f4895b879e67928441,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376175537783211805, guid: 339d1e83957387f4895b879e67928441,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 339d1e83957387f4895b879e67928441, type: 3}
 --- !u!1 &1288586990

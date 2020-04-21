@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
         windDirectUI.Initialize();
         memberAliveUI = GetComponentInChildren<MemberAliveUI>();
         memberAliveUI.Initialize();
+        gameOverUI = GetComponentInChildren<GameOverUI>();
+        gameOverUI.Initialize();
     }
 
     
