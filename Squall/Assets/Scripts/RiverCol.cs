@@ -6,8 +6,8 @@ public class RiverCol : MonoBehaviour
 {
     public enum Directions
     {
-        Vertical,
-        Horizontal,
+        Vertical,  //縦向き(0度)
+        Horizontal,  //横向き(90度)
         Other,
     }
 
@@ -21,13 +21,25 @@ public class RiverCol : MonoBehaviour
 
     private Directions direction;
 
-    private bool isJump;
+    private GamePlayManager.SquallDirections jumpDir;
+
+    //private bool isJump;
 
     private float colSize;
 
+    private bool isRightHit;  //右から当たっていたらtrue
+    private bool isLeftHit;  //左から当たっていたらtrue
+
+    private GameObject jumpTarget;
+    //private Transform jumpTarget;
+    private Playercontrol pc;
+
     public Directions Direction { get => direction; set => direction = value; }
-    public bool IsJump { get => isJump; set => isJump = value; }
+    //public bool IsJump { get => isJump; set => isJump = value; }
     public float ColSizeX { get => colSize; set => colSize = value; }
+    public bool IsRightHit { get => isRightHit; set => isRightHit = value; }
+    public bool IsLeftHit { get => isLeftHit; set => isLeftHit = value; }
+    public BoxCollider Col { get => col; set => col = value; }
 
     void Start()
     {
@@ -47,34 +59,91 @@ public class RiverCol : MonoBehaviour
             direction = Directions.Horizontal;
             colSize = col.bounds.size.z;
         }
-
-        //else if (objAngle == 180)
-        //    direction = Directions.Right;
-
-        //else if (objAngle == 270)
-        //    direction = Directions.Down;
+        
 
         else
         {
             direction = Directions.Other;
-            colSize = 2;
+            colSize = 100;
         }
         
 
         if (colSize < 2)
         {
-            isJump = true;
+            //isJump = true;
         }
 
         else
         {
-            isJump = false;
+            //isJump = false;
         }
+
+        isRightHit = false;
+        isLeftHit = false;
+        jumpDir = GamePlayManager.SquallDirections.Up;
+
     }
     // Update is called once per frame
     void Update()
     {
+        Jump();
+    }
+
+    private void Jump()
+    {
+        if (isRightHit && jumpDir == GamePlayManager.SquallDirections.Left)
+        {
+            pc.IsJump = true;
+            jumpTarget.transform.position += new Vector3(-0.05f, 0, 0);
+        }
+
+        if (isRightHit && jumpDir == GamePlayManager.SquallDirections.Up)
+        {
+            pc.IsJump = true;
+            jumpTarget.transform.position += new Vector3(0, 0, 0.05f);
+        }
+
+        if (isLeftHit && jumpDir == GamePlayManager.SquallDirections.Right)
+        {
+            pc.IsJump = true;
+            jumpTarget.transform.position += new Vector3(0.05f, 0, 0);
+        }
+
+        if (isLeftHit && jumpDir == GamePlayManager.SquallDirections.Down)
+        {
+            pc.IsJump = true;
+            jumpTarget.transform.position += new Vector3(0, 0, -0.05f);
+        }
+
+
+    }
+
+    public void RightJump(GameObject obj, GamePlayManager.SquallDirections squallDir)
+    {
+
+        if ((squallDir == GamePlayManager.SquallDirections.Left && direction == RiverCol.Directions.Vertical) || //風が左向きで川が縦
+            (squallDir == GamePlayManager.SquallDirections.Up && direction == RiverCol.Directions.Horizontal))   //風が上向きで川が横
+        {
+            isRightHit = true;
+            col.isTrigger = true;
+            jumpDir = squallDir;
+            jumpTarget = obj;
+            pc = jumpTarget.GetComponent<Playercontrol>();
+        }
         
+    }
+
+    public void LeftJump(GameObject obj, GamePlayManager.SquallDirections squallDir)
+    {
+        if ((squallDir == GamePlayManager.SquallDirections.Right && direction == RiverCol.Directions.Vertical) ||  //風が右向きで川が縦
+            (squallDir == GamePlayManager.SquallDirections.Down && direction == RiverCol.Directions.Horizontal))   //風が下向きで川が横
+        {
+            isLeftHit = true;
+            col.isTrigger = true;
+            jumpDir = squallDir;
+            jumpTarget = obj;
+            pc = jumpTarget.GetComponent<Playercontrol>();
+        }
     }
     
 }

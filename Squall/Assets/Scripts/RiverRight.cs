@@ -31,7 +31,27 @@ public class RiverRight : MonoBehaviour
 
         if (obj.tag == "Player")
         {
-            Jump(obj);
+            //Jump(obj);
+
+            var weather = GamePlayManager.instance.Weather;
+            if (weather != GamePlayManager.WeatherStates.Squall
+                /*|| !riverCol.IsJump*/)
+                return;
+            
+            var squallDir = GamePlayManager.instance.SquallDirection;
+            riverCol.RightJump(obj, squallDir);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        var obj = other.gameObject;
+
+        if (obj.tag == "Player")
+        {
+            riverCol.IsLeftHit = false;
+            riverCol.Col.isTrigger = false;
+            obj.GetComponent<Playercontrol>().IsJump = false;
         }
     }
 
@@ -43,8 +63,8 @@ public class RiverRight : MonoBehaviour
         //Debug.Log("川の向き : " + riverCol.Direction);
 
         var weather = GamePlayManager.instance.Weather;
-        if (weather != GamePlayManager.WeatherStates.Squall ||
-            !riverCol.IsJump)
+        if (weather != GamePlayManager.WeatherStates.Squall
+            /*|| !riverCol.IsJump*/)
             return;
 
         var squallDir = GamePlayManager.instance.SquallDirection;
@@ -62,16 +82,16 @@ public class RiverRight : MonoBehaviour
             obj.transform.position += new Vector3(0, 0, riverCol.ColSizeX + 0.5f);
         }
 
-        if (squallDir == GamePlayManager.SquallDirections.Right &&
-           riverDir == RiverCol.Directions.Vertical)
-        {
-            obj.transform.position += new Vector3(riverCol.ColSizeX + 0.5f, 0, 0);
-        }
+        //if (squallDir == GamePlayManager.SquallDirections.Right &&
+        //   riverDir == RiverCol.Directions.Vertical)
+        //{
+        //    obj.transform.position += new Vector3(riverCol.ColSizeX + 0.5f, 0, 0);
+        //}
 
-        if (squallDir == GamePlayManager.SquallDirections.Down &&
-           riverDir == RiverCol.Directions.Horizontal)
-        {
-            obj.transform.position += new Vector3(0, 0, -riverCol.ColSizeX - 0.5f);
-        }
+        //if (squallDir == GamePlayManager.SquallDirections.Down &&
+        //   riverDir == RiverCol.Directions.Horizontal)
+        //{
+        //    obj.transform.position += new Vector3(0, 0, -riverCol.ColSizeX - 0.5f);
+        //}
     }
 }
