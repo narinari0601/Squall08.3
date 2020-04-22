@@ -38,7 +38,7 @@ public class Stage : MonoBehaviour
     private SquallDirections[] squallDirArray = new SquallDirections[0];
 
 
-    private const float RIPPLE_TIME = 3.0f;
+    private const float RIPPLE_TIME = 6.0f;
 
     private float currentTimer;
 
@@ -158,7 +158,7 @@ public class Stage : MonoBehaviour
 
                 foreach (var enemy in enemies)
                 {
-                    enemy.GetComponent<Obstacle>().Ripple();
+                    //enemy.GetComponent<Obstacle>().Ripple();
                 }
 
                 currentTimer = 0;
