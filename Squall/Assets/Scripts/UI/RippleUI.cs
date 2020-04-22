@@ -10,8 +10,7 @@ public class RippleUI : MonoBehaviour
 
     [SerializeField,Header("Imageオブジェクト達")]
     private GameObject[] sprites = new GameObject[0];
-
-    private RectTransform imageRect;
+    
     private RectTransform imageRect01;
     private RectTransform imageRect02;
     private RectTransform imageRect03;
@@ -19,43 +18,38 @@ public class RippleUI : MonoBehaviour
     [SerializeField, Header("発信者")]
     private GameObject senderObj = null;
 
-    private bool isActive;
-
     private bool isActive01;
     private bool isActive02;
     private bool isActive03;
-
-    private const float RIPPLE_TIME = 2;
 
     private const float RIRGT_MAX = 1280;
     private const float LEFT_MAX = 0;
     private const float UP_MAX = 720;
     private const float DOWN_MAX = 0;
-    private const float SIZEDELTA_MAX = 256;
-
-    //private float currentRippleTimer;
-
-    private Vector2 rippleScale;
+    private const float SIZEDELTA_MAX = 256;  //波紋が消える大きさ
+    private const float BORDERLINE01 = 66;    //波紋が3つから2つになる割合
+    private const float BORDERLINE02 = 33;    //波紋が2つから1つになる割合
+    
     private Vector2 rippleScale01;
     private Vector2 rippleScale02;
     private Vector2 rippleScale03;
-
-    private float rippleAlfa;
+    
     private float rippleAlfa01;
     private float rippleAlfa02;
     private float rippleAlfa03;
 
     private float red, green, blue;
-
-    private Image spriteImage;
+    
     private Image spriteImage01;
     private Image spriteImage02;
     private Image spriteImage03;
 
     private bool isMember;
 
-    [SerializeField, Range(0,100)]
-    private float hp = 100;
+    private MemberControl memberControl;
+    private float memberMaxHp;
+    private float currentMemberHp;
+    private int hpRetio;  //HPの割合
 
 
     // Start is called before the first frame update
@@ -71,98 +65,59 @@ public class RippleUI : MonoBehaviour
 
         else
             isMember = false;
-
-
-        isActive = false;
+        
         isActive01 = false;
         
-
-        //currentRippleTimer = 0;
-
-        imageRect = sprite.GetComponent<RectTransform>();
-        //imageRect01 = sprites[0].transform as RectTransform;
+        imageRect01 = sprites[0].transform as RectTransform;
         
-        rippleScale = Vector2.zero;
         rippleScale01 = Vector2.zero;
         rippleScale02 = Vector2.zero;
         rippleScale03 = Vector2.zero;
-
-        spriteImage = sprite.GetComponent<Image>();
-       // spriteImage01 = sprites[0].GetComponent<Image>();
         
-
-        rippleAlfa = 1.5f;
+        spriteImage01 = sprites[0].GetComponent<Image>();
+        
         rippleAlfa01 = 1.5f;
         rippleAlfa02 = 1.5f;
         rippleAlfa03 = 1.5f;
 
-        red = spriteImage.color.r;
-        green = spriteImage.color.g;
-        blue = spriteImage.color.b;
+        red = spriteImage01.color.r;
+        green = spriteImage01.color.g;
+        blue = spriteImage01.color.b;
 
-        //if (isMember)
-        //{
-        //    isActive02 = false;
-        //    isActive03 = false;
+        //memberControl = transform.parent.gameObject.GetComponent<MemberControl>();
+        //memberMaxHp = memberControl.GetMaxMemberHp();
+        //currentMemberHp = memberControl.GetMemberHp();
+        //hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
 
-        //    imageRect02 = sprites[1].transform as RectTransform;
-        //    imageRect03 = sprites[2].transform as RectTransform;
+        if (isMember)
+        {
+            isActive02 = false;
+            isActive03 = false;
 
-        //    spriteImage02 = sprites[1].GetComponent<Image>();
-        //    spriteImage03 = sprites[2].GetComponent<Image>();
-        //}
+            imageRect02 = sprites[1].transform as RectTransform;
+            imageRect03 = sprites[2].transform as RectTransform;
+
+            spriteImage02 = sprites[1].GetComponent<Image>();
+            spriteImage03 = sprites[2].GetComponent<Image>();
+
+            memberControl = transform.parent.gameObject.GetComponent<MemberControl>();
+            memberMaxHp = memberControl.GetMaxMemberHp();
+            currentMemberHp = memberControl.GetMemberHp();
+            hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)
+        if (isMember)
         {
-            sprite.SetActive(false);
-            return;
+            currentMemberHp = memberControl.GetMemberHp();
+            hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
         }
-
-
-        //出ているとき
-        if (isActive)
-        {
-            //currentRippleTimer += Time.deltaTime;
-            rippleScale += new Vector2(2, 2);
-            imageRect.sizeDelta = rippleScale;
-            rippleAlfa -= 0.01f;
-            spriteImage.color = new Color(red, green, blue, rippleAlfa);
-
-            //if (currentRippleTimer >= RIPPLE_TIME)
-            //{
-            //    isActive = false;
-            //    //sprite.SetActive(false);
-            //    currentRippleTimer = 0;
-            //    rippleScale = Vector2.zero;
-            //    imageRect.sizeDelta = rippleScale;
-            //    rippleAlfa = 1.5f;
-            //    spriteImage.color = new Color(red, green, blue, rippleAlfa);
-            //}
-
-            if (rippleScale.x > SIZEDELTA_MAX)
-            {
-                isActive = false;
-                //sprite.SetActive(false);
-                //currentRippleTimer = 0;
-                rippleScale = Vector2.zero;
-                imageRect.sizeDelta = rippleScale;
-                rippleAlfa = 1.5f;
-                spriteImage.color = new Color(red, green, blue, rippleAlfa);
-            }
-        }
-
-        else
-        {
-            MoveUI();
-        }
-
-        //Shout();
+        
+        Shout();
     }
 
     public void Ripple()
@@ -170,18 +125,19 @@ public class RippleUI : MonoBehaviour
         var weather = GamePlayManager.instance.Weather;
 
         if (weather == GamePlayManager.WeatherStates.Squall)
+        {
+            ResetUI();
             return;
+        }
 
+        
+        isActive01 = true;
         MoveUI();
-        isActive = true;
-        //isActive01 = true;
 
-        sprite.SetActive(true);
-
-        //foreach (var sprite in sprites)
-        //{
-        //    sprite.SetActive(true);
-        //}
+        foreach (var sprite in sprites)
+        {
+            sprite.SetActive(true);
+        }
 
     }
 
@@ -197,17 +153,29 @@ public class RippleUI : MonoBehaviour
             return;
         }
 
+        Vector3 pos = RectTransformUtility.WorldToScreenPoint(Camera.main, senderObj.transform.position);
+        if (pos.x > LEFT_MAX && pos.x < RIRGT_MAX && pos.y > DOWN_MAX && pos.y < UP_MAX)
+        {
+            imageRect01.transform.position = pos;
+            if (isMember)
+            {
+                imageRect02.transform.position = pos;
+                imageRect03.transform.position = pos;
+            }
+        }
+
 
         if (isActive01)
         {
-            rippleScale01 += new Vector2(2, 2);
+            rippleScale01 += new Vector2(2.5f, 2.5f);
             imageRect01.sizeDelta = rippleScale01;
             rippleAlfa01 -= 0.01f;
             spriteImage01.color = new Color(red, green, blue, rippleAlfa01);
 
             if (isMember &&
                 !isActive02 &&
-                rippleScale01.x > 96)
+                rippleScale01.x > 96 &&
+                hpRetio > BORDERLINE01)
             {
                 isActive02 = true;
             }
@@ -224,14 +192,15 @@ public class RippleUI : MonoBehaviour
 
         if (isActive02)
         {
-            rippleScale02 += new Vector2(2, 2);
+            rippleScale02 += new Vector2(2.5f, 2.5f);
             imageRect02.sizeDelta = rippleScale02;
             rippleAlfa02 -= 0.01f;
             spriteImage02.color = new Color(red, green, blue, rippleAlfa02);
 
             if (isMember &&
                 !isActive03 &&
-                rippleScale02.x > 96)
+                rippleScale02.x > 96 &&
+                hpRetio > BORDERLINE02)
             {
                 isActive03 = true;
             }
@@ -248,7 +217,7 @@ public class RippleUI : MonoBehaviour
 
         if (isActive03)
         {
-            rippleScale03 += new Vector2(2, 2);
+            rippleScale03 += new Vector2(2.5f, 2.5f);
             imageRect03.sizeDelta = rippleScale03;
             rippleAlfa03 -= 0.01f;
             spriteImage03.color = new Color(red, green, blue, rippleAlfa03);
@@ -257,7 +226,7 @@ public class RippleUI : MonoBehaviour
             {
                 isActive03 = false;
                 rippleScale03 = Vector2.zero;
-                imageRect03.sizeDelta = rippleScale01;
+                imageRect03.sizeDelta = rippleScale03;
                 rippleAlfa03 = 1.5f;
                 spriteImage03.color = new Color(red, green, blue, rippleAlfa03);
             }
@@ -269,32 +238,66 @@ public class RippleUI : MonoBehaviour
         
         //ワールド座標をスクリーン座標に
         Vector3 pos = RectTransformUtility.WorldToScreenPoint(Camera.main, senderObj.transform.position);
+
+
+        if (pos.x > LEFT_MAX && pos.x < RIRGT_MAX && pos.y > DOWN_MAX && pos.y < UP_MAX)
+        {
+            imageRect01.transform.position = pos;
+            if (isMember)
+            {
+                imageRect02.transform.position = pos;
+                imageRect03.transform.position = pos;
+            }
+        }
+
+        else
+        {
+            if (pos.x < LEFT_MAX)
+            {
+                pos.x = LEFT_MAX;
+            }
+
+            if (pos.x > RIRGT_MAX)
+            {
+                pos.x = RIRGT_MAX;
+            }
+
+            if (pos.y > UP_MAX)
+            {
+                pos.y = UP_MAX;
+            }
+
+            if (pos.y < DOWN_MAX)
+            {
+                pos.y = DOWN_MAX;
+            }
+        }
         
-
-        if (pos.x < LEFT_MAX)
+        imageRect01.transform.position = pos;
+        if (isMember)
         {
-            pos.x = LEFT_MAX;
+            imageRect02.transform.position = pos;
+            imageRect03.transform.position = pos;
         }
 
-        if (pos.x > RIRGT_MAX)
-        {
-            pos.x = RIRGT_MAX;
-        }
+    }
 
-        if (pos.y > UP_MAX)
-        {
-            pos.y = UP_MAX;
-        }
+    private void ResetUI()
+    {
+        isActive01 = false;
+        isActive02 = false;
+        isActive03 = false;
 
-        if (pos.y < DOWN_MAX)
-        {
-            pos.y = DOWN_MAX;
-        }
+        rippleScale01 = Vector2.zero;
+        rippleScale02 = Vector2.zero;
+        rippleScale03 = Vector2.zero;
 
-        imageRect.transform.position = pos;
-        //imageRect01.transform.position = pos;
-        //imageRect02.transform.position = pos;
-        //imageRect03.transform.position = pos;
+        imageRect01.sizeDelta = rippleScale01;
+        imageRect02.sizeDelta = rippleScale02;
+        imageRect03.sizeDelta = rippleScale03;
 
+        rippleAlfa01 = 1.5f;
+        rippleAlfa02 = 1.5f;
+        rippleAlfa03 = 1.5f;
     }
 }
