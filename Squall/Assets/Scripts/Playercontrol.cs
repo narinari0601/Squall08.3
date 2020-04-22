@@ -19,6 +19,13 @@ public class Playercontrol : MonoBehaviour
     private int mutekitime;
     int mashcount;
     GameObject throwmash;
+
+
+    //ナリが追加
+    private bool isJump;  //ジャンプ中ならtrue
+    public bool IsJump { get => isJump; set => isJump = value; }
+    //
+
     enum Direc
     {
         UP,DOWN,RIGHT,LEFT
@@ -35,6 +42,7 @@ public class Playercontrol : MonoBehaviour
         _audio = gameObject.GetComponent<AudioSource>();
         throwmash = (GameObject)Resources.Load("throwmash");
         bursteffect = (GameObject)Resources.Load("Effects/Burst");
+        isJump = false;
     }
     public void Initialize()
     {
@@ -48,6 +56,7 @@ public class Playercontrol : MonoBehaviour
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
 
         throwmash = (GameObject)Resources.Load("throwmash");
+        isJump = false;
     }
     // Update is called once per frame
     void Update()
@@ -72,6 +81,9 @@ public class Playercontrol : MonoBehaviour
     }
     void Move()
     {
+        if (isJump)
+            return;
+
         wind = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.UpArrow))
         {

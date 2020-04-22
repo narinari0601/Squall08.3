@@ -8,6 +8,7 @@ TagManager:
   - Mash
   - TMash
   - BaseCamp
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Member
   - MapSprite
-  - 
+  - River
   - 
   - 
   - 
