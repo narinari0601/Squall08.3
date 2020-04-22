@@ -10,14 +10,20 @@ public class NavBakeScript : MonoBehaviour
     void Start()
     {
         meshSurface = GetComponent<NavMeshSurface>();
+        NavReBake();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            meshSurface.BuildNavMesh();
+            NavReBake();
         }
+    }
+
+    public void NavReBake()//再ベイク
+    {
+        meshSurface.BuildNavMesh();
     }
 }
