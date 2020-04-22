@@ -253,6 +253,7 @@ public class MemberControl : MonoBehaviour
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
             memberHp = memberHpMax;//HPを全回復
+            member.agentTypeID = 0;//navmeshを変更
         }     
         if(other.gameObject.tag =="Enemy" && GetMemberCheck == MemberCheck.isCapture && invincibleTime <=0 
             && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall )
@@ -269,4 +270,15 @@ public class MemberControl : MonoBehaviour
         }
        
     }
+
+    public float GetMemberHp()
+    {
+        return memberHp;
+    }
+
+    public float GetMaxMemberHp()
+    {
+        return memberHpMax;
+    }
+
 }
