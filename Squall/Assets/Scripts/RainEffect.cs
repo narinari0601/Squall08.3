@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RainEffect : MonoBehaviour
 {
-    AudioSource rainBGM;//雨音
+    public AudioSource rainBGM;//雨音
     const float maxvol = 0.5f;//スコール時の最大ボリューム
     const float minvol = 0.1f;//スコールじゃない時の最小ボリューム
     const float addvol = 0.02f;//天気が変わった時に音量が変化する速度
@@ -17,7 +17,7 @@ public class RainEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rainBGM = GetComponent<AudioSource>();
+        //rainBGM = GetComponent<AudioSource>();
         rainBGM.volume = minvol;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
