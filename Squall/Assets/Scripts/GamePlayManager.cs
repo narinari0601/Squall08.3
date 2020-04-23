@@ -88,6 +88,10 @@ public class GamePlayManager : MonoBehaviour
 
     private int stageNum;
 
+    [SerializeField, Header("bake2つ")]
+    private GameObject[] navBakes = new GameObject[2];
+    
+
 
     //ゲームの状態関連
     private GamePlayStates gameState;
@@ -105,6 +109,7 @@ public class GamePlayManager : MonoBehaviour
     public Stage CurrentStage { get => currentStage; set => currentStage = value; }
     public GamePlayStates GameState { get => gameState; set => gameState = value; }
     public UIManager UIManager { get => uiManager; set => uiManager = value; }
+    public GameObject[] NavBakes { get => navBakes; set => navBakes = value; }
 
     private void Awake()
     {
@@ -129,17 +134,26 @@ public class GamePlayManager : MonoBehaviour
 
         cameraList = new List<GameObject>();
 
+        foreach (var nav in navBakes)
+        {
+            nav.GetComponent<NavBakeScript>().Initialize();
+        }
+        uiManager = uIObj.GetComponent<UIManager>();
+
         StageInitialize();
 
-        uiManager = uIObj.GetComponent<UIManager>();
-        uiManager.Initialize();
+        //uiManager = uIObj.GetComponent<UIManager>();
+        //uiManager.Initialize();
     }
 
     private void StageInitialize()
     {
         var stage = Instantiate(stagePrefabs[stageNum]);
 
-        //currentStage = stageList[stageNum].GetComponent<Stage>();
+        foreach (var nav in navBakes)
+        {
+            nav.GetComponent<NavBakeScript>().NavReBake();
+        }
 
         currentStage = stage.GetComponent<Stage>();
         currentStage.Initialize();
@@ -157,18 +171,7 @@ public class GamePlayManager : MonoBehaviour
         squallDirArray = currentStage.SquallDirArray;
 
         squallDirection = squallDirArray[0];
-
-        ///
-        //player = currentStage.PlayerObj;
-
-        //player.GetComponent<Playercontrol>().Initialize();
-
-        //members = currentStage.Members;
-
-        //for (int i = 0; i < members.Length; i++)
-        //{
-        //    Debug.Log(members[i].name);
-        //}
+        
 
         cameraController = mainCamera.GetComponent<CameraController>();
         cameraController.Initialize();
@@ -179,7 +182,10 @@ public class GamePlayManager : MonoBehaviour
         cameraList.Add(mapCamera);
         currentCamera = cameraList[0];
         cameraList[1].SetActive(false);
-        
+
+
+        uiManager.Initialize();
+
     }
 
     private void FixedUpdate()
@@ -210,6 +216,7 @@ public class GamePlayManager : MonoBehaviour
             GameOver();
         }
 
+        //NextStage();
         RetryScene();
 
 
@@ -278,7 +285,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void NextStage()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             //var stage = Instantiate(stagePrefabs[stageNum]);
             //stage.GetComponent<Stage>().Initialize();
