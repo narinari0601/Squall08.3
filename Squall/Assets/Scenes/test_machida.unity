@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 446295438, guid: 339d1e83957387f4895b879e67928441, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 915171526}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 339d1e83957387f4895b879e67928441, type: 3}
 --- !u!1 &274019957
@@ -412,6 +416,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 164459626}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &652579902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 860777037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &860777037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -487,12 +497,24 @@ PrefabInstance:
       propertyPath: DistanceUI
       value: 
       objectReference: {fileID: 569015017}
+    - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+        type: 3}
+      propertyPath: black
+      value: 
+      objectReference: {fileID: 652579902}
     - target: {fileID: 1887918852, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 6455
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+--- !u!20 &915171526 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1887918852, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 860777037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1030087682 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3831173329885776611, guid: 339d1e83957387f4895b879e67928441,
