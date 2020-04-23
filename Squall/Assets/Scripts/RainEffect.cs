@@ -39,7 +39,7 @@ public class RainEffect : MonoBehaviour
         }
         else if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sign)//予兆のときに音量を上げる
         {
-            if (rainBGM.volume > minvol)
+            if (rainBGM.volume < minvol)
             {
                 rainBGM.volume += addvol;
             }
@@ -50,7 +50,7 @@ public class RainEffect : MonoBehaviour
         }
         else if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sun)//スコールじゃないときに音量を下げる
         {
-            if (rainBGM.volume > minvol)
+            if (rainBGM.volume > 0)
             {
                 rainBGM.volume -= addvol;
             }
