@@ -44,7 +44,7 @@ public class SquallCameraBlind : MonoBehaviour
             cntfull = 21;
         }
 
-        
+
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
@@ -105,7 +105,7 @@ public class SquallCameraBlind : MonoBehaviour
                 if (count <= cntfull)
                 {
                     transforms.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
-                    Debug.Log(this.transform.localScale);
+
                     count++;
                     memberCount2 = memberCount;
                 }
