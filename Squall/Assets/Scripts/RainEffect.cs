@@ -37,13 +37,24 @@ public class RainEffect : MonoBehaviour
                 rainBGM.volume = maxvol;
             }
         }
-        else if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sun || GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sign)//スコールじゃないときに音量を下げる
+        else if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sign)//予兆のときに音量を上げる
+        {
+            if (rainBGM.volume > minvol)
+            {
+                rainBGM.volume += addvol;
+            }
+            else if (rainBGM.volume > minvol)//音量が最小値を上回らないように設定
+            {
+                rainBGM.volume = minvol;
+            }
+        }
+        else if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sun)//スコールじゃないときに音量を下げる
         {
             if (rainBGM.volume > minvol)
             {
                 rainBGM.volume -= addvol;
             }
-            else if (rainBGM.volume < minvol)//音量が最小値を下回らないように設定
+            else if (rainBGM.volume < 0)//音量が0を下回らないように設定
             {
                 rainBGM.volume = minvol;
             }
@@ -51,7 +62,7 @@ public class RainEffect : MonoBehaviour
         #endregion
 
         #region 風向き
-        if(GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Up)//風向きが上の時
+        if (GamePlayManager.instance.SquallDirection == GamePlayManager.SquallDirections.Up)//風向きが上の時
         {
             target = Quaternion.Euler(90, 0, 0);
             now_rot = transform.rotation;
@@ -109,7 +120,11 @@ public class RainEffect : MonoBehaviour
         {
             spriteRenderer.color = new Color(1, 1, 1, 1);
         }
-        else
+        else if(GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sign)
+        {
+            spriteRenderer.color = new Color(1, 1, 1, 0.3f);
+        }
+        else if(GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Sun)
         {
             spriteRenderer.color = new Color(1, 1, 1, 0);
         }
