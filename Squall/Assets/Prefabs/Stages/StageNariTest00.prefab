@@ -1894,10 +1894,13 @@ MonoBehaviour:
   - {fileID: 1749090297872150660}
   enemies:
   - {fileID: 5642399611789905085}
+  baseCamp: {fileID: 2041033036}
   mapCamera: {fileID: 934557806}
   weatherRotateTime: 100
   windPower: 0.05
   squallDirArray: 02000000000000000100000003000000
+  threeStarsScore: 6000
+  twoStarsScore: 4000
 --- !u!1 &4816494705284986541
 GameObject:
   m_ObjectHideFlags: 0
