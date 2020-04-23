@@ -7,6 +7,7 @@ public class throwmash : MonoBehaviour
     Vector3 wind;
     float windpower;
     Vector3 move;
+    float deletetime;
     float time;
     // Start is called before the first frame update
     void Start()
@@ -15,19 +16,21 @@ public class throwmash : MonoBehaviour
         wind = Vector3.zero;
         SetMove(GamePlayManager.instance.Player.GetComponent<Playercontrol>().GetDirec());
         time = 1;
-
+        deletetime = 300;
     }
     void Initialize()
     {
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
         wind = Vector3.zero;
         time = 1;
+        deletetime = 300;
     }
     // Update is called once per frame
     void Update()
     {
         Wind();
         Move();
+        DeleteTimer();
     }
     public void SetMove(Vector3 velocity)
     {
@@ -63,6 +66,14 @@ public class throwmash : MonoBehaviour
             wind = new Vector3(windpower * time, 0, 0);
         }
         transform.position += wind;
+    }
+    void DeleteTimer()
+    {
+        deletetime--;
+        if (deletetime <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
