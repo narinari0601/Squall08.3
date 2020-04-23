@@ -5,32 +5,48 @@ using UnityEngine.UI;
 
 public class BasedirectionUI : MonoBehaviour
 {
-    public GameObject baseCamp;//拠点
+    private GameObject baseCamp;//拠点
     public GameObject baseUI;//拠点ＵＩ
     public GameObject DistanceUI;//距離表示用テキストＵＩ
     GameObject player;//プレイヤー
     Text text;//表示する文字
     int distance;//拠点とＵＩの距離
-    public Camera camera;
+    public Camera m_camera;
+
+    public GameObject BaseCamp { get => baseCamp;}
 
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void Initialize()
+    {
         text = DistanceUI.GetComponent<Text>();
+
+        if (baseCamp == null)
+        {
+            baseCamp = GameObject.FindWithTag("BaseCamp");
+        }
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (baseCamp == null)
-        {
-            baseCamp = GameObject.FindWithTag("BaseCamp");
-        }
-        if(player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
-        baseUI.transform.position = camera.WorldToScreenPoint(baseCamp.transform.position);
+        //if (baseCamp == null)
+        //{
+        //    baseCamp = GameObject.FindWithTag("BaseCamp");
+        //}
+        //if(player == null)
+        //{
+        //    player = GameObject.FindGameObjectWithTag("Player");
+        //}
+        baseUI.transform.position = m_camera.WorldToScreenPoint(baseCamp.transform.position);
         if(baseUI.transform.position.x < 60)
         {
             baseUI.transform.position = new Vector3(60,baseUI.transform.position.y,baseUI.transform.position.z);
@@ -49,7 +65,7 @@ public class BasedirectionUI : MonoBehaviour
         }
 
         //拠点とＵＩの距離を求め,表示する
-        distance = (int)Vector3.Distance(camera.WorldToScreenPoint(player.transform.position), camera.WorldToScreenPoint(baseCamp.transform.position))/10;
+        distance = (int)Vector3.Distance(m_camera.WorldToScreenPoint(player.transform.position), m_camera.WorldToScreenPoint(baseCamp.transform.position))/10;
         text.text = (distance-5).ToString() + "m";
 
         if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
