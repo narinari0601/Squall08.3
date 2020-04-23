@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class RippleUI : MonoBehaviour
 {
-    [SerializeField, Header("Imageオブジェクト")]
-    private GameObject sprite = null;
-
     [SerializeField,Header("Imageオブジェクト達")]
     private GameObject[] sprites = new GameObject[0];
     

@@ -102,6 +102,7 @@ public class GamePlayManager : MonoBehaviour
     public GameObject Player { get => player; set => player = value; }
     public Stage CurrentStage { get => currentStage; set => currentStage = value; }
     public GamePlayStates GameState { get => gameState; set => gameState = value; }
+    public UIManager UIManager { get => uiManager; set => uiManager = value; }
 
     private void Awake()
     {
@@ -130,7 +131,6 @@ public class GamePlayManager : MonoBehaviour
 
         uiManager = uIObj.GetComponent<UIManager>();
         uiManager.Initialize();
-
     }
 
     private void StageInitialize()
