@@ -21,18 +21,39 @@ public class BaseCamp : MonoBehaviour
        
     }
 
-    public void MapDisplay()
+    public void TouchBaseCamp()
     {
-        foreach (var member in GamePlayManager.instance.CurrentStage.MemberControllers)
-        {
-            member.MemberHubCheck();
-        }
+        //GamePlayManager.instance.CurrentStage.ScoreUp();
 
-        GamePlayManager.instance.StageEndCheack();
+        //foreach (var member in GamePlayManager.instance.CurrentStage.MemberControllers)
+        //{
+        //    member.MemberHubCheck();
+        //}
 
-        if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
+        //GamePlayManager.instance.StageEndCheack();
+
+        //if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
+        //{
+        //    GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
+        //}
+
+        var currentStage = GamePlayManager.instance.CurrentStage;
+
+        if (currentStage.PlayerController.MemberList.memberList.Count < 2)
         {
             GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
+        }
+
+        else
+        {
+            GamePlayManager.instance.CurrentStage.ScoreUp();
+
+            foreach (var member in GamePlayManager.instance.CurrentStage.MemberControllers)
+            {
+                member.MemberHubCheck();
+            }
+
+            GamePlayManager.instance.StageEndCheack();
         }
     }
 
@@ -47,7 +68,7 @@ public class BaseCamp : MonoBehaviour
 
         if (obj.tag == "Player")
         {
-            MapDisplay();
+            TouchBaseCamp();
         }
     }
 }

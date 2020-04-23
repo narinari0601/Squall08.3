@@ -23,7 +23,10 @@ public class Playercontrol : MonoBehaviour
 
     //ナリが追加
     private bool isJump;  //ジャンプ中ならtrue
+    private MemberList memberList;
     public bool IsJump { get => isJump; set => isJump = value; }
+    public MemberList MemberList { get => memberList; set => memberList = value; }
+
     //
 
     enum Direc
@@ -43,6 +46,7 @@ public class Playercontrol : MonoBehaviour
         throwmash = (GameObject)Resources.Load("throwmash");
         bursteffect = (GameObject)Resources.Load("Effects/Burst");
         isJump = false;
+        memberList = GetComponent<MemberList>();
     }
     public void Initialize()
     {
@@ -57,6 +61,7 @@ public class Playercontrol : MonoBehaviour
 
         throwmash = (GameObject)Resources.Load("throwmash");
         isJump = false;
+        memberList = GetComponent<MemberList>();
     }
     // Update is called once per frame
     void Update()

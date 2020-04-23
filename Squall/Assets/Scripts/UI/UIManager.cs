@@ -10,9 +10,19 @@ public class UIManager : MonoBehaviour
 
     private GameOverUI gameOverUI;
 
+    private ScoreUpUI scoreUpUI;
+
+    private BasedirectionUI basedirectionUI;
+
+    private GameClearUI gameClearUI;
+
     public WindDirectUI WindDirectUI { get => windDirectUI;}
-    public MemberAliveUI MemberAliveUI { get => memberAliveUI; set => memberAliveUI = value; }
+    public MemberAliveUI MemberAliveUI { get => memberAliveUI; }
     public GameOverUI GameOverUI { get => gameOverUI; }
+    public ScoreUpUI ScoreUpUI { get => scoreUpUI;}
+    public BasedirectionUI BasedirectionUI { get => basedirectionUI;}
+    public GameClearUI GameClearUI { get => gameClearUI; set => gameClearUI = value; }
+
     void Start()
     {
         
@@ -26,6 +36,12 @@ public class UIManager : MonoBehaviour
         memberAliveUI.Initialize();
         gameOverUI = GetComponentInChildren<GameOverUI>();
         gameOverUI.Initialize();
+        scoreUpUI = GetComponentInChildren<ScoreUpUI>();
+        scoreUpUI.Initialize();
+        basedirectionUI = GetComponentInChildren<BasedirectionUI>();
+        basedirectionUI.Initialize();
+        gameClearUI = GetComponentInChildren<GameClearUI>();
+        gameClearUI.Initialize();
     }
 
     
@@ -38,5 +54,7 @@ public class UIManager : MonoBehaviour
     {
         windDirectUI.SetActive(false);
         memberAliveUI.SetActive(false);
+        scoreUpUI.SetActive(false);
+        gameClearUI.SetActive(false);
     }
 }

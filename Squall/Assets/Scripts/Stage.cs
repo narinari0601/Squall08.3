@@ -9,6 +9,8 @@ public class Stage : MonoBehaviour
     [SerializeField, Header("プレイヤー")]
     private GameObject playerObj = null;
 
+    private Playercontrol playerController;
+
     private Vector3 playerInitPos;
 
     [SerializeField, Header("仲間たち")]
@@ -38,9 +40,22 @@ public class Stage : MonoBehaviour
     private SquallDirections[] squallDirArray = new SquallDirections[0];
 
 
+    //波紋用タイマー
     private const float RIPPLE_TIME = 6.0f;
-
     private float currentTimer;
+
+
+    //スコア
+    private float currentScore;
+
+    [SerializeField,Header("星3つスコア")]
+    private int threeStarsScore = 6000;
+
+    [SerializeField,Header("星2つスコア")]
+    private int twoStarsScore = 4000;
+
+    //[SerializeField,Header("星1つスコア")]
+    //private int oneStarScore = 3000;
 
 
     public GameObject PlayerObj { get => playerObj; set => playerObj = value; }
@@ -50,6 +65,11 @@ public class Stage : MonoBehaviour
     public float WindPower { get => windPower; set => windPower = value; }
     public GameObject MapCamera { get => mapCamera; set => mapCamera = value; }
     public MemberControl[] MemberControllers { get => memberControllers; set => memberControllers = value; }
+    public Playercontrol PlayerController { get => playerController; set => playerController = value; }
+    public float CurrentScore { get => currentScore; set => currentScore = value; }
+    public int ThreeStarsScore { get => threeStarsScore;}
+    public int TwoStarsScore { get => twoStarsScore;}
+    //public int OneStarScore { get => oneStarScore; }
 
     void Start()
     {
@@ -66,6 +86,7 @@ public class Stage : MonoBehaviour
     {
         playerObj.GetComponent<Playercontrol>().Initialize();
         GamePlayManager.instance.Player = playerObj;
+        playerController = playerObj.GetComponent<Playercontrol>();
 
         playerInitPos = playerObj.transform.position;
 
@@ -98,6 +119,8 @@ public class Stage : MonoBehaviour
         }
 
         currentTimer = 0.0f;
+
+        currentScore = 0;
 
     }
 
@@ -164,6 +187,35 @@ public class Stage : MonoBehaviour
                 currentTimer = 0;
             }
         }
+    }
+
+    public void ScoreUp()
+    {
+        var memberList = playerController.MemberList.memberList;
+        int scoreMemberCount = 0;
+        float plusScore = 0;
+
+        foreach (var member in memberList)
+        {
+            if (member.GetComponent<MemberControl>())
+            {
+                var memberController = member.GetComponent<MemberControl>();
+
+                if (memberController.GetMemberState == MemberControl.MemberStates.isAlive)
+                {
+                    scoreMemberCount++;
+                }
+            }
+        }
+
+        if (scoreMemberCount == 0)
+            return;
+
+        plusScore = (float)(1000 * scoreMemberCount * (1 + 0.5 * (scoreMemberCount - 1)));
+
+        GamePlayManager.instance.UIManager.ScoreUpUI.ScoreUp(plusScore);
+
+        currentScore += plusScore;
     }
 
     public int GetMemberAliveValue()

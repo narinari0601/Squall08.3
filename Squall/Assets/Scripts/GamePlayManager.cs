@@ -42,6 +42,8 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField, Header("メインカメラ")]
     private GameObject mainCamera = null;
 
+    private CameraController cameraController;
+
     private GameObject currentCamera;
 
     private List<GameObject> cameraList;
@@ -102,6 +104,7 @@ public class GamePlayManager : MonoBehaviour
     public GameObject Player { get => player; set => player = value; }
     public Stage CurrentStage { get => currentStage; set => currentStage = value; }
     public GamePlayStates GameState { get => gameState; set => gameState = value; }
+    public UIManager UIManager { get => uiManager; set => uiManager = value; }
 
     private void Awake()
     {
@@ -130,7 +133,6 @@ public class GamePlayManager : MonoBehaviour
 
         uiManager = uIObj.GetComponent<UIManager>();
         uiManager.Initialize();
-
     }
 
     private void StageInitialize()
@@ -168,10 +170,11 @@ public class GamePlayManager : MonoBehaviour
         //    Debug.Log(members[i].name);
         //}
 
-        mainCamera.GetComponent<CameraController>().Initialize();
+        cameraController = mainCamera.GetComponent<CameraController>();
+        cameraController.Initialize();
 
         cameraList.Clear();
-        cameraList.Add(mainCamera.GetComponent<CameraController>().Camera);
+        cameraList.Add(cameraController.Camera);
         var mapCamera = currentStage.MapCamera;
         cameraList.Add(mapCamera);
         currentCamera = cameraList[0];
@@ -347,7 +350,14 @@ public class GamePlayManager : MonoBehaviour
 
     public void GameClear()
     {
-        Debug.Log("クリア");
+        cameraController.Black.SetActive(false);
+
+        var gameClearUI = uiManager.GameClearUI;
+        gameClearUI.SetActive(true);
+        gameClearUI.ScoreUp();
+        gameClearUI.RankJudgment();
+        gameClearUI.CursolMove();
+        gameClearUI.NextScene();
     }
 
     public void GameOver()
