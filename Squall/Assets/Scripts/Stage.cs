@@ -48,6 +48,15 @@ public class Stage : MonoBehaviour
     //スコア
     private float currentScore;
 
+    [SerializeField,Header("星3つスコア")]
+    private int threeStarsScore = 6000;
+
+    [SerializeField,Header("星2つスコア")]
+    private int twoStarsScore = 4000;
+
+    //[SerializeField,Header("星1つスコア")]
+    //private int oneStarScore = 3000;
+
 
     public GameObject PlayerObj { get => playerObj; set => playerObj = value; }
     public GameObject[] Members { get => members; set => members = value; }
@@ -57,6 +66,10 @@ public class Stage : MonoBehaviour
     public GameObject MapCamera { get => mapCamera; set => mapCamera = value; }
     public MemberControl[] MemberControllers { get => memberControllers; set => memberControllers = value; }
     public Playercontrol PlayerController { get => playerController; set => playerController = value; }
+    public float CurrentScore { get => currentScore; set => currentScore = value; }
+    public int ThreeStarsScore { get => threeStarsScore;}
+    public int TwoStarsScore { get => twoStarsScore;}
+    //public int OneStarScore { get => oneStarScore; }
 
     void Start()
     {
