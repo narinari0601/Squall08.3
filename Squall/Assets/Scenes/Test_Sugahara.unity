@@ -14642,7 +14642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &394451917
 Transform:
   m_ObjectHideFlags: 0
@@ -14681,6 +14681,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   enemies: []
+  baseCamp: {fileID: 0}
   mapCamera: {fileID: 1722008107}
   weatherRotateTime: 20
   windPower: 0.05
@@ -22609,6 +22610,9 @@ MonoBehaviour:
   squallRatio: 5
   stagePrefabs:
   - {fileID: 4844275414684906838, guid: ff6cc9b781714a043aabe7dce4ab0985, type: 3}
+  navBakes:
+  - {fileID: 679806471}
+  - {fileID: 1402110360}
   uIObj: {fileID: 455057751}
 --- !u!4 &588807859
 Transform:
@@ -25291,6 +25295,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677905444}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &679806471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6886402225974262738, guid: b30397c37ec0ec440a0d697d9756deef,
+    type: 3}
+  m_PrefabInstance: {fileID: 6886402225104058829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &682437213
 GameObject:
   m_ObjectHideFlags: 0
@@ -49937,6 +49947,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1402110360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6886402225818673143, guid: b30397c37ec0ec440a0d697d9756deef,
+    type: 3}
+  m_PrefabInstance: {fileID: 6886402225104058829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1403048930
 GameObject:
   m_ObjectHideFlags: 0
