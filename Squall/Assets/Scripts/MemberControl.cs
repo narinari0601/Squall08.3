@@ -195,9 +195,9 @@ public class MemberControl : MonoBehaviour
     {
         if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
         {
-            memberHp -= Time.deltaTime * 4;
+            memberHp -= Time.deltaTime * 4;//毎秒減る量
             memberHp = System.Math.Max(memberHp, MIN);//最小値を超えたら戻す
-            member.speed = 6;//Playerを追いかけるスピードを変更
+            member.speed = 8;//Playerを追いかけるスピードを変更
         }
         else 
         {
@@ -205,11 +205,11 @@ public class MemberControl : MonoBehaviour
             memberHp = System.Math.Min(memberHp, memberHpMax);//最大値を超えたら戻す
             if(GetMemberCheck == MemberCheck.isLoitering)
             {
-                member.speed = 3;
+                member.speed = 3;//通常時捕まえていないときのスピード
             }
             else if(GetMemberCheck == MemberCheck.isCapture)
             {
-                member.speed = 7;
+                member.speed = 6;//通常時捕まえてる時のスピード
             }
             
         }           

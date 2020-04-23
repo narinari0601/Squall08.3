@@ -20,6 +20,7 @@ public class Obstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         sunmaterial = (Material)Resources.Load("Materials/blue");
         rainmaterial = (Material)Resources.Load("Materials/red");
         damagematerial = (Material)Resources.Load("Materials/damage");
@@ -34,9 +35,11 @@ public class Obstacle : MonoBehaviour
         if (damagetime > 0)
         {
             damagetime--;
+            gameObject.layer = 12;
         }
         else
         {
+            gameObject.layer = 0;
             if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
             {
                 if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != rain)

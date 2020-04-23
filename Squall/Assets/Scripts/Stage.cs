@@ -27,6 +27,9 @@ public class Stage : MonoBehaviour
     [SerializeField, Header("敵たち")]
     private GameObject[] enemies = new GameObject[0];
 
+    [SerializeField,Header("拠点")]
+    private GameObject baseCamp = null;
+
     [SerializeField, Header("全体マップのカメラ")]
     private GameObject mapCamera = null;
 
@@ -60,6 +63,7 @@ public class Stage : MonoBehaviour
 
     public GameObject PlayerObj { get => playerObj; set => playerObj = value; }
     public GameObject[] Members { get => members; set => members = value; }
+    public GameObject BaseCamp { get => baseCamp; set => baseCamp = value; }
     public float WeatherRotateTime { get => weatherRotateTime; set => weatherRotateTime = value; }
     public SquallDirections[] SquallDirArray { get => squallDirArray; set => squallDirArray = value; }
     public float WindPower { get => windPower; set => windPower = value; }
@@ -69,6 +73,8 @@ public class Stage : MonoBehaviour
     public float CurrentScore { get => currentScore; set => currentScore = value; }
     public int ThreeStarsScore { get => threeStarsScore;}
     public int TwoStarsScore { get => twoStarsScore;}
+    
+
     //public int OneStarScore { get => oneStarScore; }
 
     void Start()

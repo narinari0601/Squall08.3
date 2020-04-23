@@ -25,14 +25,17 @@ public class BasedirectionUI : MonoBehaviour
     {
         text = DistanceUI.GetComponent<Text>();
 
-        if (baseCamp == null)
-        {
-            baseCamp = GameObject.FindWithTag("BaseCamp");
-        }
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
+        //if (baseCamp == null)
+        //{
+        //    baseCamp = GameObject.FindWithTag("BaseCamp");
+        //}
+        //if (player == null)
+        //{
+        //    player = GameObject.FindGameObjectWithTag("Player");
+        //}
+
+        baseCamp = GamePlayManager.instance.CurrentStage.BaseCamp;
+        player = GamePlayManager.instance.CurrentStage.PlayerObj;
     }
 
     // Update is called once per frame

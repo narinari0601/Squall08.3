@@ -120,14 +120,16 @@ public class SquallCameraBlind : MonoBehaviour
                     transforms.localScale += new Vector3(0.08f, 0.08f, 0);
                     memberCount2 = memberCount;
                     cntfull -= 4;
-                    count = 0;
+                    //count = 0;
+                    //Debug.Log("D");
                 }
                 else if (memberCount < memberCount2)
                 {
                     transforms.localScale -= new Vector3(0.08f, 0.08f, 0);
                     memberCount2 = memberCount;
                     cntfull += 4;
-                    count = 0;
+                    //count = 0;
+                    //Debug.Log("C");
                 }
 
             }
@@ -192,11 +194,13 @@ public class SquallCameraBlind : MonoBehaviour
                 {
                     memberCount2 = memberCount;
                     cntfull -= 4;
+                    //Debug.Log("B");
                 }
                 else if (memberCount < memberCount2)
                 {
                     memberCount2 = memberCount;
                     cntfull += 4;
+                    //Debug.Log("A");
                 }
             }
 
