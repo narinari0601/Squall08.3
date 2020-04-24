@@ -6096,6 +6096,7 @@ MonoBehaviour:
   - {fileID: 477131385468575814}
   - {fileID: 3041459079330455128}
   enemies: []
+  baseCamp: {fileID: 4471453468731056161}
   mapCamera: {fileID: 8290744736581551909}
   weatherRotateTime: 20
   windPower: 0.05

@@ -124,6 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &115407434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6886402225818673143, guid: b30397c37ec0ec440a0d697d9756deef,
+    type: 3}
+  m_PrefabInstance: {fileID: 492640262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &164459626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,6 +317,12 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &356672692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6886402225974262738, guid: b30397c37ec0ec440a0d697d9756deef,
+    type: 3}
+  m_PrefabInstance: {fileID: 492640262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &476023120 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1643177782200063119, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
@@ -568,6 +580,9 @@ MonoBehaviour:
   squallRatio: 5
   stagePrefabs:
   - {fileID: 5811891556689328434, guid: b2fdd71c8837ce24880b0d743b91c500, type: 3}
+  navBakes:
+  - {fileID: 356672692}
+  - {fileID: 115407434}
   uIObj: {fileID: 282771961}
 --- !u!4 &1687244020
 Transform:

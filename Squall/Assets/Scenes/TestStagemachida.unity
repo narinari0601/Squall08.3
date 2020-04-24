@@ -272,6 +272,18 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b30397c37ec0ec440a0d697d9756deef, type: 3}
+--- !u!1 &387341790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6886402225818673143, guid: b30397c37ec0ec440a0d697d9756deef,
+    type: 3}
+  m_PrefabInstance: {fileID: 387341789}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &387341791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6886402225974262738, guid: b30397c37ec0ec440a0d697d9756deef,
+    type: 3}
+  m_PrefabInstance: {fileID: 387341789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &752414739
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +363,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752414739}
   m_CullTransparentMesh: 0
+--- !u!20 &763886519 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1887918852, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 1977614120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &785482117
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +404,9 @@ MonoBehaviour:
   squallRatio: 5
   stagePrefabs:
   - {fileID: 2475283516566480147, guid: c56ff2a03e8970e4da93404e6309d141, type: 3}
+  navBakes:
+  - {fileID: 387341791}
+  - {fileID: 387341790}
   uIObj: {fileID: 2104162921}
 --- !u!4 &785482119
 Transform:
@@ -647,7 +668,7 @@ PrefabInstance:
         type: 3}
       propertyPath: currentDirect
       value: 
-      objectReference: {fileID: 1288586992}
+      objectReference: {fileID: 1371512481}
     - target: {fileID: 3831173329631970181, guid: 339d1e83957387f4895b879e67928441,
         type: 3}
       propertyPath: secondDirect
@@ -667,6 +688,19 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 446295438, guid: 339d1e83957387f4895b879e67928441, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 763886519}
+    - target: {fileID: 1179212371, guid: 339d1e83957387f4895b879e67928441, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831173328648759317, guid: 339d1e83957387f4895b879e67928441,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 339d1e83957387f4895b879e67928441, type: 3}
@@ -749,6 +783,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288586990}
   m_CullTransparentMesh: 0
+--- !u!114 &1371512481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3831173329369354126, guid: 339d1e83957387f4895b879e67928441,
+    type: 3}
+  m_PrefabInstance: {fileID: 1260300802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1393044508 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 468608185582529998, guid: 339d1e83957387f4895b879e67928441,
@@ -1208,6 +1254,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1751860366 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 1977614120}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1767810588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1500,17 @@ PrefabInstance:
       propertyPath: DistanceUI
       value: 
       objectReference: {fileID: 1393044508}
-    m_RemovedComponents: []
+    - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+        type: 3}
+      propertyPath: black
+      value: 
+      objectReference: {fileID: 1751860366}
+    - target: {fileID: 1887918852, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2359
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
 --- !u!1 &2104162921 stripped
 GameObject:
