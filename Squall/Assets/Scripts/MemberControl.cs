@@ -201,7 +201,7 @@ public class MemberControl : MonoBehaviour
         }
         else 
         {
-            memberHp += Time.deltaTime * 2;
+            //memberHp += Time.deltaTime * 2;
             memberHp = System.Math.Min(memberHp, memberHpMax);//最大値を超えたら戻す
             if(GetMemberCheck == MemberCheck.isLoitering)
             {
