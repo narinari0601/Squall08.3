@@ -14421,7 +14421,7 @@ MonoBehaviour:
   mapCamera: {fileID: 7033192013994407284}
   weatherRotateTime: 20
   windPower: 0.05
-  squallDirArray: 02000000000000000200000001000000
+  squallDirArray: 03000000000000000200000001000000
   threeStarsScore: 6000
   twoStarsScore: 4000
 --- !u!1 &4844275414812259910
