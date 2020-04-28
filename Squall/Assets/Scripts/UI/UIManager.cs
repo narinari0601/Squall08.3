@@ -16,12 +16,18 @@ public class UIManager : MonoBehaviour
 
     private GameClearUI gameClearUI;
 
+    private OverviewUI overviewUI;
+
+    
+
+
     public WindDirectUI WindDirectUI { get => windDirectUI;}
     public MemberAliveUI MemberAliveUI { get => memberAliveUI; }
     public GameOverUI GameOverUI { get => gameOverUI; }
     public ScoreUpUI ScoreUpUI { get => scoreUpUI;}
     public BasedirectionUI BasedirectionUI { get => basedirectionUI;}
     public GameClearUI GameClearUI { get => gameClearUI; set => gameClearUI = value; }
+    public OverviewUI OverviewUI { get => overviewUI; set => overviewUI = value; }
 
     void Start()
     {
@@ -30,6 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void Initialize()
     {
+
         windDirectUI = GetComponentInChildren<WindDirectUI>();
         windDirectUI.Initialize();
         memberAliveUI = GetComponentInChildren<MemberAliveUI>();
@@ -42,6 +49,8 @@ public class UIManager : MonoBehaviour
         basedirectionUI.Initialize();
         gameClearUI = GetComponentInChildren<GameClearUI>();
         gameClearUI.Initialize();
+        overviewUI= GetComponentInChildren<OverviewUI>();
+        overviewUI.Initialize();
     }
 
     
@@ -50,11 +59,31 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void HiddenPlayUI()
+    public void SetActiveAllPlayUI(bool value)
     {
-        windDirectUI.SetActive(false);
-        memberAliveUI.SetActive(false);
-        scoreUpUI.SetActive(false);
-        gameClearUI.SetActive(false);
+        windDirectUI.SetActive(value);
+        memberAliveUI.SetActive(value);
+        scoreUpUI.SetActive(value);
+        gameClearUI.SetActive(value);
     }
+
+    //public void HiddenPlayUI()
+    //{
+
+    //    windDirectUI.SetActive(false);
+    //    memberAliveUI.SetActive(false);
+    //    scoreUpUI.SetActive(false);
+    //    gameClearUI.SetActive(false);
+        
+    //}
+
+    public void SetActiveAllOverviewUI(bool value)
+    {
+        overviewUI.SetActive(value);
+    }
+
+    //public void HiddenOverviewUI()
+    //{
+    //    overviewUI.SetActive(false);
+    //}
 }

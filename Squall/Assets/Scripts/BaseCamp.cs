@@ -42,6 +42,8 @@ public class BaseCamp : MonoBehaviour
         if (currentStage.PlayerController.MemberList.memberList.Count < 2)
         {
             GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
+            GamePlayManager.instance.UIManager.SetActiveAllOverviewUI(true);
+            GamePlayManager.instance.UIManager.SetActiveAllPlayUI(false);
         }
 
         else

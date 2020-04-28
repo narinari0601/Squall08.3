@@ -160,6 +160,8 @@ public class GamePlayManager : MonoBehaviour
 
         weather = WeatherStates.Sun;
 
+        gameState = GamePlayStates.Map;
+
         currentWeatherTimer = 0;
 
         squallCount = 0;
@@ -186,23 +188,29 @@ public class GamePlayManager : MonoBehaviour
 
         uiManager.Initialize();
 
+        var currentDir = (int)squallDirArray[(squallCount + 0) % squallDirArray.Length];
+        var secondDir = (int)squallDirArray[(squallCount + 1) % squallDirArray.Length];
+        var thirdDir = (int)squallDirArray[(squallCount + 2) % squallDirArray.Length];
+        uiManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
+
     }
 
     private void FixedUpdate()
     {
         ChangeCamera();
-        ChangeWeather();
+        
 
         if (gameState == GamePlayStates.Play)
         {
             StageEndCheack();
             currentStage.Ripple();
+            ChangeWeather();
         }
 
         else if (gameState == GamePlayStates.Map)
         {
-            uiManager.HiddenPlayUI();
-
+            //uiManager.HiddenPlayUI();
+            uiManager.OverviewUI.MapCameraMove();
             MapEnd();
         }
 
@@ -339,9 +347,11 @@ public class GamePlayManager : MonoBehaviour
     {
         if (gameState == GamePlayStates.Map)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 uiManager.MemberAliveUI.SetActive(true);
+                uiManager.OverviewUI.SetActive(false);
+                uiManager.OverviewUI.MapCameraReset();
                 gameState = GamePlayStates.Play;
             }
         }
