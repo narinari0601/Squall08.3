@@ -74,6 +74,12 @@ public class Playercontrol : MonoBehaviour
 
             Move();
         }
+
+        else if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Pause)
+        {
+            WindMove();
+        }
+
         //Shout();
        
     }
