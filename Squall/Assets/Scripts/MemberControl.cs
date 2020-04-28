@@ -7,11 +7,24 @@ using UnityEngine.UI;
 public class MemberControl : MonoBehaviour
 {
     public NavMeshAgent member;
+    //public float navSpeed;//navの動くスピード
+    public float navStop;//どれだけ離れて止まるか
     public Transform[] points;
     private int destPoint = 0;
+    [SerializeField, Header("仲間のHP")]
     public float memberHp;//仲間のhp
+
+    [SerializeField, Header("仲間が最初から受けるダメージ")]
+    public float memberStartDamageHp = 0;//仲間が最初から受けるダメージ
+
+    [SerializeField, Header("敵に当たった時のダメージ")]
+    public float damageToMember = 0;//仲間が敵二当たった時のダメージ
+
+    [SerializeField, Header("仲間を捕まえた時の回復量 0なら最大値まで回復")]
+    public float recovery = 0;//仲間が最初から受けるダメージ
+
     const float MIN = 0;
-    const float MAX =200;
+    //const float MAX =200;
     private float memberHpMax;//最大hp
     //プレイヤーを追うための
     private Vector3 def;
@@ -19,10 +32,10 @@ public class MemberControl : MonoBehaviour
     MemberList script;
     Playercontrol playerScript;
 
-    //public float navSpeed;//navの動くスピード
-    public float navStop;//どれだけ離れて止まるか
+   
     //仲間の光
     private GameObject memberLingt;
+    [SerializeField, Header("仲間の光のスケール")]
     public Vector3 lightScale;
     public Slider slider;
     private float invincibleTime = 0;
@@ -69,6 +82,7 @@ public class MemberControl : MonoBehaviour
     public void Initialize()
     {
         memberHpMax = memberHp;//最大値の固定
+        memberHp -= memberStartDamageHp;
         //player = GameObject.Find("Player");
         player = GamePlayManager.instance.CurrentStage.PlayerObj;
         //memberLingt = this.gameObject.transform.Find("MemberLight");
@@ -100,6 +114,10 @@ public class MemberControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {    
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log(Vector2.Angle(new Vector2(player.transform.position.x, player.transform.position.z), new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z)));
+        }
         //Debug.Log(memberHp);
         slider.value = memberHp;
         //Memberの処理分岐
@@ -195,13 +213,18 @@ public class MemberControl : MonoBehaviour
     {
         if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
         {
-            memberHp -= Time.deltaTime * 4;//毎秒減る量
+            if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play 
+                || GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Pause)//ポーズとプレイ中のみダメージを受けるを受ける
+            {
+                memberHp -= Time.deltaTime * 4;//毎秒減る量
+            }
+            
             memberHp = System.Math.Max(memberHp, MIN);//最小値を超えたら戻す
             member.speed = 8;//Playerを追いかけるスピードを変更
         }
         else 
         {
-            //memberHp += Time.deltaTime * 2;
+            //memberHp += Time.deltaTime * 2;//
             memberHp = System.Math.Min(memberHp, memberHpMax);//最大値を超えたら戻す
             if(GetMemberCheck == MemberCheck.isLoitering)
             {
@@ -209,9 +232,8 @@ public class MemberControl : MonoBehaviour
             }
             else if(GetMemberCheck == MemberCheck.isCapture)
             {
-                member.speed = 6;//通常時捕まえてる時のスピード
-            }
-            
+                member.speed = 7;//通常時捕まえてる時のスピード
+            }   
         }           
     }
 
@@ -231,7 +253,7 @@ public class MemberControl : MonoBehaviour
     }
 
     public void MemberHubCheck()//拠点についたか
-    {//今のところはPlayerがマップを見たら、変更するかも...
+    {
         //if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
             if (GetMemberCheck == MemberCheck.isCapture)
@@ -252,14 +274,23 @@ public class MemberControl : MonoBehaviour
             MemberToPlayer();
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
-            memberHp = memberHpMax;//HPを全回復
+            if(recovery == 0)
+            {
+                memberHp = memberHpMax;//HPを全回復
+            }
+            else
+            {
+                memberHp += recovery;
+            }
+            
             member.agentTypeID = 0;//navmeshを変更
         }     
         if(other.gameObject.tag =="Enemy" && GetMemberCheck == MemberCheck.isCapture && invincibleTime <=0 
             && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall )
         {
-            memberHp -= 20;//ダメージ量
+            memberHp -= damageToMember;//ダメージ量
             invincibleTime = 5;//無敵時間(単位-秒)
+            Debug.Log("aaaaaaaa");
         }
     }
     public void Ripple()
