@@ -63,5 +63,7 @@ public class WindDirectUI : MonoBehaviour
         currentDirect.text = directStrings[current];
         secondDirect.text = directStrings[second];
         thirdDirect.text = directStrings[third];
+
+        GamePlayManager.instance.UIManager.OverviewUI.SetWindDirect(currentDirect.text, secondDirect.text, thirdDirect.text);
     }
 }
