@@ -36,6 +36,7 @@ public class OverviewUI : MonoBehaviour
     {
         mapCamera = GamePlayManager.instance.CurrentStage.MapCamera;
         initPos = mapCamera.transform.position;
+        SetActive(true);
     }
 
 
