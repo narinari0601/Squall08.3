@@ -198,20 +198,26 @@ public class GamePlayManager : MonoBehaviour
     private void FixedUpdate()
     {
         ChangeCamera();
-        
+
 
         if (gameState == GamePlayStates.Play)
         {
             StageEndCheack();
             currentStage.Ripple();
             ChangeWeather();
+            PauseStart();
         }
 
         else if (gameState == GamePlayStates.Map)
         {
-            //uiManager.HiddenPlayUI();
             uiManager.OverviewUI.MapCameraMove();
             MapEnd();
+        }
+
+        else if (gameState == GamePlayStates.Pause)
+        {
+            ChangeWeather();
+            uiManager.PauseUI.PauseUpdate();
         }
 
         else if (gameState == GamePlayStates.Clear)
@@ -225,9 +231,13 @@ public class GamePlayManager : MonoBehaviour
         }
 
         //NextStage();
-        RetryScene();
 
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RetryScene();
+        }
+        
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameEnd();
@@ -357,9 +367,19 @@ public class GamePlayManager : MonoBehaviour
         }
     }
 
+    public void PauseStart()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            uiManager.SetActiveAllPlayUI(false);
+            uiManager.PauseUI.SetActive(true);
+            gameState = GamePlayStates.Pause;
+        }
+    }
+
     public void RetryScene()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        //if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

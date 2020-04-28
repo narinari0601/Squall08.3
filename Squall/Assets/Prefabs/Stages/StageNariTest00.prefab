@@ -7615,7 +7615,7 @@ MonoBehaviour:
   - {fileID: 5642399611789905085}
   baseCamp: {fileID: 2041033036}
   mapCamera: {fileID: 934557806}
-  weatherRotateTime: 100
+  weatherRotateTime: 20
   windPower: 0.05
   squallDirArray: 02000000000000000100000003000000
   threeStarsScore: 6000
