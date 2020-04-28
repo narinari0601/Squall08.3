@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BaseCamp : MonoBehaviour
 {
+    
+    private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
+
+    //カメラに表示されているか
+    private bool _isRendered = false;
 
     void Start()
     {
@@ -13,7 +18,16 @@ public class BaseCamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_isRendered)
+        {
+            Debug.Log("カメラに映ってるよ！");
+        }
+        else
+        {
+            Debug.Log("カメラに映ってないよ");
+        }
+
+        _isRendered = false;
     }
 
     public void Initialize()
@@ -42,6 +56,8 @@ public class BaseCamp : MonoBehaviour
         if (currentStage.PlayerController.MemberList.memberList.Count < 2)
         {
             GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
+            GamePlayManager.instance.UIManager.SetActiveAllOverviewUI(true);
+            GamePlayManager.instance.UIManager.SetActiveAllPlayUI(false);
         }
 
         else
@@ -70,5 +86,22 @@ public class BaseCamp : MonoBehaviour
         {
             TouchBaseCamp();
         }
+    }
+
+    //カメラに映ってる間に呼ばれる
+    private void OnWillRenderObject()
+    {
+        //メインカメラに映った時だけ_isRenderedを有効に
+        if (Camera.current.tag == MAIN_CAMERA_TAG_NAME)
+        {
+            _isRendered = true;
+        }
+    }
+
+
+    public bool IsCameraCheck()
+    {
+        Debug.Log("3");
+        return _isRendered;
     }
 }

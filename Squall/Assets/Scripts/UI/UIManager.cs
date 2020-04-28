@@ -16,12 +16,19 @@ public class UIManager : MonoBehaviour
 
     private GameClearUI gameClearUI;
 
+    private OverviewUI overviewUI;
+
+    private PauseUI pauseUI;
+
+
     public WindDirectUI WindDirectUI { get => windDirectUI;}
     public MemberAliveUI MemberAliveUI { get => memberAliveUI; }
     public GameOverUI GameOverUI { get => gameOverUI; }
     public ScoreUpUI ScoreUpUI { get => scoreUpUI;}
     public BasedirectionUI BasedirectionUI { get => basedirectionUI;}
     public GameClearUI GameClearUI { get => gameClearUI; set => gameClearUI = value; }
+    public OverviewUI OverviewUI { get => overviewUI; set => overviewUI = value; }
+    public PauseUI PauseUI { get => pauseUI; set => pauseUI = value; }
 
     void Start()
     {
@@ -30,6 +37,7 @@ public class UIManager : MonoBehaviour
 
     public void Initialize()
     {
+
         windDirectUI = GetComponentInChildren<WindDirectUI>();
         windDirectUI.Initialize();
         memberAliveUI = GetComponentInChildren<MemberAliveUI>();
@@ -42,6 +50,10 @@ public class UIManager : MonoBehaviour
         basedirectionUI.Initialize();
         gameClearUI = GetComponentInChildren<GameClearUI>();
         gameClearUI.Initialize();
+        overviewUI= GetComponentInChildren<OverviewUI>();
+        overviewUI.Initialize();
+        pauseUI= GetComponentInChildren<PauseUI>();
+        pauseUI.Initialize();
     }
 
     
@@ -50,11 +62,16 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void HiddenPlayUI()
+    public void SetActiveAllPlayUI(bool value)
     {
-        windDirectUI.SetActive(false);
-        memberAliveUI.SetActive(false);
-        scoreUpUI.SetActive(false);
-        gameClearUI.SetActive(false);
+        windDirectUI.SetActive(value);
+        memberAliveUI.SetActive(value);
+        scoreUpUI.SetActive(value);
     }
+
+    public void SetActiveAllOverviewUI(bool value)
+    {
+        overviewUI.SetActive(value);
+    }
+    
 }
