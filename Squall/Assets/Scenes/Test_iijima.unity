@@ -1476,6 +1476,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1643177782200063117, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1550,10 +1554,6 @@ PrefabInstance:
     - target: {fileID: 1887918852, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 2359
-      objectReference: {fileID: 0}
-    - target: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
         type: 3}
@@ -2225,7 +2225,7 @@ MonoBehaviour:
   signRatio: 2
   squallRatio: 5
   stagePrefabs:
-  - {fileID: 4816494704771551257, guid: 279426a5a09281e4a80c2a8ab1a50e62, type: 3}
+  - {fileID: 5811891556689328434, guid: b2fdd71c8837ce24880b0d743b91c500, type: 3}
   - {fileID: 4816494704771551257, guid: 279426a5a09281e4a80c2a8ab1a50e62, type: 3}
   navBakes:
   - {fileID: 344763110}
