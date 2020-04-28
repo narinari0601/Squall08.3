@@ -13,6 +13,7 @@ public class BasedirectionUI : MonoBehaviour
     int distance;//拠点とＵＩの距離
     public Camera m_camera;
 
+    BaseCamp campScript;
     public GameObject BaseCamp { get => baseCamp;}
 
     // Start is called before the first frame update
@@ -36,11 +37,13 @@ public class BasedirectionUI : MonoBehaviour
 
         baseCamp = GamePlayManager.instance.CurrentStage.BaseCamp;
         player = GamePlayManager.instance.CurrentStage.PlayerObj;
+        campScript = baseCamp.GetComponent<BaseCamp>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //BaseUIjA();
         //if (baseCamp == null)
         //{
         //    baseCamp = GameObject.FindWithTag("BaseCamp");
@@ -79,5 +82,24 @@ public class BasedirectionUI : MonoBehaviour
         {
             baseUI.SetActive(true);
         }
+
+        if (campScript.IsCameraCheck()|| GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
+        {
+            Debug.Log("非表示");
+            baseUI.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("表示");
+            baseUI.SetActive(true);
+        }
+    }
+    public void BaseUIjA()
+    {
+        
+       
+
+
+
     }
 }
