@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
 
     private OperationUIScript operationUI;
 
+    private MushroomValueUI mushroomValueUI;
+
 
     public WindDirectUI WindDirectUI { get => windDirectUI;}
     public MemberAliveUI MemberAliveUI { get => memberAliveUI; }
@@ -32,6 +34,7 @@ public class UIManager : MonoBehaviour
     public OverviewUI OverviewUI { get => overviewUI; }
     public PauseUI PauseUI { get => pauseUI;}
     public OperationUIScript OperationUI { get => operationUI;}
+    public MushroomValueUI MushroomValueUI { get => mushroomValueUI; }
 
     void Start()
     {
@@ -58,12 +61,20 @@ public class UIManager : MonoBehaviour
         pauseUI.Initialize();
         operationUI= GetComponentInChildren<OperationUIScript>();
         operationUI.Initialize();
+        mushroomValueUI= GetComponentInChildren<MushroomValueUI>();
+        mushroomValueUI.Initialize();
     }
 
     
     void Update()
     {
         
+    }
+
+    public void UpdatePlayUI()
+    {
+        memberAliveUI.MemberCount();
+        mushroomValueUI.MashValueUpdate();
     }
 
     /// <summary>
@@ -73,6 +84,7 @@ public class UIManager : MonoBehaviour
     {
         memberAliveUI.SetActive(true);
         operationUI.SetActive(true);
+        mushroomValueUI.SetActive(true);
     }
 
     public void PlayUIActiveFalse()
@@ -81,6 +93,7 @@ public class UIManager : MonoBehaviour
         memberAliveUI.SetActive(false);
         scoreUpUI.SetActive(false);
         operationUI.SetActive(false);
+        mushroomValueUI.SetActive(false);
     }
 
     public void OverviewUIAllSetActive(bool value)

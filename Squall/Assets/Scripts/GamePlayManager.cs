@@ -205,6 +205,7 @@ public class GamePlayManager : MonoBehaviour
             currentStage.Ripple();
             ChangeWeather();
             PauseStart();
+            uiManager.UpdatePlayUI();
         }
 
         else if (gameState == GamePlayStates.Map)
@@ -217,6 +218,7 @@ public class GamePlayManager : MonoBehaviour
         {
             ChangeWeather();
             uiManager.PauseUI.PauseUpdate();
+            uiManager.UpdatePlayUI();
         }
 
         else if (gameState == GamePlayStates.Clear)
