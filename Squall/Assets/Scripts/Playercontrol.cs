@@ -26,6 +26,7 @@ public class Playercontrol : MonoBehaviour
     private MemberList memberList;
     public bool IsJump { get => isJump; set => isJump = value; }
     public MemberList MemberList { get => memberList; set => memberList = value; }
+    public int Mashcount { get => mashcount;}
 
     //
 
