@@ -43,6 +43,13 @@ public class BasedirectionUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(baseCamp)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(baseCamp.transform.position - this.transform.position, Vector3.up);
+            lookRotation.x = 0;
+            lookRotation.z = 0;
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, 0.1f);
+        }
         //BaseUIjA();
         //if (baseCamp == null)
         //{

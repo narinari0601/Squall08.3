@@ -22,9 +22,9 @@ public class MemberAliveUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
-        MemberCount();
+        //MemberCount();
     }
 
     public void MemberCount()
