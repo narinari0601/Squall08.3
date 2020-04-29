@@ -152,11 +152,17 @@ public class Stage : MonoBehaviour
         if (deadMember == memberMaxValue)
         {
             GamePlayManager.instance.GameState = GamePlayStates.GameOver;
+            var uiManager = GamePlayManager.instance.UIManager;
+            uiManager.PlayUIActiveFalse();
+            uiManager.PauseUI.SetActive(false);
         }
 
         else if (deadMember + hubMember == memberMaxValue)
         {
             GamePlayManager.instance.GameState = GamePlayStates.Clear;
+            var uiManager = GamePlayManager.instance.UIManager;
+            uiManager.PlayUIActiveFalse();
+            uiManager.PauseUI.SetActive(false);
         }
 
         hubMember = 0;

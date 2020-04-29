@@ -18,14 +18,6 @@ public class BaseCamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isRendered)
-        {
-            Debug.Log("カメラに映ってるよ！");
-        }
-        else
-        {
-            Debug.Log("カメラに映ってないよ");
-        }
 
         _isRendered = false;
     }
@@ -55,9 +47,12 @@ public class BaseCamp : MonoBehaviour
 
         if (currentStage.PlayerController.MemberList.memberList.Count < 2)
         {
+            var uiMaanager = GamePlayManager.instance.UIManager;
+
+            uiMaanager.OverviewUIAllSetActive(true);
+            uiMaanager.PlayUIActiveFalse();
+            uiMaanager.PauseUI.ResetUI();
             GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
-            GamePlayManager.instance.UIManager.SetActiveAllOverviewUI(true);
-            GamePlayManager.instance.UIManager.SetActiveAllPlayUI(false);
         }
 
         else
@@ -101,7 +96,6 @@ public class BaseCamp : MonoBehaviour
 
     public bool IsCameraCheck()
     {
-        Debug.Log("3");
         return _isRendered;
     }
 }
