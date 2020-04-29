@@ -489,7 +489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8497379272960427584
 Transform:
   m_ObjectHideFlags: 0
@@ -740,7 +740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8312f7225b285ec4d8cf7413fd298da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1246945240593574069}
   sprites:
   - {fileID: 1246945240593574069}
   - {fileID: 61452348833212200}
@@ -1012,7 +1011,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 34306da888c95674489ce1d17a038d90, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1379,13 +1378,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   member: {fileID: 8879815386498847806}
+  navStop: 1.75
   points:
   - {fileID: 8879815384633031947}
   - {fileID: 8879815386146325386}
   - {fileID: 8879815386075611262}
   - {fileID: 8879815386103051576}
   memberHp: 200
-  navStop: 1.75
+  memberStartDamageHp: 0
+  damageToMember: 0
+  recovery: 0
   lightScale: {x: 3, y: 3, z: 3}
   slider: {fileID: 5104173190644349010}
 --- !u!54 &3751308973813074872
