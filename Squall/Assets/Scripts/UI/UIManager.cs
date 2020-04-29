@@ -20,15 +20,18 @@ public class UIManager : MonoBehaviour
 
     private PauseUI pauseUI;
 
+    private OperationUIScript operationUI;
+
 
     public WindDirectUI WindDirectUI { get => windDirectUI;}
     public MemberAliveUI MemberAliveUI { get => memberAliveUI; }
     public GameOverUI GameOverUI { get => gameOverUI; }
     public ScoreUpUI ScoreUpUI { get => scoreUpUI;}
     public BasedirectionUI BasedirectionUI { get => basedirectionUI;}
-    public GameClearUI GameClearUI { get => gameClearUI; set => gameClearUI = value; }
-    public OverviewUI OverviewUI { get => overviewUI; set => overviewUI = value; }
-    public PauseUI PauseUI { get => pauseUI; set => pauseUI = value; }
+    public GameClearUI GameClearUI { get => gameClearUI;}
+    public OverviewUI OverviewUI { get => overviewUI; }
+    public PauseUI PauseUI { get => pauseUI;}
+    public OperationUIScript OperationUI { get => operationUI;}
 
     void Start()
     {
@@ -37,7 +40,6 @@ public class UIManager : MonoBehaviour
 
     public void Initialize()
     {
-
         windDirectUI = GetComponentInChildren<WindDirectUI>();
         windDirectUI.Initialize();
         memberAliveUI = GetComponentInChildren<MemberAliveUI>();
@@ -54,6 +56,8 @@ public class UIManager : MonoBehaviour
         overviewUI.Initialize();
         pauseUI= GetComponentInChildren<PauseUI>();
         pauseUI.Initialize();
+        operationUI= GetComponentInChildren<OperationUIScript>();
+        operationUI.Initialize();
     }
 
     
@@ -62,14 +66,24 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void SetActiveAllPlayUI(bool value)
+    /// <summary>
+    /// 「常に」表示しておくPlayUIをアクティブに
+    /// </summary>
+    public void PlayUIActiveTrue()
     {
-        windDirectUI.SetActive(value);
-        memberAliveUI.SetActive(value);
-        scoreUpUI.SetActive(value);
+        memberAliveUI.SetActive(true);
+        operationUI.SetActive(true);
     }
 
-    public void SetActiveAllOverviewUI(bool value)
+    public void PlayUIActiveFalse()
+    {
+        windDirectUI.SetActive(false);
+        memberAliveUI.SetActive(false);
+        scoreUpUI.SetActive(false);
+        operationUI.SetActive(false);
+    }
+
+    public void OverviewUIAllSetActive(bool value)
     {
         overviewUI.SetActive(value);
     }

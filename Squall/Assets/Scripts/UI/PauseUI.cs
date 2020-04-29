@@ -34,6 +34,12 @@ public class PauseUI : MonoBehaviour
         SetActive(false);
     }
 
+    public void ResetUI()
+    {
+        selectNum = 0;
+        SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -120,9 +126,9 @@ public class PauseUI : MonoBehaviour
 
     private void ReturnToGame()
     {
-        Initialize();
+        GamePlayManager.instance.UIManager.PlayUIActiveTrue();
         GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Play;
-        SetActive(false);
+        ResetUI();
     }
 
     private void ResetGame()

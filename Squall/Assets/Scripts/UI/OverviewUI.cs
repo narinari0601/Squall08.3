@@ -69,22 +69,22 @@ public class OverviewUI : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            mapCamera.transform.position += new Vector3(0, 0, -cameraVelocity);
+            mapCamera.transform.position += new Vector3(0, 0, cameraVelocity);
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            mapCamera.transform.position += new Vector3(0, 0, cameraVelocity);
+            mapCamera.transform.position += new Vector3(0, 0, -cameraVelocity);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            mapCamera.transform.position += new Vector3(-cameraVelocity, 0, 0);
+            mapCamera.transform.position += new Vector3(cameraVelocity, 0, 0);
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            mapCamera.transform.position += new Vector3(cameraVelocity, 0, 0);
+            mapCamera.transform.position += new Vector3(-cameraVelocity, 0, 0);
         }
     }
 

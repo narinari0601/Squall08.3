@@ -77,7 +77,9 @@ public class Playercontrol : MonoBehaviour
 
         else if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Pause)
         {
+            TimerManager();
             WindMove();
+            Damagemove();
         }
 
         //Shout();

@@ -195,10 +195,9 @@ public class GamePlayManager : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         ChangeCamera();
-
 
         if (gameState == GamePlayStates.Play)
         {
@@ -359,9 +358,9 @@ public class GamePlayManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                uiManager.MemberAliveUI.SetActive(true);
-                uiManager.OverviewUI.SetActive(false);
+                uiManager.PlayUIActiveTrue();
                 uiManager.OverviewUI.MapCameraReset();
+                uiManager.OverviewUI.SetActive(false);
                 gameState = GamePlayStates.Play;
             }
         }
@@ -371,7 +370,7 @@ public class GamePlayManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            uiManager.SetActiveAllPlayUI(false);
+            uiManager.PlayUIActiveFalse();
             uiManager.PauseUI.SetActive(true);
             gameState = GamePlayStates.Pause;
         }
