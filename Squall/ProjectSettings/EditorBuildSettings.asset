@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/test_machida.unity
+    path: Assets/Scenes/machidascene/testmachida.unity
     guid: 26501f35c72721c4e8e8d4317e4c7e58
   - enabled: 1
     path: Assets/Scenes/TitleScene.unity
@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 9d3d2d809577e524d9b6603c256f91ba
   - enabled: 1
-    path: Assets/Scenes/TestStagemachida.unity
+    path: Assets/Scenes/machidascene/firststage.unity
     guid: abbb40a12871ffd43a11e6cee1691eb8
   m_configObjects: {}
