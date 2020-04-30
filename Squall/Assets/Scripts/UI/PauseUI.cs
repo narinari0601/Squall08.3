@@ -133,7 +133,7 @@ public class PauseUI : MonoBehaviour
 
     private void ResetGame()
     {
-        GamePlayManager.instance.RetryScene();
+        GamePlayManager.instance.StageInitialize();
     }
 
     private void EndGame()
