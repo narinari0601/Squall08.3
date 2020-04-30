@@ -180,7 +180,7 @@ public class GameClearUI : MonoBehaviour
 
             else if (selectNum == 1)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                GamePlayManager.instance.StageInitialize();
             }
 
             else if (selectNum == 2)

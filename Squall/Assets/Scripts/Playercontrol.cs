@@ -254,17 +254,18 @@ public class Playercontrol : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hit"); // ログを表示する
+         // ログを表示する
 
         if (collision.gameObject.tag == "Mash")
         {
             _audio.PlayOneShot(getse);
-            Debug.Log(getse.name);
+           
             mashcount++;
         }
-        else if(collision.gameObject.tag == "TMash")
+        if(collision.gameObject.tag == "TMash")
         {
             _audio.PlayOneShot(getse);
+            Debug.Log("Hit");
             mashcount++;
         }
         //if (collision.gameObject.tag == "Enemy")
