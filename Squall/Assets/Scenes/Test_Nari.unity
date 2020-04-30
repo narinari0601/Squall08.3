@@ -142,15 +142,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 1643177782200063119, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887918852, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 6455
-      objectReference: {fileID: 0}
     - target: {fileID: 1643177782200063117, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -206,16 +197,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
-        type: 3}
-      propertyPath: offset.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
-        type: 3}
-      propertyPath: black
-      value: 
-      objectReference: {fileID: 631000182}
     - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: baseUI
       value: 
@@ -224,33 +205,11 @@ PrefabInstance:
       propertyPath: DistanceUI
       value: 
       objectReference: {fileID: 1871342057}
-    - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887918850, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 15.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1887918849, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
 --- !u!1 &533646589 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1643177782200063119, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 435691278}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &631000182 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
     type: 3}
   m_PrefabInstance: {fileID: 435691278}
   m_PrefabAsset: {fileID: 0}
@@ -616,6 +575,7 @@ MonoBehaviour:
   squallRatio: 5
   stagePrefabs:
   - {fileID: 1575125608694834337, guid: 1c2c9344cdbd42a42b49b5080d4fcc0b, type: 3}
+  - {fileID: 4816494704771551257, guid: 279426a5a09281e4a80c2a8ab1a50e62, type: 3}
   navBakes:
   - {fileID: 290469855}
   - {fileID: 1986402537}

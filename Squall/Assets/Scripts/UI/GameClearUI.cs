@@ -77,6 +77,8 @@ public class GameClearUI : MonoBehaviour
         cursolRect = cursolImage.transform as RectTransform;
 
         cursolDelay = new Vector3(-330, 0, 0);
+
+        SetActive(false);
     }
 
     // Update is called once per frame
@@ -173,7 +175,7 @@ public class GameClearUI : MonoBehaviour
         {
             if (selectNum == 0)
             {
-                //SceneManager.LoadScene("GameScene");
+                GamePlayManager.instance.NextStage();
             }
 
             else if (selectNum == 1)

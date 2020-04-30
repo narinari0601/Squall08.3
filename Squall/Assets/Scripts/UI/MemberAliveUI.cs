@@ -19,6 +19,7 @@ public class MemberAliveUI : MonoBehaviour
     public void Initialize()
     {
         memberAliveUI.text = "あと" +GamePlayManager.instance.CurrentStage.GetMemberAliveValue() + "人";
+        SetActive(false);
     }
 
     // Update is called once per frame
