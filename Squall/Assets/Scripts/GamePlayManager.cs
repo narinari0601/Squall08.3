@@ -304,12 +304,13 @@ public class GamePlayManager : MonoBehaviour
 
     public void NextStage()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //var stage = Instantiate(stagePrefabs[stageNum]);
             //stage.GetComponent<Stage>().Initialize();
             //stageList[stageNum] = stage;
 
+            currentStage.gameObject.SetActive(false);
             Destroy(currentStage.gameObject);
 
             stageNum++;
