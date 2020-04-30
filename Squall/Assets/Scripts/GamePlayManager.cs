@@ -146,8 +146,15 @@ public class GamePlayManager : MonoBehaviour
         //uiManager.Initialize();
     }
 
-    private void StageInitialize()
+    public void StageInitialize()
     {
+        if (currentStage != null)
+        {
+            currentStage.gameObject.SetActive(false);
+            Destroy(currentStage.gameObject);
+            currentStage = null;
+        }
+
         var stage = Instantiate(stagePrefabs[stageNum]);
 
         foreach (var nav in navBakes)
