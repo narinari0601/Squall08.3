@@ -240,6 +240,11 @@ public class GamePlayManager : MonoBehaviour
 
         //NextStage();
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            NextStage();
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             RetryScene();
