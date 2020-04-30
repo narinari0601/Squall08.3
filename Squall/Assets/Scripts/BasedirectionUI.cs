@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class BasedirectionUI : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class BasedirectionUI : MonoBehaviour
     Text text;//表示する文字
     int distance;//拠点とＵＩの距離
     public Camera m_camera;
+
+    //public GameObject campUI;
 
     BaseCamp campScript;
     public GameObject BaseCamp { get => baseCamp;}
@@ -43,13 +46,26 @@ public class BasedirectionUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(baseCamp)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(baseCamp.transform.position - this.transform.position, Vector3.up);
-            lookRotation.x = 0;
-            lookRotation.z = 0;
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, 0.1f);
-        }
+
+        
+        //float speed = 0.1f;
+
+        //Vector3 relativePos = baseCamp.transform.position - baseUI.transform.position;
+        //Quaternion rotation = Quaternion.LookRotation(relativePos);
+        //baseUI.transform.rotation = Quaternion.Slerp(baseUI.transform.rotation, rotation, speed);
+
+        //baseUI.transform.rotation = Quaternion.Euler(90, 0, 0);
+        //if (baseCamp)
+        //{
+        //    //Quaternion lookRotation = Quaternion.LookRotation(baseCamp.transform.position - baseUI.transform.position, Vector3.right);
+        //    //lookRotation.x = 0;
+        //    //lookRotation.y = 0;
+        //    //baseUI.transform.rotation = Quaternion.Lerp(baseUI.transform.rotation, lookRotation, 0.1f);
+        //    Quaternion lookRotation = Quaternion.LookRotation(baseCamp.transform.position - baseUI.transform.position, Vector3.right);
+        //    lookRotation.x = 0;
+        //    lookRotation.y = 0;
+        //    baseUI.transform.rotation = Quaternion.Lerp(baseUI.transform.rotation, lookRotation, 0.3f);
+        //}
         //BaseUIjA();
         //if (baseCamp == null)
         //{
@@ -60,21 +76,21 @@ public class BasedirectionUI : MonoBehaviour
         //    player = GameObject.FindGameObjectWithTag("Player");
         //}
         baseUI.transform.position = m_camera.WorldToScreenPoint(baseCamp.transform.position);
-        if(baseUI.transform.position.x < 60)
+        if(baseUI.transform.position.x < 60)//60
         {
             baseUI.transform.position = new Vector3(60,baseUI.transform.position.y,baseUI.transform.position.z);
         }
-        if (baseUI.transform.position.x > 1220)
+        if (baseUI.transform.position.x > 1180)//220
         {
-            baseUI.transform.position = new Vector3(1220, baseUI.transform.position.y, baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(1180, baseUI.transform.position.y, baseUI.transform.position.z);
         }
-        if (baseUI.transform.position.y < 50)
+        if (baseUI.transform.position.y < 45)//50
         {
-            baseUI.transform.position = new Vector3(baseUI.transform.position.x,50, baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(baseUI.transform.position.x,45, baseUI.transform.position.z);
         }
-        if (baseUI.transform.position.y > 670)
+        if (baseUI.transform.position.y > 630)//70
         {
-            baseUI.transform.position = new Vector3(baseUI.transform.position.x,670, baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(baseUI.transform.position.x,630, baseUI.transform.position.z);
         }
 
         //拠点とＵＩの距離を求め,表示する
@@ -84,29 +100,36 @@ public class BasedirectionUI : MonoBehaviour
         if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
             baseUI.SetActive(false);
+            
         }
         else
         {
             baseUI.SetActive(true);
+          
         }
 
         if (campScript.IsCameraCheck()|| GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
-            Debug.Log("非表示");
+            //Debug.Log("非表示");
             baseUI.SetActive(false);
+            
         }
         else
         {
-            Debug.Log("表示");
+            //Debug.Log("表示");
             baseUI.SetActive(true);
+            
         }
-    }
-    public void BaseUIjA()
-    {
-        
+
+
+        //var diff = (player.transform.position - baseUI.transform.position).normalized;
+
+        //diff.x = 90;
+        //diff.y = 0;
+        //baseUI.transform.rotation = Quaternion.FromToRotation(Vector3.right, diff);
        
 
 
-
     }
+
 }
