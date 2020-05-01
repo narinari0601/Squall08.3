@@ -44,7 +44,7 @@ public class Stage : MonoBehaviour
 
 
     //波紋用タイマー
-    private const float RIPPLE_TIME = 6.0f;
+    private const float RIPPLE_TIME = 4.0f;
     private float currentTimer;
 
 
@@ -124,7 +124,7 @@ public class Stage : MonoBehaviour
             enemy.GetComponent<Obstacle>().Initialize();
         }
 
-        currentTimer = 0.0f;
+        currentTimer = RIPPLE_TIME;
 
         currentScore = 0;
 
