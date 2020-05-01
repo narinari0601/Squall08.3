@@ -1678,7 +1678,7 @@ MonoBehaviour:
   enemies: []
   baseCamp: {fileID: 8501094134977325974}
   mapCamera: {fileID: 5222333320304319226}
-  weatherRotateTime: 15
+  weatherRotateTime: 13
   windPower: 0.05
   squallDirArray: 02000000010000000000000002000000
   threeStarsScore: 6000
@@ -2849,6 +2849,21 @@ PrefabInstance:
       propertyPath: points.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: memberHp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: recovery
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: memberStartDamageHp
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3707,6 +3722,26 @@ PrefabInstance:
       propertyPath: points.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: damageToMember
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: memberHp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: memberStartDamageHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: recovery
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3746,7 +3781,7 @@ PrefabInstance:
     - target: {fileID: 8879815386179262174, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.20734
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8879815386179262174, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
@@ -3827,6 +3862,16 @@ PrefabInstance:
         type: 3}
       propertyPath: points.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: memberStartDamageHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: recovery
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
@@ -4264,6 +4309,16 @@ PrefabInstance:
         type: 3}
       propertyPath: points.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: memberStartDamageHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879815386498847797, guid: f4746aa2685c0514c86a7419e8de5ea9,
+        type: 3}
+      propertyPath: recovery
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4424163213539042251, guid: f4746aa2685c0514c86a7419e8de5ea9,
         type: 3}
