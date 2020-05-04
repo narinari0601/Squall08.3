@@ -45,14 +45,14 @@ public class RiverRight : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var obj = other.gameObject;
+        //var obj = other.gameObject;
 
-        if (obj.tag == "Player")
-        {
-            riverCol.IsLeftHit = false;
-            riverCol.Col.isTrigger = false;
-            obj.GetComponent<Playercontrol>().IsJump = false;
-        }
+        //if (obj.tag == "Player")
+        //{
+        //    riverCol.IsLeftHit = false;
+        //    riverCol.Col.isTrigger = false;
+        //    obj.GetComponent<Playercontrol>().IsJump = false;
+        //}
     }
 
     private void Jump(GameObject obj)
