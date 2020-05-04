@@ -413,7 +413,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void GameOver()
     {
-
+        uiManager.GameOverUI.GameOverUpdate();
     }
     
 
