@@ -34,6 +34,12 @@ public class RiverCol : MonoBehaviour
     //private Transform jumpTarget;
     private Playercontrol pc;
 
+    //private float jumpDistance;  //ジャンプの飛距離
+
+    private float currentJumpDistance;
+
+    //private BoxCollider boxCollider;
+
     public Directions Direction { get => direction; set => direction = value; }
     //public bool IsJump { get => isJump; set => isJump = value; }
     public float ColSizeX { get => colSize; set => colSize = value; }
@@ -81,6 +87,8 @@ public class RiverCol : MonoBehaviour
         isRightHit = false;
         isLeftHit = false;
         jumpDir = GamePlayManager.SquallDirections.Up;
+        
+        currentJumpDistance = 0;
 
     }
     // Update is called once per frame
@@ -91,29 +99,78 @@ public class RiverCol : MonoBehaviour
 
     private void Jump()
     {
-        if (isRightHit && jumpDir == GamePlayManager.SquallDirections.Left)
+        //if (isRightHit && jumpDir == GamePlayManager.SquallDirections.Left)
+        //{
+        //    pc.IsJump = true;
+        //    jumpTarget.transform.position += new Vector3(-0.05f, 0, 0);
+        //}
+
+        //if (isRightHit && jumpDir == GamePlayManager.SquallDirections.Up)
+        //{
+        //    pc.IsJump = true;
+        //    jumpTarget.transform.position += new Vector3(0, 0, 0.05f);
+        //}
+
+        //if (isLeftHit && jumpDir == GamePlayManager.SquallDirections.Right)
+        //{
+        //    pc.IsJump = true;
+        //    jumpTarget.transform.position += new Vector3(0.05f, 0, 0);
+        //}
+
+        //if (isLeftHit && jumpDir == GamePlayManager.SquallDirections.Down)
+        //{
+        //    pc.IsJump = true;
+        //    jumpTarget.transform.position += new Vector3(0, 0, -0.05f);
+        //}
+        
+
+        if (currentJumpDistance >= colSize)
         {
-            pc.IsJump = true;
-            jumpTarget.transform.position += new Vector3(-0.05f, 0, 0);
+            isRightHit = false;
+            isLeftHit = false;
+            col.isTrigger = false;
+            pc.IsJump = false;
+            currentJumpDistance = 0;
         }
 
-        if (isRightHit && jumpDir == GamePlayManager.SquallDirections.Up)
+
+        if (isRightHit)
         {
-            pc.IsJump = true;
-            jumpTarget.transform.position += new Vector3(0, 0, 0.05f);
+            if (jumpDir == GamePlayManager.SquallDirections.Left)
+            {
+                pc.IsJump = true;
+                jumpTarget.transform.position += new Vector3(-0.05f, 0, 0);
+                currentJumpDistance += 0.05f;
+            }
+
+            else if (jumpDir == GamePlayManager.SquallDirections.Up)
+            {
+                pc.IsJump = true;
+                jumpTarget.transform.position += new Vector3(0, 0, 0.05f);
+                currentJumpDistance += 0.05f;
+            }
         }
 
-        if (isLeftHit && jumpDir == GamePlayManager.SquallDirections.Right)
+        else if (isLeftHit)
         {
-            pc.IsJump = true;
-            jumpTarget.transform.position += new Vector3(0.05f, 0, 0);
-        }
+            if (jumpDir == GamePlayManager.SquallDirections.Right)
+            {
+                pc.IsJump = true;
+                jumpTarget.transform.position += new Vector3(0.05f, 0, 0);
+                currentJumpDistance += 0.05f;
+            }
 
-        if (isLeftHit && jumpDir == GamePlayManager.SquallDirections.Down)
-        {
-            pc.IsJump = true;
-            jumpTarget.transform.position += new Vector3(0, 0, -0.05f);
+            else if (jumpDir == GamePlayManager.SquallDirections.Down)
+            {
+                pc.IsJump = true;
+                jumpTarget.transform.position += new Vector3(0, 0, -0.05f);
+                currentJumpDistance += 0.05f;
+            }
+            
         }
+        
+
+        
 
 
     }
