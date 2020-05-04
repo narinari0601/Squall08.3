@@ -574,7 +574,7 @@ MonoBehaviour:
   signRatio: 2
   squallRatio: 5
   stagePrefabs:
-  - {fileID: 1575125608694834337, guid: 1c2c9344cdbd42a42b49b5080d4fcc0b, type: 3}
+  - {fileID: 4816494704771551257, guid: 279426a5a09281e4a80c2a8ab1a50e62, type: 3}
   - {fileID: 6686803657707993013, guid: 506078262db253e46985e0e4a92bd4de, type: 3}
   - {fileID: 7313193218754326367, guid: 9d770bedcf833ed4895978c05349c0e1, type: 3}
   - {fileID: 5096815228066975669, guid: 305bc6abd3983d241a81b045416be45e, type: 3}
