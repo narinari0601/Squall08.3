@@ -220,7 +220,7 @@ PrefabInstance:
     - target: {fileID: 446295438, guid: 339d1e83957387f4895b879e67928441, type: 3}
       propertyPath: m_camera
       value: 
-      objectReference: {fileID: 553320019}
+      objectReference: {fileID: 290960242}
     - target: {fileID: 6784857425675962091, guid: 339d1e83957387f4895b879e67928441,
         type: 3}
       propertyPath: m_CullTransparentMesh
@@ -308,6 +308,12 @@ GameObject:
 --- !u!1 &290960239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1887918849, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 860777037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &290960242 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1887918852, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
     type: 3}
   m_PrefabInstance: {fileID: 860777037}
   m_PrefabAsset: {fileID: 0}
@@ -428,12 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!20 &553320019 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 9665816, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 860777037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &569015017 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 468608185582529998, guid: 339d1e83957387f4895b879e67928441,
