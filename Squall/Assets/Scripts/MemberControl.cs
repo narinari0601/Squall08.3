@@ -114,10 +114,10 @@ public class MemberControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {    
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            Debug.Log(Vector2.Angle(new Vector2(player.transform.position.x, player.transform.position.z), new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z)));
-        }
+        //if(Input.GetKeyDown(KeyCode.A))
+        //{
+        //    Debug.Log(Vector2.Angle(new Vector2(player.transform.position.x, player.transform.position.z), new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z)));
+        //}
         //Debug.Log(memberHp);
         slider.value = memberHp;
         //Memberの処理分岐
