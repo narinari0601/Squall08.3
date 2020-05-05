@@ -1191,6 +1191,10 @@ PrefabInstance:
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 301488447}
+    - target: {fileID: 2004471156, guid: 339d1e83957387f4895b879e67928441, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 24.600098
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 339d1e83957387f4895b879e67928441, type: 3}
 --- !u!1001 &8276519307499833241
