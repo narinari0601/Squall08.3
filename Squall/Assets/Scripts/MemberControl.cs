@@ -38,6 +38,8 @@ public class MemberControl : MonoBehaviour
     [SerializeField, Header("仲間の光のスケール")]
     public Vector3 lightScale;
     public Slider slider;
+    [SerializeField, Header("全体マップ用HPスライダー")]
+    private Slider mapHpSlider = null;
     private float invincibleTime = 0;
     //仲間の速さ
     private Vector3 wind;
@@ -100,6 +102,7 @@ public class MemberControl : MonoBehaviour
         script = player.GetComponent<MemberList>();
         // member.speed += navSpeed;
         slider.maxValue = memberHpMax;
+        mapHpSlider.maxValue = memberHpMax;
         playerScript = GetComponent<Playercontrol>();
         //波紋のやつ
         rippleUI = GetComponentInChildren<RippleUI>();
@@ -120,6 +123,7 @@ public class MemberControl : MonoBehaviour
         //}
         //Debug.Log(memberHp);
         slider.value = memberHp;
+        mapHpSlider.value = memberHp;
         //Memberの処理分岐
         if (GetMemberCheck == MemberCheck.isLoitering)//徘徊しているときの処理書くところ
         {

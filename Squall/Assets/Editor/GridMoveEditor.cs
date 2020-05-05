@@ -2,17 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridMoveEditor : MonoBehaviour
+#if UNITY_EDITOR
+using UnityEditor;
+[CustomEditor(typeof(GridMove))]
+public class BoxEditor : Editor
 {
-    // Start is called before the first frame update
-    void Start()
+    //グリッドの幅
+    public const float GRID = 0.5f;
+
+    void OnSceneGUI()
     {
-        
+        GridMove grid = target as GridMove;
+
+        //グリッドの色
+        //Color color = Color.cyan * 0.7f;
+
+        //グリッドの中心座標
+        //Vector3 orig = Vector3.zero;
+
+
+        //const int num = 10;
+        //const float size = GRID * num;
+
+        //グリッド描画
+        //for (int x = -num; x <= num; x++)
+        //{
+        //    Vector3 pos = orig + Vector3.right * x * GRID;
+        //    Debug.DrawLine(pos + Vector3.up * size, pos + Vector3.down * size, color);
+        //}
+        //for (int y = -num; y <= num; y++)
+        //{
+        //    Vector3 pos = orig + Vector3.up * y * GRID;
+        //    Debug.DrawLine(pos + Vector3.left * size, pos + Vector3.right * size, color);
+        //}
+
+        //グリッドの位置にそろえる
+        Vector3 position = grid.transform.position;
+        position.x = Mathf.Floor(position.x / GRID) * GRID;
+        position.z = Mathf.Floor(position.z / GRID) * GRID;
+        grid.transform.position = position;
+
+        //Sceneビュー更新
+        EditorUtility.SetDirty(target);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //フォーカスが外れたときに実行
+    //void OnDisable()
+    //{
+    //    //Sceneビュー更新
+    //    EditorUtility.SetDirty(target);
+    //}
 }
+#endif //UNITY_EDITOR

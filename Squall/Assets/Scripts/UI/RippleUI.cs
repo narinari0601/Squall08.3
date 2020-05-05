@@ -24,8 +24,8 @@ public class RippleUI : MonoBehaviour
     private const float UP_MAX = 720;
     private const float DOWN_MAX = 0;
     private const float SIZEDELTA_MAX = 256;  //波紋が消える大きさ
-    private const float BORDERLINE01 = 66;    //波紋が3つから2つになる割合
-    private const float BORDERLINE02 = 33;    //波紋が2つから1つになる割合
+    private const float BORDERLINE01 = 100;    //波紋が3つから2つになるHP固定値
+    private const float BORDERLINE02 = 50;    //波紋が2つから1つになるHP固定値
     
     private Vector2 rippleScale01;
     private Vector2 rippleScale02;
@@ -46,7 +46,7 @@ public class RippleUI : MonoBehaviour
     private MemberControl memberControl;
     private float memberMaxHp;
     private float currentMemberHp;
-    private int hpRetio;  //HPの割合
+    //private int hpRetio;  //HPの割合
 
 
     // Start is called before the first frame update
@@ -100,7 +100,7 @@ public class RippleUI : MonoBehaviour
             memberControl = transform.parent.gameObject.GetComponent<MemberControl>();
             memberMaxHp = memberControl.GetMaxMemberHp();
             currentMemberHp = memberControl.GetMemberHp();
-            hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
+            //hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
         }
 
     }
@@ -111,7 +111,7 @@ public class RippleUI : MonoBehaviour
         if (isMember)
         {
             currentMemberHp = memberControl.GetMemberHp();
-            hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
+            //hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
         }
         
         Shout();
@@ -172,7 +172,7 @@ public class RippleUI : MonoBehaviour
             if (isMember &&
                 !isActive02 &&
                 rippleScale01.x > 96 &&
-                hpRetio > BORDERLINE01)
+                currentMemberHp > BORDERLINE01)
             {
                 isActive02 = true;
             }
@@ -197,7 +197,7 @@ public class RippleUI : MonoBehaviour
             if (isMember &&
                 !isActive03 &&
                 rippleScale02.x > 96 &&
-                hpRetio > BORDERLINE02)
+                currentMemberHp > BORDERLINE02)
             {
                 isActive03 = true;
             }
