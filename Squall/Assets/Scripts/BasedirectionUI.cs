@@ -13,6 +13,7 @@ public class BasedirectionUI : MonoBehaviour
     Text text;//表示する文字
     int distance;//拠点とＵＩの距離
     public Camera m_camera;
+    private bool flag;
 
     //public GameObject campUI;
 
@@ -29,6 +30,7 @@ public class BasedirectionUI : MonoBehaviour
     {
         text = DistanceUI.GetComponent<Text>();
 
+        baseUI.SetActive(false);
         //if (baseCamp == null)
         //{
         //    baseCamp = GameObject.FindWithTag("BaseCamp");
@@ -46,8 +48,8 @@ public class BasedirectionUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
+        flag = campScript.IsCameraCheck();
+        Debug.Log("UI" + flag);
         //float speed = 0.1f;
 
         //Vector3 relativePos = baseCamp.transform.position - baseUI.transform.position;
@@ -97,26 +99,26 @@ public class BasedirectionUI : MonoBehaviour
         distance = (int)Vector3.Distance(m_camera.WorldToScreenPoint(player.transform.position), m_camera.WorldToScreenPoint(baseCamp.transform.position))/10;
         text.text = (distance-5).ToString() + "m";
 
-        if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
-        {
-            baseUI.SetActive(false);
+        //if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
+        //{
+        //    baseUI.SetActive(false);
             
-        }
-        else
-        {
-            baseUI.SetActive(true);
+        //}
+        //else
+        //{
+        //    baseUI.SetActive(true);
           
-        }
+        //}
 
-        if (campScript.IsCameraCheck()|| GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
+        if (flag == true || GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)//campScript.IsCameraCheck()
         {
-            //Debug.Log("非表示");
+            Debug.Log("非表示");
             baseUI.SetActive(false);
             
         }
         else
         {
-            //Debug.Log("表示");
+            Debug.Log("表示");
             baseUI.SetActive(true);
             
         }
