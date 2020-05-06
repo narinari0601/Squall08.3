@@ -30,9 +30,6 @@ public class Stage : MonoBehaviour
     [SerializeField,Header("拠点")]
     private GameObject baseCamp = null;
 
-    [SerializeField, Header("全体マップのカメラ")]
-    private GameObject mapCamera = null;
-
     [SerializeField, Header("天気が1周する時間")]
     private float weatherRotateTime = 0;
 
@@ -67,7 +64,6 @@ public class Stage : MonoBehaviour
     public float WeatherRotateTime { get => weatherRotateTime; set => weatherRotateTime = value; }
     public SquallDirections[] SquallDirArray { get => squallDirArray; set => squallDirArray = value; }
     public float WindPower { get => windPower; set => windPower = value; }
-    public GameObject MapCamera { get => mapCamera; set => mapCamera = value; }
     public MemberControl[] MemberControllers { get => memberControllers; set => memberControllers = value; }
     public Playercontrol PlayerController { get => playerController; set => playerController = value; }
     public float CurrentScore { get => currentScore; set => currentScore = value; }

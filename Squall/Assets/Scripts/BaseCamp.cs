@@ -87,7 +87,13 @@ public class BaseCamp : MonoBehaviour
     private void OnWillRenderObject()
     {
         //メインカメラに映った時だけ_isRenderedを有効に
-        if (Camera.current.tag == MAIN_CAMERA_TAG_NAME)
+        //if (Camera.current.tag == MAIN_CAMERA_TAG_NAME)
+        //{
+
+        //    _isRendered = true;
+        //}
+
+        if (Camera.current.name == "MainCamera")
         {
             _isRendered = true;
         }
@@ -96,7 +102,7 @@ public class BaseCamp : MonoBehaviour
 
     public bool IsCameraCheck()
     {
-        Debug.Log("拠点" + _isRendered);
+        
         return _isRendered;
         
     }

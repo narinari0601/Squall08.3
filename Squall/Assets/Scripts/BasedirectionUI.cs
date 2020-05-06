@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class BasedirectionUI : MonoBehaviour
 {
+    [SerializeField, Header("大元のパネル")]
+    private GameObject basePanel = null;
+
     private GameObject baseCamp;//拠点
-    public GameObject baseUI;//拠点ＵＩ
-    public GameObject DistanceUI;//距離表示用テキストＵＩ
+    public GameObject baseUI = null;//拠点ＵＩ
+    public GameObject DistanceUI = null;//距離表示用テキストＵＩ
     GameObject player;//プレイヤー
     Text text;//表示する文字
     int distance;//拠点とＵＩの距離
@@ -18,6 +20,7 @@ public class BasedirectionUI : MonoBehaviour
     //public GameObject campUI;
 
     BaseCamp campScript;
+
     public GameObject BaseCamp { get => baseCamp;}
 
     // Start is called before the first frame update
@@ -30,7 +33,8 @@ public class BasedirectionUI : MonoBehaviour
     {
         text = DistanceUI.GetComponent<Text>();
 
-        baseUI.SetActive(false);
+        //baseUI.SetActive(false);
+
         //if (baseCamp == null)
         //{
         //    baseCamp = GameObject.FindWithTag("BaseCamp");
@@ -43,13 +47,27 @@ public class BasedirectionUI : MonoBehaviour
         baseCamp = GamePlayManager.instance.CurrentStage.BaseCamp;
         player = GamePlayManager.instance.CurrentStage.PlayerObj;
         campScript = baseCamp.GetComponent<BaseCamp>();
+
+        SetActive(false);
+    }
+
+    public void SetActive(bool value)
+    {
+        if (value)
+        {
+            basePanel.SetActive(true);
+        }
+
+        else
+        {
+            basePanel.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         flag = campScript.IsCameraCheck();
-        Debug.Log("UI" + flag);
         //float speed = 0.1f;
 
         //Vector3 relativePos = baseCamp.transform.position - baseUI.transform.position;
@@ -102,26 +120,36 @@ public class BasedirectionUI : MonoBehaviour
         //if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         //{
         //    baseUI.SetActive(false);
-            
+
         //}
         //else
         //{
         //    baseUI.SetActive(true);
-          
+
         //}
 
-        if (flag == true || GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)//campScript.IsCameraCheck()
+        //if (flag == true || GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)//campScript.IsCameraCheck()
+        //{
+        //    //baseUI.SetActive(false);
+        //    SetActive(false);
+
+        //}
+        //else if(!flag&& GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
+        //{
+        //    //baseUI.SetActive(true);
+        //    SetActive(true);
+        //}
+
+        if (!flag && GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
         {
-            Debug.Log("非表示");
-            baseUI.SetActive(false);
-            
+            SetActive(true);
         }
+
         else
         {
-            Debug.Log("表示");
-            baseUI.SetActive(true);
-            
+            SetActive(false);
         }
+        
 
 
         //var diff = (player.transform.position - baseUI.transform.position).normalized;

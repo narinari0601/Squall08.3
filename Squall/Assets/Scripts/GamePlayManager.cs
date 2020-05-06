@@ -44,9 +44,9 @@ public class GamePlayManager : MonoBehaviour
 
     private CameraController cameraController;
 
-    private GameObject currentCamera;
+    //private GameObject currentCamera;
 
-    private List<GameObject> cameraList;
+    //private List<Camera> cameraList;
 
     //天気関連
     private WeatherStates weather;
@@ -110,6 +110,7 @@ public class GamePlayManager : MonoBehaviour
     public GamePlayStates GameState { get => gameState; set => gameState = value; }
     public UIManager UIManager { get => uiManager; set => uiManager = value; }
     public GameObject[] NavBakes { get => navBakes; set => navBakes = value; }
+    public CameraController CameraController { get => cameraController; set => cameraController = value; }
 
     private void Awake()
     {
@@ -128,11 +129,12 @@ public class GamePlayManager : MonoBehaviour
 
     private void Initialize()
     {
+
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
         
         stageNum = 0;
 
-        cameraList = new List<GameObject>();
+        //cameraList = new List<Camera>();
 
         foreach (var nav in navBakes)
         {
@@ -185,13 +187,20 @@ public class GamePlayManager : MonoBehaviour
         cameraController = mainCamera.GetComponent<CameraController>();
         cameraController.Initialize();
 
-        cameraList.Clear();
-        cameraList.Add(cameraController.Camera);
-        var mapCamera = currentStage.MapCamera;
-        cameraList.Add(mapCamera);
-        currentCamera = cameraList[0];
-        cameraList[1].SetActive(false);
+        //cameraList.Clear();
 
+        //cameraList.Add(cameraController.Camera);
+        //var mapCamera = currentStage.MapCamera;
+        //cameraList.Add(mapCamera);
+        //currentCamera = cameraList[0];
+        //cameraList[1].SetActive(false);
+
+
+        //cameraList.Add(cameraController.CameraScript);
+        //var mapCamera = currentStage.MapCamera.GetComponentInChildren<Camera>();
+        //cameraList.Add(mapCamera);
+        //cameraList[0].depth = 2;
+        //cameraList[1].depth = 3;
 
         uiManager.Initialize();
 
@@ -348,22 +357,39 @@ public class GamePlayManager : MonoBehaviour
 
         if (state == GamePlayStates.Play)
         {
-            if (currentCamera == cameraList[0])
-                return;
+            //if (currentCamera == cameraList[0])
+            //    return;
 
-            currentCamera = cameraList[0];
-            cameraList[1].SetActive(false);
-            cameraList[0].SetActive(true);
+            //currentCamera = cameraList[0];
+            //cameraList[1].SetActive(false);
+            //cameraList[0].SetActive(true);
+
+            //if (cameraList[0].depth < cameraList[1].depth)
+            //{
+            //    cameraList[0].depth = 3;
+            //    cameraList[1].depth = 2;
+            //}
+
+            cameraController.MapToPlay();
+
         }
 
         else if (state == GamePlayStates.Map)
         {
-            if (currentCamera == cameraList[1])
-                return;
+            //if (currentCamera == cameraList[1])
+            //    return;
 
-            currentCamera = cameraList[1];
-            cameraList[0].SetActive(false);
-            cameraList[1].SetActive(true);
+            //currentCamera = cameraList[1];
+            //cameraList[0].SetActive(false);
+            //cameraList[1].SetActive(true);
+
+            //if (cameraList[0].depth > cameraList[1].depth)
+            //{
+            //    cameraList[0].depth = 2;
+            //    cameraList[1].depth = 3;
+            //}
+
+            cameraController.PlayToMap();
         }
     }
 
