@@ -8,7 +8,7 @@ public class BaseCamp : MonoBehaviour
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
 
     //カメラに表示されているか
-    private bool _isRendered = false;
+    public bool _isRendered = false;
 
     void Start()
     {
@@ -18,13 +18,13 @@ public class BaseCamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
         _isRendered = false;
     }
 
     public void Initialize()
     {
-       
+        _isRendered = false;
     }
 
     public void TouchBaseCamp()
@@ -87,7 +87,13 @@ public class BaseCamp : MonoBehaviour
     private void OnWillRenderObject()
     {
         //メインカメラに映った時だけ_isRenderedを有効に
-        if (Camera.current.tag == MAIN_CAMERA_TAG_NAME)
+        //if (Camera.current.tag == MAIN_CAMERA_TAG_NAME)
+        //{
+
+        //    _isRendered = true;
+        //}
+
+        if (Camera.current.name == "MainCamera")
         {
             _isRendered = true;
         }
@@ -96,6 +102,8 @@ public class BaseCamp : MonoBehaviour
 
     public bool IsCameraCheck()
     {
+        
         return _isRendered;
+        
     }
 }
