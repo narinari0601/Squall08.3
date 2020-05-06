@@ -278,7 +278,11 @@ public class MemberControl : MonoBehaviour
             MemberToPlayer();
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
-            if(recovery == 0)
+            Instantiate((GameObject)Resources.Load("reaction"), transform.position,
+                    Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)),this.transform);
+
+
+            if (recovery == 0)
             {
                 memberHp = memberHpMax;//HPを全回復
             }
