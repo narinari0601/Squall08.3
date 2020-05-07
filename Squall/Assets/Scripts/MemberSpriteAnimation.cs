@@ -8,26 +8,13 @@ public class MemberSpriteAnimation : MonoBehaviour
     public Sprite[] DownSpriteAni;
     public Sprite[] LeftSpriteAni;
     public Sprite[] RightSpriteAni;
+    [SerializeField, Header("スプライト")]
     public SpriteRenderer spriteRenderer;
     //アニメーションフレーム設定
-    [SerializeField, Header("アニメーションフレーム設定")]
+    [SerializeField, Header("アニメーション間隔設定")]
     public float AnimationFrame;
     Coroutine runCoroutine;
     public MemberControl memberControl;
-
-    public enum MemberDirection
-    {
-        Up,
-        Down,
-        Left,
-        Right,
-        UpStop,
-        DownStop,
-        LeftStop,
-        RightStop,
-    }
-    private MemberDirection memberDirection;
-    public MemberDirection GetMemberDirection { get => memberDirection; set => memberDirection = value; }
 
     void Start()
     {
@@ -38,22 +25,6 @@ public class MemberSpriteAnimation : MonoBehaviour
     {
         AnimeStart();
         MemberAni();
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            memberDirection = MemberDirection.Up;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            memberDirection = MemberDirection.Down;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            memberDirection = MemberDirection.Left;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            memberDirection = MemberDirection.Right;
-        }
     }
  
     public void AnimeStart()
@@ -68,19 +39,19 @@ public class MemberSpriteAnimation : MonoBehaviour
     {
         if (memberControl.GetMemberDirection == MemberControl.MemberDirection.UpStop)
         {
-            spriteRenderer.sprite = UpSpriteAni[1];
+            spriteRenderer.sprite = UpSpriteAni[0];
         }
         else if (memberControl.GetMemberDirection == MemberControl.MemberDirection.DownStop)
         {
-            spriteRenderer.sprite = DownSpriteAni[1];
+            spriteRenderer.sprite = DownSpriteAni[0];
         }
         else if (memberControl.GetMemberDirection == MemberControl.MemberDirection.LeftStop)
         {
-            spriteRenderer.sprite = LeftSpriteAni[1];
+            spriteRenderer.sprite = LeftSpriteAni[0];
         }
         else if (memberControl.GetMemberDirection == MemberControl.MemberDirection.RightStop)
         {
-            spriteRenderer.sprite = RightSpriteAni[1];
+            spriteRenderer.sprite = RightSpriteAni[0];
         }
         //////////////////////////////ここから動いてるとき
         else if (memberControl.GetMemberDirection == MemberControl.MemberDirection.Up)
@@ -136,6 +107,5 @@ public class MemberSpriteAnimation : MonoBehaviour
             }
         }
         runCoroutine = null;
-
     }
 }

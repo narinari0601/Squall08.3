@@ -58,6 +58,8 @@ public class MemberControl : MonoBehaviour
 
     //アニメーション関係
     public float angle;
+    public Rigidbody rigid;
+
     public enum MemberDirection
     {
         Up,
@@ -147,6 +149,7 @@ public class MemberControl : MonoBehaviour
             MemberDontRotaion();//HPバーが回転しないように
             WeratherCheck();//天気の確認
             SquallCheck();//スコールの時止まるやつ
+            MemverDirectionSetting();
             if (!member.pathPending && member.remainingDistance < 0.5f)
             {
                 GotoNextPoint();//ぐるぐる回るやつ(徘徊)
@@ -160,7 +163,7 @@ public class MemberControl : MonoBehaviour
                 memberStates = MemberStates.isDaed;
                 script.memberList.Remove(this.gameObject);
             }
-                      
+            MemverDirectionSetting();
             WeratherCheck();//天気の確認
             PlayerFollows();//隊列になるやつ
             //MemberHubCheck();//拠点についたら
@@ -221,8 +224,11 @@ public class MemberControl : MonoBehaviour
             return;
         //ぐるぐる回るやつ(徘徊)
         member.destination = points[destPoint].transform.position;
-        destPoint = (destPoint + 1) % points.Length;
 
+        angle = GetAngle(new Vector2(this.transform.position.x, this.transform.position.z),
+               new Vector2(points[destPoint].transform.position.x, points[destPoint].transform.position.z));
+
+        destPoint = (destPoint + 1) % points.Length;
     }
 
     public void WeratherCheck()//天気を確認()
@@ -248,7 +254,7 @@ public class MemberControl : MonoBehaviour
             }
             else if(GetMemberCheck == MemberCheck.isCapture)
             {
-                member.speed = 7;//通常時捕まえてる時のスピード
+                member.speed = 6;//通常時捕まえてる時のスピード
             }   
         }           
     }
@@ -290,9 +296,9 @@ public class MemberControl : MonoBehaviour
             MemberToPlayer();
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
+
             Instantiate((GameObject)Resources.Load("reaction"), transform.position,
                     Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)),this.transform);
-
 
             if (recovery == 0)
             {
@@ -318,8 +324,7 @@ public class MemberControl : MonoBehaviour
         if (GetMemberCheck == MemberCheck.isLoitering )
         {
             rippleUI.Ripple();//徘徊しているときに呼ばれるUI
-        }
-       
+        }      
     }
 
     public float GetMemberHp()
@@ -344,37 +349,100 @@ public class MemberControl : MonoBehaviour
         return degree;
     }
 
-    public void MemverDirectionSetting()
+    public void MemverDirectionSetting()//仲間の向きと状態を決める
     {
-        if (GetMemberCheck == MemberCheck.isCapture)
+        //angleは 0～360
+        if (GetMemberCheck == MemberCheck.isCapture)//捕まえた時の角度
         {
-            angle = GetAngle(new Vector2(this.transform.position.x, this.transform.position.z),
-                new Vector2(player.transform.position.x, player.transform.position.z));
-        }
-        else if (GetMemberCheck == MemberCheck.isLoitering)
-        {
-            angle = GetAngle(new Vector2(this.transform.position.x, this.transform.position.z),
-               new Vector2(points[destPoint].transform.position.x, points[destPoint].transform.position.z));
+            for (int i = 1; i < script.memberList.Count; i++)//捕まえたメンバーの数だけ回す、誰をターゲットにするか決める
+            {
+                if (script.memberList[i] == this.gameObject)
+                {
+                    angle = GetAngle(new Vector2(this.transform.position.x, this.transform.position.z),
+                 　　　　new Vector2(script.memberList[i - 1].transform.position.x, script.memberList[i - 1].transform.position.z));
+                }
+            }
+            
+            if(rigid.IsSleeping())//仲間が止まっているときのアニメーション
+            {
+                if (angle < 45 || angle >= 315)
+                {
+                    memberDirection = MemberDirection.UpStop;
+                }
+                else if (angle >= 45 && angle < 135)
+                {
+                    memberDirection = MemberDirection.RightStop;
+                }
+                else if (angle >= 135 && angle < 225)
+                {
+                    memberDirection = MemberDirection.DownStop;
+                }
+                else if (angle >= 225 && angle < 315)
+                {
+                    memberDirection = MemberDirection.LeftStop;
+                }
+            }
+            else//仲間が動いているときのアニメーション
+            {
+                if (angle < 45 || angle >= 315)
+                {
+                    memberDirection = MemberDirection.Up;
+                }
+                else if (angle >= 45 && angle < 135)
+                {
+                    memberDirection = MemberDirection.Right;
+                }
+                else if (angle >= 135 && angle < 225)
+                {
+                    memberDirection = MemberDirection.Down;
+                }
+                else if (angle >= 225 && angle < 315)
+                {
+                    memberDirection = MemberDirection.Left;
+                }
+            }
         }
 
-        if (angle < 45 || angle >= 315)
+        if(GetMemberCheck == MemberCheck.isLoitering)//徘徊しているときの角度設定
         {
-            //if()
-            memberDirection = MemberDirection.Up;
+            if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)//スコールの時のアニメーション
+            {
+                if (angle < 45 || angle >= 315)
+                {
+                    memberDirection = MemberDirection.UpStop;
+                }
+                else if (angle >= 45 && angle < 135)
+                {
+                    memberDirection = MemberDirection.RightStop;
+                }
+                else if (angle >= 135 && angle < 225)
+                {
+                    memberDirection = MemberDirection.DownStop;
+                }
+                else if (angle >= 225 && angle < 315)
+                {
+                    memberDirection = MemberDirection.LeftStop;
+                }
+            }
+            else//通常時のアニメーション
+            {
+                if (angle < 45 || angle >= 315)
+                {
+                    memberDirection = MemberDirection.Up;
+                }
+                else if (angle >= 45 && angle < 135)
+                {
+                    memberDirection = MemberDirection.Right;
+                }
+                else if (angle >= 135 && angle < 225)
+                {
+                    memberDirection = MemberDirection.Down;
+                }
+                else if (angle >= 225 && angle < 315)
+                {
+                    memberDirection = MemberDirection.Left;
+                }
+            }
         }
-        else if (angle >= 45 && angle < 135)
-        {
-            memberDirection = MemberDirection.Right;
-        }
-        else if (angle >= 135 && angle < 225)
-        {
-            memberDirection = MemberDirection.Down;
-        }
-        else if(angle>=225 && angle<315)
-        {
-            memberDirection = MemberDirection.Left;
-        }
-
     }
-
 }
