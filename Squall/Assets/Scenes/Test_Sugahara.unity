@@ -1112,8 +1112,8 @@ MonoBehaviour:
   signRatio: 2
   squallRatio: 5
   stagePrefabs:
-  - {fileID: 286939673562697022, guid: 6f8cd92eba1266845a1d6716619a3b7d, type: 3}
-  - {fileID: 1575125608694834337, guid: 1c2c9344cdbd42a42b49b5080d4fcc0b, type: 3}
+  - {fileID: 1303177098933180297, guid: dbde94bfb1c315d4abe8f976f1ff1b2c, type: 3}
+  - {fileID: 1303177098933180297, guid: dbde94bfb1c315d4abe8f976f1ff1b2c, type: 3}
   - {fileID: 4640163145860849899, guid: cea308b2fd410b747822cdabd2ccc48e, type: 3}
   - {fileID: 6126573537394672910, guid: 26428d791cca3cc4dadcd28d179b27fc, type: 3}
   - {fileID: 582102510779441359, guid: 18f266182217e734c8f3c683260cf28a, type: 3}
@@ -1429,7 +1429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &946890570
 BoxCollider:
   m_ObjectHideFlags: 0
