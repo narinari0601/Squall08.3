@@ -19,7 +19,7 @@ public class ScoreUpUI : MonoBehaviour
 
     //private Vector3 basePos;
 
-    private Vector2 delayPos; 
+    private Vector2 delayPos;
 
     void Start()
     {
@@ -30,7 +30,7 @@ public class ScoreUpUI : MonoBehaviour
     {
         currentActiveTimer = 0;
         scoreUpText.text = "";
-        panel.SetActive(false);
+        SetActive(false);
         scoreTextRect = scoreUpText.transform as RectTransform;
         //basePos = RectTransformUtility.WorldToScreenPoint(Camera.main, GamePlayManager.instance.UIManager.BasedirectionUI.BaseCamp.transform.position);
         delayPos = new Vector2(-8, 10);
@@ -56,6 +56,7 @@ public class ScoreUpUI : MonoBehaviour
 
     public void ScoreUp(float score)
     {
+
         scoreUpText.text = "+" + score;
 
         SetActive(true);

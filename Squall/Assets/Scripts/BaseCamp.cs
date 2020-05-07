@@ -51,6 +51,7 @@ public class BaseCamp : MonoBehaviour
 
             uiMaanager.OverviewUIAllSetActive(true);
             uiMaanager.PlayUIActiveFalse();
+            uiMaanager.ScoreUpUI.SetActive(false);
             uiMaanager.PauseUI.ResetUI();
             GamePlayManager.instance.GameState = GamePlayManager.GamePlayStates.Map;
         }
