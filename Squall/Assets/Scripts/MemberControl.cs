@@ -56,6 +56,22 @@ public class MemberControl : MonoBehaviour
     //非表示を一回しか呼ばないためのフラグ
     private bool oneTrigger = false;
 
+    //アニメーション関係
+    public float angle;
+    public enum MemberDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+        UpStop,
+        DownStop,
+        LeftStop,
+        RightStop,
+    }
+    private MemberDirection memberDirection;
+    public MemberDirection GetMemberDirection { get => memberDirection; set => memberDirection = value; }
+
     public enum MemberStates//メンバーの状態
     {
         isAlive,//生きてる
@@ -116,12 +132,8 @@ public class MemberControl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {    
-        //if(Input.GetKeyDown(KeyCode.A))
-        //{
-        //    Debug.Log(Vector2.Angle(new Vector2(player.transform.position.x, player.transform.position.z), new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z)));
-        //}
-        //Debug.Log(memberHp);
+    {
+
         slider.value = memberHp;
         mapHpSlider.value = memberHp;
         //Memberの処理分岐
@@ -298,7 +310,7 @@ public class MemberControl : MonoBehaviour
         {
             memberHp -= damageToMember;//ダメージ量
             invincibleTime = 5;//無敵時間(単位-秒)
-            Debug.Log("aaaaaaaa");
+            //Debug.Log("aaaaaaaa");
         }
     }
     public void Ripple()
@@ -318,6 +330,51 @@ public class MemberControl : MonoBehaviour
     public float GetMaxMemberHp()
     {
         return memberHpMax;
+    }
+
+    public float GetAngle(Vector2 start,Vector2 target)
+    {
+        Vector2 dt = target - start;
+        float rad = Mathf.Atan2(dt.x, dt.y);
+        float degree = rad * Mathf.Rad2Deg;
+        if(degree<0)
+        {
+            degree += 360;
+        }
+        return degree;
+    }
+
+    public void MemverDirectionSetting()
+    {
+        if (GetMemberCheck == MemberCheck.isCapture)
+        {
+            angle = GetAngle(new Vector2(this.transform.position.x, this.transform.position.z),
+                new Vector2(player.transform.position.x, player.transform.position.z));
+        }
+        else if (GetMemberCheck == MemberCheck.isLoitering)
+        {
+            angle = GetAngle(new Vector2(this.transform.position.x, this.transform.position.z),
+               new Vector2(points[destPoint].transform.position.x, points[destPoint].transform.position.z));
+        }
+
+        if (angle < 45 || angle >= 315)
+        {
+            //if()
+            memberDirection = MemberDirection.Up;
+        }
+        else if (angle >= 45 && angle < 135)
+        {
+            memberDirection = MemberDirection.Right;
+        }
+        else if (angle >= 135 && angle < 225)
+        {
+            memberDirection = MemberDirection.Down;
+        }
+        else if(angle>=225 && angle<315)
+        {
+            memberDirection = MemberDirection.Left;
+        }
+
     }
 
 }
