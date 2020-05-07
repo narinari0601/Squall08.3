@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
@@ -138,6 +139,6 @@ public class PauseUI : MonoBehaviour
 
     private void EndGame()
     {
-
+        GamePlayManager.instance.GameToStageSelect();
     }
 }

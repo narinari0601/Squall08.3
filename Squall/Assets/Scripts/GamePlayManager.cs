@@ -86,7 +86,7 @@ public class GamePlayManager : MonoBehaviour
 
     private Stage currentStage;
 
-    private int stageNum;
+    private int stageNum = 0;
 
     [SerializeField, Header("bake2つ")]
     private GameObject[] navBakes = new GameObject[2];
@@ -123,16 +123,17 @@ public class GamePlayManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
+        
         Initialize();
     }
 
     private void Initialize()
     {
 
+        stageNum = StageSelectManager.stageNum;
+
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
         
-        stageNum = 0;
 
         //cameraList = new List<Camera>();
 
@@ -440,6 +441,12 @@ public class GamePlayManager : MonoBehaviour
     public void GameOver()
     {
         uiManager.GameOverUI.GameOverUpdate();
+    }
+
+    public void GameToStageSelect()
+    {
+        StageSelectManager.stageNum = stageNum;
+        SceneManager.LoadScene("StageSelectScene");
     }
     
 
