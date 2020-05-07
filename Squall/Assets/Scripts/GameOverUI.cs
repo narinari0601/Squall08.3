@@ -196,7 +196,7 @@ public class GameOverUI : MonoBehaviour
 
             else if (selectNum == 1)
             {
-                //GamePlayManager.instance.StageInitialize();
+                GamePlayManager.instance.GameToStageSelect();
             }
 
         }

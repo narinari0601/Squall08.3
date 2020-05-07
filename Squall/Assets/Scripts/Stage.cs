@@ -219,7 +219,8 @@ public class Stage : MonoBehaviour
         if (scoreMemberCount == 0)
             return;
 
-        plusScore = (float)(1000 * scoreMemberCount * (1 + 0.5 * (scoreMemberCount - 1)));
+        float bonusScore = (float)(1 + 0.5 * (scoreMemberCount - 1));
+        plusScore = (float)(1000 * scoreMemberCount * bonusScore);
 
         GamePlayManager.instance.UIManager.ScoreUpUI.ScoreUp(plusScore);
 

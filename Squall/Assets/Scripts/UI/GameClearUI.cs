@@ -185,7 +185,7 @@ public class GameClearUI : MonoBehaviour
 
             else if (selectNum == 2)
             {
-                //SceneManager.LoadScene("StageSelectScene");
+                GamePlayManager.instance.GameToStageSelect();
             }
         }
     }

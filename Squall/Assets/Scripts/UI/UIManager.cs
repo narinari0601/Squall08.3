@@ -91,7 +91,7 @@ public class UIManager : MonoBehaviour
     {
         windDirectUI.SetActive(false);
         memberAliveUI.SetActive(false);
-        scoreUpUI.SetActive(false);
+        //scoreUpUI.SetActive(false);
         operationUI.SetActive(false);
         mushroomValueUI.SetActive(false);
     }

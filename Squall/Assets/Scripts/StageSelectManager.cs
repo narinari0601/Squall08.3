@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StageSelectManager : MonoBehaviour
 {
@@ -8,28 +10,54 @@ public class StageSelectManager : MonoBehaviour
     private GameObject[] stages = new GameObject[0];
     private int stageValue;
 
-    private int stageNum;
+    public static int stageNum = 0;
+
+    //選択関連
+    [SerializeField, Header("選択カーソル")]
+    private Image cursolImage = null;
+
+    private RectTransform cursolRect;
+
+    [SerializeField, Header("選択オブジェクト達")]
+    private GameObject[] selectObjcts = new GameObject[0];
+
+    private RectTransform[] selectRects;
+
+    private Vector3 cursolDelay;
 
     void Start()
     {
         stageValue = stages.Length;
 
-        stageNum = 1;
+        selectRects = new RectTransform[stageValue];
+
+        for (int i = 0; i < stageValue; i++)
+        {
+            selectRects[i] = selectObjcts[i].transform as RectTransform;
+        }
+
+        cursolRect = cursolImage.transform as RectTransform;
+
+        cursolDelay = new Vector3(-100, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         StageSelect();
+
+        StageSelectToGame();
+
+        StageSelectToTitle();
     }
 
     private void StageSelect()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (stageNum == stageValue)
+            if (stageNum == stageValue - 1)
             {
-                stageNum = 1;
+                stageNum = 0;
             }
 
             else
@@ -40,9 +68,9 @@ public class StageSelectManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (stageNum == 1)
+            if (stageNum == 0)
             {
-                stageNum = stageValue;
+                stageNum = stageValue - 1;
             }
 
             else
@@ -50,13 +78,40 @@ public class StageSelectManager : MonoBehaviour
                 stageNum--;
             }
         }
+
+        cursolRect.transform.position = selectRects[stageNum].transform.position + cursolDelay;
+
     }
 
-    private void GoToPlay()
+    private void StageSelectToGame()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            // イベントに登録
+            //SceneManager.sceneLoaded += GameSceneLoaded;
 
+            // シーン切り替え
+            SceneManager.LoadScene("GameScene");
         }
+    }
+
+    private void StageSelectToTitle()
+    {
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
+    }
+
+    private void GameSceneLoaded(Scene next, LoadSceneMode mode)
+    {
+        // シーン切り替え後のスクリプトを取得
+        var gameManager = GameObject.Find("GamePlayManager").GetComponent<GamePlayManager>();
+
+        // データを渡す処理
+        //gameManager.score = 100;
+
+        // イベントから削除
+        SceneManager.sceneLoaded -= GameSceneLoaded;
     }
 }

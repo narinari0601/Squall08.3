@@ -75,7 +75,7 @@ public class TitleSceneManager : MonoBehaviour
         {
             if (selectNum == 0)
             {
-                GameStart();
+                TitleToStageSelect();
             }
 
             else if (selectNum == 1)
@@ -86,9 +86,9 @@ public class TitleSceneManager : MonoBehaviour
     }
 
 
-    public void GameStart()
+    public void TitleToStageSelect()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("StageSelectScene");
     }
 
     public void GameEnd()
