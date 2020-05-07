@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class StageSelectManager : MonoBehaviour
 {
     [SerializeField, Header("ステージ")]
-    private GameObject[] stages = new GameObject[0];
+    private GameObject[] stagePrefabs = new GameObject[0];
+
     private int stageValue;
 
     public static int stageNum = 0;
@@ -27,7 +28,7 @@ public class StageSelectManager : MonoBehaviour
 
     void Start()
     {
-        stageValue = stages.Length;
+        stageValue = stagePrefabs.Length;
 
         selectRects = new RectTransform[stageValue];
 
