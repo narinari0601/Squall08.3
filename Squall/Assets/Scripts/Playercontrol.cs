@@ -19,7 +19,7 @@ public class Playercontrol : MonoBehaviour
     private int mutekitime;
     int mashcount;
     GameObject throwmash;
-
+    Animator anim;
 
     //ナリが追加
     private bool isJump;  //ジャンプ中ならtrue
@@ -47,6 +47,7 @@ public class Playercontrol : MonoBehaviour
         throwmash = (GameObject)Resources.Load("throwmash");
         bursteffect = (GameObject)Resources.Load("Effects/Burst");
         isJump = false;
+        anim = transform.GetChild(0).gameObject.GetComponent<Animator>();
         memberList = GetComponent<MemberList>();
     }
     public void Initialize()
@@ -59,7 +60,7 @@ public class Playercontrol : MonoBehaviour
         _audio = gameObject.GetComponent<AudioSource>();
         _direc = Direc.UP;
         windpower = GamePlayManager.instance.CurrentStage.WindPower;
-
+        anim = transform.GetChild(0).gameObject.GetComponent<Animator>();
         throwmash = (GameObject)Resources.Load("throwmash");
         isJump = false;
         memberList = GetComponent<MemberList>();
@@ -103,21 +104,26 @@ public class Playercontrol : MonoBehaviour
         {
             _direc = Direc.UP;
             velocity += new Vector3(0, 0, 0.1f);
+            anim.SetInteger("Direction", 0);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
             velocity += new Vector3(0, 0, -0.1f);
             _direc = Direc.DOWN;
+            anim.SetInteger("Direction", 1);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             velocity += new Vector3(-0.1f, 0, 0);
             _direc = Direc.LEFT;
+            anim.SetInteger("Direction", 2);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             velocity += new Vector3(0.1f, 0, 0);
             _direc = Direc.RIGHT;
+
+            anim.SetInteger("Direction", 3);
         }
         if (velocity.x * velocity.x + velocity.z * velocity.z > 0.01)
         {
