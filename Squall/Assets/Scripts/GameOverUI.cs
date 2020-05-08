@@ -110,7 +110,7 @@ public class GameOverUI : MonoBehaviour
         if (alpha > 1)
         {
             selectPanel.SetActive(true);
-            tex.text = "味方が全滅した...";
+            tex.text = "仲間が全滅した...";
             alpha = 1;
 
             CursolMove();
