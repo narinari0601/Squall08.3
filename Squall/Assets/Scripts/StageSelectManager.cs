@@ -32,7 +32,7 @@ public class StageSelectManager : MonoBehaviour
 
         selectRects = new RectTransform[stageValue];
 
-        for (int i = 0; i < stageValue; i++)
+        for (int i = 0; i < stageValue-1; i++)
         {
             selectRects[i] = selectObjcts[i].transform as RectTransform;
         }
@@ -41,7 +41,11 @@ public class StageSelectManager : MonoBehaviour
 
         cursolDelay = new Vector3(-100, 0, 0);
 
-        BGMManager.instance.StopBGM();  //ここでステージセレクト用BGM
+        if (!BGMManager.instance.SameBGM(1))
+        {
+            BGMManager.instance.ChangeBGM(1, 0.07f);
+        }
+
     }
 
     // Update is called once per frame
@@ -58,7 +62,7 @@ public class StageSelectManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (stageNum == stageValue - 1)
+            if (stageNum == stageValue - 2)
             {
                 stageNum = 0;
             }
@@ -73,7 +77,7 @@ public class StageSelectManager : MonoBehaviour
         {
             if (stageNum == 0)
             {
-                stageNum = stageValue - 1;
+                stageNum = stageValue - 2;
             }
 
             else
