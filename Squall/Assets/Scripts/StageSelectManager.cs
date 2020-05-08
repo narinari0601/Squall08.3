@@ -40,6 +40,8 @@ public class StageSelectManager : MonoBehaviour
         cursolRect = cursolImage.transform as RectTransform;
 
         cursolDelay = new Vector3(-100, 0, 0);
+
+        BGMManager.instance.StopBGM();  //ここでステージセレクト用BGM
     }
 
     // Update is called once per frame
