@@ -24,6 +24,11 @@ public class TitleSceneManager : MonoBehaviour
         selectNum = 0;
         selectValue = selectedObjcts.Length;
 
+        if (!BGMManager.instance.SameBGM(1))
+        {
+            BGMManager.instance.ChangeBGM(1, 0.07f);
+        }
+
         //Debug.Log((selectedObjcts[0].transform as RectTransform).position);
         //Debug.Log((selectedObjcts[1].transform as RectTransform).position);
         //Debug.Log(cursolPos.position);

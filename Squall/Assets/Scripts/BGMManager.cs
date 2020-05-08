@@ -17,13 +17,14 @@ public class BGMManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);  //シーンを切り替えても消えない
+            Initialize();
         }
         else
         {
             Destroy(this.gameObject);
         }
 
-        Initialize();
+        
     }
 
 
@@ -48,5 +49,15 @@ public class BGMManager : MonoBehaviour
     public void StopBGM()
     {
         audioSource.Stop();
+    }
+
+    public bool SameBGM(int num)
+    {
+        if (audioClips[num] == audioSource.clip)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
