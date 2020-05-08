@@ -57,8 +57,12 @@ public class MemberControl : MonoBehaviour
     private bool oneTrigger = false;
 
     //アニメーション関係
+    
     public float angle;
     public Rigidbody rigid;
+    public Sprite sprite;
+    public SpriteRenderer spriteRenderer;
+    public bool onDamageFlag;
 
     public enum MemberDirection
     {
@@ -70,6 +74,7 @@ public class MemberControl : MonoBehaviour
         DownStop,
         LeftStop,
         RightStop,
+        Deth,
     }
     private MemberDirection memberDirection;
     public MemberDirection GetMemberDirection { get => memberDirection; set => memberDirection = value; }
@@ -101,6 +106,7 @@ public class MemberControl : MonoBehaviour
 
     public void Initialize()
     {
+        
         memberHpMax = memberHp;//最大値の固定
         memberHp -= memberStartDamageHp;
         //player = GameObject.Find("Player");
@@ -130,6 +136,8 @@ public class MemberControl : MonoBehaviour
         memberHpUI = this.gameObject.transform.Find("MemberHpUI").gameObject;
         boxCollider = GetComponent<BoxCollider>();
         oneTrigger = false;
+        onDamageFlag = false;
+        spriteRenderer = memberSprite.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -190,6 +198,7 @@ public class MemberControl : MonoBehaviour
         else//死んだときの処理を書くところ
         {
             MemberDontRotaion();//HPバーが回転しないように
+            memberDirection = MemberDirection.Deth;
         }     
     }
 
@@ -316,8 +325,30 @@ public class MemberControl : MonoBehaviour
         {
             memberHp -= damageToMember;//ダメージ量
             invincibleTime = 5;//無敵時間(単位-秒)
-            //Debug.Log("aaaaaaaa");
+            DamageSprite();//点滅処理
         }
+    }
+    public void DamageSprite()
+    {       
+        StartCoroutine("WaitSpriteAlpha");      
+    }
+    IEnumerator WaitSpriteAlpha()
+    {
+        if(onDamageFlag)
+        {
+            yield break;
+        }
+        onDamageFlag = true;
+
+        for(int i = 0;i<10;i++)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+            yield return new WaitForSeconds(0.05f);
+
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(0.05f);
+        }
+        onDamageFlag = false;     
     }
     public void Ripple()
     {
