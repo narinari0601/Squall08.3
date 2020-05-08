@@ -234,6 +234,12 @@ public class GamePlayManager : MonoBehaviour
             isBGM = true;
         }
 
+        if(stageNum ==0)
+        {
+            NextStage();
+        }
+        
+
         ChangeCamera();
 
         if (gameState == GamePlayStates.Play)
