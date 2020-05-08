@@ -297,7 +297,7 @@ public class MemberControl : MonoBehaviour
             script.memberList.Add(this.gameObject);
             memberLingt.transform.localScale = new Vector3(lightScale.x,lightScale.y,lightScale.z);//LifhtのScale変更
 
-            Instantiate((GameObject)Resources.Load("reaction"), transform.position,
+            Instantiate((GameObject)Resources.Load("reaction"), transform.position + new Vector3(0, 0, 1.5f),
                     Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)),this.transform);
 
             if (recovery == 0)
