@@ -8,6 +8,9 @@ public class MemberSpriteAnimation : MonoBehaviour
     public Sprite[] DownSpriteAni;
     public Sprite[] LeftSpriteAni;
     public Sprite[] RightSpriteAni;
+
+    public Sprite[] DethSpriteAni;
+
     [SerializeField, Header("スプライト")]
     public SpriteRenderer spriteRenderer;
     //アニメーションフレーム設定
@@ -52,6 +55,10 @@ public class MemberSpriteAnimation : MonoBehaviour
         else if (memberControl.GetMemberDirection == MemberControl.MemberDirection.RightStop)
         {
             spriteRenderer.sprite = RightSpriteAni[0];
+        }
+        else if((memberControl.GetMemberDirection == MemberControl.MemberDirection.Deth))
+        {
+            spriteRenderer.sprite = DethSpriteAni[0];
         }
         //////////////////////////////ここから動いてるとき
         else if (memberControl.GetMemberDirection == MemberControl.MemberDirection.Up)
