@@ -35,6 +35,14 @@ public class SquallCameraBlind : MonoBehaviour
         cntfull = 21;     
     }
 
+    public void Initialize()
+    {
+        count = 21;
+        cntfull = 21;
+        transforms.localScale -= new Vector3(BlackMAX,BlackMAX, BlackMAX);
+    }
+
+
     // Update is called once per frame
     void Update()
     {
