@@ -2021,6 +2021,7 @@ MonoBehaviour:
   cursolImage: {fileID: 1854672052}
   selectObjcts:
   - {fileID: 3182138}
+  - {fileID: 3182138}
   - {fileID: 1604205650}
   - {fileID: 1326376156}
   - {fileID: 334547303}

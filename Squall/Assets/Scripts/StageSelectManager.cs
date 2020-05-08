@@ -32,7 +32,7 @@ public class StageSelectManager : MonoBehaviour
 
         selectRects = new RectTransform[stageValue];
 
-        for (int i = 0; i < stageValue-1; i++)
+        for (int i = 1; i < stageValue; i++)
         {
             selectRects[i] = selectObjcts[i].transform as RectTransform;
         }
@@ -86,7 +86,7 @@ public class StageSelectManager : MonoBehaviour
             }
         }
 
-        cursolRect.transform.position = selectRects[stageNum].transform.position + cursolDelay;
+        cursolRect.transform.position = selectRects[stageNum+1].transform.position + cursolDelay;
 
     }
 

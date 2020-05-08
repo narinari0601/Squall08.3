@@ -139,7 +139,7 @@ public class GamePlayManager : MonoBehaviour
     private void Initialize()
     {
 
-        stageNum = StageSelectManager.stageNum;
+        stageNum = StageSelectManager.stageNum+1;
 
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
 
@@ -474,7 +474,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void GameToStageSelect()
     {
-        StageSelectManager.stageNum = stageNum;
+        StageSelectManager.stageNum = stageNum - 1;
         SceneManager.LoadScene("StageSelectScene");
     }
 
