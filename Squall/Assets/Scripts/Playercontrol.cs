@@ -96,75 +96,77 @@ public class Playercontrol : MonoBehaviour
     }
     void Move()
     {
-        if (isJump)
-            return;
-
-        wind = new Vector3(0, 0, 0);
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            _direc = Direc.UP;
-            velocity += new Vector3(0, 0, 0.1f);
-            anim.SetInteger("Direction", 0);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            velocity += new Vector3(0, 0, -0.1f);
-            _direc = Direc.DOWN;
-            anim.SetInteger("Direction", 1);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            velocity += new Vector3(-0.1f, 0, 0);
-            _direc = Direc.LEFT;
-            anim.SetInteger("Direction", 2);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            velocity += new Vector3(0.1f, 0, 0);
-            _direc = Direc.RIGHT;
-
-            anim.SetInteger("Direction", 3);
-        }
-        if (velocity.x * velocity.x + velocity.z * velocity.z > 0.01)
-        {
-            if (velocity.x < 0)
-            {
-                velocity.x = 0.1f / -1.4f;
-            }
-            else if (velocity.x > 0) 
-            {
-                velocity.x = 0.1f / 1.4f;
-            }
-            if (velocity.z < 0)
-            {
-                velocity.z = 0.1f / -1.4f;
-            }
-            else if (velocity.z > 0) 
-            {
-                velocity.z = 0.1f / 1.4f;
-            }
-
-        }
         if (mutekitime == 0)
         {
+
+
+            if (isJump)
+                return;
+
+            wind = new Vector3(0, 0, 0);
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                _direc = Direc.UP;
+                velocity += new Vector3(0, 0, 0.1f);
+                anim.SetInteger("Direction", 0);
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                velocity += new Vector3(0, 0, -0.1f);
+                _direc = Direc.DOWN;
+                anim.SetInteger("Direction", 1);
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                velocity += new Vector3(-0.1f, 0, 0);
+                _direc = Direc.LEFT;
+                anim.SetInteger("Direction", 2);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                velocity += new Vector3(0.1f, 0, 0);
+                _direc = Direc.RIGHT;
+
+                anim.SetInteger("Direction", 3);
+            }
+            if (velocity.x * velocity.x + velocity.z * velocity.z > 0.01)
+            {
+                if (velocity.x < 0)
+                {
+                    velocity.x = 0.1f / -1.4f;
+                }
+                else if (velocity.x > 0)
+                {
+                    velocity.x = 0.1f / 1.4f;
+                }
+                if (velocity.z < 0)
+                {
+                    velocity.z = 0.1f / -1.4f;
+                }
+                else if (velocity.z > 0)
+                {
+                    velocity.z = 0.1f / 1.4f;
+                }
+
+            }
+
             transform.position += velocity;
-        }
-        velocity = Vector3.zero;
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (mashcount > 0)
+            velocity = Vector3.zero;
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                mashcount--;
-                _audio.PlayOneShot(throwse);
-                Instantiate((GameObject)throwmash, transform.position + GetDirec() * 9 ,
-                    Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)));
-            }
-            else
-            {
+                if (mashcount > 0)
+                {
+                    mashcount--;
+                    _audio.PlayOneShot(throwse);
+                    Instantiate((GameObject)throwmash, transform.position + GetDirec() * 9,
+                        Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)));
+                }
+                else
+                {
 
+                }
             }
         }
-
     }
    public Vector3 GetDirec()
     {
