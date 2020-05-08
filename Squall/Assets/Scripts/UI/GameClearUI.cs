@@ -180,6 +180,7 @@ public class GameClearUI : MonoBehaviour
 
             else if (selectNum == 1)
             {
+                BGMManager.instance.ChangeBGM(0, 0.04f);
                 GamePlayManager.instance.StageInitialize();
             }
 
