@@ -96,7 +96,7 @@ public class Playercontrol : MonoBehaviour
     }
     void Move()
     {
-        if (mutekitime == 0)
+        if (mutekitime <= 30) 
         {
 
 
@@ -238,7 +238,7 @@ public class Playercontrol : MonoBehaviour
     {
         if (mutekitime == 0)
         {
-            mutekitime = 180;
+            mutekitime = 210;
             HP--;
           
             damagevelocity = Nock/10;
@@ -251,7 +251,7 @@ public class Playercontrol : MonoBehaviour
     }
     void Damagemove()
     {
-        if (mutekitime > 170)
+        if (mutekitime > 200)
         {
             transform.position = transform.position + damagevelocity;
             damagevelocity -= savevelocity / 5;
