@@ -44,6 +44,8 @@ public class GamePlayManager : MonoBehaviour
 
     private CameraController cameraController;
 
+    private SquallCameraBlind cameraBlind;
+
     //private GameObject currentCamera;
 
     //private List<Camera> cameraList;
@@ -143,6 +145,8 @@ public class GamePlayManager : MonoBehaviour
 
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
 
+        cameraBlind = mainCamera.GetComponent<SquallCameraBlind>();
+
         //audioSource = GetComponent<AudioSource>();
 
         //cameraList = new List<Camera>();
@@ -222,8 +226,7 @@ public class GamePlayManager : MonoBehaviour
         var thirdDir = (int)squallDirArray[(squallCount + 2) % squallDirArray.Length];
         uiManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
 
-        //ChangeBGM(0, 0.04f);
-        //audioSource.Play();
+        cameraBlind.Initialize();
     }
 
     private void Update()

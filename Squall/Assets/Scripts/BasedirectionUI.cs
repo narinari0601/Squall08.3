@@ -117,39 +117,41 @@ public class BasedirectionUI : MonoBehaviour
         distance = (int)Vector3.Distance(m_camera.WorldToScreenPoint(player.transform.position), m_camera.WorldToScreenPoint(baseCamp.transform.position))/10;
         text.text = (distance-5).ToString() + "m";
 
-        //if(GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
-        //{
-        //    baseUI.SetActive(false);
-
-        //}
-        //else
-        //{
-        //    baseUI.SetActive(true);
-
-        //}
-
-        //if (flag == true || GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)//campScript.IsCameraCheck()
-        //{
-        //    //baseUI.SetActive(false);
-        //    SetActive(false);
-
-        //}
-        //else if(!flag&& GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
-        //{
-        //    //baseUI.SetActive(true);
-        //    SetActive(true);
-        //}
-
-        if (!flag && GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
+        if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
+            //baseUI.SetActive(false);
+            SetActive(false);
+
+        }
+        else
+        {
+            //baseUI.SetActive(true);
+            SetActive(true);
+
+        }
+
+        if (flag == true || GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)//campScript.IsCameraCheck()
+        {
+            //baseUI.SetActive(false);
+            SetActive(false);
+
+        }
+        else /*if (!flag && GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)*/
+        {
+            //baseUI.SetActive(true);
             SetActive(true);
         }
 
-        else
-        {
-            SetActive(false);
-        }
-        
+        //if (!flag && GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
+        //{
+        //    SetActive(true);
+        //}
+
+        //else
+        //{
+        //    SetActive(false);
+        //}
+
 
 
         //var diff = (player.transform.position - baseUI.transform.position).normalized;
@@ -157,7 +159,7 @@ public class BasedirectionUI : MonoBehaviour
         //diff.x = 90;
         //diff.y = 0;
         //baseUI.transform.rotation = Quaternion.FromToRotation(Vector3.right, diff);
-       
+
 
 
     }
