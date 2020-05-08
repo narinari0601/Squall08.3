@@ -103,6 +103,15 @@ public class GamePlayManager : MonoBehaviour
     private UIManager uiManager;
 
 
+    //音関連
+    //private AudioSource audioSource;
+
+    //[SerializeField,Header("BGMたち")]
+    //private AudioClip[] audioClips = new AudioClip[0];
+
+    private bool isBGM;
+
+
     public WeatherStates Weather { get => weather; set => weather = value; }
     public SquallDirections SquallDirection { get => squallDirection; set => squallDirection = value; }
     public GameObject Player { get => player; set => player = value; }
@@ -133,7 +142,8 @@ public class GamePlayManager : MonoBehaviour
         stageNum = StageSelectManager.stageNum;
 
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
-        
+
+        //audioSource = GetComponent<AudioSource>();
 
         //cameraList = new List<Camera>();
 
@@ -144,6 +154,8 @@ public class GamePlayManager : MonoBehaviour
         uiManager = uIObj.GetComponent<UIManager>();
 
         StageInitialize();
+
+        isBGM = false;
 
         //uiManager = uIObj.GetComponent<UIManager>();
         //uiManager.Initialize();
@@ -210,10 +222,18 @@ public class GamePlayManager : MonoBehaviour
         var thirdDir = (int)squallDirArray[(squallCount + 2) % squallDirArray.Length];
         uiManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
 
+        //ChangeBGM(0, 0.04f);
+        //audioSource.Play();
     }
 
     private void Update()
     {
+        if (!isBGM)
+        {
+            BGMManager.instance.ChangeBGM(0, 0.04f);
+            isBGM = true;
+        }
+
         ChangeCamera();
 
         if (gameState == GamePlayStates.Play)
@@ -343,6 +363,9 @@ public class GamePlayManager : MonoBehaviour
                 stageNum = 0;
             }
 
+
+            BGMManager.instance.ChangeBGM(0, 0.04f);
+
             StageInitialize();
         }
     }
@@ -448,7 +471,20 @@ public class GamePlayManager : MonoBehaviour
         StageSelectManager.stageNum = stageNum;
         SceneManager.LoadScene("StageSelectScene");
     }
-    
+
+    //public void ChangeBGM(int num, float volume)
+    //{
+    //    audioSource.Stop();
+    //    audioSource.clip = audioClips[num];
+    //    audioSource.volume = volume;
+    //    audioSource.Play();
+    //}
+
+    //public void StopBGM()
+    //{
+    //    audioSource.Stop();
+    //}
+
 
     public void GameEnd()
     {

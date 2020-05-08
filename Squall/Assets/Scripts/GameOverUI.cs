@@ -191,11 +191,13 @@ public class GameOverUI : MonoBehaviour
         {
             if (selectNum == 0)
             {
+                BGMManager.instance.ChangeBGM(0, 0.04f);
                 GamePlayManager.instance.StageInitialize();
             }
 
             else if (selectNum == 1)
             {
+                BGMManager.instance.StopBGM();
                 GamePlayManager.instance.GameToStageSelect();
             }
 

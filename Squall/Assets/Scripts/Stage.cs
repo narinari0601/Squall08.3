@@ -151,6 +151,7 @@ public class Stage : MonoBehaviour
             var uiManager = GamePlayManager.instance.UIManager;
             uiManager.PlayUIActiveFalse();
             uiManager.PauseUI.SetActive(false);
+            BGMManager.instance.StopBGM();     //本当ならGameOverBGM
         }
 
         else if (deadMember + hubMember == memberMaxValue)
@@ -159,6 +160,7 @@ public class Stage : MonoBehaviour
             var uiManager = GamePlayManager.instance.UIManager;
             uiManager.PlayUIActiveFalse();
             uiManager.PauseUI.SetActive(false);
+            BGMManager.instance.StopBGM();     //本当ならGameClearBGM
         }
 
         hubMember = 0;
