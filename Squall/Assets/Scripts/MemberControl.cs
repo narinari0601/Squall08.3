@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class MemberControl : MonoBehaviour
 {
     public NavMeshAgent member;
-    //public float navSpeed;//navの動くスピード
     public float navStop;//どれだけ離れて止まるか
     public Transform[] points;
     private int destPoint = 0;
@@ -31,8 +30,7 @@ public class MemberControl : MonoBehaviour
     private GameObject player;
     MemberList script;
     Playercontrol playerScript;
-
-   
+    
     //仲間の光
     private GameObject memberLingt;
     [SerializeField, Header("仲間の光のスケール")]
@@ -55,16 +53,17 @@ public class MemberControl : MonoBehaviour
     private GameObject memberHpUI;
     //非表示を一回しか呼ばないためのフラグ
     private bool oneTrigger = false;
-
     //アニメーション関係
-    
     public float angle;
     public Rigidbody rigid;
-    public Sprite sprite;
-    public SpriteRenderer spriteRenderer;
-    public bool onDamageFlag;
+    private SpriteRenderer spriteRenderer;
+    private bool onDamageFlag;
+    //音
+    AudioSource audioSource;
+    public AudioClip enemyHitSE;
+    public AudioClip bikkuriSE;
 
-    public enum MemberDirection
+    public enum MemberDirection//アニメーション判定
     {
         Up,
         Down,
@@ -138,12 +137,12 @@ public class MemberControl : MonoBehaviour
         oneTrigger = false;
         onDamageFlag = false;
         spriteRenderer = memberSprite.GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         slider.value = memberHp;
         mapHpSlider.value = memberHp;
         //Memberの処理分岐
@@ -300,6 +299,7 @@ public class MemberControl : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && GetMemberCheck == MemberCheck.isLoitering)
         {
+            audioSource.PlayOneShot(bikkuriSE);
             member.isStopped = false;//徘徊していたnavmechを止める
             memberCheck = MemberCheck.isCapture;           
             MemberToPlayer();
@@ -323,8 +323,9 @@ public class MemberControl : MonoBehaviour
         if(other.gameObject.tag =="Enemy" && GetMemberCheck == MemberCheck.isCapture && invincibleTime <=0 
             && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall )
         {
+            audioSource.PlayOneShot(enemyHitSE);
             memberHp -= damageToMember;//ダメージ量
-            invincibleTime = 5;//無敵時間(単位-秒)
+            invincibleTime = 4;//無敵時間(単位-秒)
             DamageSprite();//点滅処理
         }
     }
@@ -368,7 +369,7 @@ public class MemberControl : MonoBehaviour
         return memberHpMax;
     }
 
-    public float GetAngle(Vector2 start,Vector2 target)
+    public float GetAngle(Vector2 start,Vector2 target)//上基準
     {
         Vector2 dt = target - start;
         float rad = Mathf.Atan2(dt.x, dt.y);

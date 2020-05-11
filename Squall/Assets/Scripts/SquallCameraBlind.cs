@@ -28,12 +28,22 @@ public class SquallCameraBlind : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //count = 21;
+        //currentstates = GamePlayManager.instance.Weather;
+        //transforms = GameObject.Find("View").transform;
+        //gamePlayManager = GameObject.Find("GamePlayManager");
+        //cntfull = 21;     
+    }
+
+    public void Initialize()
+    {
         count = 21;
+        cntfull = 21;
         currentstates = GamePlayManager.instance.Weather;
         transforms = GameObject.Find("View").transform;
-        //gamePlayManager = GameObject.Find("GamePlayManager");
-        cntfull = 21;     
+        transforms.localScale = new Vector3(BlackMAX,BlackMAX, BlackMAX);
     }
+
 
     // Update is called once per frame
     void Update()
