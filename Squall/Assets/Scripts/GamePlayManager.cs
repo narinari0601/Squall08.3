@@ -435,6 +435,7 @@ public class GamePlayManager : MonoBehaviour
                 uiManager.PlayUIActiveTrue();
                 uiManager.OverviewUI.MapCameraReset();
                 uiManager.OverviewUI.SetActive(false);
+                UIManager.OverviewUI.GameStart();
                 gameState = GamePlayStates.Play;
             }
         }

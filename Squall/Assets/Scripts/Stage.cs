@@ -27,7 +27,7 @@ public class Stage : MonoBehaviour
     [SerializeField, Header("敵たち")]
     private GameObject[] enemies = new GameObject[0];
 
-    [SerializeField,Header("拠点")]
+    [SerializeField, Header("拠点")]
     private GameObject baseCamp = null;
 
     [SerializeField, Header("天気が1周する時間")]
@@ -48,10 +48,10 @@ public class Stage : MonoBehaviour
     //スコア
     private float currentScore;
 
-    [SerializeField,Header("星3つスコア")]
+    [SerializeField, Header("星3つスコア")]
     private int threeStarsScore = 6000;
 
-    [SerializeField,Header("星2つスコア")]
+    [SerializeField, Header("星2つスコア")]
     private int twoStarsScore = 4000;
 
     //[SerializeField,Header("星1つスコア")]
@@ -67,9 +67,9 @@ public class Stage : MonoBehaviour
     public MemberControl[] MemberControllers { get => memberControllers; set => memberControllers = value; }
     public Playercontrol PlayerController { get => playerController; set => playerController = value; }
     public float CurrentScore { get => currentScore; set => currentScore = value; }
-    public int ThreeStarsScore { get => threeStarsScore;}
-    public int TwoStarsScore { get => twoStarsScore;}
-    
+    public int ThreeStarsScore { get => threeStarsScore; }
+    public int TwoStarsScore { get => twoStarsScore; }
+
 
     //public int OneStarScore { get => oneStarScore; }
 
@@ -145,22 +145,22 @@ public class Stage : MonoBehaviour
             }
         }
 
-        if (deadMember == memberMaxValue)
+        if (deadMember > 0)
         {
             GamePlayManager.instance.GameState = GamePlayStates.GameOver;
             var uiManager = GamePlayManager.instance.UIManager;
             uiManager.PlayUIActiveFalse();
             uiManager.PauseUI.SetActive(false);
-            BGMManager.instance.StopBGM();     //本当ならGameOverBGM
+            BGMManager.instance.StopBGM();
         }
 
-        else if (deadMember + hubMember == memberMaxValue)
+        else if (hubMember == memberMaxValue)
         {
             GamePlayManager.instance.GameState = GamePlayStates.Clear;
             var uiManager = GamePlayManager.instance.UIManager;
             uiManager.PlayUIActiveFalse();
             uiManager.PauseUI.SetActive(false);
-            BGMManager.instance.StopBGM();     //本当ならGameClearBGM
+            BGMManager.instance.ChangeBGM(2, 0.07f);   //本当ならGameClearBGM
         }
 
         hubMember = 0;
