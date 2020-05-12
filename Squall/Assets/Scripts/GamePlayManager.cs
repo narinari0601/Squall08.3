@@ -277,16 +277,15 @@ public class GamePlayManager : MonoBehaviour
             GameOver();
         }
 
-        //NextStage();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            NextStage();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    NextStage();
+        //}
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            RetryScene();
+            BGMManager.instance.ChangeBGM(0, 0.04f);
+            StageInitialize();
         }
         
         

@@ -341,7 +341,7 @@ public class MemberControl : MonoBehaviour
         }
         onDamageFlag = true;
 
-        for(int i = 0;i<10;i++)
+        for(int i = 0;i<20;i++)
         {
             spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
             yield return new WaitForSeconds(0.05f);

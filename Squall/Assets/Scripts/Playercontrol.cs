@@ -255,7 +255,7 @@ public class Playercontrol : MonoBehaviour
         {
             transform.position = transform.position + damagevelocity;
             damagevelocity -= savevelocity / 5;
-            Debug.Log(damagevelocity);
+            //Debug.Log(damagevelocity);
             
         }
        // transform.position *= Time.deltaTime;
@@ -276,14 +276,49 @@ public class Playercontrol : MonoBehaviour
             Debug.Log("Hit");
             mashcount++;
         }
-        //if (collision.gameObject.tag == "Enemy")
-        //{
-        //    if (mutekitime == 0)
-        //    {
-        //        mutekitime = 300;
-        //        HP--;
-        //        _audio.PlayOneShot(_se);
-        //    }
-        //}
+        if (collision.gameObject.tag == "Enemy")
+        {
+            //if (mutekitime == 0)
+            //{
+            //    mutekitime = 300;
+            //    HP--;
+            //    _audio.PlayOneShot(_se);
+            //}
+            //菅原追加
+            if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
+            {
+                DamageSprite();//点滅処理
+            }
+                
+                
+        }
+    }
+
+    //以下菅原追加
+    private bool onPlayerDamageFlag;
+    public SpriteRenderer spriteRenderer;
+    //Playerの画像
+    //private GameObject playerSprite;
+    public void DamageSprite()
+    {
+        StartCoroutine("WaitSpriteAlpha");
+    }
+    IEnumerator WaitSpriteAlpha()
+    {
+        if (onPlayerDamageFlag)
+        {
+            yield break;
+        }
+        onPlayerDamageFlag = true;
+
+        for (int i = 0; i < 20; i++)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+            yield return new WaitForSeconds(0.05f);
+
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(0.05f);
+        }
+        onPlayerDamageFlag = false;
     }
 }

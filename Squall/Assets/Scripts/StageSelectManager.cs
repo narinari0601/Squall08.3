@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class StageSelectManager : MonoBehaviour
 {
+    [SerializeField,Header("音源")]
+    private AudioClip[] clips = new AudioClip[0];
+
+    private AudioSource audioSource;
+
+
     [SerializeField, Header("ステージ")]
     private GameObject[] stagePrefabs = new GameObject[0];
 
@@ -26,6 +32,9 @@ public class StageSelectManager : MonoBehaviour
 
     private Vector3 cursolDelay;
 
+    private bool isControl;  //操作できるならtrue
+
+
     void Start()
     {
         stageValue = stagePrefabs.Length;
@@ -41,6 +50,12 @@ public class StageSelectManager : MonoBehaviour
 
         cursolDelay = new Vector3(-100, 0, 0);
 
+        isControl = true;
+
+
+        audioSource = GetComponent<AudioSource>();
+
+
         if (!BGMManager.instance.SameBGM(1))
         {
             BGMManager.instance.ChangeBGM(1, 0.07f);
@@ -51,11 +66,14 @@ public class StageSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StageSelect();
+        if (isControl)
+        {
+            StageSelect();
 
-        StageSelectToGame();
+            StageSelectToGame();
 
-        StageSelectToTitle();
+            StageSelectToTitle();
+        }
     }
 
     private void StageSelect()
@@ -97,8 +115,10 @@ public class StageSelectManager : MonoBehaviour
             // イベントに登録
             //SceneManager.sceneLoaded += GameSceneLoaded;
 
-            // シーン切り替え
-            SceneManager.LoadScene("GameScene");
+            audioSource.PlayOneShot(clips[0]);
+            isControl = false;
+
+            StartCoroutine("LoadPreparation");
         }
     }
 
@@ -120,5 +140,19 @@ public class StageSelectManager : MonoBehaviour
 
         // イベントから削除
         SceneManager.sceneLoaded -= GameSceneLoaded;
+    }
+
+    private IEnumerator LoadPreparation()
+    {
+        while (true)
+        {
+            yield return new WaitForFixedUpdate();
+            if (!audioSource.isPlaying)
+            {
+                // シーン切り替え
+                SceneManager.LoadScene("GameScene");
+                break;
+            }
+        }
     }
 }

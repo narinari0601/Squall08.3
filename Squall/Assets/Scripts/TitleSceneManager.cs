@@ -18,11 +18,25 @@ public class TitleSceneManager : MonoBehaviour
 
     private int selectValue;
 
+    private bool isControl;
+
+
+    //音関連
+    [SerializeField,Header("音源")]
+    private AudioClip[] audioClips = new AudioClip[0];
+
+    private AudioSource audioSource;
+
+
+
     void Start()
     {
         cursolPos = cursolImage.transform as RectTransform;
         selectNum = 0;
         selectValue = selectedObjcts.Length;
+        isControl = true;
+
+        audioSource = GetComponent<AudioSource>();
 
         if (!BGMManager.instance.SameBGM(1))
         {
@@ -37,9 +51,12 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CursolMove();
+        if (isControl)
+        {
+            CursolMove();
 
-        SelectScene();
+            SelectScene();
+        }
     }
 
     private void CursolMove()
@@ -93,7 +110,26 @@ public class TitleSceneManager : MonoBehaviour
 
     public void TitleToStageSelect()
     {
-        SceneManager.LoadScene("StageSelectScene");
+        audioSource.PlayOneShot(audioClips[0]);
+        isControl = false;
+
+        StartCoroutine("LoadPreparation");
+
+        //SceneManager.LoadScene("StageSelectScene");
+    }
+
+    private IEnumerator LoadPreparation()
+    {
+        while (true)
+        {
+            yield return new WaitForFixedUpdate();
+            if (!audioSource.isPlaying)
+            {
+                // シーン切り替え
+                SceneManager.LoadScene("StageSelectScene");
+                break;
+            }
+        }
     }
 
     public void GameEnd()
