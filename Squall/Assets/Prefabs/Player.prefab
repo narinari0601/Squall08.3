@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
+  spriteRenderer: {fileID: 7575307596041684965}
 --- !u!82 &387896445533993959
 AudioSource:
   m_ObjectHideFlags: 0
