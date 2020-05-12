@@ -121,7 +121,17 @@ public class BasedirectionUI : MonoBehaviour
 
         baseCampCameraPosition = m_camera.WorldToScreenPoint(baseCamp.transform.position);
 
-       
+
+        if (baseCampCameraPosition.x > -20 && baseCampCameraPosition.x < 1280 && baseCampCameraPosition.y > 0 && baseCampCameraPosition.y < 710)
+        {
+            SetActive(false);
+        }
+        else
+        {
+            SetActive(true);
+
+        }
+
 
         if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
@@ -136,15 +146,7 @@ public class BasedirectionUI : MonoBehaviour
 
         }
 
-        if (baseCampCameraPosition.x >-20 && baseCampCameraPosition.x < 1280 && baseCampCameraPosition.y > 0 && baseCampCameraPosition.y < 710)
-        {
-            SetActive(false);
-        }
-        else
-        {
-            SetActive(true);
-
-        }
+       
 
 
 
