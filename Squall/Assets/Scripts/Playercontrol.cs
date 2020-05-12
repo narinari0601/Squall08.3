@@ -104,67 +104,31 @@ public class Playercontrol : MonoBehaviour
                 return;
 
             wind = new Vector3(0, 0, 0);
-
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 _direc = Direc.UP;
                 velocity += new Vector3(0, 0, 0.1f);
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    anim.SetInteger("Direction", 0);
-                }
+                anim.SetInteger("Direction", 0);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
                 velocity += new Vector3(0, 0, -0.1f);
                 _direc = Direc.DOWN;
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    anim.SetInteger("Direction", 1);
-                }
+                anim.SetInteger("Direction", 1);
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 velocity += new Vector3(-0.1f, 0, 0);
                 _direc = Direc.LEFT;
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    anim.SetInteger("Direction", 2);
-                }
+                anim.SetInteger("Direction", 2);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 velocity += new Vector3(0.1f, 0, 0);
                 _direc = Direc.RIGHT;
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    anim.SetInteger("Direction", 3);
-                }
-            }
 
-            if (Mathf.Abs(velocity.x) > Mathf.Abs(velocity.z))
-            {
-                if (velocity.x < 0)
-                {
-                    anim.SetInteger("Direction", 2);
-                }
-                else if (velocity.x > 0)
-                {
-                    anim.SetInteger("Direction", 3);
-                }
+                anim.SetInteger("Direction", 3);
             }
-            if (Mathf.Abs(velocity.x) < Mathf.Abs(velocity.z))
-            {
-                if (velocity.z< 0)
-                {
-                    anim.SetInteger("Direction", 1);
-                }
-                else if (velocity.z > 0)
-                {
-                    anim.SetInteger("Direction", 0);
-                }
-            }
-            
             if (velocity.x * velocity.x + velocity.z * velocity.z > 0.01)
             {
                 if (velocity.x < 0)
@@ -291,7 +255,8 @@ public class Playercontrol : MonoBehaviour
         {
             transform.position = transform.position + damagevelocity;
             damagevelocity -= savevelocity / 5;
-        
+            Debug.Log(damagevelocity);
+            
         }
        // transform.position *= Time.deltaTime;
     }
