@@ -43,6 +43,19 @@ public class OverviewUI : MonoBehaviour
 
     private RectTransform scenePanelRect;
 
+    private Vector3 initScenePos;
+    private Vector3 initSceneScale;
+
+    private Vector3 endScenePos;
+    private Vector3 endSceneScale;
+    private bool isScenePanelMoveEnd = false;
+    private float moveTimer;
+
+    [SerializeField,Header("フェード用パネル")]
+    private GameObject fadePanel = null;
+    private Image fadeImage;
+    private float fadeAlpha;
+
 
     void Start()
     {
@@ -51,15 +64,34 @@ public class OverviewUI : MonoBehaviour
 
     public void Initialize()
     {
+
+        
         mapCamera = GamePlayManager.instance.CameraController.MapCamera;
         initPos = mapCamera.transform.position;
         startPanel.SetActive(true);
         outPanel.SetActive(false);
         isStart = false;
         scenePanelRect = scenePanel.transform as RectTransform;
-        //Debug.Log(scenePanelRect.transform.position);
 
         SetActive(true);
+
+        if (!isScenePanelMoveEnd)
+        {
+            initScenePos = scenePanelRect.transform.position;
+            initSceneScale = new Vector3(1, 1, 1);
+            endScenePos = new Vector3(140.0f, 630.0f, 0.0f);
+            endSceneScale = new Vector3(0.4f, 0.4f, 0.4f);
+            //initScenePos = RectTransformUtility.WorldToScreenPoint(Camera.main, scenePanel.transform.position);
+
+            scenePanelRect.transform.position = initScenePos;
+
+            moveTimer = 1.0f;
+            fadeAlpha = 0.9f;
+            fadeImage = fadePanel.GetComponent<Image>();
+        }
+        
+
+        
     }
 
 
@@ -70,6 +102,8 @@ public class OverviewUI : MonoBehaviour
             startPanel.SetActive(false);
             outPanel.SetActive(true);
         }
+
+        ScenePanelMove();
     }
 
     public void SetActive(bool value)
@@ -124,5 +158,42 @@ public class OverviewUI : MonoBehaviour
     {
         if(!isStart)
         isStart = true;
+    }
+
+    public void ScenePanelMove()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            scenePanelRect.transform.position = initScenePos;
+            scenePanelRect.transform.localScale = initSceneScale;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            scenePanelRect.transform.position = endScenePos;
+            scenePanelRect.transform.localScale = endSceneScale;
+        }
+
+        moveTimer -= Time.deltaTime;
+
+        if (moveTimer > 0)
+            return;
+
+
+        if (scenePanelRect.transform.position.x < endScenePos.x && scenePanelRect.transform.position.y > endScenePos.y)
+        {
+            scenePanelRect.transform.position = endScenePos;
+            isScenePanelMoveEnd = true;
+        }
+
+        if (!isScenePanelMoveEnd)
+        {
+            fadeAlpha -= 0.02f;
+            fadeImage.color = new Color(0, 0, 0, fadeAlpha);
+            var pos = (endScenePos - initScenePos) / 60;
+            var scale = 0.01f;
+            scenePanelRect.transform.position += pos;
+            scenePanelRect.transform.localScale -= new Vector3(scale, scale, 0);
+        }
     }
 }
