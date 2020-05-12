@@ -79,7 +79,7 @@ public class OverviewUI : MonoBehaviour
         {
             initScenePos = scenePanelRect.transform.position;
             initSceneScale = new Vector3(1, 1, 1);
-            endScenePos = new Vector3(140.0f, 630.0f, 0.0f);
+            endScenePos = new Vector3(140.0f, 670.0f, 0.0f);
             endSceneScale = new Vector3(0.4f, 0.4f, 0.4f);
             //initScenePos = RectTransformUtility.WorldToScreenPoint(Camera.main, scenePanel.transform.position);
 
