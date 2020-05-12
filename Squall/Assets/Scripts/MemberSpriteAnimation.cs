@@ -27,7 +27,7 @@ public class MemberSpriteAnimation : MonoBehaviour
     void Update()
     {
         AnimeStart();
-        MemberAni();
+        //MemberAni();
     }
  
     public void AnimeStart()

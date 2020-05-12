@@ -21,6 +21,8 @@ public class BasedirectionUI : MonoBehaviour
 
     BaseCamp campScript;
 
+    private Vector3 baseCampCameraPosition;
+
     public GameObject BaseCamp { get => baseCamp;}
 
     // Start is called before the first frame update
@@ -67,7 +69,7 @@ public class BasedirectionUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        flag = campScript.IsCameraCheck();
+        //flag = campScript.IsCameraCheck();
         //float speed = 0.1f;
 
         //Vector3 relativePos = baseCamp.transform.position - baseUI.transform.position;
@@ -96,26 +98,30 @@ public class BasedirectionUI : MonoBehaviour
         //    player = GameObject.FindGameObjectWithTag("Player");
         //}
         baseUI.transform.position = m_camera.WorldToScreenPoint(baseCamp.transform.position);
-        if(baseUI.transform.position.x < 60)//60
+        if(baseUI.transform.position.x <55 )//60
         {
-            baseUI.transform.position = new Vector3(60,baseUI.transform.position.y,baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(55,baseUI.transform.position.y,baseUI.transform.position.z);
         }
         if (baseUI.transform.position.x > 1180)//220
         {
             baseUI.transform.position = new Vector3(1180, baseUI.transform.position.y, baseUI.transform.position.z);
         }
-        if (baseUI.transform.position.y < 45)//50
+        if (baseUI.transform.position.y < 50)//50
         {
-            baseUI.transform.position = new Vector3(baseUI.transform.position.x,45, baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(baseUI.transform.position.x,50, baseUI.transform.position.z);
         }
-        if (baseUI.transform.position.y > 630)//70
+        if (baseUI.transform.position.y > 640)//70   630
         {
-            baseUI.transform.position = new Vector3(baseUI.transform.position.x,630, baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(baseUI.transform.position.x,640, baseUI.transform.position.z);
         }
 
         //拠点とＵＩの距離を求め,表示する
         distance = (int)Vector3.Distance(m_camera.WorldToScreenPoint(player.transform.position), m_camera.WorldToScreenPoint(baseCamp.transform.position))/10;
         text.text = (distance-5).ToString() + "m";
+
+        baseCampCameraPosition = m_camera.WorldToScreenPoint(baseCamp.transform.position);
+
+       
 
         if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
@@ -130,17 +136,29 @@ public class BasedirectionUI : MonoBehaviour
 
         }
 
-        if (flag == true || GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)//campScript.IsCameraCheck()
+        if (baseCampCameraPosition.x >-20 && baseCampCameraPosition.x < 1280 && baseCampCameraPosition.y > 0 && baseCampCameraPosition.y < 710)
         {
-            //baseUI.SetActive(false);
             SetActive(false);
+        }
+        else
+        {
+            SetActive(true);
 
         }
-        else /*if (!flag && GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)*/
-        {
-            //baseUI.SetActive(true);
-            SetActive(true);
-        }
+
+
+
+        //if (flag == true || GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)//campScript.IsCameraCheck()
+        //{
+        //    //baseUI.SetActive(false);
+        //    SetActive(false);
+
+        //}
+        //else /*if (!flag && GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)*/
+        //{
+        //    //baseUI.SetActive(true);
+        //    SetActive(true);
+        //}
 
         //if (!flag && GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Play)
         //{
