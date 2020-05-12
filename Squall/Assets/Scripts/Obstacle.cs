@@ -13,6 +13,7 @@ public class Obstacle : MonoBehaviour
     int damagetime;
     AudioSource _audio;
     AudioClip hitse;
+    float acttime;
     //
     RippleUI rippleUI;
     //
@@ -37,8 +38,16 @@ public class Obstacle : MonoBehaviour
             damagetime--;
             gameObject.layer = 12;
         }
+        else if (acttime > 0)
+        {
+            acttime--;
+
+            Attack();
+
+        }
         else
         {
+
             gameObject.layer = 0;
             if (GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
             {
@@ -57,9 +66,10 @@ public class Obstacle : MonoBehaviour
                 {
                     transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = sun;
                 }
-               // gameObject.GetComponent<Renderer>().material = sunmaterial;
-             
+                // gameObject.GetComponent<Renderer>().material = sunmaterial;
+               
             }
+            
         }
     }
     void OnCollisionEnter(Collision collision)
@@ -81,9 +91,28 @@ public class Obstacle : MonoBehaviour
             GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall &&
             damagetime == 0)  
         {
+            acttime = 180;
             collision.gameObject.GetComponent<Playercontrol>().Damage(
                 (collision.transform.position - transform.position).normalized);
         }
+    }
+    public void Attack()
+    {
+       
+        if (acttime % 30 == 0) 
+        {
+            if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != rain)
+            {
+                transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = rain;
+
+            }
+           else if (transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite != sun)
+            {
+                transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = sun;
+
+            }
+        }
+      
     }
     public void Initialize()
     {
