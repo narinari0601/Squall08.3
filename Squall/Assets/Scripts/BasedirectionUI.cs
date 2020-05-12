@@ -102,17 +102,17 @@ public class BasedirectionUI : MonoBehaviour
         {
             baseUI.transform.position = new Vector3(55,baseUI.transform.position.y,baseUI.transform.position.z);
         }
-        if (baseUI.transform.position.x > 1180)//220
+        if (baseUI.transform.position.x > 1220)//220
         {
-            baseUI.transform.position = new Vector3(1180, baseUI.transform.position.y, baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(1220, baseUI.transform.position.y, baseUI.transform.position.z);
         }
         if (baseUI.transform.position.y < 50)//50
         {
             baseUI.transform.position = new Vector3(baseUI.transform.position.x,50, baseUI.transform.position.z);
         }
-        if (baseUI.transform.position.y > 640)//70   630
+        if (baseUI.transform.position.y > 660)//70   630
         {
-            baseUI.transform.position = new Vector3(baseUI.transform.position.x,640, baseUI.transform.position.z);
+            baseUI.transform.position = new Vector3(baseUI.transform.position.x,660, baseUI.transform.position.z);
         }
 
         //拠点とＵＩの距離を求め,表示する
@@ -120,6 +120,7 @@ public class BasedirectionUI : MonoBehaviour
         text.text = (distance-5).ToString() + "m";
 
         baseCampCameraPosition = m_camera.WorldToScreenPoint(baseCamp.transform.position);
+
 
 
         if (baseCampCameraPosition.x > -20 && baseCampCameraPosition.x < 1280 && baseCampCameraPosition.y > 0 && baseCampCameraPosition.y < 710)
@@ -132,7 +133,6 @@ public class BasedirectionUI : MonoBehaviour
 
         }
 
-
         if (GamePlayManager.instance.GameState == GamePlayManager.GamePlayStates.Map)
         {
             //baseUI.SetActive(false);
@@ -142,7 +142,7 @@ public class BasedirectionUI : MonoBehaviour
         else
         {
             //baseUI.SetActive(true);
-            SetActive(true);
+            //SetActive(true);
 
         }
 
