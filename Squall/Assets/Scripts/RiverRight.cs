@@ -25,7 +25,7 @@ public class RiverRight : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         var obj = other.gameObject;
 
