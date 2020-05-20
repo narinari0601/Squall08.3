@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class StageSelectManager : MonoBehaviour
 {
+    public static StageSelectManager instance = null;
+
+
     [SerializeField,Header("音源")]
     private AudioClip[] clips = new AudioClip[0];
 
@@ -14,10 +17,14 @@ public class StageSelectManager : MonoBehaviour
 
     [SerializeField, Header("ステージ")]
     private GameObject[] stagePrefabs = new GameObject[0];
+    
+    private  List<GameObject> stageList;
 
     private int stageValue;
 
-    public static int stageNum = 0;
+    private int stageNum = 0;
+
+    private int releasedStageValue;
 
     //選択関連
     [SerializeField, Header("選択カーソル")]
@@ -25,26 +32,71 @@ public class StageSelectManager : MonoBehaviour
 
     private RectTransform cursolRect;
 
-    [SerializeField, Header("選択オブジェクト達")]
-    private GameObject[] selectObjcts = new GameObject[0];
+    [SerializeField,Header("選択パネルUI")]
+    private GameObject stageSelectPanelObj = null;
+
+    private StageSelectPanelUI selectPanelUI;
+
+    //[SerializeField, Header("選択オブジェクト達")]
+    private GameObject[] selectObjcts;
 
     private RectTransform[] selectRects;
+
+    private int selectedValue;  //選択できるステージの数
 
     private Vector3 cursolDelay;
 
     private bool isControl;  //操作できるならtrue
 
+    [SerializeField,Header("確認用")]
+    private Dictionary<int, bool> releasedValues;
 
-    void Start()
+    public List<GameObject> StageList { get => stageList; }
+    public int StageValue { get => stageValue; }
+    public int StageNum { get => stageNum;}
+    public GameObject[] SelectObjcts { get => selectObjcts; set => selectObjcts = value; }
+
+    private void Awake()
     {
-        stageValue = stagePrefabs.Length;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+        Initialize();
+    }
+    
+
+    private void Initialize()
+    {
+        StageData.SetStagePrefab(stagePrefabs);
+        StageData.DataInitialize();
+
+        stageList = StageData.StageList;
+
+        stageNum = StageData.StageNum;
+
+        stageValue = stageList.Count;
+
+        releasedStageValue = StageData.releasedStageValue();
+
+        selectObjcts = new GameObject[StageValue];
+
+        selectPanelUI = stageSelectPanelObj.GetComponent<StageSelectPanelUI>();
+        selectPanelUI.Initialize();
+
 
         selectRects = new RectTransform[stageValue];
 
-        for (int i = 1; i < stageValue; i++)
+        for (int i = 0; i < stageValue; i++)
         {
             selectRects[i] = selectObjcts[i].transform as RectTransform;
         }
+
 
         cursolRect = cursolImage.transform as RectTransform;
 
@@ -60,12 +112,12 @@ public class StageSelectManager : MonoBehaviour
         {
             BGMManager.instance.ChangeBGM(1, 0.07f);
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (isControl)
         {
             StageSelect();
@@ -74,13 +126,26 @@ public class StageSelectManager : MonoBehaviour
 
             StageSelectToTitle();
         }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameEnd();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            StageData.ReleaseAllStage();
+            releasedStageValue = StageData.releasedStageValue();
+        }
     }
 
     private void StageSelect()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (stageNum == stageValue - 2)
+            if (stageNum == releasedStageValue-1)
             {
                 stageNum = 0;
             }
@@ -95,7 +160,7 @@ public class StageSelectManager : MonoBehaviour
         {
             if (stageNum == 0)
             {
-                stageNum = stageValue - 2;
+                stageNum = releasedStageValue - 1;
             }
 
             else
@@ -104,7 +169,7 @@ public class StageSelectManager : MonoBehaviour
             }
         }
 
-        cursolRect.transform.position = selectRects[stageNum+1].transform.position + cursolDelay;
+        cursolRect.transform.position = selectRects[stageNum].transform.position + cursolDelay;
 
     }
 
@@ -117,6 +182,7 @@ public class StageSelectManager : MonoBehaviour
 
             audioSource.PlayOneShot(clips[0]);
             isControl = false;
+            StageData.StageNum = stageNum;
 
             StartCoroutine("LoadPreparation");
         }
@@ -154,5 +220,14 @@ public class StageSelectManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void GameEnd()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 }

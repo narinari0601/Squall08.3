@@ -11,8 +11,6 @@ public class Stage : MonoBehaviour
 
     private Playercontrol playerController;
 
-    private Vector3 playerInitPos;
-
     [SerializeField, Header("仲間たち")]
     private GameObject[] members = new GameObject[0];
 
@@ -68,6 +66,7 @@ public class Stage : MonoBehaviour
 
     //スコア
     private float currentScore;
+    
 
     [SerializeField, Header("星3つスコア")]
     private int threeStarsScore = 6000;
@@ -116,8 +115,6 @@ public class Stage : MonoBehaviour
         playerObj.GetComponent<Playercontrol>().Initialize();
         GamePlayManager.instance.Player = playerObj;
         playerController = playerObj.GetComponent<Playercontrol>();
-
-        playerInitPos = playerObj.transform.position;
 
         GamePlayManager.instance.CameraController = GamePlayManager.instance.MainCamera.GetComponent<CameraController>();
         GamePlayManager.instance.CameraController.Initialize();
@@ -217,10 +214,18 @@ public class Stage : MonoBehaviour
         else if (hubMember == memberMaxValue)
         {
             GamePlayManager.instance.GameState = GamePlayStates.Clear;
+
+            if (currentScore >= StageData.HighScores[GamePlayManager.instance.StageNum])
+            {
+                StageData.HighScores[GamePlayManager.instance.StageNum] = currentScore;
+            }
+
+            StageData.StageClear(GamePlayManager.instance.StageNum + 1);
+
             var uiManager = GamePlayManager.instance.UIManager;
             uiManager.PlayUIActiveFalse();
             uiManager.PauseUI.SetActive(false);
-            BGMManager.instance.ChangeBGM(2, 0.07f);   //本当ならGameClearBGM
+            BGMManager.instance.ChangeBGM(2, 0.07f);   
         }
 
         hubMember = 0;

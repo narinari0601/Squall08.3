@@ -90,7 +90,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField,Header("ステージ")]
     private GameObject[] stagePrefabs = new GameObject[0];
 
-    //private List<GameObject> stageList;
+    private List<GameObject> stageList;
 
     private Stage currentStage;
 
@@ -130,6 +130,7 @@ public class GamePlayManager : MonoBehaviour
     public GameObject[] NavBakes { get => navBakes; set => navBakes = value; }
     public CameraController CameraController { get => cameraController; set => cameraController = value; }
     public GameObject MainCamera { get => mainCamera; set => mainCamera = value; }
+    public int StageNum { get => stageNum; set => stageNum = value; }
 
     private void Awake()
     {
@@ -148,8 +149,7 @@ public class GamePlayManager : MonoBehaviour
 
     private void Initialize()
     {
-
-        stageNum = StageSelectManager.stageNum+1;
+        stageNum = StageData.StageNum;
 
         toatalWeatherRatio = sunRatio + signRatio + squallRatio;
 
@@ -182,7 +182,8 @@ public class GamePlayManager : MonoBehaviour
             currentStage = null;
         }
 
-        var stage = Instantiate(stagePrefabs[stageNum]);
+        //var stage = Instantiate(stagePrefabs[stageNum]);
+        var stage = Instantiate(StageData.StageList[stageNum]);
 
         foreach (var nav in navBakes)
         {
@@ -264,12 +265,6 @@ public class GamePlayManager : MonoBehaviour
             BGMManager.instance.ChangeBGM(0, 0.04f);
             isBGM = true;
         }
-
-        if(stageNum ==0)
-        {
-            NextStage();
-        }
-        
 
         ChangeCamera();
 
@@ -428,7 +423,7 @@ public class GamePlayManager : MonoBehaviour
             stageNum++;
             
 
-            if (stageNum > stagePrefabs.Length - 1)
+            if (stageNum > StageData.StageList.Count-1)
             {
                 stageNum = 0;
             }
@@ -539,7 +534,7 @@ public class GamePlayManager : MonoBehaviour
 
     public void GameToStageSelect()
     {
-        StageSelectManager.stageNum = stageNum - 1;
+        StageData.StageNum = stageNum;
         SceneManager.LoadScene("StageSelectScene");
     }
 
