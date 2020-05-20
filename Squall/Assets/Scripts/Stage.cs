@@ -11,8 +11,6 @@ public class Stage : MonoBehaviour
 
     private Playercontrol playerController;
 
-    private Vector3 playerInitPos;
-
     [SerializeField, Header("仲間たち")]
     private GameObject[] members = new GameObject[0];
 
@@ -30,14 +28,35 @@ public class Stage : MonoBehaviour
     [SerializeField, Header("拠点")]
     private GameObject baseCamp = null;
 
+
+    //天気関連
     [SerializeField, Header("天気が1周する時間")]
     private float weatherRotateTime = 0;
+    
+    private const float SUN_RATIO = 2;
+    
+    private const float SIGN_RATIO = 3;
+    
+    private const float SQUALL_RATIO = 5;
 
+    private const float TOATAL_WEATHER_RATIO = 10;  //天候比の合計
+
+    private float currentWeatherTimer;
+
+    //風関連
     [SerializeField, Header("風の強さ")]
     private float windPower = 0;
 
     [SerializeField, Header("風の方向を順番に")]
     private SquallDirections[] squallDirArray = new SquallDirections[0];
+    
+    private List<SquallDirections> squallDirList;
+
+    private int squallCount;  //何回目のスコールか
+
+    private bool isInsert;
+
+    private SquallDirections interruptDir;  //割り込みスコールの方向
 
 
     //波紋用タイマー
@@ -47,6 +66,7 @@ public class Stage : MonoBehaviour
 
     //スコア
     private float currentScore;
+    
 
     [SerializeField, Header("星3つスコア")]
     private int threeStarsScore = 6000;
@@ -69,6 +89,7 @@ public class Stage : MonoBehaviour
     public float CurrentScore { get => currentScore; set => currentScore = value; }
     public int ThreeStarsScore { get => threeStarsScore; }
     public int TwoStarsScore { get => twoStarsScore; }
+    public bool IsInsert { get => isInsert; set => isInsert = value; }
 
 
     //public int OneStarScore { get => oneStarScore; }
@@ -82,6 +103,11 @@ public class Stage : MonoBehaviour
     void Update()
     {
         //Ripple();
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            InterrectWind(SquallDirections.Up);
+        }
     }
 
     public void Initialize()
@@ -90,7 +116,8 @@ public class Stage : MonoBehaviour
         GamePlayManager.instance.Player = playerObj;
         playerController = playerObj.GetComponent<Playercontrol>();
 
-        playerInitPos = playerObj.transform.position;
+        GamePlayManager.instance.CameraController = GamePlayManager.instance.MainCamera.GetComponent<CameraController>();
+        GamePlayManager.instance.CameraController.Initialize();
 
         memberControllers = new MemberControl[members.Length];
 
@@ -123,6 +150,36 @@ public class Stage : MonoBehaviour
         currentTimer = RIPPLE_TIME;
 
         currentScore = 0;
+
+        GamePlayManager.instance.UIManager.Initialize();
+
+        //天気関連
+        //toatalWeatherRatio = SUN_RATIO + SIGN_RATIO + SQUALL_RATIO;
+
+        //風関連
+        currentWeatherTimer = 0;
+
+        squallCount = 0;
+
+        squallDirList = new List<SquallDirections>();
+
+        for (int i = 0; i < squallDirArray.Length; i++)
+        {
+            squallDirList.Add(squallDirArray[i]);
+        }
+
+        //squallDirection = squallDirArray[0];
+
+        GamePlayManager.instance.SquallDirection = squallDirList[squallCount];
+
+        isInsert = false;
+        interruptDir = SquallDirections.Up;
+
+        var currentDir = (int)squallDirList[(squallCount + 0) % squallDirList.Count];
+        var secondDir = (int)squallDirList[(squallCount + 1) % squallDirList.Count];
+        var thirdDir = (int)squallDirList[(squallCount + 2) % squallDirList.Count];
+
+        GamePlayManager.instance.UIManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
 
     }
 
@@ -157,16 +214,141 @@ public class Stage : MonoBehaviour
         else if (hubMember == memberMaxValue)
         {
             GamePlayManager.instance.GameState = GamePlayStates.Clear;
+
+            if (currentScore >= StageData.HighScores[GamePlayManager.instance.StageNum])
+            {
+                StageData.HighScores[GamePlayManager.instance.StageNum] = currentScore;
+            }
+
+            StageData.StageClear(GamePlayManager.instance.StageNum + 1);
+
             var uiManager = GamePlayManager.instance.UIManager;
             uiManager.PlayUIActiveFalse();
             uiManager.PauseUI.SetActive(false);
-            BGMManager.instance.ChangeBGM(2, 0.07f);   //本当ならGameClearBGM
+            BGMManager.instance.ChangeBGM(2, 0.07f);   
         }
 
         hubMember = 0;
         deadMember = 0;
     }
 
+    public void ChangeWeather()
+    {
+        currentWeatherTimer += Time.deltaTime;
+
+        if (currentWeatherTimer >= weatherRotateTime)
+        {
+            currentWeatherTimer = 0;
+
+            if (isInsert)
+            {
+                if (GamePlayManager.instance.SquallDirection == interruptDir)
+                {
+                    isInsert = false;
+                    squallDirList.RemoveAt(squallCount);
+
+                    squallCount--;
+                    if (squallCount < 0)
+                    {
+                        squallCount = squallDirList.Count - 1;
+                    }
+                }
+            }
+
+            squallCount++;
+
+            //if (squallCount == squallDirArray.Length)
+            //{
+            //    squallCount = 0;
+            //}
+
+            if (squallCount == squallDirList.Count)
+            {
+                squallCount = 0;
+            }
+
+            //squallDirection = squallDirArray[squallCount];
+
+            GamePlayManager.instance.SquallDirection = squallDirList[squallCount];
+        }
+
+        //var weather = GamePlayManager.instance.Weather;
+        //var uiManager = GamePlayManager.instance.UIManager;
+
+        //晴れ
+        if (currentWeatherTimer < SUN_RATIO / TOATAL_WEATHER_RATIO * weatherRotateTime)
+        {
+            var currentDir = (int)squallDirList[(squallCount + 0) % squallDirList.Count];
+            var secondDir = (int)squallDirList[(squallCount + 1) % squallDirList.Count];
+            var thirdDir = (int)squallDirList[(squallCount + 2) % squallDirList.Count];
+            GamePlayManager.instance.UIManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
+
+            GamePlayManager.instance.Weather = WeatherStates.Sun;
+            //Debug.Log("晴れ");
+        }
+
+        //スコール
+        else if (currentWeatherTimer >= (TOATAL_WEATHER_RATIO - SQUALL_RATIO) / TOATAL_WEATHER_RATIO * weatherRotateTime)
+        {
+            GamePlayManager.instance.Weather = WeatherStates.Squall;
+            GamePlayManager.instance.UIManager.WindDirectUI.SetActive(false);
+            //Debug.Log("スコール");
+        }
+
+        //予兆
+        else
+        {
+            GamePlayManager.instance.Weather = WeatherStates.Sign;
+
+            //var currentDir= (int)squallDirArray[(squallCount + 0) % squallDirArray.Length];
+            //var secondDir = (int)squallDirArray[(squallCount + 1) % squallDirArray.Length];
+            //var thirdDir= (int)squallDirArray[(squallCount + 2) % squallDirArray.Length];
+
+            var currentDir = (int)squallDirList[(squallCount + 0) % squallDirList.Count];
+            var secondDir = (int)squallDirList[(squallCount + 1) % squallDirList.Count];
+            var thirdDir = (int)squallDirList[(squallCount + 2) % squallDirList.Count];
+            GamePlayManager.instance.UIManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
+
+            if (GamePlayManager.instance.GameState == GamePlayStates.Play)
+            {
+                GamePlayManager.instance.UIManager.WindDirectUI.SetActive(true);
+            }
+
+            //currentDirect.text = directStrings[(int)squallDirArray[squallCount]];
+            //secondDirect.text = directStrings[(int)secondDir];
+            //thirdDirect.text = directStrings[(int)thirdDir];
+            //Debug.Log("予兆");
+        }
+
+
+    }
+
+    public void InterrectWind(SquallDirections dir)
+    {
+        if (!isInsert)
+        {
+            isInsert = true;
+
+            if (GamePlayManager.instance.Weather == WeatherStates.Squall)
+            {
+                squallDirList.Insert(squallCount + 1, dir);
+            }
+
+            else
+            {
+                squallDirList.Insert(squallCount, dir);
+            }
+
+            interruptDir = dir;
+            GamePlayManager.instance.SquallDirection = squallDirList[squallCount];
+
+            var currentDir = (int)squallDirList[(squallCount + 0) % squallDirList.Count];
+            var secondDir = (int)squallDirList[(squallCount + 1) % squallDirList.Count];
+            var thirdDir = (int)squallDirList[(squallCount + 2) % squallDirList.Count];
+
+            GamePlayManager.instance.UIManager.WindDirectUI.ChangeDirection(currentDir, secondDir, thirdDir);
+        }
+    }
 
     public void Ripple()
     {

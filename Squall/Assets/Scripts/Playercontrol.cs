@@ -108,37 +108,41 @@ public class Playercontrol : MonoBehaviour
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                _direc = Direc.UP;
+               
                 velocity += new Vector3(0, 0, 0.1f);
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    _direc = Direc.UP;
                     anim.SetInteger("Direction", 0);
                 }
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
                 velocity += new Vector3(0, 0, -0.1f);
-                _direc = Direc.DOWN;
+      
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    _direc = Direc.DOWN;
                     anim.SetInteger("Direction", 1);
                 }
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 velocity += new Vector3(-0.1f, 0, 0);
-                _direc = Direc.LEFT;
+                
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
+                    _direc = Direc.LEFT;
                     anim.SetInteger("Direction", 2);
                 }
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 velocity += new Vector3(0.1f, 0, 0);
-                _direc = Direc.RIGHT;
+               
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
+                    _direc = Direc.RIGHT;
                     anim.SetInteger("Direction", 3);
                 }
             }
@@ -147,10 +151,12 @@ public class Playercontrol : MonoBehaviour
             {
                 if (velocity.x < 0)
                 {
+                    _direc = Direc.LEFT;
                     anim.SetInteger("Direction", 2);
                 }
                 else if (velocity.x > 0)
                 {
+                    _direc = Direc.RIGHT;
                     anim.SetInteger("Direction", 3);
                 }
             }
@@ -158,10 +164,12 @@ public class Playercontrol : MonoBehaviour
             {
                 if (velocity.z < 0)
                 {
+                    _direc = Direc.DOWN;
                     anim.SetInteger("Direction", 1);
                 }
                 else if (velocity.z > 0)
                 {
+                    _direc = Direc.UP;
                     anim.SetInteger("Direction", 0);
                 }
             }
