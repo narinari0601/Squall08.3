@@ -51,6 +51,17 @@ public class OverviewUI : MonoBehaviour
     private bool isScenePanelMoveEnd = false;
     private float moveTimer;
 
+    //スコアパネル関連
+    [SerializeField,Header("星3つテキスト")]
+    private Text threeStarsText = null;
+
+    //[SerializeField,Header("ハイスコアテキスト")]
+    //private Text highScoreText = null;
+
+    [SerializeField,Header("現在のポイントテキスト")]
+    private Text currentScoreText = null;
+
+
     [SerializeField,Header("フェード用パネル")]
     private GameObject fadePanel = null;
     private Image fadeImage;
@@ -89,8 +100,8 @@ public class OverviewUI : MonoBehaviour
             fadeAlpha = 0.9f;
             fadeImage = fadePanel.GetComponent<Image>();
         }
-        
 
+        ChangeScore();
         
     }
 
@@ -104,6 +115,8 @@ public class OverviewUI : MonoBehaviour
         }
 
         ScenePanelMove();
+
+        ChangeScore();
     }
 
     public void SetActive(bool value)
@@ -195,5 +208,14 @@ public class OverviewUI : MonoBehaviour
             scenePanelRect.transform.position += pos;
             scenePanelRect.transform.localScale -= new Vector3(scale, scale, 0);
         }
+    }
+
+    private void ChangeScore()
+    {
+        var currentStage = GamePlayManager.instance.CurrentStage;
+
+        threeStarsText.text = "★★★スコア : " + currentStage.ThreeStarsScore;
+        //highScoreText.text = "ハイスコア : " + StageData.HighScores[StageData.StageNum];
+        currentScoreText.text = "今のスコア : " + currentStage.CurrentScore;
     }
 }
