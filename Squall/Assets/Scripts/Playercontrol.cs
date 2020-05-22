@@ -109,7 +109,7 @@ public class Playercontrol : MonoBehaviour
             if (Input.GetKey(KeyCode.UpArrow))
             {
                
-                velocity += new Vector3(0, 0, 0.1f);
+                velocity += new Vector3(0, 0, 0.11f);
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     _direc = Direc.UP;
@@ -118,7 +118,7 @@ public class Playercontrol : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                velocity += new Vector3(0, 0, -0.1f);
+                velocity += new Vector3(0, 0, -0.11f);
       
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
@@ -128,7 +128,7 @@ public class Playercontrol : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                velocity += new Vector3(-0.1f, 0, 0);
+                velocity += new Vector3(-0.11f, 0, 0);
                 
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
@@ -138,7 +138,7 @@ public class Playercontrol : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                velocity += new Vector3(0.1f, 0, 0);
+                velocity += new Vector3(0.11f, 0, 0);
                
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
@@ -178,19 +178,19 @@ public class Playercontrol : MonoBehaviour
             {
                 if (velocity.x < 0)
                 {
-                    velocity.x = 0.1f / -1.4f;
+                    velocity.x = 0.1f / -1.3f;
                 }
                 else if (velocity.x > 0)
                 {
-                    velocity.x = 0.1f / 1.4f;
+                    velocity.x = 0.1f / 1.3f;
                 }
                 if (velocity.z < 0)
                 {
-                    velocity.z = 0.1f / -1.4f;
+                    velocity.z = 0.1f / -1.3f;
                 }
                 else if (velocity.z > 0)
                 {
-                    velocity.z = 0.1f / 1.4f;
+                    velocity.z = 0.1f / 1.3f;
                 }
 
             }
