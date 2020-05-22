@@ -10,6 +10,8 @@ public class TreeTiling : MonoBehaviour
 
     public SpriteRenderer mapTreeSpriteRenderer;
 
+    public SpriteRenderer mapGroundRenderer;
+
     public SpriteRenderer groundSprite;
 
     public GameObject _gameObject;
@@ -47,8 +49,9 @@ public class TreeTiling : MonoBehaviour
             if (groundSprite != null)
             {
                 groundSprite.size = new Vector2(transformX * groundSize, transformY * groundSize);
+                mapGroundRenderer.size = new Vector2(transformX * groundSize, transformY * groundSize);
             }
-
+            check = true;
         }
         
     }
