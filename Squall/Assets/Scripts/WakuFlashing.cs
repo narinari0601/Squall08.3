@@ -29,6 +29,10 @@ public class WakuFlashing : MonoBehaviour
     {
         time += Time.deltaTime * 5.0f * speed;
         color.a = Mathf.Sin(time) * 0.5f + 0.5f;
+        if(color.a <= 0.3)
+        {
+            color.a = 0.3f;
+        }
 
         return color;
     }

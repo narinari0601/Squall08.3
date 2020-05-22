@@ -20,6 +20,7 @@ public class TreeTiling : MonoBehaviour
     private float objectScaleX;
     private float objectScaleY;
 
+    private bool check = false;
 
     private const float spriteSize = 0.64f;
     private const float groundSize = 5.0f;
@@ -29,21 +30,26 @@ public class TreeTiling : MonoBehaviour
     void Start()
     {
         //wallMeshRenderer.enabled = false;
-        transformX = _gameObject.transform.localScale.x/2;
-        transformY = _gameObject.transform.localScale.y/2;
-
-        treeSpriteRenderer.size = new Vector2(transformX * spriteSize, transformY * spriteSize);
-        mapTreeSpriteRenderer.size = new Vector2(transformX * spriteSize, transformY * spriteSize);
-        if(groundSprite != null)
-        {
-            groundSprite.size = new Vector2(transformX * groundSize, transformY *groundSize);
-        }
+       
        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(check == false)
+        {
+            transformX = _gameObject.transform.localScale.x / 2;
+            transformY = _gameObject.transform.localScale.y / 2;
+
+            treeSpriteRenderer.size = new Vector2(transformX * spriteSize, transformY * spriteSize);
+            mapTreeSpriteRenderer.size = new Vector2(transformX * spriteSize, transformY * spriteSize);
+            if (groundSprite != null)
+            {
+                groundSprite.size = new Vector2(transformX * groundSize, transformY * groundSize);
+            }
+
+        }
         
     }
 }
