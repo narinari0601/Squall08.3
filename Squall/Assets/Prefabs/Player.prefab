@@ -243,6 +243,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
+  JumpspriteU: {fileID: 21300010, guid: 3905326509fd81f459a1d74c06a44901, type: 3}
+  JumpspriteD: {fileID: 21300002, guid: 3905326509fd81f459a1d74c06a44901, type: 3}
+  JumpspriteL: {fileID: 21300026, guid: 3905326509fd81f459a1d74c06a44901, type: 3}
+  JumpspriteR: {fileID: 21300018, guid: 3905326509fd81f459a1d74c06a44901, type: 3}
   spriteRenderer: {fileID: 7575307596041684965}
 --- !u!82 &387896445533993959
 AudioSource:

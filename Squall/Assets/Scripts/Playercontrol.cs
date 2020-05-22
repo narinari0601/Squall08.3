@@ -20,7 +20,7 @@ public class Playercontrol : MonoBehaviour
     int mashcount;
     GameObject throwmash;
     Animator anim;
-
+    public Sprite JumpspriteU;   public Sprite JumpspriteD; public Sprite JumpspriteL; public Sprite JumpspriteR;
     //ナリが追加
     private bool isJump;  //ジャンプ中ならtrue
     private MemberList memberList;
@@ -102,14 +102,36 @@ public class Playercontrol : MonoBehaviour
 
 
             if (isJump)
+            {
+                GetComponentInChildren<Animator>().enabled = false;
+                if (_direc == Direc.UP)
+                {
+                   transform.GetChild(0).GetComponent<SpriteRenderer>().sprite= JumpspriteU;
+                }
+                else if (_direc == Direc.DOWN)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteD;
+                }
+                else if (_direc == Direc.LEFT)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteR;
+                }
+                else if (_direc == Direc.RIGHT)
+                {
+     
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteL;
+                }
+                
                 return;
 
+            }
+            GetComponentInChildren<Animator>().enabled = true;
             wind = new Vector3(0, 0, 0);
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
                
-                velocity += new Vector3(0, 0, 0.1f);
+                velocity += new Vector3(0, 0, 0.11f);
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     _direc = Direc.UP;
@@ -118,7 +140,7 @@ public class Playercontrol : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                velocity += new Vector3(0, 0, -0.1f);
+                velocity += new Vector3(0, 0, -0.11f);
       
                 if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
@@ -128,7 +150,7 @@ public class Playercontrol : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                velocity += new Vector3(-0.1f, 0, 0);
+                velocity += new Vector3(-0.11f, 0, 0);
                 
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
@@ -138,7 +160,7 @@ public class Playercontrol : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                velocity += new Vector3(0.1f, 0, 0);
+                velocity += new Vector3(0.11f, 0, 0);
                
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
@@ -178,19 +200,19 @@ public class Playercontrol : MonoBehaviour
             {
                 if (velocity.x < 0)
                 {
-                    velocity.x = 0.1f / -1.4f;
+                    velocity.x = 0.1f / -1.3f;
                 }
                 else if (velocity.x > 0)
                 {
-                    velocity.x = 0.1f / 1.4f;
+                    velocity.x = 0.1f / 1.3f;
                 }
                 if (velocity.z < 0)
                 {
-                    velocity.z = 0.1f / -1.4f;
+                    velocity.z = 0.1f / -1.3f;
                 }
                 else if (velocity.z > 0)
                 {
-                    velocity.z = 0.1f / 1.4f;
+                    velocity.z = 0.1f / 1.3f;
                 }
 
             }
