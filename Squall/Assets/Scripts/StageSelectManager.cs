@@ -100,7 +100,8 @@ public class StageSelectManager : MonoBehaviour
 
         cursolRect = cursolImage.transform as RectTransform;
 
-        cursolDelay = new Vector3(-100, 0, 0);
+        //菅原変更
+        cursolDelay = new Vector3(0, 0, 0);
 
         isControl = true;
 
