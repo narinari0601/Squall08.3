@@ -20,6 +20,11 @@ public class TitleSceneManager : MonoBehaviour
 
     private bool isControl;
 
+    [SerializeField,Header("黒幕")]
+    private GameObject blackPanel = null;
+
+    private float blackTimer;
+
 
     //音関連
     [SerializeField,Header("音源")]
@@ -27,7 +32,16 @@ public class TitleSceneManager : MonoBehaviour
 
     private AudioSource audioSource;
 
-
+    private void Awake()
+    {
+        // PC向けビルドだったらサイズ変更
+        if (Application.platform == RuntimePlatform.WindowsPlayer ||
+        Application.platform == RuntimePlatform.OSXPlayer ||
+        Application.platform == RuntimePlatform.LinuxPlayer)
+        {
+            Screen.SetResolution(1280, 720, true);
+        }
+    }
 
     void Start()
     {
@@ -43,6 +57,9 @@ public class TitleSceneManager : MonoBehaviour
             BGMManager.instance.ChangeBGM(1, 0.07f);
         }
 
+        blackTimer = 0;
+        
+
         //Debug.Log((selectedObjcts[0].transform as RectTransform).position);
         //Debug.Log((selectedObjcts[1].transform as RectTransform).position);
         //Debug.Log(cursolPos.position);
@@ -56,6 +73,18 @@ public class TitleSceneManager : MonoBehaviour
             CursolMove();
 
             SelectScene();
+        }
+
+        blackTimer++;
+        if (blackTimer > 2)
+        {
+            blackPanel.SetActive(false);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameEnd();
         }
     }
 

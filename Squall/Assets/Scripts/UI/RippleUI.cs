@@ -5,19 +5,28 @@ using UnityEngine.UI;
 
 public class RippleUI : MonoBehaviour
 {
-    [SerializeField,Header("Imageオブジェクト達")]
-    private GameObject[] sprites = new GameObject[0];
-    
-    private RectTransform imageRect01;
-    private RectTransform imageRect02;
-    private RectTransform imageRect03;
+    //[SerializeField,Header("Imageオブジェクト達")]
+    //private GameObject[] sprites = new GameObject[0];
+
+    [SerializeField, Header("波紋")]
+    private GameObject ripple = null;
+
+    [SerializeField,Header("波紋のテクスチャたち")]
+    private Sprite[] rippleSprites = new Sprite[0];
+
+    //private RectTransform imageRect01;
+    //private RectTransform imageRect02;
+    //private RectTransform imageRect03;
+
+    private RectTransform rippleRect;
 
     [SerializeField, Header("発信者")]
     private GameObject senderObj = null;
 
-    private bool isActive01;
-    private bool isActive02;
-    private bool isActive03;
+    //private bool isActive01;
+    //private bool isActive02;
+    //private bool isActive03;
+    private bool isActive;
 
     private const float RIRGT_MAX = 1280;
     private const float LEFT_MAX = 0;
@@ -26,22 +35,26 @@ public class RippleUI : MonoBehaviour
     private const float SIZEDELTA_MAX = 256;  //波紋が消える大きさ
     private const float BORDERLINE01 = 100;    //波紋が3つから2つになるHP固定値
     private const float BORDERLINE02 = 50;    //波紋が2つから1つになるHP固定値
-    
-    private Vector2 rippleScale01;
-    private Vector2 rippleScale02;
-    private Vector2 rippleScale03;
-    
-    private float rippleAlfa01;
-    private float rippleAlfa02;
-    private float rippleAlfa03;
+
+    //private Vector2 rippleScale01;
+    //private Vector2 rippleScale02;
+    //private Vector2 rippleScale03;
+    private Vector2 rippleScale;
+
+    //private float rippleAlfa01;
+    //private float rippleAlfa02;
+    //private float rippleAlfa03;
+    private float rippleAlfa;
 
     private float red, green, blue;
-    
-    private Image spriteImage01;
-    private Image spriteImage02;
-    private Image spriteImage03;
 
-    private bool isMember;
+    //private Image spriteImage01;
+    //private Image spriteImage02;
+    //private Image spriteImage03;
+
+    private Image rippleImage;
+
+    //private bool isMember;
 
     private MemberControl memberControl;
     private float memberMaxHp;
@@ -57,45 +70,59 @@ public class RippleUI : MonoBehaviour
 
     public void Initialize()
     {
-        if (senderObj.tag == "Member")
-            isMember = true;
+        //if (senderObj.tag == "Member")
+        //    isMember = true;
 
-        else
-            isMember = false;
-        
-        isActive01 = false;
-        
-        imageRect01 = sprites[0].transform as RectTransform;
-        
-        rippleScale01 = Vector2.zero;
-        rippleScale02 = Vector2.zero;
-        rippleScale03 = Vector2.zero;
-        
-        spriteImage01 = sprites[0].GetComponent<Image>();
-        
-        rippleAlfa01 = 1.5f;
-        rippleAlfa02 = 1.5f;
-        rippleAlfa03 = 1.5f;
+        //else
+        //    isMember = false;
 
-        red = spriteImage01.color.r;
-        green = spriteImage01.color.g;
-        blue = spriteImage01.color.b;
+        //isActive01 = false;
+
+        isActive = false;
+
+        //imageRect01 = sprites[0].transform as RectTransform;
+
+        rippleRect = ripple.GetComponent<RectTransform>();
+
+        //rippleScale01 = Vector2.zero;
+        //rippleScale02 = Vector2.zero;
+        //rippleScale03 = Vector2.zero;
+
+        rippleScale = Vector2.zero;
+
+        //spriteImage01 = sprites[0].GetComponent<Image>();
+
+        rippleImage = ripple.GetComponent<Image>();
+
+        //rippleAlfa01 = 1.5f;
+        //rippleAlfa02 = 1.5f;
+        //rippleAlfa03 = 1.5f;
+
+        rippleAlfa = 1.5f;
+
+        //red = spriteImage01.color.r;
+        //green = spriteImage01.color.g;
+        //blue = spriteImage01.color.b;
+
+        red = rippleImage.color.r;
+        green = rippleImage.color.g;
+        blue = rippleImage.color.b;
 
         //memberControl = transform.parent.gameObject.GetComponent<MemberControl>();
         //memberMaxHp = memberControl.GetMaxMemberHp();
         //currentMemberHp = memberControl.GetMemberHp();
         //hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
 
-        if (isMember)
+        //if (isMember)
         {
-            isActive02 = false;
-            isActive03 = false;
+            //isActive02 = false;
+            //isActive03 = false;
 
-            imageRect02 = sprites[1].transform as RectTransform;
-            imageRect03 = sprites[2].transform as RectTransform;
+            //imageRect02 = sprites[1].transform as RectTransform;
+            //imageRect03 = sprites[2].transform as RectTransform;
 
-            spriteImage02 = sprites[1].GetComponent<Image>();
-            spriteImage03 = sprites[2].GetComponent<Image>();
+            //spriteImage02 = sprites[1].GetComponent<Image>();
+            //spriteImage03 = sprites[2].GetComponent<Image>();
 
             memberControl = transform.parent.gameObject.GetComponent<MemberControl>();
             memberMaxHp = memberControl.GetMaxMemberHp();
@@ -108,12 +135,14 @@ public class RippleUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isMember)
+        //if (isMember)
         {
             currentMemberHp = memberControl.GetMemberHp();
             //hpRetio = (int)(currentMemberHp / memberMaxHp * 100);
         }
-        
+
+        ChangeColor();
+
         Shout();
     }
 
@@ -127,14 +156,17 @@ public class RippleUI : MonoBehaviour
             return;
         }
 
-        
-        isActive01 = true;
+
+        //isActive01 = true;
+        isActive = true;
         MoveUI();
 
-        foreach (var sprite in sprites)
-        {
-            sprite.SetActive(true);
-        }
+        //foreach (var sprite in sprites)
+        //{
+        //    sprite.SetActive(true);
+        //}
+
+        ripple.SetActive(true);
 
     }
 
@@ -143,91 +175,116 @@ public class RippleUI : MonoBehaviour
         if (GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)
         {
 
-            foreach (var sprite in sprites)
-            {
-                sprite.SetActive(false);
-            }
+            //foreach (var sprite in sprites)
+            //{
+            //    sprite.SetActive(false);
+            //}
+
+            ripple.SetActive(false);
+
             return;
         }
 
         Vector3 pos = RectTransformUtility.WorldToScreenPoint(Camera.main, senderObj.transform.position);
         if (pos.x > LEFT_MAX && pos.x < RIRGT_MAX && pos.y > DOWN_MAX && pos.y < UP_MAX)
         {
-            imageRect01.transform.position = pos;
-            if (isMember)
-            {
-                imageRect02.transform.position = pos;
-                imageRect03.transform.position = pos;
-            }
+            //imageRect01.transform.position = pos;
+            //if (isMember)
+            //{
+            //    imageRect02.transform.position = pos;
+            //    imageRect03.transform.position = pos;
+            //}
+
+            rippleRect.transform.position = pos;
         }
 
-
-        if (isActive01)
+        if (isActive)
         {
-            rippleScale01 += new Vector2(2.5f, 2.5f);
-            imageRect01.sizeDelta = rippleScale01;
-            rippleAlfa01 -= 0.01f;
-            spriteImage01.color = new Color(red, green, blue, rippleAlfa01);
+            rippleScale += new Vector2(2.5f, 2.5f);
+            rippleRect.sizeDelta = rippleScale;
+            rippleAlfa -= 0.01f;
+            rippleImage.color = new Color(red, blue, green, rippleAlfa);
 
-            if (isMember &&
-                !isActive02 &&
-                rippleScale01.x > 96 &&
-                currentMemberHp > BORDERLINE01)
-            {
-                isActive02 = true;
-            }
 
-            if (rippleScale01.x > SIZEDELTA_MAX)
+            if (rippleScale.x > SIZEDELTA_MAX)
             {
-                isActive01 = false;
-                rippleScale01 = Vector2.zero;
-                imageRect01.sizeDelta = rippleScale01;
-                rippleAlfa01 = 1.5f;
-                spriteImage01.color = new Color(red, green, blue, rippleAlfa01);
+                isActive = false;
+                rippleScale = Vector2.zero;
+                rippleRect.sizeDelta = rippleScale;
+                rippleAlfa = 1.5f;
+                rippleImage.color = new Color(red, green, blue, rippleAlfa);
             }
+            
         }
 
-        if (isActive02)
-        {
-            rippleScale02 += new Vector2(2.5f, 2.5f);
-            imageRect02.sizeDelta = rippleScale02;
-            rippleAlfa02 -= 0.01f;
-            spriteImage02.color = new Color(red, green, blue, rippleAlfa02);
+        
 
-            if (isMember &&
-                !isActive03 &&
-                rippleScale02.x > 96 &&
-                currentMemberHp > BORDERLINE02)
-            {
-                isActive03 = true;
-            }
+        //if (isActive01)
+        //{
+        //    c
+        //    imageRect01.sizeDelta = rippleScale01;
+        //    rippleAlfa01 -= 0.01f;
+        //    spriteImage01.color = new Color(red, green, blue, rippleAlfa01);
 
-            if (rippleScale02.x > SIZEDELTA_MAX)
-            {
-                isActive02 = false;
-                rippleScale02 = Vector2.zero;
-                imageRect02.sizeDelta = rippleScale02;
-                rippleAlfa02 = 1.5f;
-                spriteImage02.color = new Color(red, green, blue, rippleAlfa02);
-            }
-        }
+        //    if (isMember &&
+        //        !isActive02 &&
+        //        rippleScale01.x > 96 &&
+        //        currentMemberHp > BORDERLINE01)
+        //    {
+        //        isActive02 = true;
+        //    }
 
-        if (isActive03)
-        {
-            rippleScale03 += new Vector2(2.5f, 2.5f);
-            imageRect03.sizeDelta = rippleScale03;
-            rippleAlfa03 -= 0.01f;
-            spriteImage03.color = new Color(red, green, blue, rippleAlfa03);
+        //    if (rippleScale01.x > SIZEDELTA_MAX)
+        //    {
+        //        isActive01 = false;
+        //        rippleScale01 = Vector2.zero;
+        //        imageRect01.sizeDelta = rippleScale01;
+        //        rippleAlfa01 = 1.5f;
+        //        spriteImage01.color = new Color(red, green, blue, rippleAlfa01);
+        //    }
+        //}
 
-            if (rippleScale03.x > SIZEDELTA_MAX)
-            {
-                isActive03 = false;
-                rippleScale03 = Vector2.zero;
-                imageRect03.sizeDelta = rippleScale03;
-                rippleAlfa03 = 1.5f;
-                spriteImage03.color = new Color(red, green, blue, rippleAlfa03);
-            }
-        }
+        //if (isActive02)
+        //{
+        //    rippleScale02 += new Vector2(2.5f, 2.5f);
+        //    imageRect02.sizeDelta = rippleScale02;
+        //    rippleAlfa02 -= 0.01f;
+        //    spriteImage02.color = new Color(red, green, blue, rippleAlfa02);
+
+        //    if (isMember &&
+        //        !isActive03 &&
+        //        rippleScale02.x > 96 &&
+        //        currentMemberHp > BORDERLINE02)
+        //    {
+        //        isActive03 = true;
+        //    }
+
+        //    if (rippleScale02.x > SIZEDELTA_MAX)
+        //    {
+        //        isActive02 = false;
+        //        rippleScale02 = Vector2.zero;
+        //        imageRect02.sizeDelta = rippleScale02;
+        //        rippleAlfa02 = 1.5f;
+        //        spriteImage02.color = new Color(red, green, blue, rippleAlfa02);
+        //    }
+        //}
+
+        //if (isActive03)
+        //{
+        //    rippleScale03 += new Vector2(2.5f, 2.5f);
+        //    imageRect03.sizeDelta = rippleScale03;
+        //    rippleAlfa03 -= 0.01f;
+        //    spriteImage03.color = new Color(red, green, blue, rippleAlfa03);
+
+        //    if (rippleScale03.x > SIZEDELTA_MAX)
+        //    {
+        //        isActive03 = false;
+        //        rippleScale03 = Vector2.zero;
+        //        imageRect03.sizeDelta = rippleScale03;
+        //        rippleAlfa03 = 1.5f;
+        //        spriteImage03.color = new Color(red, green, blue, rippleAlfa03);
+        //    }
+        //}
     }
 
     private void MoveUI()
@@ -239,12 +296,12 @@ public class RippleUI : MonoBehaviour
 
         if (pos.x > LEFT_MAX && pos.x < RIRGT_MAX && pos.y > DOWN_MAX && pos.y < UP_MAX)
         {
-            imageRect01.transform.position = pos;
-            if (isMember)
-            {
-                imageRect02.transform.position = pos;
-                imageRect03.transform.position = pos;
-            }
+            //imageRect01.transform.position = pos;
+            //if (isMember)
+            //{
+            //    imageRect02.transform.position = pos;
+            //    imageRect03.transform.position = pos;
+            //}
         }
 
         else
@@ -269,32 +326,56 @@ public class RippleUI : MonoBehaviour
                 pos.y = DOWN_MAX;
             }
         }
-        
-        imageRect01.transform.position = pos;
-        if (isMember)
-        {
-            imageRect02.transform.position = pos;
-            imageRect03.transform.position = pos;
-        }
+
+        rippleRect.transform.position = pos;
+
+        //imageRect01.transform.position = pos;
+        //if (isMember)
+        //{
+        //    imageRect02.transform.position = pos;
+        //    imageRect03.transform.position = pos;
+        //}
 
     }
 
     private void ResetUI()
     {
-        isActive01 = false;
-        isActive02 = false;
-        isActive03 = false;
+        //isActive01 = false;
+        //isActive02 = false;
+        //isActive03 = false;
+        isActive = false;
 
-        rippleScale01 = Vector2.zero;
-        rippleScale02 = Vector2.zero;
-        rippleScale03 = Vector2.zero;
+        //rippleScale01 = Vector2.zero;
+        //rippleScale02 = Vector2.zero;
+        //rippleScale03 = Vector2.zero;
+        rippleScale = Vector2.zero;
 
-        imageRect01.sizeDelta = rippleScale01;
-        imageRect02.sizeDelta = rippleScale02;
-        imageRect03.sizeDelta = rippleScale03;
+        //imageRect01.sizeDelta = rippleScale01;
+        //imageRect02.sizeDelta = rippleScale02;
+        //imageRect03.sizeDelta = rippleScale03;
+        rippleRect.sizeDelta = rippleScale;
 
-        rippleAlfa01 = 1.5f;
-        rippleAlfa02 = 1.5f;
-        rippleAlfa03 = 1.5f;
+        //rippleAlfa01 = 1.5f;
+        //rippleAlfa02 = 1.5f;
+        //rippleAlfa03 = 1.5f;
+        rippleAlfa = 1.5f;
+    }
+
+    private void ChangeColor()
+    {
+        if (currentMemberHp <= BORDERLINE02)
+        {
+            rippleImage.sprite = rippleSprites[2];
+        }
+
+        else if (currentMemberHp <= BORDERLINE01)
+        {
+            rippleImage.sprite = rippleSprites[1];
+        }
+
+        else
+        {
+            rippleImage.sprite = rippleSprites[0];
+        }
     }
 }
