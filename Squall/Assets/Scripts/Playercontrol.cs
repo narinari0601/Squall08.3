@@ -280,7 +280,7 @@ public class Playercontrol : MonoBehaviour
         {
             wind = new Vector3(windpower, 0, 0);
         }
-        if (mutekitime == 0)
+        if (mutekitime == 0 && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
         {
             transform.position += wind;
         }
