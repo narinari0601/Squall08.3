@@ -32,6 +32,7 @@ public class TitleSceneManager : MonoBehaviour
 
     private AudioSource audioSource;
 
+
     private void Awake()
     {
         // PC向けビルドだったらサイズ変更
@@ -58,7 +59,8 @@ public class TitleSceneManager : MonoBehaviour
         }
 
         blackTimer = 0;
-        
+
+
 
         //Debug.Log((selectedObjcts[0].transform as RectTransform).position);
         //Debug.Log((selectedObjcts[1].transform as RectTransform).position);
@@ -76,11 +78,12 @@ public class TitleSceneManager : MonoBehaviour
         }
 
         blackTimer++;
-        if (blackTimer > 2)
+        /*if (blackTimer > 2)
         {
             blackPanel.SetActive(false);
-        }
+        }*/
 
+        
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
