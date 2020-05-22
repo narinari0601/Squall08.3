@@ -41,6 +41,9 @@ public class OverviewUI : MonoBehaviour
     [SerializeField,Header("マップ表示中のパネル")]
     private GameObject scenePanel = null;
 
+    [SerializeField,Header("ステージ名テキスト")]
+    private Text stageNameText = null;
+
     private RectTransform scenePanelRect;
 
     private Vector3 initScenePos;
@@ -90,7 +93,7 @@ public class OverviewUI : MonoBehaviour
         {
             initScenePos = scenePanelRect.transform.position;
             initSceneScale = new Vector3(1, 1, 1);
-            endScenePos = new Vector3(140.0f, 670.0f, 0.0f);
+            endScenePos = new Vector3(140.0f, 640.0f, 0.0f);
             endSceneScale = new Vector3(0.4f, 0.4f, 0.4f);
             //initScenePos = RectTransformUtility.WorldToScreenPoint(Camera.main, scenePanel.transform.position);
 
@@ -100,6 +103,8 @@ public class OverviewUI : MonoBehaviour
             fadeAlpha = 0.9f;
             fadeImage = fadePanel.GetComponent<Image>();
         }
+
+        stageNameText.text = "ステージ" + (StageData.StageNum + 1).ToString();
 
         ChangeScore();
         
