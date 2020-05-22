@@ -20,7 +20,7 @@ public class Playercontrol : MonoBehaviour
     int mashcount;
     GameObject throwmash;
     Animator anim;
-
+    public Sprite JumpspriteU;   public Sprite JumpspriteD; public Sprite JumpspriteL; public Sprite JumpspriteR;
     //ナリが追加
     private bool isJump;  //ジャンプ中ならtrue
     private MemberList memberList;
@@ -102,8 +102,30 @@ public class Playercontrol : MonoBehaviour
 
 
             if (isJump)
+            {
+                GetComponentInChildren<Animator>().enabled = false;
+                if (_direc == Direc.UP)
+                {
+                   transform.GetChild(0).GetComponent<SpriteRenderer>().sprite= JumpspriteU;
+                }
+                else if (_direc == Direc.DOWN)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteD;
+                }
+                else if (_direc == Direc.LEFT)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteR;
+                }
+                else if (_direc == Direc.RIGHT)
+                {
+     
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteL;
+                }
+                
                 return;
 
+            }
+            GetComponentInChildren<Animator>().enabled = true;
             wind = new Vector3(0, 0, 0);
 
             if (Input.GetKey(KeyCode.UpArrow))
