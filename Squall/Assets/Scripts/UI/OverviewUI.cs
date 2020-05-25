@@ -104,7 +104,7 @@ public class OverviewUI : MonoBehaviour
             fadeImage = fadePanel.GetComponent<Image>();
         }
 
-        stageNameText.text = "ステージ" + (StageData.StageNum + 1).ToString();
+        stageNameText.text = "ステージ" + (GamePlayManager.instance.StageNum + 1).ToString();
 
         ChangeScore();
         
