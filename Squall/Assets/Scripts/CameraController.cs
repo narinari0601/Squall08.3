@@ -23,10 +23,14 @@ public class CameraController : MonoBehaviour
     [SerializeField, Header("周りの黒いやつ")]
     private GameObject black = null;
 
+    [SerializeField,Header("雲で影になる部分")]
+    private GameObject signBlack = null;
+
     public GameObject Camera { get => m_Camera; set => m_Camera = value; }
     public GameObject Black { get => black; set => black = value; }
     public Camera CameraScript { get => cameraScript; set => cameraScript = value; }
     public GameObject MapCamera { get => mapCamera; set => mapCamera = value; }
+    public GameObject SignBlack { get => signBlack; set => signBlack = value; }
 
     void Start()
     {
@@ -40,6 +44,7 @@ public class CameraController : MonoBehaviour
         target = GamePlayManager.instance.Player;
         mapCamera.transform.position = new Vector3(target.transform.position.x, mapCamera.transform.position.y, target.transform.position.z);
         black.SetActive(true);
+        signBlack.SetActive(true);
         //offset = target.transform.position - transform.position;
     }
 

@@ -356,7 +356,7 @@ public class Stage : MonoBehaviour
 
         if (weather == WeatherStates.Squall)
         {
-            currentTimer = 0;
+            currentTimer = RIPPLE_TIME;
         }
 
         else

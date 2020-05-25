@@ -49,7 +49,7 @@ public class GameClearUI : MonoBehaviour
 
     private int selectMaxValue;
 
-    private Vector3 cursolDelay;
+    //private Vector3 cursolDelay;
 
 
 
@@ -76,7 +76,7 @@ public class GameClearUI : MonoBehaviour
 
         cursolRect = cursolImage.transform as RectTransform;
 
-        cursolDelay = new Vector3(-330, 0, 0);
+        //cursolDelay = new Vector3(-330, 0, 0);
 
         SetActive(false);
     }
@@ -166,7 +166,7 @@ public class GameClearUI : MonoBehaviour
         }
         
 
-        cursolRect.transform.position = selectRects[selectNum].transform.position + cursolDelay;
+        cursolRect.transform.position = selectRects[selectNum].transform.position /*+ cursolDelay*/;
     }
 
     public void NextScene()

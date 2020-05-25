@@ -518,6 +518,7 @@ public class GamePlayManager : MonoBehaviour
     public void GameClear()
     {
         cameraController.Black.SetActive(false);
+        cameraController.SignBlack.SetActive(false);
 
         var gameClearUI = uiManager.GameClearUI;
         gameClearUI.SetActive(true);
