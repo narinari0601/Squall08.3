@@ -67,7 +67,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9dd1b893e589e28489c92addab1a5334, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -128,6 +128,8 @@ MonoBehaviour:
   wallMeshRenderer: {fileID: 7112239330091273500}
   treeSpriteRenderer: {fileID: 3783238376559389103}
   mapTreeSpriteRenderer: {fileID: 1779076426874283386}
+  mapGroundRenderer: {fileID: 0}
+  groundSprite: {fileID: 0}
   _gameObject: {fileID: 8473748616037239569}
 --- !u!1 &8426948851855354837
 GameObject:
