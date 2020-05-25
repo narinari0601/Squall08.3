@@ -25,6 +25,16 @@ public class SquallCameraBlind : MonoBehaviour
     private bool memberCheckFlag = false;//一回しか呼ばないためのフラグ
     private int memberCount2 = 0;//1f前の仲間の人数
 
+
+    [SerializeField,Header("予兆で出てくるブラック")]
+    private GameObject signBlack = null;
+
+    private SpriteRenderer signRenderer;
+
+    private const float INIT_SIGN_ALFA = 0;
+    private const float MAX_SIGN_ALFA = 0.4f;
+    private float currentSignAlfa;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +52,10 @@ public class SquallCameraBlind : MonoBehaviour
         currentstates = GamePlayManager.instance.Weather;
         transforms = GameObject.Find("View").transform;
         transforms.localScale = new Vector3(BlackMAX,BlackMAX, BlackMAX);
+
+        signRenderer = signBlack.GetComponent<SpriteRenderer>();
+        signRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+        currentSignAlfa = INIT_SIGN_ALFA;
     }
 
 
@@ -66,12 +80,14 @@ public class SquallCameraBlind : MonoBehaviour
         paststate = currentstates;
         currentstates = GamePlayManager.instance.Weather;
 
-        if(currentstates == GamePlayManager.WeatherStates.Squall)
+        if (currentstates == GamePlayManager.WeatherStates.Squall)
         {
-            if(currentstate2 == GamePlayManager.GamePlayStates.Play && paststate2 == GamePlayManager.GamePlayStates.Map)
+            //signRenderer.maskInteraction = SpriteMaskInteraction.None;
+
+            if (currentstate2 == GamePlayManager.GamePlayStates.Play && paststate2 == GamePlayManager.GamePlayStates.Map)
             {
                 count = cntfull;
-                transforms.localScale -= new Vector3(0.4f,0.4f,0.4f);
+                transforms.localScale -= new Vector3(0.4f, 0.4f, 0.4f);
             }
 
             if (paststate == GamePlayManager.WeatherStates.Sign)
@@ -96,9 +112,9 @@ public class SquallCameraBlind : MonoBehaviour
             }
             if (direction == 2)
             {
-                if  (count < cntfull)
+                if (count < cntfull)
                 {
-                    transform.Translate(Vector3.left*0.25f);
+                    transform.Translate(Vector3.left * 0.25f);
                     count++;
                 }
             }
@@ -115,7 +131,7 @@ public class SquallCameraBlind : MonoBehaviour
                 if (count <= cntfull)
                 {
                     transforms.localScale -= new Vector3(0.02f, 0.02f, 0.02f);
-
+                    //transforms.localScale = new Vector3(BlackMIN, BlackMIN, BlackMIN);
                     count++;
                     memberCount2 = memberCount;
                 }
@@ -144,8 +160,25 @@ public class SquallCameraBlind : MonoBehaviour
 
             }
         }
+
+        else if (currentstates == GamePlayManager.WeatherStates.Sign)
+        {
+
+            //signRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            currentSignAlfa += 0.0015f;
+            if (currentSignAlfa > MAX_SIGN_ALFA)
+                currentSignAlfa = MAX_SIGN_ALFA;
+
+            signRenderer.color = new Color(255, 255, 255, currentSignAlfa);
+        }
         else
         {
+            //signRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            currentSignAlfa -= 0.01f;
+            if (currentSignAlfa < INIT_SIGN_ALFA)
+                currentSignAlfa = INIT_SIGN_ALFA;
+            signRenderer.color = new Color(255, 255, 255, currentSignAlfa);
+
             if (currentstate2 == GamePlayManager.GamePlayStates.Play && paststate2 == GamePlayManager.GamePlayStates.Map)
             {
                 count = cntfull;//+1消した
@@ -191,7 +224,7 @@ public class SquallCameraBlind : MonoBehaviour
             {
                 if (count <= cntfull)
                 {
-                    transforms.localScale += new Vector3(0.02f,0.02f,0.02f);
+                    transforms.localScale += new Vector3(0.02f, 0.02f, 0.02f);
                     count++;
                 }
 
