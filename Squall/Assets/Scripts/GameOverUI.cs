@@ -35,7 +35,7 @@ public class GameOverUI : MonoBehaviour
 
     private int selectMaxValue;
 
-    private Vector3 cursolDelay;
+    //private Vector3 cursolDelay;
 
 
     void Start()
@@ -143,7 +143,7 @@ public class GameOverUI : MonoBehaviour
 
         cursolRect = cursolImage.transform as RectTransform;
 
-        cursolDelay = new Vector3(-230, 0, 0);
+        //cursolDelay = new Vector3(-230, 0, 0);
 
         SetActive(false);
 
