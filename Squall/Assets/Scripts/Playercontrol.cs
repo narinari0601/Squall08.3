@@ -114,12 +114,12 @@ public class Playercontrol : MonoBehaviour
                 }
                 else if (_direc == Direc.LEFT)
                 {
-                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteR;
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteL;
                 }
                 else if (_direc == Direc.RIGHT)
                 {
      
-                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteL;
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = JumpspriteR;
                 }
                 
                 return;
