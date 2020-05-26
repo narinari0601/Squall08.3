@@ -170,6 +170,24 @@ public class StageSelectManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (stageNum / 5 == 0)
+            {
+                return;
+            }
+
+            stageNum -= 5;
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (stageNum / 5 == 1)
+                return;
+
+            stageNum += 5;
+        }
+
         cursolRect.transform.position = selectRects[stageNum].transform.position + cursolDelay;
 
     }

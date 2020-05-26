@@ -113,10 +113,10 @@ public class GamePlayManager : MonoBehaviour
 
 
     //音関連
-    //private AudioSource audioSource;
+    private AudioSource audioSource;
 
-    //[SerializeField,Header("BGMたち")]
-    //private AudioClip[] audioClips = new AudioClip[0];
+    [SerializeField, Header("SE")]
+    private AudioClip[] audioClipsSE = new AudioClip[0];
 
     private bool isBGM;
 
@@ -155,7 +155,7 @@ public class GamePlayManager : MonoBehaviour
 
         cameraBlind = mainCamera.GetComponent<SquallCameraBlind>();
 
-        //audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         //cameraList = new List<Camera>();
 
@@ -495,6 +495,12 @@ public class GamePlayManager : MonoBehaviour
                 gameState = GamePlayStates.Play;
             }
         }
+    }
+
+    public void PlaySE(int num, float volume)
+    {
+        audioSource.volume = volume;
+        audioSource.PlayOneShot(audioClipsSE[num]);
     }
 
     public void PauseStart()
