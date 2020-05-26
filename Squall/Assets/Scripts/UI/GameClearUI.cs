@@ -36,7 +36,7 @@ public class GameClearUI : MonoBehaviour
     private GameObject selectPanel = null;
 
     [SerializeField, Header("選択カーソル")]
-    private Image cursolImage = null;
+    private GameObject cursolImage = null;
 
     private RectTransform cursolRect;
 
