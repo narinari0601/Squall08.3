@@ -27,7 +27,7 @@ public class Playercontrol : MonoBehaviour
     public bool IsJump { get => isJump; set => isJump = value; }
     public MemberList MemberList { get => memberList; set => memberList = value; }
     public int Mashcount { get => mashcount;}
-
+    private AudioClip hitse;
     //
 
     enum Direc
@@ -41,6 +41,7 @@ public class Playercontrol : MonoBehaviour
         shouttime = 0;
         getse = (AudioClip)Resources.Load("Sounds/GetSE");
         throwse = (AudioClip)Resources.Load("Sounds/ThrowSE");
+        hitse = (AudioClip)Resources.Load("Sounds/P_Ehit");
         _direc = Direc.UP;
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
@@ -56,6 +57,7 @@ public class Playercontrol : MonoBehaviour
         shouttime = 0;
         getse = (AudioClip)Resources.Load("Sounds/GetSE");
         throwse = (AudioClip)Resources.Load("Sounds/HitSE");
+        hitse = (AudioClip)Resources.Load("Sounds/P_Ehit");
         wind = new Vector3(0, 0, 0);
         _audio = gameObject.GetComponent<AudioSource>();
         _direc = Direc.UP;
@@ -305,6 +307,7 @@ public class Playercontrol : MonoBehaviour
     {
         if (mutekitime == 0)
         {
+            _audio.PlayOneShot(hitse);
             mutekitime = 210;
             HP--;
           
