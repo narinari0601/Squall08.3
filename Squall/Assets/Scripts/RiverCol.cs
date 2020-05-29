@@ -46,7 +46,10 @@ public class RiverCol : MonoBehaviour
     public bool IsRightHit { get => isRightHit; set => isRightHit = value; }
     public bool IsLeftHit { get => isLeftHit; set => isLeftHit = value; }
     public BoxCollider Col { get => col; set => col = value; }
-
+    private AudioSource _audio;
+    public AudioClip jump;
+    //0529SE用に追加
+    private bool seflag;
     void Start()
     {
         riverTransform = GetComponent<Transform>();
@@ -90,6 +93,8 @@ public class RiverCol : MonoBehaviour
         
         currentJumpDistance = 0;
 
+        _audio = GetComponent<AudioSource>();
+        seflag = false;
     }
     // Update is called once per frame
     void Update()
@@ -136,9 +141,15 @@ public class RiverCol : MonoBehaviour
 
         if (isRightHit)
         {
+           
             if (jumpDir == GamePlayManager.SquallDirections.Left)
             {
                 pc.IsJump = true;
+                if (!seflag)
+                {
+                    _audio.PlayOneShot(jump);
+                    seflag = true;
+                }
                 jumpTarget.transform.position += new Vector3(-0.05f, 0, 0);
                 currentJumpDistance += 0.05f;
             }
@@ -146,6 +157,11 @@ public class RiverCol : MonoBehaviour
             else if (jumpDir == GamePlayManager.SquallDirections.Up)
             {
                 pc.IsJump = true;
+                if (!seflag)
+                {
+                    _audio.PlayOneShot(jump);
+                    seflag = true;
+                }
                 jumpTarget.transform.position += new Vector3(0, 0, 0.05f);
                 currentJumpDistance += 0.05f;
             }
@@ -153,9 +169,15 @@ public class RiverCol : MonoBehaviour
 
         else if (isLeftHit)
         {
+           
             if (jumpDir == GamePlayManager.SquallDirections.Right)
             {
                 pc.IsJump = true;
+                if (!seflag) 
+                {
+                    _audio.PlayOneShot(jump);
+                    seflag = true;
+                }
                 jumpTarget.transform.position += new Vector3(0.05f, 0, 0);
                 currentJumpDistance += 0.05f;
             }
@@ -163,13 +185,21 @@ public class RiverCol : MonoBehaviour
             else if (jumpDir == GamePlayManager.SquallDirections.Down)
             {
                 pc.IsJump = true;
+                if (!seflag)
+                {
+                    _audio.PlayOneShot(jump);
+                    seflag = true;
+                }
                 jumpTarget.transform.position += new Vector3(0, 0, -0.05f);
                 currentJumpDistance += 0.05f;
             }
             
         }
-        
-
+        else
+        {
+            seflag = false;
+        }
+       
         
 
 
