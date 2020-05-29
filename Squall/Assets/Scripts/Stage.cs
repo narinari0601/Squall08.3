@@ -102,12 +102,7 @@ public class Stage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Ripple();
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            InterrectWind(SquallDirections.Up);
-        }
+        
     }
 
     public void Initialize()
@@ -341,6 +336,8 @@ public class Stage : MonoBehaviour
 
             interruptDir = dir;
             GamePlayManager.instance.SquallDirection = squallDirList[squallCount];
+
+            GamePlayManager.instance.PlaySE(0, 0.7f);
 
             var currentDir = (int)squallDirList[(squallCount + 0) % squallDirList.Count];
             var secondDir = (int)squallDirList[(squallCount + 1) % squallDirList.Count];
