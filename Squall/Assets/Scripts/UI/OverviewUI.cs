@@ -180,17 +180,17 @@ public class OverviewUI : MonoBehaviour
 
     public void ScenePanelMove()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            scenePanelRect.transform.position = initScenePos;
-            scenePanelRect.transform.localScale = initSceneScale;
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //{
+        //    scenePanelRect.transform.position = initScenePos;
+        //    scenePanelRect.transform.localScale = initSceneScale;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            scenePanelRect.transform.position = endScenePos;
-            scenePanelRect.transform.localScale = endSceneScale;
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //{
+        //    scenePanelRect.transform.position = endScenePos;
+        //    scenePanelRect.transform.localScale = endSceneScale;
+        //}
 
         moveTimer -= Time.deltaTime;
 

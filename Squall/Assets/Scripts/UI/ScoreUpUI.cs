@@ -39,6 +39,11 @@ public class ScoreUpUI : MonoBehaviour
     void Update()
     {
         MoveUI();
+
+        if (GamePlayManager.instance.GameState != GamePlayManager.GamePlayStates.Play)
+        {
+            SetActive(false);
+        }
     }
 
     public void SetActive(bool value)

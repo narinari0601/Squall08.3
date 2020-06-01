@@ -528,10 +528,10 @@ public class GamePlayManager : MonoBehaviour
 
         var gameClearUI = uiManager.GameClearUI;
         gameClearUI.SetActive(true);
-        gameClearUI.ScoreUp();
-        gameClearUI.RankJudgment();
-        gameClearUI.CursolMove();
-        gameClearUI.NextScene();
+        gameClearUI.ScoreCalculate();
+        //gameClearUI.RankJudgment();
+        //gameClearUI.CursolMove();
+        //gameClearUI.NextScene();
     }
 
     public void GameOver()

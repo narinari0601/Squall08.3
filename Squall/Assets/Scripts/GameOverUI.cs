@@ -97,6 +97,7 @@ public class GameOverUI : MonoBehaviour
         //        alpha = 0;
         //    }
         //}
+        
     }
 
     public void GameOverUpdate()
@@ -128,6 +129,8 @@ public class GameOverUI : MonoBehaviour
         green = panel.color.g;
         blue = panel.color.b;
         alpha = 0;
+
+        tex.text = "";
 
         //membercount = GamePlayManager.instance.CurrentStage.MemberControllers.Length;
 

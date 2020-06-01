@@ -23,12 +23,44 @@ public class GameClearUI : MonoBehaviour
 
     private string scoreText;
 
+    [SerializeField, Header("新しいほうのスコアテキスト")]
+    private Text stageScoreText = null;
+
+    private List<float> scoreList;
+
+    [SerializeField, Header("ボーナスのほうのスコアテキスト")]
+    private Text bonusScoreText = null;
+
+    private List<float> bonusScoreList;
+
+    [SerializeField, Header("トータルスコア")]
+    private Text totalScoreText = null;
+
+    private RectTransform totalScoreRect;
+
+    private bool isScoreCalculate;   //計算が終わったらtrue
+
+    private const float CALCULATE_TIME = 3.0f;
+
+    private float currentCalculateTimer;
+
+    private bool isScoreMove;
+    private bool isScoreMoveEnd;
+
+    private Vector3 scoreMoveEndPos;
+    private Vector3 initScoreMovePos;
+
+    private const float SCORE_MOVE_TIME = 1.0f;
+    private float currentScoreMoveTimer;
+
+
     //星関連
     [SerializeField, Header("星判定用のパネル")]
     private GameObject starPanel = null;
 
     [SerializeField, Header("星のテキスト")]
     private Text starText = null;
+    
 
 
     //選択関連
@@ -49,7 +81,21 @@ public class GameClearUI : MonoBehaviour
 
     private int selectMaxValue;
 
-    //private Vector3 cursolDelay;
+    [SerializeField,Header("ラストステージ用選択パネル")]
+    private GameObject lastSelectPanel = null;
+
+    [SerializeField, Header("ラスト用選択カーソル")]
+    private GameObject lastCursolImage = null;
+
+    private RectTransform lastCursolRect;
+
+    [SerializeField,Header("ラストステージ用選択オブジェクト")]
+    private GameObject[] lastSelectObjct = new GameObject[0];
+
+    private RectTransform[] lastSelectRects;
+
+    private int lastSelectValue;
+    
 
 
 
@@ -60,10 +106,32 @@ public class GameClearUI : MonoBehaviour
 
     public void Initialize()
     {
+        //スコア関連
         stageScore = 0;
         currentScore = 0;
         scoreText = "";
 
+        scoreList = new List<float>();
+        bonusScoreList = new List<float>();
+        stageScoreText.text = "";
+        bonusScoreText.text = "";
+
+        isScoreCalculate = false;
+        currentCalculateTimer = 0;
+
+        totalScoreRect = totalScoreText.GetComponent<RectTransform>();
+
+        isScoreMove = false;
+        isScoreMoveEnd = false;
+        scoreMoveEndPos = new Vector3(600, 460, 0);
+        initScoreMovePos = new Vector3(985, 71.3f, 0);
+        totalScoreRect.position = initScoreMovePos;
+        totalScoreRect.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+        currentScoreMoveTimer = SCORE_MOVE_TIME;
+
+
+        //選択関連
         selectNum = 0;
         selectMaxValue = selectObjcts.Length;
 
@@ -76,7 +144,19 @@ public class GameClearUI : MonoBehaviour
 
         cursolRect = cursolImage.transform as RectTransform;
 
-        //cursolDelay = new Vector3(-330, 0, 0);
+        lastSelectValue = lastSelectObjct.Length;
+        lastSelectRects = new RectTransform[lastSelectValue];
+
+        for (int i = 0; i < lastSelectValue; i++)
+        {
+            lastSelectRects[i] = lastSelectObjct[i].transform as RectTransform;
+        }
+        lastCursolRect = lastCursolImage.transform as RectTransform;
+        
+        scorePanel.SetActive(true);
+        starPanel.SetActive(false);
+        selectPanel.SetActive(false);
+        lastSelectPanel.SetActive(false);
 
         SetActive(false);
     }
@@ -86,6 +166,33 @@ public class GameClearUI : MonoBehaviour
     {
         //CursolMove();
         //ScoreUp();
+
+        if (isScoreCalculate)
+        {
+            currentCalculateTimer += Time.deltaTime;
+
+            if (currentCalculateTimer > CALCULATE_TIME)
+            {
+                scorePanel.SetActive(false);
+                isScoreMove = true;
+            }
+        }
+
+        MoveTotalScore();
+        RankJudgment();
+
+        var stageNum = GamePlayManager.instance.StageNum;
+
+        if (stageNum == 9)
+        {
+            LastSelectMove();
+        }
+
+        else
+        {
+            SelectMove();
+        }
+        
     }
 
     public void SetActive(bool value)
@@ -101,7 +208,13 @@ public class GameClearUI : MonoBehaviour
         }
     }
 
-    public void ScoreUp()
+    public void ScoreUp(float normalScore, float bonusScore)
+    {
+        scoreList.Add(normalScore);
+        bonusScoreList.Add(bonusScore);
+    }
+
+    public void ScoreCalculate()
     {
         //if (currentScore > GamePlayManager.instance.CurrentStage.CurrentScore)
         //{
@@ -111,14 +224,61 @@ public class GameClearUI : MonoBehaviour
 
         //}
 
-        stageScore = GamePlayManager.instance.CurrentStage.CurrentScore;
-        scoreText = stageScore.ToString();
-        scoreNumberText.text = scoreText;
+        //stageScore = GamePlayManager.instance.CurrentStage.CurrentScore;
+        //scoreText = stageScore.ToString();
+        //scoreNumberText.text = scoreText;
+
+        //string scoreStr;
+
+        if (isScoreCalculate)
+            return;
+
+        foreach (var score in scoreList)
+        {
+            string str = score.ToString() + "\n";
+            stageScoreText.text += str;
+        }
+
+        foreach (var bonus in bonusScoreList)
+        {
+            bonusScoreText.text += "×" + bonus.ToString("0.0") + "\n";
+        }
+
+        totalScoreText.text = GamePlayManager.instance.CurrentStage.CurrentScore.ToString();
+
+        isScoreCalculate = true;
+    }
+
+    public void MoveTotalScore()
+    {
+        if(isScoreMove)
+        {
+
+            if (totalScoreRect.position.x < scoreMoveEndPos.x && totalScoreRect.position.y > scoreMoveEndPos.y)
+            {
+                totalScoreRect.position = scoreMoveEndPos;
+                isScoreMoveEnd = true;
+                
+            }
+
+            if (!isScoreMoveEnd)
+            {
+                var pos = (scoreMoveEndPos - initScoreMovePos) / 60;
+                totalScoreRect.transform.position += pos;
+                var scale = 0.01f;
+                totalScoreRect.transform.localScale += new Vector3(scale, scale, 0);
+            }
+        }
     }
 
     public void RankJudgment()
     {
+        if (!isScoreMoveEnd)
+            return;
+
         var stage = GamePlayManager.instance.CurrentStage;
+
+        stageScore = stage.CurrentScore;
 
         if (stageScore >= stage.ThreeStarsScore)
         {
@@ -134,11 +294,18 @@ public class GameClearUI : MonoBehaviour
         {
             starText.text = "    ★    ";
         }
+
+        starPanel.SetActive(true);
     }
     
 
-    public void CursolMove()
+    public void SelectMove()
     {
+        if (!isScoreMoveEnd)
+            return;
+
+        selectPanel.SetActive(true);
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (selectNum == selectMaxValue - 1)
@@ -166,7 +333,48 @@ public class GameClearUI : MonoBehaviour
         }
         
 
-        cursolRect.transform.position = selectRects[selectNum].transform.position /*+ cursolDelay*/;
+        cursolRect.transform.position = selectRects[selectNum].transform.position;
+
+        NextScene();
+    }
+
+    public void LastSelectMove()
+    {
+        if (!isScoreMoveEnd)
+            return;
+
+        lastSelectPanel.SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (selectNum == lastSelectValue - 1)
+            {
+                selectNum = 0;
+            }
+
+            else
+            {
+                selectNum++;
+            }
+        }
+
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (selectNum == 0)
+            {
+                selectNum = lastSelectValue - 1;
+            }
+
+            else
+            {
+                selectNum--;
+            }
+        }
+
+
+        lastCursolRect.transform.position = lastSelectRects[selectNum].transform.position;
+
+        LastNextScene();
     }
 
     public void NextScene()
@@ -188,6 +396,24 @@ public class GameClearUI : MonoBehaviour
             {
                 GamePlayManager.instance.GameToStageSelect();
             }
+        }
+    }
+
+    public void LastNextScene()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (selectNum == 0)
+            {
+                BGMManager.instance.ChangeBGM(0, 0.04f);
+                GamePlayManager.instance.StageInitialize();
+            }
+
+            else if (selectNum == 1)
+            {
+                GamePlayManager.instance.GameToStageSelect();
+            }
+            
         }
     }
 }

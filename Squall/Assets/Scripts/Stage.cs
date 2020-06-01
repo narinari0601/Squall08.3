@@ -402,8 +402,11 @@ public class Stage : MonoBehaviour
 
         float bonusScore = (float)(1 + 0.5 * (scoreMemberCount - 1));
         plusScore = (float)(1000 * scoreMemberCount * bonusScore);
+        GamePlayManager.instance.UIManager.GameClearUI.ScoreUp(1000 * scoreMemberCount, bonusScore);
 
+        
         GamePlayManager.instance.UIManager.ScoreUpUI.ScoreUp(plusScore);
+        
 
         currentScore += plusScore;
     }
