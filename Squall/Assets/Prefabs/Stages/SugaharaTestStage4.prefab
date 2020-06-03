@@ -12586,6 +12586,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: River (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6739650643237628360, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
+    - target: {fileID: 2881326971919177322, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53, type: 3}
 --- !u!4 &8783714183644432497 stripped
@@ -14547,6 +14559,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.890625
       objectReference: {fileID: 0}
+    - target: {fileID: 6739650643237628360, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
+    - target: {fileID: 2881326971919177322, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53, type: 3}
 --- !u!4 &16320316537551406 stripped
@@ -14963,6 +14987,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: River (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6739650643237628360, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
+    - target: {fileID: 2881326971919177322, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53, type: 3}
 --- !u!4 &16320317058835983 stripped
@@ -15118,6 +15154,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: River (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6739650643237628360, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
+    - target: {fileID: 2881326971919177322, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53, type: 3}
 --- !u!4 &16320317288956985 stripped
@@ -16799,6 +16847,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.95617497
       objectReference: {fileID: 0}
+    - target: {fileID: 6739650643237628360, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
+    - target: {fileID: 2881326971919177322, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e1366b3a1ffedf45a7a4300e052c0b3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53, type: 3}
 --- !u!4 &2447959184846312814 stripped
