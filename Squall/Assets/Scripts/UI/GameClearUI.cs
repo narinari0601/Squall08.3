@@ -75,6 +75,12 @@ public class GameClearUI : MonoBehaviour
     [SerializeField,Header("掛けたスコアテキスト達")]
     private Text[] mulTexts = new Text[0];
 
+    [SerializeField, Header("新しいほうの掛けたスコアテキスト")]
+    private Text mulScoreText = null;
+
+    [SerializeField,Header("イコールのテキスト")]
+    private Text mulEqualText = null;
+
     private RectTransform[] mulTextRects;
 
     private float[] mulScores;  //掛けた計算結果が入る配列
@@ -165,16 +171,18 @@ public class GameClearUI : MonoBehaviour
         bonusScoreText.text = "";
 
         scoreTextRect = stageScoreText.GetComponent<RectTransform>();
-        //Debug.Log(scoreTextRect.position);
         //initScoreTextPos = new Vector3(422.9f, 280.9f, 0);
         initScoreTextPos = new Vector3(398.7f, 246.9f, 0);
-        scoreTextRect.position = initScoreTextPos;
+        //scoreTextRect.position = initScoreTextPos;
 
         bonusScoreRect = bonusScoreText.GetComponent<RectTransform>();
-        //Debug.Log(bonusScoreRect.position);
         //initBonusScoreTextPos = new Vector3(817.9f, 281.8f, 0);
         initBonusScoreTextPos = new Vector3(845.0f, 248.0f, 0);
-        bonusScoreRect.position = initBonusScoreTextPos;
+        //bonusScoreRect.position = initBonusScoreTextPos;
+
+        mulScoreText.text = "";
+        mulEqualText.text = "";
+
 
         //halfScorePos = (initScoreTextPos + initBonusScoreTextPos) / 2;
         halfScorePos = new Vector3(totalScoreRect.position.x, (initScoreTextPos.y + initBonusScoreTextPos.y) / 2, 0);
@@ -187,9 +195,9 @@ public class GameClearUI : MonoBehaviour
         isScoreMove = false;
         isScoreMoveEnd = false;
         scoreMoveEndPos = new Vector3(600, 460, 0);
-        initScoreMovePos = new Vector3(985, 71.3f, 0);
-        //totalScoreRect.position = initScoreMovePos;
-        //totalScoreRect.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        initScoreMovePos = new Vector3(993.7f, 67.5f, 0);
+        totalScoreRect.position = initScoreMovePos;
+        totalScoreRect.localScale = new Vector3(1.5f, 1.5f, 0.5f);
 
         currentScoreMoveTimer = SCORE_MOVE_TIME;
 
@@ -201,15 +209,15 @@ public class GameClearUI : MonoBehaviour
                 new Vector3(totalScoreRect.position.x,91.4f,0),
             };
 
-        mulTextRects = new RectTransform[mulTexts.Length];
+        //mulTextRects = new RectTransform[mulTexts.Length];
 
-        for (int i = 0; i < mulTexts.Length; i++)
-        {
-            mulTexts[i].text = "";
-            mulTextRects[i] = mulTexts[i].GetComponent<RectTransform>();
-            //Debug.Log(mulTextRects[i].position);
-            mulTextRects[i].position = mulRectPostions[i];
-        }
+        //for (int i = 0; i < mulTexts.Length; i++)
+        //{
+        //    mulTexts[i].text = "";
+        //    mulTextRects[i] = mulTexts[i].GetComponent<RectTransform>();
+        //    //Debug.Log(mulTextRects[i].position);
+        //    mulTextRects[i].position = mulRectPostions[i];
+        //}
 
         mulScores = new float[4] { 0, 0, 0, 0 };
 
@@ -249,8 +257,8 @@ public class GameClearUI : MonoBehaviour
         selectPanel.SetActive(false);
         lastSelectPanel.SetActive(false);
         calculatePanel.SetActive(true);
-        mulScorePanel.SetActive(false);
-        totalScorePanel.SetActive(false);
+        mulScorePanel.SetActive(true);
+        totalScorePanel.SetActive(true);
 
         SetActive(false);
     }
@@ -267,13 +275,14 @@ public class GameClearUI : MonoBehaviour
 
             if (currentCalculateTimer > CALCULATE_TIME)
             {
-                //scorePanel.SetActive(false);
+                scorePanel.SetActive(false);
                 //isScoreMove = true;
-                isMul = true;
+                //isMul = true;
+                isScoreMove = true;
             }
         }
 
-        //MoveTotalScore();
+        MoveTotalScore();
         ScoreMultiple();
         SumScore();
         RankJudgment();
@@ -343,29 +352,37 @@ public class GameClearUI : MonoBehaviour
 
         totalScoreText.text = GamePlayManager.instance.CurrentStage.CurrentScore.ToString();
 
-
         for (int i = 0; i < scoreList.Count; i++)
         {
-            mulScores[i] = scoreList[i] * bonusScoreList[i];
+            string scoreStr = (scoreList[i] * bonusScoreList[i]).ToString() + "\n";
+            mulScoreText.text += scoreStr;
+
+            string equal = "=\n";
+            mulEqualText.text += equal;
         }
 
-        for (int i = 0; i < mulScores.Length; i++)
-        {
-            string scoreStr;
-            float score = mulScores[i];
+        //for (int i = 0; i < scoreList.Count; i++)
+        //{
+        //    mulScores[i] = scoreList[i] * bonusScoreList[i];
+        //}
 
-            if (score == 0)
-            {
-                scoreStr = "";
-            }
+        //for (int i = 0; i < mulScores.Length; i++)
+        //{
+        //    string scoreStr;
+        //    float score = mulScores[i];
 
-            else
-            {
-                scoreStr = score.ToString();
-            }
+        //    if (score == 0)
+        //    {
+        //        scoreStr = "";
+        //    }
 
-            mulTexts[i].text = scoreStr;
-        }
+        //    else
+        //    {
+        //        scoreStr = score.ToString();
+        //    }
+
+        //    mulTexts[i].text = scoreStr;
+        //}
         isScoreCalculate = true;
     }
 
@@ -421,27 +438,27 @@ public class GameClearUI : MonoBehaviour
 
     }
 
-    //public void MoveTotalScore()
-    //{
-    //    if(isScoreMove)
-    //    {
+    public void MoveTotalScore()
+    {
+        if (isScoreMove)
+        {
 
-    //        if (totalScoreRect.position.x < scoreMoveEndPos.x && totalScoreRect.position.y > scoreMoveEndPos.y)
-    //        {
-    //            totalScoreRect.position = scoreMoveEndPos;
-    //            isScoreMoveEnd = true;
-                
-    //        }
+            if (totalScoreRect.position.x < scoreMoveEndPos.x && totalScoreRect.position.y > scoreMoveEndPos.y)
+            {
+                totalScoreRect.position = scoreMoveEndPos;
+                isScoreMoveEnd = true;
 
-    //        if (!isScoreMoveEnd)
-    //        {
-    //            var pos = (scoreMoveEndPos - initScoreMovePos) / 60;
-    //            totalScoreRect.transform.position += pos;
-    //            var scale = 0.01f;
-    //            totalScoreRect.transform.localScale += new Vector3(scale, scale, 0);
-    //        }
-    //    }
-    //}
+            }
+
+            if (!isScoreMoveEnd)
+            {
+                var pos = (scoreMoveEndPos - initScoreMovePos) / 60;
+                totalScoreRect.transform.position += pos;
+                var scale = 0.02f;
+                totalScoreRect.transform.localScale += new Vector3(scale, scale, 0);
+            }
+        }
+    }
 
     public void RankJudgment()
     {
