@@ -5,14 +5,20 @@ using UnityEngine.UI;
 
 public class StagePanel : MonoBehaviour
 {
-    [SerializeField, Header("文字パネル")]
-    private GameObject textPanel = null;
+    [SerializeField, Header("ロック解除状態のパネル")]
+    private GameObject unLockPanel = null;
+
+    [SerializeField, Header("ロック状態のパネル")]
+    private GameObject lockPanel = null;
 
     [SerializeField, Header("ステージ番号")]
     private Text stageNumText = null;
 
     [SerializeField, Header("ランクテキスト")]
     private Text rankText = null;
+
+    [SerializeField,Header("ロック時のステージ番号")]
+    private Text lockStageNum = null;
 
     private Color blackColor;
 
@@ -39,6 +45,7 @@ public class StagePanel : MonoBehaviour
 
         stageNumText.text = stageNum.ToString();
         rankText.text = rank;
+        lockStageNum.text= stageNum.ToString();
         blackColor = new Color(0, 0f, 0, 1);
         yellowColor = new Color(1, 0.9f, 0, 1);
         starOutLine = rankText.GetComponent<Outline>();
@@ -61,8 +68,9 @@ public class StagePanel : MonoBehaviour
         isReleased = false;
         panelNum = stageNum - 1;
 
-        textPanel.SetActive(false);
-        padlockImage.SetActive(true);
+        unLockPanel.SetActive(false);
+        //padlockImage.SetActive(true);
+        lockPanel.SetActive(true);
     }
 
     void Update()
@@ -73,8 +81,9 @@ public class StagePanel : MonoBehaviour
 
             if (isReleased)
             {
-                padlockImage.SetActive(false);
-                textPanel.SetActive(true);
+                //padlockImage.SetActive(false);
+                lockPanel.SetActive(false);
+                unLockPanel.SetActive(true);
             }
         }
     }
