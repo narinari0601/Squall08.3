@@ -42,6 +42,8 @@ public class TitleSceneManager : MonoBehaviour
         {
             Screen.SetResolution(1280, 720, true);
         }
+
+        Cursor.visible = false;
     }
 
     void Start()

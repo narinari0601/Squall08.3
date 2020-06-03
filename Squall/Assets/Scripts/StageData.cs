@@ -8,7 +8,7 @@ public static class StageData
 
     private static int stageNum = 0;
 
-    private static string[] ranks = { " ☆ ☆ ☆ ", " ★ ☆ ☆ ", " ★ ★ ☆ ", " ★ ★ ★ " };
+    private static string[] ranks = { " ☆☆☆ ", " ★☆☆ ", " ★★☆ ", " ★★★ " };
 
     private static Dictionary<int, bool> stagePlayFlags = new Dictionary<int, bool>();
 

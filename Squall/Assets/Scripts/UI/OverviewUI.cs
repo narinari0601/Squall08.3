@@ -219,8 +219,8 @@ public class OverviewUI : MonoBehaviour
     {
         var currentStage = GamePlayManager.instance.CurrentStage;
 
-        threeStarsText.text = "★★★スコア : " + currentStage.ThreeStarsScore;
+        threeStarsText.text = "★★★スコア\n" + currentStage.ThreeStarsScore;
         //highScoreText.text = "ハイスコア : " + StageData.HighScores[StageData.StageNum];
-        currentScoreText.text = "今のスコア : " + currentStage.CurrentScore;
+        //currentScoreText.text = "今のスコア : " + currentStage.CurrentScore;
     }
 }

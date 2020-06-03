@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 16671940}
   - component: {fileID: 16671939}
   - component: {fileID: 16671941}
+  - component: {fileID: 16671942}
   m_Layer: 0
   m_Name: EnterKey
   m_TagString: Untagged
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -171,7 +172,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 0f2b6ad37b15e364fa51962381fd53ea, type: 3}
+    m_Font: {fileID: 12800000, guid: 3355eafda89662a48806065c756b2e73, type: 3}
     m_FontSize: 78
     m_FontStyle: 0
     m_BestFit: 0
@@ -183,7 +184,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Enter : \u6C7A\u5B9A"
+  m_Text: "Enter\uFF1A\u6C7A\u5B9A"
 --- !u!222 &16671940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -206,6 +207,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 6, y: 6}
+  m_UseGraphicAlpha: 1
+--- !u!114 &16671942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16671937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1 &302410640
 GameObject:
@@ -773,6 +789,7 @@ GameObject:
   - component: {fileID: 1277379529}
   - component: {fileID: 1277379528}
   - component: {fileID: 1277379530}
+  - component: {fileID: 1277379531}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -820,7 +837,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 0f2b6ad37b15e364fa51962381fd53ea, type: 3}
+    m_Font: {fileID: 12800000, guid: 3355eafda89662a48806065c756b2e73, type: 3}
     m_FontSize: 101
     m_FontStyle: 0
     m_BestFit: 0
@@ -856,6 +873,21 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 6, y: 6}
   m_UseGraphicAlpha: 1
+--- !u!114 &1277379531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277379526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!224 &1322056772 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8148336282947219393, guid: 819a3a5790f3c0f478e2faf2241ac760,
@@ -873,6 +905,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BGMManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336175428868655657, guid: 709f585fef5bfbd4dbb6865b887ebd79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8336175428868655652, guid: 709f585fef5bfbd4dbb6865b887ebd79,
         type: 3}
@@ -1223,6 +1260,7 @@ GameObject:
   - component: {fileID: 2103048771}
   - component: {fileID: 2103048770}
   - component: {fileID: 2103048772}
+  - component: {fileID: 2103048773}
   m_Layer: 0
   m_Name: BackKey
   m_TagString: Untagged
@@ -1262,7 +1300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1270,7 +1308,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 0f2b6ad37b15e364fa51962381fd53ea, type: 3}
+    m_Font: {fileID: 12800000, guid: 3355eafda89662a48806065c756b2e73, type: 3}
     m_FontSize: 78
     m_FontStyle: 0
     m_BestFit: 0
@@ -1282,7 +1320,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "BackSpace : \u30BF\u30A4\u30C8\u30EB\u3078"
+  m_Text: "BackSpace\uFF1A\u30BF\u30A4\u30C8\u30EB\u3078"
 --- !u!222 &2103048771
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1305,6 +1343,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 6, y: 6}
+  m_UseGraphicAlpha: 1
+--- !u!114 &2103048773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103048768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
 --- !u!1001 &8148336281910383493
 PrefabInstance:
