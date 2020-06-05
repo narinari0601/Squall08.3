@@ -286,6 +286,7 @@ public class GamePlayManager : MonoBehaviour
 
         else if (gameState == GamePlayStates.Pause)
         {
+            StageEndCheack();
             currentStage.ChangeWeather();
             //ChangeWeather();
             uiManager.PauseUI.PauseUpdate();
