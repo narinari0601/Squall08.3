@@ -394,7 +394,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1256,7 +1256,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1625,25 +1625,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpSpriteAni:
-  - {fileID: 21300008, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300010, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300012, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300014, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
+  - {fileID: 21300008, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300010, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300012, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300014, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
   DownSpriteAni:
-  - {fileID: 21300000, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300002, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300004, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300006, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
+  - {fileID: 21300000, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300002, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300004, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300006, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
   LeftSpriteAni:
-  - {fileID: 21300024, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300026, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300028, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300030, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
+  - {fileID: 21300024, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300026, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300028, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300030, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
   RightSpriteAni:
-  - {fileID: 21300016, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300018, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300020, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
-  - {fileID: 21300022, guid: a7dd66a043c088c46a437dacd4ff5d38, type: 3}
+  - {fileID: 21300016, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300018, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300020, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
+  - {fileID: 21300022, guid: 84a39a8965d0488478c4415ef6ea0325, type: 3}
   DethSpriteAni:
   - {fileID: 21300000, guid: ec3ee545abf680a418610d2d9d6f61bd, type: 3}
   spriteRenderer: {fileID: 6110790558438096444}
@@ -1668,10 +1668,8 @@ MonoBehaviour:
   - {fileID: 8879815386146325386}
   - {fileID: 8879815386075611262}
   - {fileID: 8879815386103051576}
-  memberHp: 200
   memberStartDamageHp: 0
   damageToMember: 0
-  recovery: 0
   lightScale: {x: 3, y: 3, z: 3}
   slider: {fileID: 5104173190644349010}
   mapHpSlider: {fileID: 3604983087366412271}
