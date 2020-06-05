@@ -10,8 +10,8 @@ public class MemberControl : MonoBehaviour
     public float navStop;//どれだけ離れて止まるか
     public Transform[] points;
     private int destPoint = 0;
-    [SerializeField, Header("仲間のHP")]
-    public float memberHp;//仲間のhp
+    //[SerializeField, Header("仲間のHP")]
+    private float memberHp = 200;//仲間のhp
 
     [SerializeField, Header("仲間が最初から受けるダメージ")]
     public float memberStartDamageHp = 0;//仲間が最初から受けるダメージ
@@ -19,8 +19,8 @@ public class MemberControl : MonoBehaviour
     [SerializeField, Header("敵に当たった時のダメージ")]
     public float damageToMember = 0;//仲間が敵二当たった時のダメージ
 
-    [SerializeField, Header("仲間を捕まえた時の回復量 0なら最大値まで回復")]
-    public float recovery = 0;//仲間が最初から受けるダメージ
+    //[SerializeField, Header("仲間を捕まえた時の回復量 0なら最大値まで回復")]
+    private float recovery = 75;//仲間が最初から受けるダメージ
 
     const float MIN = 0;
     //const float MAX =200;
