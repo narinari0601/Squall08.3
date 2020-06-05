@@ -348,7 +348,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3355eafda89662a48806065c756b2e73, type: 3}
     m_FontSize: 76
     m_FontStyle: 0
     m_BestFit: 0
@@ -566,18 +566,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: baseUI
+    - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+        type: 3}
+      propertyPath: signBlack
       value: 
-      objectReference: {fileID: 67211874473728612}
-    - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: DistanceUI
+      objectReference: {fileID: 1032343817}
+    - target: {fileID: 905665799, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: signBlack
       value: 
-      objectReference: {fileID: 468608184498357078}
-    - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_camera
-      value: 
-      objectReference: {fileID: 882959246}
+      objectReference: {fileID: 1032343817}
+    - target: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 171453724, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7060003903143903414, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
         type: 3}
       propertyPath: m_ClearFlags
@@ -633,23 +638,6 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.height
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 905665799, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: signBlack
-      value: 
-      objectReference: {fileID: 1032343817}
-    - target: {fileID: 171453722, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 171453724, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1643177782200063118, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
-        type: 3}
-      propertyPath: signBlack
-      value: 
-      objectReference: {fileID: 1032343817}
     - target: {fileID: 181371081, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: m_IsCustomRangeActive
       value: 1
@@ -662,6 +650,18 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: baseUI
+      value: 
+      objectReference: {fileID: 67211874473728612}
+    - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: DistanceUI
+      value: 
+      objectReference: {fileID: 468608184498357078}
+    - target: {fileID: 945302977, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: m_camera
+      value: 
+      objectReference: {fileID: 882959246}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
 --- !u!1 &90034672 stripped
@@ -2457,7 +2457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 20, y: -95}
+  m_AnchoredPosition: {x: 20, y: -94.99988}
   m_SizeDelta: {x: -701.7, y: -631.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &573599423
@@ -4237,7 +4237,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3355eafda89662a48806065c756b2e73, type: 3}
     m_FontSize: 76
     m_FontStyle: 0
     m_BestFit: 0
