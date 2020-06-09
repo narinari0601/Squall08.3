@@ -1009,7 +1009,7 @@ MonoBehaviour:
   - {fileID: 5733450228862917257, guid: 8a50eae546baa4c49ab6b1d7f6fc8d85, type: 3}
   - {fileID: 5539081085556247666, guid: 215af2846d8fd49478ac2dee3782cbcd, type: 3}
   - {fileID: 9130015560946472898, guid: 741154b5488e15e419cc2c6f4c557f20, type: 3}
-  - {fileID: 4016744400429576879, guid: e03d490aaff5d6943a88dfa9fe8e6761, type: 3}
+  - {fileID: 2439392822848340345, guid: 4c227faa904acdb4f9d57539fc916f91, type: 3}
   - {fileID: 6686803657707993013, guid: 506078262db253e46985e0e4a92bd4de, type: 3}
   cursolImage: {fileID: 1940228684}
   stageSelectPanelObj: {fileID: 1717194869}
