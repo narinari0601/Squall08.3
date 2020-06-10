@@ -219,7 +219,7 @@ public class Playercontrol : MonoBehaviour
 
             }
 
-            transform.position += velocity * 60 * Time.deltaTime;
+            transform.position += velocity * 62 * Time.deltaTime;
             velocity = Vector3.zero;
             if (Input.GetKeyDown(KeyCode.C))
             {
