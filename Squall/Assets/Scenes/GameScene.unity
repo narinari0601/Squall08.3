@@ -638,6 +638,11 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.height
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2495196559774233169, guid: 5211a2ee496beea4fb4ff9822d9c3a98,
+        type: 3}
+      propertyPath: m_Depth
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 181371081, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: m_IsCustomRangeActive
       value: 1
@@ -2457,7 +2462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 20, y: -94.99988}
+  m_AnchoredPosition: {x: 20, y: -95}
   m_SizeDelta: {x: -701.7, y: -631.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &573599423
@@ -8167,7 +8172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0.10824884, b: 0.5660378, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -10098,7 +10103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0.10980392, b: 0.5647059, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -10339,7 +10344,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5c8a200e52155684888d977cbf478796, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 739de121922ea6440b8b1c75bc71147d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -82,7 +82,8 @@ public class StageSelectManager : MonoBehaviour
 
         stageValue = stageList.Count;
 
-        releasedStageValue = StageData.releasedStageValue();
+        StageData.ReleaseAllStage();
+        releasedStageValue = StageData.ReleasedStageValue();
 
         selectObjcts = new GameObject[StageValue];
 
@@ -135,11 +136,11 @@ public class StageSelectManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            StageData.ReleaseAllStage();
-            releasedStageValue = StageData.releasedStageValue();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    StageData.ReleaseAllStage();
+        //    releasedStageValue = StageData.ReleasedStageValue();
+        //}
     }
 
     private void StageSelect()

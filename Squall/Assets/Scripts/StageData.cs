@@ -49,7 +49,7 @@ public static class StageData
         }
     }
 
-    public static int releasedStageValue()
+    public static int ReleasedStageValue()
     {
         int value = 0;
 

@@ -20,10 +20,27 @@ public class OverviewUI : MonoBehaviour
     //操作説明関連
     [SerializeField, Header("スタート操作")]
     private GameObject startPanel = null;
+
+    private Text startText;
+
+    private float textAlpha;
+
     [SerializeField, Header("外に出る操作")]
     private GameObject outPanel = null;
 
+    private Text outText;
+
     private bool isStart;
+
+    private float flashTimer;
+
+    private float appearanceTimer;
+
+    private const float FLASH_TIME = 0.2f;
+
+    private const float APPEARANCE_TIME = 1.0f;
+
+    private float startRed, startGreen, startBlue;
 
 
     //風関連
@@ -83,8 +100,17 @@ public class OverviewUI : MonoBehaviour
         mapCamera = GamePlayManager.instance.CameraController.MapCamera;
         initPos = mapCamera.transform.position;
         startPanel.SetActive(true);
+        startText = startPanel.GetComponentInChildren<Text>();
         outPanel.SetActive(false);
+        outText = outPanel.GetComponentInChildren<Text>();
+        startRed = startText.color.r;
+        startGreen = startText.color.g;
+        startBlue = startText.color.b;
+        textAlpha = 1.0f;
+        startText.color = new Color(startRed, startGreen, startBlue, textAlpha);
         isStart = false;
+        appearanceTimer = 0.0f;
+        flashTimer = 0.0f;
         scenePanelRect = scenePanel.transform as RectTransform;
 
         SetActive(true);
@@ -118,6 +144,8 @@ public class OverviewUI : MonoBehaviour
             startPanel.SetActive(false);
             outPanel.SetActive(true);
         }
+
+        FlashStartPanel();
 
         ScenePanelMove();
 
@@ -222,5 +250,54 @@ public class OverviewUI : MonoBehaviour
         threeStarsText.text = "★★★スコア\n" + currentStage.ThreeStarsScore;
         //highScoreText.text = "ハイスコア : " + StageData.HighScores[StageData.StageNum];
         //currentScoreText.text = "今のスコア : " + currentStage.CurrentScore;
+    }
+
+    private void FlashStartPanel()
+    {
+        appearanceTimer += Time.deltaTime;
+
+        if (appearanceTimer > APPEARANCE_TIME)
+        {
+            //flashTimer = 0;
+            flashTimer += Time.deltaTime;
+
+
+            if (!isStart)
+            {
+                //startPanel.SetActive(false);
+                textAlpha = 0.2f;
+                Color col = new Color(startRed, startGreen, startBlue, textAlpha);
+                startText.color = col;
+            }
+
+            else
+            {
+                textAlpha = 0.2f;
+                Color col = new Color(startRed, startGreen, startBlue, textAlpha);
+                outText.color = col;
+            }
+        }
+
+        if (flashTimer > FLASH_TIME)
+        {
+            appearanceTimer = 0;
+            flashTimer = 0;
+
+            if (!isStart)
+            {
+                //startPanel.SetActive(true);
+                textAlpha = 1.0f;
+                Color col = new Color(startRed, startGreen, startBlue, textAlpha);
+                startText.color = col;
+            }
+
+            else
+            {
+                textAlpha = 1.0f;
+                Color col = new Color(startRed, startGreen, startBlue, textAlpha);
+                outText.color = col;
+            }
+        }
+        
     }
 }
