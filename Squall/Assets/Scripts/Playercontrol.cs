@@ -219,7 +219,7 @@ public class Playercontrol : MonoBehaviour
 
             }
 
-            transform.position += velocity;
+            transform.position += velocity * 60 * Time.deltaTime;
             velocity = Vector3.zero;
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -284,7 +284,7 @@ public class Playercontrol : MonoBehaviour
         }
         if (mutekitime == 0 && GamePlayManager.instance.Weather == GamePlayManager.WeatherStates.Squall)
         {
-            transform.position += wind;
+            transform.position += wind * 60 * Time.deltaTime;
         }
      //   transform.position *= Time.deltaTime;
     }
@@ -311,10 +311,10 @@ public class Playercontrol : MonoBehaviour
             mutekitime = 210;
             HP--;
           
-            damagevelocity = Nock/10;
+            damagevelocity = Nock/ 10 * 60 * Time.deltaTime;
             damagevelocity.y = 0;
 
-            savevelocity = Nock / 10;
+            savevelocity = Nock / 10 * 60 * Time.deltaTime;
             savevelocity.y = 0;
             Instantiate((GameObject)bursteffect, transform);
         }
