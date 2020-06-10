@@ -231,7 +231,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1b3e3a7a32390e540819d850ae019096, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c26db3c2abf719c41ad194ae209535bc, type: 3}
   m_MaskAlphaCutoff: 1
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -598,6 +598,7 @@ MonoBehaviour:
   m_Camera: {fileID: 1887918849}
   mapCamera: {fileID: 5963960185484933673}
   black: {fileID: 171453722}
+  signBlack: {fileID: 0}
 --- !u!114 &905665799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 4
+  signBlack: {fileID: 0}
 --- !u!1001 &792913658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -678,15 +680,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2495196560097039531, guid: 668c73dca0f2b78488033f2a56c2df14,
-        type: 3}
-      propertyPath: m_Depth
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7060003902619477580, guid: 668c73dca0f2b78488033f2a56c2df14,
         type: 3}
       propertyPath: m_Depth
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495196560097039531, guid: 668c73dca0f2b78488033f2a56c2df14,
+        type: 3}
+      propertyPath: m_Depth
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c73dca0f2b78488033f2a56c2df14, type: 3}
