@@ -228,7 +228,7 @@ public class Playercontrol : MonoBehaviour
                     mashcount--;
                     _audio.PlayOneShot(throwse);
                     Instantiate((GameObject)throwmash, transform.position + GetDirec() * 9,
-                        Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)));
+                        Quaternion.LookRotation(new Vector3(0, -90, 0), new Vector3(0, 0, 0)), GamePlayManager.instance.CurrentStage.transform);
                 }
                 else
                 {
