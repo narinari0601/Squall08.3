@@ -194,7 +194,7 @@ public class GameClearUI : MonoBehaviour
 
         isScoreMove = false;
         isScoreMoveEnd = false;
-        scoreMoveEndPos = new Vector3(600, 460, 0);
+        scoreMoveEndPos = new Vector3(640, 460, 0);
         initScoreMovePos = new Vector3(993.7f, 67.5f, 0);
         totalScoreRect.position = initScoreMovePos;
         totalScoreRect.localScale = new Vector3(1.5f, 1.5f, 0.5f);
