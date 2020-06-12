@@ -216,17 +216,17 @@ public class StageSelectManager : MonoBehaviour
         }
     }
 
-    private void GameSceneLoaded(Scene next, LoadSceneMode mode)
-    {
-        // シーン切り替え後のスクリプトを取得
-        var gameManager = GameObject.Find("GamePlayManager").GetComponent<GamePlayManager>();
+    //private void GameSceneLoaded(Scene next, LoadSceneMode mode)
+    //{
+    //    // シーン切り替え後のスクリプトを取得
+    //    var gameManager = GameObject.Find("GamePlayManager").GetComponent<GamePlayManager>();
 
-        // データを渡す処理
-        //gameManager.score = 100;
+    //    // データを渡す処理
+    //    //gameManager.score = 100;
 
-        // イベントから削除
-        SceneManager.sceneLoaded -= GameSceneLoaded;
-    }
+    //    // イベントから削除
+    //    SceneManager.sceneLoaded -= GameSceneLoaded;
+    //}
 
     private IEnumerator LoadPreparation()
     {
