@@ -651,6 +651,10 @@ PrefabInstance:
       propertyPath: m_FrontSortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 181371081, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
+      propertyPath: m_MaskAlphaCutoff
+      value: 0.88
+      objectReference: {fileID: 0}
     - target: {fileID: 596914578, guid: 5211a2ee496beea4fb4ff9822d9c3a98, type: 3}
       propertyPath: m_SortingOrder
       value: 4
