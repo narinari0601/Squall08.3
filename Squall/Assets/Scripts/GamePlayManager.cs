@@ -308,11 +308,11 @@ public class GamePlayManager : MonoBehaviour
         //    NextStage();
         //}
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            BGMManager.instance.ChangeBGM(0, 0.04f);
-            StageInitialize();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    BGMManager.instance.ChangeBGM(0, 0.04f);
+        //    StageInitialize();
+        //}
         
         
         if (Input.GetKeyDown(KeyCode.Escape))
