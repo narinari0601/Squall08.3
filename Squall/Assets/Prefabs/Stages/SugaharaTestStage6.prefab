@@ -12268,7 +12268,7 @@ PrefabInstance:
     - target: {fileID: 6698461515975355258, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6698461515975355258, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
         type: 3}
@@ -12597,7 +12597,7 @@ PrefabInstance:
     - target: {fileID: 6698461515975355258, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3
+      value: 2.73
       objectReference: {fileID: 0}
     - target: {fileID: 6698461515975355258, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
         type: 3}
@@ -12607,7 +12607,7 @@ PrefabInstance:
     - target: {fileID: 6698461515975355258, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.3
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6698461515975355258, guid: 71d5b8ec7fa7ecf4b9cfecce861bec53,
         type: 3}
@@ -13129,7 +13129,7 @@ PrefabInstance:
     - target: {fileID: 908166810369699607, guid: 635e1eadd598e0942b85eaaa49426f7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11
+      value: 11.62
       objectReference: {fileID: 0}
     - target: {fileID: 908166810369699607, guid: 635e1eadd598e0942b85eaaa49426f7e,
         type: 3}
@@ -14097,11 +14097,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5574939291927487786}
     m_Modifications:
-    - target: {fileID: 3998931692786196447, guid: ae5974782b93e9c48ac215969a67ca37,
-        type: 3}
-      propertyPath: m_Name
-      value: BaseCamp
-      objectReference: {fileID: 0}
     - target: {fileID: 8189392411485669476, guid: ae5974782b93e9c48ac215969a67ca37,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14156,6 +14151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3998931692786196447, guid: ae5974782b93e9c48ac215969a67ca37,
+        type: 3}
+      propertyPath: m_Name
+      value: BaseCamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae5974782b93e9c48ac215969a67ca37, type: 3}
